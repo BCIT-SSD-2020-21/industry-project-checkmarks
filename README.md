@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+<div align='center'>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Checkmarks
 
-## Available Scripts
+An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 
-In the project directory, you can run:
+<!-- <strong>Live Link: </strong> here  -->
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Overview
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<i>Checkmarks is a trademark search and registration form web app! </i>
 
-### `npm test`
+<i><strong>Objectiive: </strong> The project scope is to enhance the landing page while maintaining clients ability to manage the layout page, enhance a word-mark search to match more on a robust set of criteria, and enhance the trademark registration process with live data, additional fields, and additional functionality while maintaining existing integration with LawPay and Clio. </i>
+</br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Workflows
 
-### `npm run build`
+### Word-Mark Search Function work flow
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   User lands on checkmarks.ca (wordPress landing page).
+-   User searches for an exact plain word trademark.
+-   Search function fetches data form a static database with data copied from Canadian Trademarks Database (Cipo).
+-   Data is returned as results that show exact matches of plain word trademarks only.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Trademark Application work flow
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   User Clicks on Register Trademark from the main webpage.
+-   User is dierect to a multi-page form.
+-   User uses "Goods and Services" selector to add various government pre-approved goods and/or services to the User's application. Based on selected goods/services, the government application fee is automatically adjusted.
+-   User completes multi-page form and is direct to a payment page.
+-   user complets payment, pamemnt held in lawyers's trust account until application is complete.
+-   pre-paid application is email to reviewing lawyer/trademark agent.
 
-### `npm run eject`
+ </br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   <strong>Front-end:</strong> React
+-   <strong>Back-end:</strong>.NET Core(back-end)
+-   <strong>Deployment: </strong>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    </br>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Documentation
 
-## Learn More
+Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-2020-21/industry-project-checkmarks_backend)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Essential Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   Create a new landing page that will expost both Word-Mark Search and Trademark Registration workflows.
+-   Enhance the Word-Mark Search to pull real-time data or create an automated process that will update the static data nightly.
+-   Modify or re-create the existing Trademark Application form to function better:
+    -   enhanced user experience
+    -   allow multiple file uploads
+    -   include mandatory upload of a government issued ID
+    -   Integrate new payment packages to the existing LawPay payment processing system
 
-### Code Splitting
+### Nice to have Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-   Add functionality to "read" a trademark logo to determine the relevant Vienna classification/ info.
+-   Integrate with the Canadian TradeMarks Database to create or update the Vienna Classification data.
 
-### Analyzing the Bundle Size
+### Figma Prototypes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<!-- Images URL -->
 
-### Making a Progressive Web App
+#### ER Diagram
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<!-- Images URL -->
 
-### Advanced Configuration
+</br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Running the app
 
-### Deployment
+<details>
+<summary>:zap: Quick start instructions here</summary>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+-   clone this repo
+-   `npm i`
+-   `npm start`
 
-### `npm run build` fails to minify
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+</br>
+
+## Resources/References
+
+</br>
