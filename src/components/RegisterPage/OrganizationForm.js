@@ -2,9 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, FormControl } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import { useHistory } from 'react-router-dom';
 
 export default function IndividualForm({ user, setUser }) {
   const classes = useStyles();
+  const history = useHistory();
 
   //handle register as organzational
   const handleRegister = async (event) => {
@@ -12,19 +14,24 @@ export default function IndividualForm({ user, setUser }) {
     alert('Successfully register');
   };
 
+  //handle Existing User
+  const haveAccountButton = async (event) => {
+    event.preventDefault();
+    history.push('/');
+  };
   return (
-    <form onSubmit={handleRegister}>
+    <div>
       <FormControl fullWidth={true}>
         <input
           className={classes.input}
           placeholder="First Name"
           type="text"
-          value={user.name}
+          value={user.firtstName}
           autoComplete="on"
           onChange={(e) =>
             setUser({
               ...user,
-              name: e.target.value,
+              firstName: e.target.value,
             })
           }
         />
@@ -34,12 +41,12 @@ export default function IndividualForm({ user, setUser }) {
           className={classes.input}
           placeholder="Last Name"
           type="text"
-          value={user.name}
+          value={user.lastName}
           autoComplete="on"
           onChange={(e) =>
             setUser({
               ...user,
-              name: e.target.value,
+              lastName: e.target.value,
             })
           }
         />
@@ -49,12 +56,12 @@ export default function IndividualForm({ user, setUser }) {
           className={classes.input}
           placeholder="Organization Name"
           type="text"
-          value={user.name}
+          value={user.organizationName}
           autoComplete="on"
           onChange={(e) =>
             setUser({
               ...user,
-              name: e.target.value,
+              organizationName: e.target.value,
             })
           }
         />
@@ -121,6 +128,7 @@ export default function IndividualForm({ user, setUser }) {
         <Button
           type="submit"
           variant="contained"
+          onClick={haveAccountButton}
           className={classes.haveAccountButton}
         >
           I already have an account
@@ -129,11 +137,12 @@ export default function IndividualForm({ user, setUser }) {
           type="submit"
           variant="contained"
           className={classes.submitButton}
+          onClick={handleRegister}
         >
           Sign Up
         </Button>
       </div>
-    </form>
+    </div>
   );
 }
 
@@ -142,7 +151,6 @@ const useStyles = makeStyles((theme) => ({
     width: '60%',
     margin: '3% auto',
     padding: '3%',
-    border: 'none',
     borderRadius: '10px',
     '&:focus': {
       outline: 'none',
@@ -172,7 +180,6 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     backgroundColor: '#df3a48',
     color: '#FFF',
-    width: '20%',
     width: '40%',
     height: '50px',
     margin: '3%',
