@@ -7,7 +7,8 @@ const AskALawyer = () => {
 
   return (
     <div className={classes.lawyerText}>
-      <HelpIcon /> <span className={classes.text}>Ask a lawyer</span>
+      <span className={classes.text}>Ask a lawyer</span>
+      <HelpIcon />
     </div>
   );
 };
@@ -29,5 +30,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     right: 20,
     top: 10,
+  },
+  text: {
+    fontSize: 25,
   },
 }));
