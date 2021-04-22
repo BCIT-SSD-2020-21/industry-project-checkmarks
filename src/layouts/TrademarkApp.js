@@ -36,6 +36,11 @@ const TrademarkApp = () => {
           </Card>
         </Card>
 
+        {/* 2nd option card --- Design or logo */}
+        <Card className={classes.uploadCard}>
+          <p style={{ color: 'red', fontSize: 15 }}>Design or Logo</p>
+        </Card>
+
         <button className={classes.nextButton}>Next Step</button>
       </Card>
     </div>
@@ -101,5 +106,13 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     borderRadius: '10px',
     width: '15%',
+  },
+
+  uploadCard: {
+    width: '75%',
+    marginTop: '2%',
+    display: 'flex',
+
+    boxShadow: '5px 5px 15px 0px grey',
   },
 }));
