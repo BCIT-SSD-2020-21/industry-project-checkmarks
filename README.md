@@ -62,15 +62,15 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 - Add functionality to "read" a trademark logo to determine the relevant Vienna classification/ info.
 - Integrate with the Canadian TradeMarks Database to create or update the Vienna Classification data.
 
-### Figma Prototypes
+### Figma Prototypes (<a link="https://www.figma.com/file/7NR2yH2BINwQlmqxNspD1f/Checkmarks_Prototype?node-id=0%3A1">Figma</a>)
 
-<!-- Images URL -->
+<img src="https://i.imgur.com/OsEGEQ9.jpg" width="500px"/>
 
 ### ER Diagram
 
 ### Use Case Diagram (<a link="https://www.figma.com/file/RH0Ymf55Rw6M7UCZY7ly33/Checkmarks_UseCaseDiagram?node-id=0%3A1">Figma</a>)
 
-<img src="https://i.imgur.com/OsEGEQ9.jpg" width="500px"/>
+<img src="https://i.imgur.com/kK7fKRH.jpg" width="500px"/>
 
 <!-- Images URL -->
 
