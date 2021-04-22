@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AskALawyer from '../components/AskALawyer';
 import Card from '@material-ui/core/Card';
 import TrademarkAppSearchBar from '../components/TrademarkAppSearchBar';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const TrademarkApp = () => {
   const classes = useStyles();
@@ -39,6 +41,11 @@ const TrademarkApp = () => {
         {/* 2nd option card --- Design or logo */}
         <Card className={classes.uploadCard}>
           <p style={{ color: 'red', fontSize: 15 }}>Design or Logo</p>
+
+          <div className={classes.arrowIcons}>
+            <ArrowBackIcon />
+            <ArrowForwardIcon />
+          </div>
         </Card>
 
         <button className={classes.nextButton}>Next Step</button>
@@ -112,7 +119,13 @@ const useStyles = makeStyles((theme) => ({
     width: '75%',
     marginTop: '2%',
     display: 'flex',
-
     boxShadow: '5px 5px 15px 0px grey',
+  },
+
+  arrowIcons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '5%',
   },
 }));
