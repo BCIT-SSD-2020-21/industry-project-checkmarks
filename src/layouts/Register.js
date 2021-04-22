@@ -31,8 +31,8 @@ export default function Register() {
       <div className={classes.logo}>
         <img src={logo} alt="Logo" />
       </div>
-      <Typography className={classes.title}>Sign up</Typography>
       <Card className={classes.card}>
+        <Typography className={classes.title}>Sign up</Typography>
         <Typography className={classes.question}>
           Are you registering as an individual or representing an organization?
         </Typography>
@@ -83,9 +83,16 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     marginTop: '15%',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: '1%',
+    },
   },
   card: {
-    margin: '2%',
+    width: '80%',
+    [theme.breakpoints.up('md')]: {
+      marginTop: '1%',
+      width: '50%',
+    },
   },
   formContainer: {
     marginTop: '5%',
@@ -96,14 +103,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#df3a48',
     },
   },
-  text: {
-    marginLeft: '5px',
-  },
   title: {
     margin: '5%',
     fontSize: '20px',
     fontWeight: 'bold',
     color: '#df3a48',
+    textAlign: 'center',
   },
   question: {
     marginTop: '5%',
