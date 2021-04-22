@@ -3,13 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import AskALawyer from '../components/AskALawyer';
 import Card from '@material-ui/core/Card';
 import TrademarkAppSearchBar from '../components/TrademarkAppSearchBar';
+import Logo2 from '../images/CheckmarksLogo2.png';
+import Alert from '@material-ui/lab/Alert';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
     return (
-        <div>
+        <div className={classes.root}>
+            <div className={classes.logo}>
+                <img src={Logo2} alt="Logo" />
+            </div>
             <AskALawyer />
             <div className={classes.title}>
                 <span className={classes.text}>Trademark Application</span>
@@ -40,7 +45,11 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 275,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '5%',
     },
     title: {
         display: 'flex',
@@ -90,24 +99,24 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
 
-    seeAllButton: {
-        backgroundColor: '#128b83',
-        color: '#fff',
-        borderRadius: '10px',
-        width: '15%',
-    },
+    // seeAllButton: {
+    //     backgroundColor: '#128b83',
+    //     color: '#fff',
+    //     borderRadius: '10px',
+    //     width: '15%',
+    // },
 
-    uploadCard: {
-        width: '75%',
-        marginTop: '2%',
-        display: 'flex',
-        boxShadow: '5px 5px 15px 0px grey',
-    },
+    // uploadCard: {
+    //     width: '75%',
+    //     marginTop: '2%',
+    //     display: 'flex',
+    //     boxShadow: '5px 5px 15px 0px grey',
+    // },
 
-    arrowIcons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: '5%',
-    },
+    // arrowIcons: {
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-between',
+    //     marginTop: '5%',
+    // },
 }));
