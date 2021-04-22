@@ -19,6 +19,7 @@ export default function IndividualForm({ user, setUser }) {
     event.preventDefault();
     history.push('/');
   };
+  console.log(user);
   return (
     <div>
       <FormControl fullWidth={true}>
