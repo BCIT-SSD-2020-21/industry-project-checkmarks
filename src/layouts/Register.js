@@ -8,11 +8,11 @@ import OrganizationForm from '../components/RegisterPage/OrganizationForm';
 
 export default function Register() {
   const classes = useStyles();
-  const [errorMsgs, setErrorMsgs] = useState([]);
   const [user, setUser] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
+    organizationName: '',
     email: '',
-    address: '',
     password: '',
     confirmPassword: '',
   });
@@ -21,45 +21,6 @@ export default function Register() {
   const [tabValue, setTabValue] = useState(0);
   const handleTabChange = (_, newValue) => {
     setTabValue(newValue);
-  };
-
-  // Handle errors function
-  const handleErrors = () => {
-    let tempArr = [];
-
-    //Password length validation;
-    if (user.password.length < 8) {
-      tempArr.push('Password needs to be a minimum of 8 characters');
-    }
-
-    // Uppercase validation
-    let upperCase = new RegExp(/^(?=.*[A-Z])/);
-    if (!upperCase.test(user.password)) {
-      tempArr.push('Password needs an UPPERCASE letter');
-    }
-
-    //Lowercase validation
-    let lowerCase = new RegExp(/^(?=.*[a-z])/);
-    if (!lowerCase.test(user.password)) {
-      tempArr.push('Password needs an lowercase letter');
-    }
-    //Number validation
-    let digits = new RegExp(/^(?=.*[0-9])/);
-    if (!digits.test(user.password)) {
-      tempArr.push('Password needs to include a number');
-    }
-    //Special character validaton
-    let special = new RegExp(/^(?=.*?[#?!@$%^&*-])/);
-    if (!special.test(user.password)) {
-      tempArr.push('Password needs to include a special character');
-    }
-
-    //Password match validation
-    if (user.password !== user.confirmPassword) {
-      tempArr.push('Password & Confirm Password does not match');
-    }
-
-    return tempArr;
   };
 
   return (
@@ -71,7 +32,7 @@ export default function Register() {
         <img src={logo} alt="Logo" />
       </div>
       <Typography className={classes.title}>Sign up</Typography>
-      <Card>
+      <Card className={classes.card}>
         <Typography className={classes.question}>
           Are you registering as an individual or representing an organization?
         </Typography>
@@ -92,22 +53,11 @@ export default function Register() {
           </Tabs>
 
           {tabValue === 0 ? (
-            /////////////////////////////// Login /////////////////////////////////////////////
-            <IndividualForm
-              user={user}
-              setUser={setUser}
-              handleErrors={handleErrors}
-              setErrorMsgs={setErrorMsgs}
-            />
+            /////////////////////////////// Register for individual /////////////////////////////////////////////
+            <IndividualForm user={user} setUser={setUser} />
           ) : (
-            /////////////////////////////// Register ////////////////////////////////////////////
-            <OrganizationForm
-              user={user}
-              setUser={setUser}
-              handleErrors={handleErrors}
-              errorMsgs={errorMsgs}
-              setErrorMsgs={setErrorMsgs}
-            />
+            /////////////////////////////// Register for organization ////////////////////////////////////////////
+            <OrganizationForm user={user} setUser={setUser} />
           )}
         </div>
       </Card>
@@ -133,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     marginTop: '15%',
+  },
+  card: {
+    margin: '2%',
   },
   formContainer: {
     marginTop: '5%',

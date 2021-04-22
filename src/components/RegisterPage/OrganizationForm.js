@@ -1,27 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, FormControl, Input } from '@material-ui/core';
+import { Button, FormControl } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
-export default function OrganizationForm({
-  user,
-  setUser,
-  handleErrors,
-  setErrorMsgs,
-}) {
+export default function IndividualForm({ user, setUser }) {
   const classes = useStyles();
 
-  //handle register
+  //handle register as organzational
   const handleRegister = async (event) => {
     event.preventDefault();
-    // Check user input errors before access the database
-    const errors = handleErrors();
-    if (errors.length > 0) {
-      setErrorMsgs(errors);
-      setTimeout(() => setErrorMsgs([]), 5000);
-      return;
-    } else {
-      setErrorMsgs([]);
-    }
+    alert('Successfully register');
   };
 
   return (
@@ -29,7 +17,37 @@ export default function OrganizationForm({
       <FormControl fullWidth={true}>
         <input
           className={classes.input}
-          placeholder="Name"
+          placeholder="First Name"
+          type="text"
+          value={user.name}
+          autoComplete="on"
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        />
+      </FormControl>
+      <FormControl fullWidth={true}>
+        <input
+          className={classes.input}
+          placeholder="Last Name"
+          type="text"
+          value={user.name}
+          autoComplete="on"
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        />
+      </FormControl>
+      <FormControl fullWidth={true}>
+        <input
+          className={classes.input}
+          placeholder="Organization Name"
           type="text"
           value={user.name}
           autoComplete="on"
@@ -55,21 +73,15 @@ export default function OrganizationForm({
             })
           }
         />
-      </FormControl>
-      <FormControl fullWidth={true}>
-        <input
-          className={classes.input}
-          placeholder="Your Location"
-          type="text"
-          value={user.address}
-          autoComplete="on"
-          onChange={(e) =>
-            setUser({
-              ...user,
-              address: e.target.value,
-            })
-          }
-        />
+        <div className={classes.uploadButtonContainer}>
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.uploadButton}
+          >
+            Upload ID Document
+          </Button>
+        </div>
       </FormControl>
       <FormControl fullWidth={true}>
         <input
@@ -101,13 +113,24 @@ export default function OrganizationForm({
           }
         />
       </FormControl>
-      <div className={classes.button}>
+      <Alert severity="info" className={classes.alert}>
+        Helper section with brief legal information, assisting the client
+        through the process.
+      </Alert>
+      <div className={classes.submitButtonContainer}>
         <Button
           type="submit"
-          variant="outlined"
+          variant="contained"
+          className={classes.haveAccountButton}
+        >
+          I already have an account
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
           className={classes.submitButton}
         >
-          Submit
+          Sign Up
         </Button>
       </div>
     </form>
@@ -126,18 +149,50 @@ const useStyles = makeStyles((theme) => ({
     },
     border: '1px solid #ccc',
   },
-  button: {
+  uploadButtonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '3%',
+  },
+  uploadButton: {
+    backgroundColor: '#df3a48',
+    color: '#FFF',
+    width: '70%',
+    height: '50px',
+    borderRadius: '10px',
+    fontSize: '10px',
+  },
+  submitButtonContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     margin: '3%',
   },
   submitButton: {
+    backgroundColor: '#df3a48',
     color: '#FFF',
+    width: '20%',
+    width: '40%',
+    height: '50px',
+    margin: '3%',
+    borderRadius: '10px',
+  },
+  haveAccountButton: {
+    color: '#df3a48',
+    backgroundColor: '#FFF',
     fontWeight: 'bold',
-    borderRadius: '20px',
+    width: '40%',
+    height: '50px',
     fontSize: '10px',
-    border: 'none',
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    margin: '3%',
+    borderRadius: '10px',
+    border: '1px solid #df3a48',
+  },
+  alert: {
+    width: '80%',
+    margin: '2% auto',
+    color: '#2a9df4',
+    fontSize: '12px',
   },
 }));
