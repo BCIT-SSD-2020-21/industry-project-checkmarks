@@ -181,6 +181,9 @@ const useStyles = makeStyles((theme) => ({
     margin: '3%',
     borderRadius: '10px',
     border: '1px solid #df3a48',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '8px',
+    },
   },
   alert: {
     width: '80%',
