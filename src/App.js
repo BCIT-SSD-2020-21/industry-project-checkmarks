@@ -1,9 +1,15 @@
-import logo from './logo.svg';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TrademarkApp from './layouts/TrademarkApp';
+import Register from '../src/layouts/Register';
 
-function App() {
-  return <TrademarkApp />;
+export default function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/Register">
+          <Register />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
-
-export default App;
