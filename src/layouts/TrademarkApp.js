@@ -28,8 +28,11 @@ const TrademarkApp = () => {
           <Card className={classes.resultCard}>
             <div className={classes.resultHeading}>
               <p>Top existing matches found...</p>
-              <button>See all</button>
+              <button className={classes.seeAllButton}>See all</button>
             </div>
+            <p>place holder</p>
+            <p>place holder</p>
+            <p>place holder</p>
           </Card>
         </Card>
 
@@ -78,5 +81,25 @@ const useStyles = makeStyles((theme) => ({
     height: '50px',
     margin: '3%',
     borderRadius: '10px',
+  },
+
+  resultCard: {
+    width: '75%',
+    boxShadow: '5px 5px 15px 0px grey',
+    alignItems: 'center',
+    justifyContent: ' center',
+  },
+
+  resultHeading: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  seeAllButton: {
+    backgroundColor: '#128b83',
+    color: '#fff',
+    borderRadius: '10px',
+    width: '15%',
   },
 }));
