@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
+import { findAllByDisplayValue } from '@testing-library/dom';
 
 export default function PaymentForm() {
     const classes = useStyles();
@@ -61,32 +62,29 @@ export default function PaymentForm() {
                     />
                 </FormControl>
                 <div className={classes.flexContainer}>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Expiry Date (MM/YY)"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={expiryDate}
-                            autoComplete="on"
-                            onChange={(e) => setExpiryDate(e.target.value)}
-                        />
-                    </FormControl>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="CVV"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={CVV}
-                            autoComplete="on"
-                            onChange={(e) => setCVV(e.target.value)}
-                        />
-                    </FormControl>
+                    <TextField
+                        id="outlined-basic"
+                        label="Expiry Date (MM/YY)"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={expiryDate}
+                        autoComplete="on"
+                        onChange={(e) => setExpiryDate(e.target.value)}
+                    />
+
+                    <TextField
+                        id="outlined-basic"
+                        label="CVV"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={CVV}
+                        autoComplete="on"
+                        onChange={(e) => setCVV(e.target.value)}
+                    />
                 </div>
                 <Typography className={classes.text} component="p">
                     Billing Addres
@@ -105,60 +103,53 @@ export default function PaymentForm() {
                     />
                 </FormControl>
                 <div className={classes.flexContainer}>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="City"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={expiryDate}
-                            autoComplete="on"
-                            onChange={(e) => setExpiryDate(e.target.value)}
-                        />
-                    </FormControl>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Province"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={CVV}
-                            autoComplete="on"
-                            onChange={(e) => setCVV(e.target.value)}
-                        />
-                    </FormControl>
+                    <TextField
+                        id="outlined-basic"
+                        label="City"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={expiryDate}
+                        autoComplete="on"
+                        onChange={(e) => setExpiryDate(e.target.value)}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Province"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={CVV}
+                        autoComplete="on"
+                        onChange={(e) => setCVV(e.target.value)}
+                    />
                 </div>
                 <div className={classes.flexContainer}>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Postal Code"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={expiryDate}
-                            autoComplete="on"
-                            onChange={(e) => setExpiryDate(e.target.value)}
-                        />
-                    </FormControl>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Country"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            value={CVV}
-                            autoComplete="on"
-                            onChange={(e) => setCVV(e.target.value)}
-                        />
-                    </FormControl>
+                    <TextField
+                        id="outlined-basic"
+                        label="Postal Code"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={expiryDate}
+                        autoComplete="on"
+                        onChange={(e) => setExpiryDate(e.target.value)}
+                    />
+
+                    <TextField
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        value={CVV}
+                        autoComplete="on"
+                        onChange={(e) => setCVV(e.target.value)}
+                    />
                 </div>
                 <Alert severity="info" className={classes.alert}>
                     Helper section with brief legal information, assisting the
@@ -190,24 +181,44 @@ const useStyles = makeStyles((theme) => ({
         width: '80%',
     },
     title: {
-        // margin: '5%',
         fontSize: '20px',
         fontWeight: 'bold',
         color: '#df3a48',
         marginBottom: '5%',
     },
-    input: {
-        width: '80%',
-        margin: '3% auto',
-        borderRadius: '10px',
-    },
     text: {
         color: '#808080',
         fontSize: '12px',
         margin: '3%',
+        fontWeight: 'bold',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '15px',
+            marginBottom: '1%',
+        },
+    },
+    input: {
+        width: '80%',
+        margin: '3% auto',
+        borderRadius: '10px',
+        [theme.breakpoints.up('sm')]: {
+            margin: '2% auto',
+        },
+    },
+    flexInput: {
+        width: '80%',
+        margin: '3% auto',
+        borderRadius: '10px',
+        [theme.breakpoints.up('sm')]: {
+            margin: '3%  ',
+            width: '37%',
+        },
     },
     flexContainer: {
-        // display: 'flex',
+        [theme.breakpoints.up('sm')]: {
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'center',
+        },
     },
     buttonContainer: {
         display: 'flex',
