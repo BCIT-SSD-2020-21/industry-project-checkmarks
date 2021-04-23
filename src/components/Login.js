@@ -25,6 +25,7 @@ export default function IndividualForm() {
     return (
         <div className={classes.root}>
             <Card className={classes.card}>
+                <Typography className={classes.title}>Sign up</Typography>
                 <FormControl fullWidth={true}>
                     <input
                         className={classes.input}
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     card: {
-        padding: '5%',
+        padding: '2%',
         width: '40%',
     },
     input: {
@@ -89,6 +90,13 @@ const useStyles = makeStyles((theme) => ({
             outline: 'none',
         },
         border: '1px solid #ccc',
+    },
+    title: {
+        margin: '5%',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: '#df3a48',
+        textAlign: 'center',
     },
     text: {
         color: '#df3a48',
