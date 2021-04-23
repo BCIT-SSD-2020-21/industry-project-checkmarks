@@ -12,7 +12,7 @@ An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 
 <i>Checkmarks is a trademark search and registration form web app! </i>
 
-<i><strong>Objective: </strong> The project scope is to enhance the landing page while maintaining clients ability to manage the layout page, enhance a word-mark search to match more on a robust set of criteria, and enhance the trademark registration process with live data, additional fields, and additional functionality while maintaining existing integration with LawPay and Clio. </i>
+<i><strong>Objective: </strong> The project scope is to enhance the landing page while maintaining clients ability to manage the layout page, enhance a word-mark search to match more on a robust set of criteria, enhance the trademark registration process with live data, additional fields, and additional functionality while maintaining existing integration with Law Pay and Clio. </i>
 </br>
 
 ## Workflows
@@ -27,7 +27,7 @@ An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 ### Trademark Application work flow
 
 -   User Clicks on Register Trademark from the main webpage.
--   User is dierect to a multi-page form.
+-   User is directed to a multi-page form.
 -   User uses "Goods and Services" selector to add various government pre-approved goods and/or services to the User's application. Based on selected goods/services, the government application fee is automatically adjusted.
 -   User completes multi-page form and is direct to a payment page.
 -   user complets payment, pamemnt held in lawyers's trust account until application is complete.
@@ -39,7 +39,7 @@ An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 
 -   <strong>Front-end:</strong> React
 -   <strong>Back-end:</strong>.NET Core(back-end)
--   <strong>Deployment: </strong>
+-   <strong>Deployment: </strong> Azure
 
     </br>
 
@@ -49,7 +49,7 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 
 ### Essential Features
 
--   Create a new landing page that will expost both Word-Mark Search and Trademark Registration workflows.
+-   Create a new landing page that will efficiently expose both Word-Mark Search and Trademark Registration workflows.
 -   Enhance the Word-Mark Search to pull real-time data or create an automated process that will update the static data nightly.
 -   Modify or re-create the existing Trademark Application form to function better:
     -   enhanced user experience
@@ -60,7 +60,7 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 ### Nice to have Features
 
 -   Add functionality to "read" a trademark logo to determine the relevant Vienna classification/ info.
--   Integrate with the Canadian TradeMarks Database to create or update the Vienna Classification data.
+-   Intergrate with the Canadian TradeMarks Database to create or update the Vienna Classification data.
 
 ### Figma Prototypes (<a link="https://www.figma.com/file/7NR2yH2BINwQlmqxNspD1f/Checkmarks_Prototype?node-id=0%3A1">Figma</a>)
 
