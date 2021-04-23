@@ -27,6 +27,8 @@ export default function PaymentForm() {
                     Confirm Your Information
                 </Typography>
                 {/* ////////////////////////////////////// Payment info ////////////////////////////////////////////*/}
+
+                {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         First Name
@@ -35,7 +37,7 @@ export default function PaymentForm() {
                         John
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Last Name ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Last Name
@@ -44,7 +46,7 @@ export default function PaymentForm() {
                         Doe
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Street Address ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Street Address
@@ -53,7 +55,7 @@ export default function PaymentForm() {
                         555 Happy Road
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// City ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         City
@@ -62,7 +64,7 @@ export default function PaymentForm() {
                         Vancouver
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Province ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Province
@@ -71,7 +73,7 @@ export default function PaymentForm() {
                         BC
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Country
@@ -80,7 +82,7 @@ export default function PaymentForm() {
                         Canada
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Postal Code ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Postal Code
@@ -89,7 +91,7 @@ export default function PaymentForm() {
                         V6K 5Q8
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Email ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Email
@@ -98,7 +100,7 @@ export default function PaymentForm() {
                         John@checkmark.com
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Trademark Types
@@ -107,7 +109,7 @@ export default function PaymentForm() {
                         Standard Characters
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Classes Selected ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Classes Selected
@@ -116,7 +118,7 @@ export default function PaymentForm() {
                         Class: 11,13
                     </Typography>
                 </div>
-
+                {/* ////////////////////////////////////// Terms Selected ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Terms Selected
@@ -125,7 +127,7 @@ export default function PaymentForm() {
                         water softening units
                     </Typography>
                 </div>
-
+                {/* //////////////////////////////////////  Filed in other country  ////////////////////////////////////////////*/}
                 <div className={classes.textContainer}>
                     <Typography className={classes.subtitle} component="p">
                         Filed in other country
@@ -179,18 +181,6 @@ const useStyles = makeStyles((theme) => ({
         margin: '2%',
         width: '40%',
         fontWeight: 'bold',
-        // [theme.breakpoints.between('sm', 'md')]: {
-        //     fontSize: '15px',
-        //     width: '20%',
-        // },
-        // [theme.breakpoints.up('md')]: {
-        //     fontSize: '15px',
-        //     width: '20%',
-        // },
-        // [theme.breakpoints.up('sm')]: {
-        //     fontSize: '15px',
-        //     width: '20%',
-        // },
         [theme.breakpoints.between('sm', 'md')]: {
             fontSize: '15px',
             width: '25%',
