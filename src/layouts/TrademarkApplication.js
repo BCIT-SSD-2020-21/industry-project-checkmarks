@@ -25,9 +25,9 @@ const TrademarkApplication = () => {
             <div className={classes.title}>
                 <span className={classes.text}>Trademark Application</span>
             </div>
-            {/* ===================================== */}
+
             {/*====== Outter Card -- Main  card *==== */}
-            {/* ===================================== */}
+
             <Card className={classes.outerCard}>
                 <div className={classes.outerText}>
                     <p style={{ color: 'red' }}>What type of Trademark? </p>
