@@ -27,7 +27,7 @@ export default function PaymentForm() {
     //handle Submit
     const handleSubmit = async (event) => {
         event.preventDefault();
-        alert('Successfully login');
+        alert('Successfully Complete');
     };
 
     return (
