@@ -13,6 +13,9 @@ import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import { standardTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 
+const checkmarksWebAPIbaseUrl =
+    'https://checkmarkswebapi.azurewebsites.net/api/trademark/';
+
 export default function TrademarkSearch() {
     const classes = searchBoxStyles();
 
@@ -20,10 +23,23 @@ export default function TrademarkSearch() {
     const searchTrademark = (text) => {
         if (text.length > 2) {
             setSearchTerm(text);
+        } else {
+            setSearchTerm('');
         }
-        console.log('Searching...');
     };
-    useEffect(() => {}, [searchTerm]);
+
+    const [searchResults, setSearchResults] = useState([]);
+    useEffect(() => {
+        if (searchTerm) {
+            (async () => {
+                await fetch(checkmarksWebAPIbaseUrl + searchTerm)
+                    .then((response) => response.json())
+                    .then((results) => setSearchResults(results.data))
+                    .catch((error) => console.log('Error: ', error));
+            })();
+        }
+    }, [searchTerm]);
+    console.log('searchResults: ', searchResults);
 
     return (
         <Box>
@@ -47,10 +63,14 @@ export default function TrademarkSearch() {
                     }
                 />
             </FormControl>
-            {searchTerm.length > 2 ? (
-                <Typography>{'Results'}</Typography>
-            ) : (
-                <Typography>{'Nothing found'}</Typography>
+            {searchTerm.length > 2 && (
+                <Box>
+                    {searchResults.length > 2 ? (
+                        <Typography>{'Results'}</Typography>
+                    ) : (
+                        <Typography>{'No Results'}</Typography>
+                    )}
+                </Box>
             )}
         </Box>
     );
