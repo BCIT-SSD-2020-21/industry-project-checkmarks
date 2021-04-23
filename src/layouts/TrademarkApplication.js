@@ -19,20 +19,27 @@ const TrademarkApplication = () => {
             <div className={classes.title}>
                 <span className={classes.text}>Trademark Application</span>
             </div>
-            {/* Outter Card -- Main  card */}
+            {/* ===================================== */}
+            {/*====== Outter Card -- Main  card *==== */}
+            {/* ===================================== */}
             <Card className={classes.outerCard}>
-                <div>
+                <div className={classes.outerText}>
                     <p style={{ color: 'red' }}>What type of Trademark? </p>
                     <p style={{ color: 'red', fontSize: 15 }}>
                         Select all that apply
                     </p>
                 </div>
                 {/* 1st option card -- Search for trade mark */}
+
                 <Card className={classes.searchCard}>
                     <p style={{ color: 'red', fontSize: 15 }}>
                         Enter your trademark text
                     </p>
                     <TrademarkAppSearchBar />
+
+                    <Alert severity="info" className={classes.alert}>
+                        A Trademark cannot be 'primarily merely a surname'
+                    </Alert>
                 </Card>
 
                 <button className={classes.nextButton}>Next Step</button>
@@ -59,8 +66,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
     text: {
-        fontSize: 23,
+        fontSize: 30,
         color: 'red',
+        fontWeight: 600,
     },
 
     outerCard: {
@@ -68,15 +76,17 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         boxShadow: '5px 5px 15px 0px grey',
     },
 
     searchCard: {
         width: '75%',
         boxShadow: '5px 5px 15px 0px grey',
+        margin: 'auto',
     },
+
     nextButton: {
         backgroundColor: '#df3a48',
         color: '#FFF',
@@ -97,6 +107,15 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+    },
+    outerText: {
+        justifyContent: 'flex-start',
+    },
+    alert: {
+        width: '80%',
+        margin: '2% auto',
+        color: '#2a9df4',
+        fontSize: '12px',
     },
 
     // seeAllButton: {
