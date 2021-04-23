@@ -69,6 +69,17 @@ const TrademarkApplication = () => {
                     </Card>
                 </Card>
 
+                {/* ======================================== */}
+                {/* Logo card */}
+                {/* ======================================== */}
+
+                <Card className={classes.logoCard}>
+                    <div>
+                        <p>select a file to upload</p>
+                        <button>browse</button>
+                    </div>
+                </Card>
+
                 <Alert severity="info" className={classes.alert}>
                     Helper Section with brief legal information, assisting the
                     client through the process
@@ -100,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontSize: 30,
         color: 'red',
-        fontWeight: 600,
+        fontWeight: 500,
     },
 
     outerCard: {
@@ -108,14 +119,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2%',
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        background: '',
     },
 
     searchCard: {
         width: '75%',
-        boxShadow: '1px 1px 10px 0px grey',
         margin: 'auto',
         marginBottom: '3%',
     },
@@ -139,7 +146,7 @@ const useStyles = makeStyles((theme) => ({
 
     resultCard: {
         width: '75%',
-        boxShadow: '1px 1px 10px 0px grey',
+
         margin: 'auto',
         marginTop: '5%',
         marginBottom: '10%',
@@ -164,6 +171,12 @@ const useStyles = makeStyles((theme) => ({
         margin: '2% auto',
         color: '#2a9df4',
         fontSize: '12px',
+    },
+
+    logoCard: {
+        width: '75%',
+        margin: 'auto',
+        paddingBottom: '2em',
     },
 
     // uploadCard: {
