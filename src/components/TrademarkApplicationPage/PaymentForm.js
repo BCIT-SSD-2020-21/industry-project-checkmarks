@@ -218,7 +218,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         width: '40%',
-        height: '50px',
+        height: '30px',
         fontSize: '10px',
         margin: '3% auto',
         borderRadius: '10px',
@@ -229,7 +229,7 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         width: '80%',
-        margin: '2% auto',
+        margin: '3% auto',
         color: '#2a9df4',
         fontSize: '12px',
     },
