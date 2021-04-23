@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from '../src/layouts/Register';
-import Login from '../src/components/TrademarkApplicationPage/ConfirmOrder';
 
 export default function App() {
     return (
@@ -9,9 +8,6 @@ export default function App() {
             <Switch>
                 <Route path="/register">
                     <Register />
-                </Route>
-                <Route path="/login">
-                    <Login />
                 </Route>
             </Switch>
         </Router>
