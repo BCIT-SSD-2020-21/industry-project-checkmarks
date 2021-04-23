@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
-import { findAllByDisplayValue } from '@testing-library/dom';
 
 export default function PaymentForm() {
     const classes = useStyles();
@@ -19,6 +18,11 @@ export default function PaymentForm() {
     const [creditcardNumber, setCreditcardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [CVV, setCVV] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [province, setProvince] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [country, setCountry] = useState('');
 
     //handle Submit
     const handleSubmit = async (event) => {
@@ -99,9 +103,9 @@ export default function PaymentForm() {
                         size="small"
                         className={classes.input}
                         type="text"
-                        value={creditcardNumber}
+                        value={streetAddress}
                         autoComplete="on"
-                        onChange={(e) => setCreditcardNumber(e.target.value)}
+                        onChange={(e) => setStreetAddress(e.target.value)}
                     />
                 </FormControl>
                 <div className={classes.flexContainer}>
@@ -112,9 +116,9 @@ export default function PaymentForm() {
                         size="small"
                         className={classes.flexInput}
                         type="text"
-                        value={expiryDate}
+                        value={city}
                         autoComplete="on"
-                        onChange={(e) => setExpiryDate(e.target.value)}
+                        onChange={(e) => setCity(e.target.value)}
                     />
                     <TextField
                         id="outlined-basic"
@@ -123,9 +127,9 @@ export default function PaymentForm() {
                         size="small"
                         className={classes.flexInput}
                         type="text"
-                        value={CVV}
+                        value={province}
                         autoComplete="on"
-                        onChange={(e) => setCVV(e.target.value)}
+                        onChange={(e) => setProvince(e.target.value)}
                     />
                 </div>
                 <div className={classes.flexContainer}>
@@ -136,9 +140,9 @@ export default function PaymentForm() {
                         size="small"
                         className={classes.flexInput}
                         type="text"
-                        value={expiryDate}
+                        value={postalCode}
                         autoComplete="on"
-                        onChange={(e) => setExpiryDate(e.target.value)}
+                        onChange={(e) => setPostalCode(e.target.value)}
                     />
 
                     <TextField
@@ -148,9 +152,9 @@ export default function PaymentForm() {
                         size="small"
                         className={classes.flexInput}
                         type="text"
-                        value={CVV}
+                        value={country}
                         autoComplete="on"
-                        onChange={(e) => setCVV(e.target.value)}
+                        onChange={(e) => setCountry(e.target.value)}
                     />
                 </div>
                 <Alert severity="info" className={classes.alert}>
