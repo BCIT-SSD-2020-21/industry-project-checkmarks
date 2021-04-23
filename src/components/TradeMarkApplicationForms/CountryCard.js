@@ -28,6 +28,9 @@ const CountryCard = () => {
                         control={<Radio />}
                         label="Yes"
                     />
+                    <p style={{ color: 'red', fontSize: 15 }}>
+                        Please fill out information below (if known)
+                    </p>
                     <TextField
                         id="outlined-basic"
                         label="Country of filing"
