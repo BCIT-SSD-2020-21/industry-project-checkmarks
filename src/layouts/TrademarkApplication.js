@@ -29,8 +29,9 @@ const TrademarkApplication = () => {
                         Select all that apply
                     </p>
                 </div>
-                {/* 1st option card -- Search for trade mark */}
-
+                {/* ======================================== */}
+                {/* Search for trade mark card */}
+                {/* ======================================== */}
                 <Card className={classes.searchCard}>
                     <p style={{ color: 'red', fontSize: 15 }}>
                         Enter your trademark text
@@ -40,7 +41,26 @@ const TrademarkApplication = () => {
                     <Alert severity="info" className={classes.alert}>
                         A Trademark cannot be 'primarily merely a surname'
                     </Alert>
+
+                    {/* ======================================== */}
+                    {/* Search Result card */}
+                    {/* ======================================== */}
+                    <Card className={classes.resultCard}>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+
+                        <div className={classes.resultCardButtons}>
+                            <ArrowBackIcon />
+                            <ArrowForwardIcon />
+                        </div>
+                    </Card>
                 </Card>
+
+                <Alert severity="info" className={classes.alert}>
+                    Helper Section with brief legal information, assisting the
+                    client through the process
+                </Alert>
 
                 <button className={classes.nextButton}>Next Step</button>
             </Card>
@@ -62,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '8%',
+        marginTop: '5%',
     },
 
     text: {
@@ -78,13 +98,14 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         // alignItems: 'center',
         // justifyContent: 'center',
-        boxShadow: '5px 5px 15px 0px grey',
+        background: '',
     },
 
     searchCard: {
         width: '75%',
-        boxShadow: '5px 5px 15px 0px grey',
+        boxShadow: '1px 1px 10px 0px grey',
         margin: 'auto',
+        marginBottom: '3%',
     },
 
     nextButton: {
@@ -94,13 +115,16 @@ const useStyles = makeStyles((theme) => ({
         height: '50px',
         margin: '3%',
         borderRadius: '10px',
+
+        margin: 'auto',
     },
 
     resultCard: {
         width: '75%',
-        boxShadow: '5px 5px 15px 0px grey',
-        alignItems: 'center',
-        justifyContent: ' center',
+        boxShadow: '1px 1px 10px 0px grey',
+        margin: 'auto',
+        marginTop: '5%',
+        marginBottom: '10%',
     },
 
     resultHeading: {
