@@ -168,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '20px',
         fontWeight: 'bold',
         color: '#df3a48',
-        marginBottom: '2%',
+        marginBottom: '5%',
     },
     textContainer: {
         display: 'flex',
@@ -177,10 +177,27 @@ const useStyles = makeStyles((theme) => ({
         color: '#808080',
         fontSize: '12px',
         margin: '2%',
-        width: '20%',
+        width: '40%',
         fontWeight: 'bold',
-        [theme.breakpoints.up('sm')]: {
+        // [theme.breakpoints.between('sm', 'md')]: {
+        //     fontSize: '15px',
+        //     width: '20%',
+        // },
+        // [theme.breakpoints.up('md')]: {
+        //     fontSize: '15px',
+        //     width: '20%',
+        // },
+        // [theme.breakpoints.up('sm')]: {
+        //     fontSize: '15px',
+        //     width: '20%',
+        // },
+        [theme.breakpoints.between('sm', 'md')]: {
             fontSize: '15px',
+            width: '25%',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '15px',
+            width: '20%',
         },
     },
     text: {
@@ -199,14 +216,15 @@ const useStyles = makeStyles((theme) => ({
         color: '#df3a48',
         backgroundColor: '#FFF',
         fontWeight: 'bold',
-        width: '40%',
+        width: '50%',
         height: '30px',
-        fontSize: '10px',
+        fontSize: '8px',
         margin: '3% auto',
         borderRadius: '10px',
         border: '1px solid #df3a48',
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '8px',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '10px',
+            width: '40%',
         },
     },
     alert: {
