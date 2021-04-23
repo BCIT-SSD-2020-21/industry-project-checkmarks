@@ -10,7 +10,9 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import CountryCard from '../components/TradeMarkApplicationPage/CountryCard';
+import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
+import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
+import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -166,6 +168,8 @@ const TrademarkApplication = () => {
             </Card>
 
             <CountryCard />
+            <ConfirmOrder />
+            <PaymentForm />
         </div>
     );
 };
