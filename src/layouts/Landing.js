@@ -5,11 +5,13 @@ import HelpIcon from '@material-ui/icons/Help';
 import { Box, Typography, Tabs, Tab, Card } from '@material-ui/core';
 import IndividualForm from '../components/RegisterPage/IndividualForm';
 import OrganizationForm from '../components/RegisterPage/OrganizationForm';
+import HeaderBanner from '../components/HeaderBanner';
 import Login from '../components/LandingPage/Login';
 
 export default function Landing() {
     return (
         <Box>
+            <HeaderBanner />
             <Login />
         </Box>
     );

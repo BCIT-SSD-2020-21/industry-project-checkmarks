@@ -3,6 +3,7 @@ import logo from '../images/checkmark logo.PNG';
 import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import { Typography, Tabs, Tab, Card } from '@material-ui/core';
+import HeaderBanner from '../components/HeaderBanner';
 import IndividualForm from '../components/RegisterPage/IndividualForm';
 import OrganizationForm from '../components/RegisterPage/OrganizationForm';
 
@@ -28,9 +29,10 @@ export default function Register() {
             <div className={classes.lawyerText}>
                 <HelpIcon /> <span className={classes.text}>Ask a lawyer</span>
             </div>
-            <div className={classes.logo}>
+            <HeaderBanner />
+            {/* <div className={classes.logo}>
                 <img src={logo} alt="Logo" />
-            </div>
+            </div> */}
             <Card className={classes.card}>
                 <Typography className={classes.title}>Sign up</Typography>
                 <Typography className={classes.question}>
