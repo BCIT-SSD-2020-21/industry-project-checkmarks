@@ -209,9 +209,12 @@ const useStyles = makeStyles((theme) => ({
         width: '40%',
         height: '50px',
         margin: '3%',
-        borderRadius: '10px',
-
+        borderRadius: '30px',
+        marginBottom: '5%',
         margin: 'auto',
+        [theme.breakpoints.up('sm')]: {
+            width: '20%',
+        },
     },
 
     resultCardHeading: {
@@ -231,7 +234,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#128b83',
         color: '#fff',
         borderRadius: '10px',
-        width: '13%',
+        width: '25%',
     },
 
     resultCardButtons: {
