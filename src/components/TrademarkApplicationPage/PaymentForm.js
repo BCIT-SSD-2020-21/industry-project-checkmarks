@@ -32,6 +32,7 @@ export default function PaymentForm() {
                 <Typography className={classes.title} component="p">
                     Place a Trust Payment
                 </Typography>
+                {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
                 <Typography className={classes.text} component="p">
                     Credit Card
                 </Typography>
@@ -86,6 +87,7 @@ export default function PaymentForm() {
                         onChange={(e) => setCVV(e.target.value)}
                     />
                 </div>
+                {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
                 <Typography className={classes.text} component="p">
                     Billing Addres
                 </Typography>
@@ -209,7 +211,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '3%',
         borderRadius: '10px',
         [theme.breakpoints.up('sm')]: {
-            width: '37%',
+            width: '38%',
+            margin: '2%',
         },
     },
     flexContainer: {
