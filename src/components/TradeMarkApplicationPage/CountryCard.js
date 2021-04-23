@@ -14,7 +14,7 @@ const CountryCard = () => {
                 Have you filed or applied for this trademark in any other
                 country?
             </p>
-            <Card className={classes.noCard}>
+            <div className={classes.formContainer}>
                 {/* ===================== */}
                 {/* No option radio card  */}
                 {/* ===================== */}
@@ -22,7 +22,7 @@ const CountryCard = () => {
                 {/* ================ */}
                 {/* Yes form payment */}
                 {/* ================ */}
-                <Card className={classes.form}>
+                <div className={classes.form}>
                     <FormControlLabel
                         value="Yes"
                         control={<Radio />}
@@ -52,15 +52,16 @@ const CountryCard = () => {
                         size="small"
                         className={classes.input}
                     />
-                </Card>
-            </Card>
+                </div>
+            </div>
 
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
                 client through the process
             </Alert>
-
-            <button className={classes.nextButton}>Next Step</button>
+            <div className={classes.buttonContainer}>
+                <button className={classes.nextButton}>Next Step</button>
+            </div>
         </Card>
     );
 };
@@ -76,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
     countryCard: {
         marginTop: '5%',
         width: '75%',
-        margin: 'auto',
     },
     nextButton: {
         backgroundColor: '#df3a48',
@@ -91,9 +91,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 
-    noCard: {
+    formContainer: {
         paddingTop: '3%',
         paddingBottom: '3%',
+        margin: '3%',
     },
 
     form: {
@@ -103,5 +104,9 @@ const useStyles = makeStyles((theme) => ({
 
     input: {
         margin: '1%',
+    },
+    buttonContainer: {
+        display: 'flex',
+        alignItems: 'center',
     },
 }));
