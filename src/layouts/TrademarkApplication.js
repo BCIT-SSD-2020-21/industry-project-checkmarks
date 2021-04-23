@@ -7,6 +7,9 @@ import Logo2 from '../images/CheckmarksLogo2.png';
 import Alert from '@material-ui/lab/Alert';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -77,6 +80,79 @@ const TrademarkApplication = () => {
                     <div>
                         <p>select a file to upload</p>
                         <button>browse</button>
+                    </div>
+                </Card>
+
+                {/* ======================================== */}
+                {/* detail selection card */}
+                {/* ======================================== */}
+                <Card className={classes.detailsCard}>
+                    <p style={{ color: 'red' }}>Select all that Apply </p>
+                    <p style={{ color: 'red', fontSize: 12 }}>
+                        For below selections,{' '}
+                        <strong>contact with lawyer</strong> is required to
+                        process the application.
+                    </p>
+
+                    {/* Selection section */}
+
+                    <div className={classes.selectionFlex}>
+                        {/* column 1 */}
+                        <FormGroup column>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    // checked={state.checkedA}
+                                    // onChange={handleChange}
+                                    // name="checkedA"
+                                    />
+                                }
+                                label="Color"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Position"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Hologram"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Motion"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Motion"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Mode of packaging goods"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Three dimensional"
+                            />
+                        </FormGroup>
+
+                        <FormGroup column>
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Sound"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Taste"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Scent"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Texture"
+                            />
+                        </FormGroup>
                     </div>
                 </Card>
 
@@ -177,6 +253,18 @@ const useStyles = makeStyles((theme) => ({
         width: '75%',
         margin: 'auto',
         paddingBottom: '2em',
+    },
+
+    detailsCard: {
+        width: '75%',
+        margin: 'auto',
+        marginTop: '3%',
+    },
+
+    selectionFlex: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
     },
 
     // uploadCard: {
