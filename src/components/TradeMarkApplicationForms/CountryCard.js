@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import Radio from '@material-ui/core/Radio';
 import Alert from '@material-ui/lab/Alert';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 
 const CountryCard = () => {
     const classes = useStyles();
@@ -14,7 +15,41 @@ const CountryCard = () => {
                 country?
             </p>
             <Card className={classes.noCard}>
+                {/* ===================== */}
+                {/* No option radio card  */}
+                {/* ===================== */}
                 <FormControlLabel value="No" control={<Radio />} label="No" />
+                {/* ================ */}
+                {/* Yes form payment */}
+                {/* ================ */}
+                <Card className={classes.form}>
+                    <FormControlLabel
+                        value="Yes"
+                        control={<Radio />}
+                        label="Yes"
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Country of filing"
+                        variant="outlined"
+                        size="small"
+                        className={classes.input}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Filing date"
+                        variant="outlined"
+                        size="small"
+                        className={classes.input}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Application file number"
+                        variant="outlined"
+                        size="small"
+                        className={classes.input}
+                    />
+                </Card>
             </Card>
 
             <Alert severity="info" className={classes.alert}>
@@ -56,5 +91,14 @@ const useStyles = makeStyles((theme) => ({
     noCard: {
         paddingTop: '3%',
         paddingBottom: '3%',
+    },
+
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    input: {
+        margin: '1%',
     },
 }));

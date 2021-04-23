@@ -247,6 +247,7 @@ const useStyles = makeStyles((theme) => ({
 
     outerText: {
         justifyContent: 'flex-start',
+        fontWeight: 550,
     },
     alert: {
         width: '80%',
