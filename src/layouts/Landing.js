@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import logo from '../images/checkmark logo.PNG';
 import { makeStyles } from '@material-ui/core/styles';
-import HelpIcon from '@material-ui/icons/Help';
-import {
-    Box,
-    Typography,
-    Tabs,
-    Tab,
-    Card,
-    IconButton,
-    Button,
-} from '@material-ui/core';
+import { Box, IconButton, Button } from '@material-ui/core';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-import IndividualForm from '../components/RegisterPage/IndividualForm';
-import OrganizationForm from '../components/RegisterPage/OrganizationForm';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import Login from '../components/LandingPage/Login';
+import About from '../components/LandingPage/About';
+import Pricing from '../components/LandingPage/Pricing';
+import Footer from '../components/LandingPage/Footer';
 
 export default function Landing() {
     const classes = useStyles();
@@ -66,6 +57,9 @@ export default function Landing() {
                     </Button>
                 </Box>
             )}
+            <About />
+            <Pricing />
+            <Footer />
         </Box>
     );
 }
