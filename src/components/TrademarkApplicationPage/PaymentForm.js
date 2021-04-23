@@ -31,160 +31,153 @@ export default function PaymentForm() {
     };
 
     return (
-        <div className={classes.root}>
-            <Card className={classes.card}>
-                <Typography className={classes.title} component="p">
-                    Place a Trust Payment
-                </Typography>
-                {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
-                <Typography className={classes.text} component="p">
-                    Credit Card
-                </Typography>
-                <FormControl fullWidth={true}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Cardholder Name"
-                        variant="outlined"
-                        size="small"
-                        className={classes.input}
-                        type="text"
-                        value={cardholderName}
-                        autoComplete="on"
-                        onChange={(e) => setCardholderName(e.target.value)}
-                    />
-                </FormControl>
-                <FormControl fullWidth={true}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Credit Card Number"
-                        variant="outlined"
-                        size="small"
-                        className={classes.input}
-                        type="text"
-                        value={creditcardNumber}
-                        autoComplete="on"
-                        onChange={(e) => setCreditcardNumber(e.target.value)}
-                    />
-                </FormControl>
-                <div className={classes.flexContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Expiry Date (MM/YY)"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={expiryDate}
-                        autoComplete="on"
-                        onChange={(e) => setExpiryDate(e.target.value)}
-                    />
+        <Card className={classes.card}>
+            <Typography className={classes.title} component="p">
+                Place a Trust Payment
+            </Typography>
+            {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
+            <Typography className={classes.text} component="p">
+                Credit Card
+            </Typography>
+            <FormControl fullWidth={true}>
+                <TextField
+                    id="outlined-basic"
+                    label="Cardholder Name"
+                    variant="outlined"
+                    size="small"
+                    className={classes.input}
+                    type="text"
+                    value={cardholderName}
+                    autoComplete="on"
+                    onChange={(e) => setCardholderName(e.target.value)}
+                />
+            </FormControl>
+            <FormControl fullWidth={true}>
+                <TextField
+                    id="outlined-basic"
+                    label="Credit Card Number"
+                    variant="outlined"
+                    size="small"
+                    className={classes.input}
+                    type="text"
+                    value={creditcardNumber}
+                    autoComplete="on"
+                    onChange={(e) => setCreditcardNumber(e.target.value)}
+                />
+            </FormControl>
+            <div className={classes.flexContainer}>
+                <TextField
+                    id="outlined-basic"
+                    label="Expiry Date (MM/YY)"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={expiryDate}
+                    autoComplete="on"
+                    onChange={(e) => setExpiryDate(e.target.value)}
+                />
 
-                    <TextField
-                        id="outlined-basic"
-                        label="CVV"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={CVV}
-                        autoComplete="on"
-                        onChange={(e) => setCVV(e.target.value)}
-                    />
-                </div>
-                {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
-                <Typography className={classes.text} component="p">
-                    Billing Addres
-                </Typography>
-                <FormControl fullWidth={true}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Street Address"
-                        variant="outlined"
-                        size="small"
-                        className={classes.input}
-                        type="text"
-                        value={streetAddress}
-                        autoComplete="on"
-                        onChange={(e) => setStreetAddress(e.target.value)}
-                    />
-                </FormControl>
-                <div className={classes.flexContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="City"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={city}
-                        autoComplete="on"
-                        onChange={(e) => setCity(e.target.value)}
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Province"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={province}
-                        autoComplete="on"
-                        onChange={(e) => setProvince(e.target.value)}
-                    />
-                </div>
-                <div className={classes.flexContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Postal Code"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={postalCode}
-                        autoComplete="on"
-                        onChange={(e) => setPostalCode(e.target.value)}
-                    />
+                <TextField
+                    id="outlined-basic"
+                    label="CVV"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={CVV}
+                    autoComplete="on"
+                    onChange={(e) => setCVV(e.target.value)}
+                />
+            </div>
+            {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
+            <Typography className={classes.text} component="p">
+                Billing Addres
+            </Typography>
+            <FormControl fullWidth={true}>
+                <TextField
+                    id="outlined-basic"
+                    label="Street Address"
+                    variant="outlined"
+                    size="small"
+                    className={classes.input}
+                    type="text"
+                    value={streetAddress}
+                    autoComplete="on"
+                    onChange={(e) => setStreetAddress(e.target.value)}
+                />
+            </FormControl>
+            <div className={classes.flexContainer}>
+                <TextField
+                    id="outlined-basic"
+                    label="City"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={city}
+                    autoComplete="on"
+                    onChange={(e) => setCity(e.target.value)}
+                />
+                <TextField
+                    id="outlined-basic"
+                    label="Province"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={province}
+                    autoComplete="on"
+                    onChange={(e) => setProvince(e.target.value)}
+                />
+            </div>
+            <div className={classes.flexContainer}>
+                <TextField
+                    id="outlined-basic"
+                    label="Postal Code"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={postalCode}
+                    autoComplete="on"
+                    onChange={(e) => setPostalCode(e.target.value)}
+                />
 
-                    <TextField
-                        id="outlined-basic"
-                        label="Country"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={country}
-                        autoComplete="on"
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
-                </div>
-                <Alert severity="info" className={classes.alert}>
-                    Helper section with brief legal information, assisting the
-                    client through the process.
-                </Alert>
-                <div className={classes.buttonContainer}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={handleSubmit}
-                        className={classes.completeButton}
-                    >
-                        Complete
-                    </Button>
-                </div>
-            </Card>
-        </div>
+                <TextField
+                    id="outlined-basic"
+                    label="Country"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    value={country}
+                    autoComplete="on"
+                    onChange={(e) => setCountry(e.target.value)}
+                />
+            </div>
+            <Alert severity="info" className={classes.alert}>
+                Helper section with brief legal information, assisting the
+                client through the process.
+            </Alert>
+            <div className={classes.buttonContainer}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    onClick={handleSubmit}
+                    className={classes.completeButton}
+                >
+                    Complete
+                </Button>
+            </div>
+        </Card>
     );
 }
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '5%',
-    },
     card: {
         padding: '2%',
-        width: '80%',
+        marginTop: '5%',
+        width: '75%',
     },
     title: {
         fontSize: '20px',

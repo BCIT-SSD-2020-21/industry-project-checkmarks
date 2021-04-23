@@ -15,138 +15,136 @@ export default function PaymentForm() {
     };
 
     return (
-        <div className={classes.root}>
-            <Card className={classes.card}>
-                <Typography className={classes.title} component="p">
-                    Confirm Your Information
+        <Card className={classes.card}>
+            <Typography className={classes.title} component="p">
+                Confirm Your Information
+            </Typography>
+            {/* ////////////////////////////////////// Payment info ////////////////////////////////////////////*/}
+
+            {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    First Name
                 </Typography>
-                {/* ////////////////////////////////////// Payment info ////////////////////////////////////////////*/}
+                <Typography className={classes.text} component="p">
+                    John
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Last Name ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Last Name
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    Doe
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Street Address ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Street Address
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    555 Happy Road
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// City ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    City
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    Vancouver
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Province ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Province
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    BC
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Country
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    Canada
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Postal Code ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Postal Code
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    V6K 5Q8
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Email ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Email
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    John@checkmark.com
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Trademark Types
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    Standard Characters
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Classes Selected ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Classes Selected
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    Class: 11,13
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Terms Selected ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Terms Selected
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    water softening units
+                </Typography>
+            </div>
+            {/* //////////////////////////////////////  Filed in other country  ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Filed in other country
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    No
+                </Typography>
+            </div>
 
-                {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        First Name
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        John
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Last Name ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Last Name
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        Doe
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Street Address ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Street Address
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        555 Happy Road
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// City ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        City
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        Vancouver
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Province ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Province
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        BC
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Country
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        Canada
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Postal Code ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Postal Code
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        V6K 5Q8
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Email ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Email
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        John@checkmark.com
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Trademark Types
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        Standard Characters
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Classes Selected ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Classes Selected
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        Class: 11,13
-                    </Typography>
-                </div>
-                {/* ////////////////////////////////////// Terms Selected ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Terms Selected
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        water softening units
-                    </Typography>
-                </div>
-                {/* //////////////////////////////////////  Filed in other country  ////////////////////////////////////////////*/}
-                <div className={classes.textContainer}>
-                    <Typography className={classes.subtitle} component="p">
-                        Filed in other country
-                    </Typography>
-                    <Typography className={classes.text} component="p">
-                        No
-                    </Typography>
-                </div>
-
-                <Alert severity="info" className={classes.alert}>
-                    Helper section with brief legal information, assisting the
-                    client through the process.
-                </Alert>
-                <div className={classes.buttonContainer}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={handleSubmit}
-                        className={classes.completeButton}
-                    >
-                        Confirm and go to payment
-                    </Button>
-                </div>
-            </Card>
-        </div>
+            <Alert severity="info" className={classes.alert}>
+                Helper section with brief legal information, assisting the
+                client through the process.
+            </Alert>
+            <div className={classes.buttonContainer}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    onClick={handleSubmit}
+                    className={classes.completeButton}
+                >
+                    Confirm and go to payment
+                </Button>
+            </div>
+        </Card>
     );
 }
 const useStyles = makeStyles((theme) => ({
@@ -157,8 +155,9 @@ const useStyles = makeStyles((theme) => ({
         margin: '5%',
     },
     card: {
+        marginTop: '5%',
+        width: '75%',
         padding: '2%',
-        width: '80%',
     },
     title: {
         fontSize: '20px',
