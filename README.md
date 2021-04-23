@@ -12,7 +12,7 @@ An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 
 <i>Checkmarks is a trademark search and registration form web app! </i>
 
-<i><strong>Objectiive: </strong> The project scope is to enhance the landing page while maintaining clients ability to manage the layout page, enhance a word-mark search to match more on a robust set of criteria, and enhance the trademark registration process with live data, additional fields, and additional functionality while maintaining existing integration with LawPay and Clio. </i>
+<i><strong>Objective: </strong> The project scope is to enhance the landing page while maintaining clients ability to manage the layout page, enhance a word-mark search to match more on a robust set of criteria, enhance the trademark registration process with live data, additional fields, and additional functionality while maintaining existing integration with Law Pay and Clio. </i>
 </br>
 
 ## Workflows
