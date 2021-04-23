@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Radio from '@material-ui/core/Radio';
 import Alert from '@material-ui/lab/Alert';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const CountryCard = () => {
     const classes = useStyles();
@@ -12,6 +13,9 @@ const CountryCard = () => {
                 Have you filed or applied for this trademark in any other
                 country?
             </p>
+            <Card className={classes.noCard}>
+                <FormControlLabel value="No" control={<Radio />} label="No" />
+            </Card>
 
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
@@ -47,5 +51,10 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             width: '20%',
         },
+    },
+
+    noCard: {
+        paddingTop: '3%',
+        paddingBottom: '3%',
     },
 }));
