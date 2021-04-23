@@ -10,6 +10,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import CountryCard from '../components/TradeMarkApplicationForms/CountryCard';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -163,6 +164,8 @@ const TrademarkApplication = () => {
 
                 <button className={classes.nextButton}>Next Step</button>
             </Card>
+
+            <CountryCard />
         </div>
     );
 };
@@ -269,18 +272,4 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
-
-    // uploadCard: {
-    //     width: '75%',
-    //     marginTop: '2%',
-    //     display: 'flex',
-    //     boxShadow: '5px 5px 15px 0px grey',
-    // },
-
-    // arrowIcons: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     justifyContent: 'space-between',
-    //     marginTop: '5%',
-    // },
 }));
