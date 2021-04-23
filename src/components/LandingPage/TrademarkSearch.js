@@ -12,6 +12,7 @@ import {
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import { standardTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
+import SearchResults from './SearchResults';
 
 const checkmarksWebAPIbaseUrl =
     'https://checkmarkswebapi.azurewebsites.net/api/trademark/';
@@ -19,6 +20,7 @@ const checkmarksWebAPIbaseUrl =
 export default function TrademarkSearch() {
     const classes = searchBoxStyles();
 
+    // user input search term
     const [searchTerm, setSearchTerm] = useState('');
     const searchTrademark = (text) => {
         if (text.length > 2) {
@@ -28,6 +30,7 @@ export default function TrademarkSearch() {
         }
     };
 
+    // webAPI search results
     const [searchResults, setSearchResults] = useState([]);
     useEffect(() => {
         if (searchTerm) {
@@ -66,7 +69,8 @@ export default function TrademarkSearch() {
             {searchTerm.length > 2 && (
                 <Box>
                     {searchResults.length > 2 ? (
-                        <Typography>{'Results'}</Typography>
+                        // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
+                        <SearchResults data={searchResults} />
                     ) : (
                         <Typography>{'No Results'}</Typography>
                     )}

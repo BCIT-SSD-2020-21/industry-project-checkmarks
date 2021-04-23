@@ -21,13 +21,15 @@ import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import Login from '../components/LandingPage/Login';
 
 export default function Landing() {
+    const classes = useStyles();
     const history = useHistory();
+
     const [authenticated, setAuthenticated] = useState(false);
     const [loggingIn, setLoggingIn] = useState(false);
     const [searching, setSearching] = useState(false);
 
     return (
-        <Box>
+        <Box className={classes.root}>
             {authenticated ? <UserDashboard /> : <HeaderBanner />}
             {searching ? (
                 <TrademarkSearch />
@@ -67,3 +69,12 @@ export default function Landing() {
         </Box>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+}));
