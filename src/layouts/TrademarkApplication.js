@@ -45,14 +45,26 @@ const TrademarkApplication = () => {
                     {/* ======================================== */}
                     {/* Search Result card */}
                     {/* ======================================== */}
+
                     <Card className={classes.resultCard}>
+                        <div className={classes.resultCardHeading}>
+                            {' '}
+                            <p>Top existing matches found...</p>
+                            <button className={classes.seeAllButton}>
+                                See all
+                            </button>
+                        </div>
                         <p>placeholder</p>
                         <p>placeholder</p>
                         <p>placeholder</p>
 
                         <div className={classes.resultCardButtons}>
-                            <ArrowBackIcon />
-                            <ArrowForwardIcon />
+                            <button>
+                                <ArrowBackIcon />
+                            </button>
+                            <button>
+                                <ArrowForwardIcon />
+                            </button>
                         </div>
                     </Card>
                 </Card>
@@ -119,6 +131,12 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
     },
 
+    resultCardHeading: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
     resultCard: {
         width: '75%',
         boxShadow: '1px 1px 10px 0px grey',
@@ -126,12 +144,18 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '5%',
         marginBottom: '10%',
     },
+    seeAllButton: {
+        backgroundColor: '#128b83',
+        color: '#fff',
+        borderRadius: '10px',
+        width: '13%',
+    },
 
-    resultHeading: {
+    resultCardButtons: {
         display: 'flex',
-        flexDirection: 'row',
         justifyContent: 'space-between',
     },
+
     outerText: {
         justifyContent: 'flex-start',
     },
@@ -141,13 +165,6 @@ const useStyles = makeStyles((theme) => ({
         color: '#2a9df4',
         fontSize: '12px',
     },
-
-    // seeAllButton: {
-    //     backgroundColor: '#128b83',
-    //     color: '#fff',
-    //     borderRadius: '10px',
-    //     width: '15%',
-    // },
 
     // uploadCard: {
     //     width: '75%',
