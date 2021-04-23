@@ -206,18 +206,20 @@ const useStyles = makeStyles((theme) => ({
     },
     flexInput: {
         width: '80%',
-        margin: '3% auto',
+        margin: '3%',
         borderRadius: '10px',
         [theme.breakpoints.up('sm')]: {
-            margin: '3%  ',
             width: '37%',
         },
     },
     flexContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         [theme.breakpoints.up('sm')]: {
-            display: 'flex',
+            flexDirection: 'row',
             width: '100%',
-            justifyContent: 'center',
         },
     },
     buttonContainer: {
