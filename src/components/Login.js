@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, FormControl, Card } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
+import { Button, FormControl, Card, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-export default function IndividualForm({ user, setUser }) {
+export default function IndividualForm() {
     const classes = useStyles();
     const history = useHistory();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    //handle register as individual
+    //handle login
     const handleLogin = async (event) => {
         event.preventDefault();
         alert('Successfully login');
@@ -33,11 +32,7 @@ export default function IndividualForm({ user, setUser }) {
                         type="email"
                         value={email}
                         autoComplete="on"
-                        onChange={(e) =>
-                            setEmail({
-                                email: e.target.value,
-                            })
-                        }
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </FormControl>
                 <FormControl fullWidth={true}>
@@ -47,11 +42,7 @@ export default function IndividualForm({ user, setUser }) {
                         type="password"
                         value={password}
                         autoComplete="on"
-                        onChange={(e) =>
-                            setPassword({
-                                password: e.target.value,
-                            })
-                        }
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </FormControl>
                 <div className={classes.submitButtonContainer}>
@@ -72,11 +63,13 @@ export default function IndividualForm({ user, setUser }) {
                         Login
                     </Button>
                 </div>
+                <Typography className={classes.text}>
+                    Forgot password?
+                </Typography>
             </Card>
         </div>
     );
 }
-
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -85,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         padding: '5%',
-        width: '50%',
+        width: '40%',
     },
     input: {
         width: '60%',
@@ -97,10 +90,14 @@ const useStyles = makeStyles((theme) => ({
         },
         border: '1px solid #ccc',
     },
+    text: {
+        color: '#df3a48',
+        fontWeight: 'bold',
+        textAlign: 'right',
+        fontSize: '10px',
+    },
     submitButtonContainer: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         margin: '3%',
     },
     loginButton: {
