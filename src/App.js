@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Landing from './layouts/Landing';
 import Register from '../src/layouts/Register';
-import TrademarkApplication from '../src/layouts/TrademarkApplication';
-import Login from '../src/components/Login';
+import TrademarkApplication from './layouts/TrademarkApplication';
 
 export default function App() {
     return (
@@ -11,8 +11,8 @@ export default function App() {
                 <Route path="/register">
                     <Register />
                 </Route>
-                <Route path="/login">
-                    <Login />
+                <Route exact path="/">
+                    <Landing />
                 </Route>
                 <Route path="/application">
                     <TrademarkApplication />
