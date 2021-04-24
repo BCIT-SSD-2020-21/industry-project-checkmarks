@@ -23,63 +23,62 @@ export default function IndividualForm() {
     };
 
     return (
-        <div className={classes.root}>
-            <Card className={classes.card}>
-                <Typography className={classes.title}>Sign up</Typography>
-                <FormControl fullWidth={true}>
-                    <input
-                        className={classes.input}
-                        placeholder="Email"
-                        type="email"
-                        value={email}
-                        autoComplete="on"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </FormControl>
-                <FormControl fullWidth={true}>
-                    <input
-                        className={classes.input}
-                        placeholder="Password"
-                        type="password"
-                        value={password}
-                        autoComplete="on"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </FormControl>
-                <div className={classes.submitButtonContainer}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        onClick={handleSignUp}
-                        className={classes.signUpButton}
-                    >
-                        Sign Up
-                    </Button>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        className={classes.loginButton}
-                        onClick={handleLogin}
-                    >
-                        Login
-                    </Button>
-                </div>
-                <Typography className={classes.text}>
-                    Forgot password?
-                </Typography>
-            </Card>
-        </div>
+        // <div className={classes.root}>
+        <Card className={classes.container}>
+            <Typography className={classes.title}>Sign up</Typography>
+            <FormControl fullWidth={true}>
+                <input
+                    className={classes.input}
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    autoComplete="on"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </FormControl>
+            <FormControl fullWidth={true}>
+                <input
+                    className={classes.input}
+                    placeholder="Password"
+                    type="password"
+                    value={password}
+                    autoComplete="on"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </FormControl>
+            <div className={classes.submitButtonContainer}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    onClick={handleSignUp}
+                    className={classes.signUpButton}
+                >
+                    Sign Up
+                </Button>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    className={classes.loginButton}
+                    onClick={handleLogin}
+                >
+                    Login
+                </Button>
+            </div>
+            <Typography className={classes.text}>Forgot password?</Typography>
+        </Card>
+        // </div>
     );
 }
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    card: {
+    // root: {
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    // },
+    container: {
         padding: '2%',
-        width: '40%',
+        margin: 'auto',
+        width: '90%',
     },
     input: {
         width: '60%',
