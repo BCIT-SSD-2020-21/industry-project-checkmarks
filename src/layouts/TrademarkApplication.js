@@ -10,7 +10,9 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import CountryCard from '../components/TradeMarkApplicationPage/CountryCard';
+import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
+import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
+import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -23,9 +25,9 @@ const TrademarkApplication = () => {
             <div className={classes.title}>
                 <span className={classes.text}>Trademark Application</span>
             </div>
-            {/* ===================================== */}
+
             {/*====== Outter Card -- Main  card *==== */}
-            {/* ===================================== */}
+
             <Card className={classes.outerCard}>
                 <div className={classes.outerText}>
                     <p style={{ color: 'red' }}>What type of Trademark? </p>
@@ -166,6 +168,8 @@ const TrademarkApplication = () => {
             </Card>
 
             <CountryCard />
+            <ConfirmOrder />
+            <PaymentForm />
         </div>
     );
 };
