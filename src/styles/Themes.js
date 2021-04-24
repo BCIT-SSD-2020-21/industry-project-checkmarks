@@ -11,7 +11,8 @@ const colors = {
     teal: '#128B83',
 
     white: '#FFFFFF',
-    lightestGray: '#ececec',
+    lightestGray: '#fafafa',
+    lighterGray: '#ececec',
     lightGray: '#969696',
     darkGray: '#434343',
     black: '#000000',
@@ -27,7 +28,7 @@ export const checkmarksTheme = {
 
     inputLabel: colors.darkRed,
     inputIcon: colors.darkRed,
-    inputBackground: colors.lightestGray,
+    inputBackground: colors.lighterGray,
     inputPlaceholder: colors.lightGray,
 
     textActive: colors.activeBlue,
@@ -39,6 +40,11 @@ export const checkmarksTheme = {
     buttonPrimary: colors.mediumRed,
     buttonTextSecondary: colors.darkRed,
     buttonSecondary: colors.white,
+
+    hoverDark: colors.darkGray,
+    hoverLight: colors.lightestGray,
+    hoverBright: colors.darkRed,
+    hoverSoft: colors.lightRed,
 
     bgGradientLight: colors.lightRed, // applied to Light side of linear gradient
     bgGradientDark: colors.darkRed, // applied to Dark side of linear gradient

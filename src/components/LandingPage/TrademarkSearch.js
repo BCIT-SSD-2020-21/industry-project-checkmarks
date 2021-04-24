@@ -10,7 +10,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-import { standardTheme } from '../../styles/Themes';
+import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './SearchResults';
 
@@ -45,27 +45,29 @@ export default function TrademarkSearch() {
     console.log('searchResults: ', searchResults);
 
     return (
-        <Box>
-            <FormControl className={classes.container}>
-                <InputLabel className={classes.label}>
-                    {'Search for a Trademark...'}
-                </InputLabel>
-                <Input
-                    className={classes.input}
-                    onChange={(e) => searchTrademark(e.target.value)}
-                    id="searchBox"
-                    placeholder={'Enter Text...'}
-                    disableUnderline={true}
-                    startAdornment={
-                        <InputAdornment
-                            className={classes.adornment}
-                            position="start"
-                        >
-                            <SearchTwoToneIcon className={classes.icon} />
-                        </InputAdornment>
-                    }
-                />
-            </FormControl>
+        <Box className={classes.container}>
+            <Box boxShadow={2} className={classes.searchBox}>
+                <FormControl className={classes.form}>
+                    <InputLabel className={classes.label}>
+                        {'Search for a Trademark...'}
+                    </InputLabel>
+                    <Input
+                        className={classes.input}
+                        onChange={(e) => searchTrademark(e.target.value)}
+                        id="searchBox"
+                        placeholder={'Enter Text...'}
+                        disableUnderline={true}
+                        startAdornment={
+                            <InputAdornment
+                                className={classes.adornment}
+                                position="start"
+                            >
+                                <SearchTwoToneIcon className={classes.icon} />
+                            </InputAdornment>
+                        }
+                    />
+                </FormControl>
+            </Box>
             {searchTerm.length > 2 && (
                 <Box>
                     {searchResults.length > 2 ? (
@@ -83,26 +85,43 @@ export default function TrademarkSearch() {
 export const searchBoxStyles = makeStyles(() => ({
     //
     container: {
-        backgroundColor: standardTheme.bgPrimary,
-        borderRadius: '22px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        width: '100%',
+        minHeight: '160px',
+
+        // width: '300px',
+    },
+    searchBox: {
+        alignItems: 'center',
+        backgroundColor: checkmarksTheme.bgPrimary,
+        borderRadius: '22px',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '10% auto',
+        '&:hover': {
+            backgroundColor: checkmarksTheme.hoverLight,
+        },
+        // padding: '10px',
+        // boxShadow: '10px 10px 0 0 rgba(0, 0, 0, 0.3)',
+        // width: '90%',
+        // maxWidth: '500px',
+    },
+    form: {
         margin: '5px auto',
         padding: '10px',
-        width: '95%',
-        maxWidth: '320px',
     },
     label: {
-        color: standardTheme.textLabel,
-        fontSize: 20,
+        color: checkmarksTheme.inputLabel,
+        fontSize: 18,
         fontStyle: 'italic',
-        padding: '5px 17px',
+        padding: '0 22px',
         textAlign: 'left',
         width: '100%',
     },
     input: {
-        backgroundColor: standardTheme.bgSecondary,
+        backgroundColor: checkmarksTheme.inputBackground,
         textAlign: 'left',
         width: '100%',
         padding: '0 8px',
@@ -111,6 +130,6 @@ export const searchBoxStyles = makeStyles(() => ({
     adornment: {},
     icon: {
         // margin: '2%',
-        color: standardTheme.textPlaceholder,
+        color: checkmarksTheme.inputIcon,
     },
 }));
