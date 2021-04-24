@@ -97,14 +97,17 @@ const useStyles = makeStyles(() => ({
         // border: '1px solid black',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
+        height: (window.innerHeight * 2) / 3,
         width: '90%',
     },
     search: {
+        alignItems: 'center',
         // border: '1px solid black',
-        margin: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '0 auto',
         width: '100%',
-        // minHeight: '100px',
     },
     buttons: {
         display: 'flex',
@@ -113,7 +116,6 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         margin: '10% 0 5% 0',
         width: '100%',
-        // margin: '0 auto',
     },
     buttonLogin: {
         backgroundColor: checkmarksTheme.buttonSecondary,
@@ -121,6 +123,7 @@ const useStyles = makeStyles(() => ({
             background: checkmarksTheme.hoverLight,
         },
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '25px',
         color: checkmarksTheme.buttonTextSecondary,
         padding: '5px 0',
         width: '40%',
@@ -131,6 +134,7 @@ const useStyles = makeStyles(() => ({
             background: checkmarksTheme.hoverSoft,
         },
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
         padding: '5px 0',
         width: '55%',
@@ -138,9 +142,10 @@ const useStyles = makeStyles(() => ({
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,
         '&:hover': {
-            background: checkmarksTheme.bgGradientLight,
+            background: checkmarksTheme.hoverLight,
         },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         color: checkmarksTheme.buttonTextSecondary,
-        padding: '10px',
+        padding: '5px',
     },
 }));
