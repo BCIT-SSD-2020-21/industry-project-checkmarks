@@ -11,6 +11,7 @@ import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 import DetailSelectForm from '../components/TrademarkApplicationPage/DetailSelectForm';
+import LogoForm from '../components/TrademarkApplicationPage/LogoForm';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -77,12 +78,7 @@ const TrademarkApplication = () => {
                 {/* Logo card */}
                 {/* ======================================== */}
 
-                <Card className={classes.logoCard}>
-                    <div>
-                        <p>select a file to upload</p>
-                        <button>browse</button>
-                    </div>
-                </Card>
+                <LogoForm />
 
                 {/* ======================================== */}
                 {/* detail selection card */}
@@ -188,11 +184,5 @@ const useStyles = makeStyles((theme) => ({
         margin: '2% auto',
         color: '#2a9df4',
         fontSize: '12px',
-    },
-
-    logoCard: {
-        width: '75%',
-        margin: 'auto',
-        paddingBottom: '2em',
     },
 }));
