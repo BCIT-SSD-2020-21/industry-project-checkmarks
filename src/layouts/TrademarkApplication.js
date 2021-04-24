@@ -5,13 +5,12 @@ import Card from '@material-ui/core/Card';
 import TrademarkAppSearchBar from '../components/TrademarkAppSearchBar';
 import Logo2 from '../images/CheckmarksLogo2.png';
 import Alert from '@material-ui/lab/Alert';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 import DetailSelectForm from '../components/TrademarkApplicationPage/DetailSelectForm';
 import LogoForm from '../components/TrademarkApplicationPage/LogoForm';
+import SearchResultCard from '../components/TrademarkApplicationPage/SearchResultCard';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -50,28 +49,6 @@ const TrademarkApplication = () => {
                     {/* ======================================== */}
                     {/* Search Result card */}
                     {/* ======================================== */}
-
-                    <Card className={classes.resultCard}>
-                        <div className={classes.resultCardHeading}>
-                            {' '}
-                            <p>Top existing matches found...</p>
-                            <button className={classes.seeAllButton}>
-                                See all
-                            </button>
-                        </div>
-                        <p>placeholder</p>
-                        <p>placeholder</p>
-                        <p>placeholder</p>
-
-                        <div className={classes.resultCardButtons}>
-                            <button>
-                                <ArrowBackIcon />
-                            </button>
-                            <button>
-                                <ArrowForwardIcon />
-                            </button>
-                        </div>
-                    </Card>
                 </Card>
 
                 {/* ======================================== */}
@@ -148,31 +125,6 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             width: '20%',
         },
-    },
-
-    resultCardHeading: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-
-    resultCard: {
-        width: '75%',
-
-        margin: 'auto',
-        marginTop: '5%',
-        marginBottom: '10%',
-    },
-    seeAllButton: {
-        backgroundColor: '#128b83',
-        color: '#fff',
-        borderRadius: '10px',
-        width: '25%',
-    },
-
-    resultCardButtons: {
-        display: 'flex',
-        justifyContent: 'space-between',
     },
 
     outerText: {
