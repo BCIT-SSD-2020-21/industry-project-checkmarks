@@ -74,7 +74,16 @@ export default function TrademarkSearch() {
                         // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
                         <SearchResults data={searchResults} />
                     ) : (
-                        <Typography>{'No Results'}</Typography>
+                        <Card className={classes.noResultContainer}>
+                            <Typography className={classes.noResultText}>
+                                {
+                                    'No match found, so this Trademark may not be registered yet.'
+                                }
+                            </Typography>
+                            <Typography className={classes.noResultText}>
+                                {`"${searchTerm}" may be available. Would you like to start an application?`}
+                            </Typography>
+                        </Card>
                     )}
                 </Box>
             )}
@@ -104,10 +113,9 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     results: {
         width: '100%',
-        backgroundColor: 'blue',
     },
     form: {
-        margin: '5px auto',
+        // margin: '5px auto',
         padding: '10px',
     },
     label: {
@@ -129,5 +137,16 @@ export const searchBoxStyles = makeStyles(() => ({
     icon: {
         // margin: '2%',
         color: checkmarksTheme.inputIcon,
+    },
+    noResultContainer: {
+        borderRadius: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        padding: '5% 10%',
+        height: '100%',
+    },
+    noResultText: {
+        textAlign: 'center',
     },
 }));
