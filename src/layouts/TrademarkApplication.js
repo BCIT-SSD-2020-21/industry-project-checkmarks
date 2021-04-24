@@ -2,15 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AskALawyer from '../components/AskALawyer';
 import Card from '@material-ui/core/Card';
-import TrademarkAppSearchBar from '../components/TrademarkAppSearchBar';
 import Logo2 from '../images/CheckmarksLogo2.png';
 import Alert from '@material-ui/lab/Alert';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
-import DetailSelectForm from '../components/TrademarkApplicationPage/DetailSelectForm';
+import DetailSelectForm from '../components/TrademarkApplicationPage/DetailSelectCard';
 import LogoForm from '../components/TrademarkApplicationPage/LogoForm';
-import SearchResultCard from '../components/TrademarkApplicationPage/SearchResultCard';
+import TextSearchForm from '../components/TrademarkApplicationPage/TextSearchCard';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -24,51 +23,7 @@ const TrademarkApplication = () => {
                 <span className={classes.text}>Trademark Application</span>
             </div>
 
-            {/*====== Outter Card -- Main  card *==== */}
-
-            <Card className={classes.outerCard}>
-                <div className={classes.outerText}>
-                    <p style={{ color: 'red' }}>What type of Trademark? </p>
-                    <p style={{ color: 'red', fontSize: 15 }}>
-                        Select all that apply
-                    </p>
-                </div>
-                {/* ======================================== */}
-                {/* Search for trade mark card */}
-                {/* ======================================== */}
-                <Card className={classes.searchCard}>
-                    <p style={{ color: 'red', fontSize: 15 }}>
-                        Enter your trademark text
-                    </p>
-                    <TrademarkAppSearchBar />
-
-                    <Alert severity="info" className={classes.alert}>
-                        A Trademark cannot be 'primarily merely a surname'
-                    </Alert>
-
-                    {/* ======================================== */}
-                    {/* Search Result card */}
-                    {/* ======================================== */}
-                </Card>
-
-                {/* ======================================== */}
-                {/* Logo card */}
-                {/* ======================================== */}
-
-                <LogoForm />
-
-                {/* ======================================== */}
-                {/* detail selection card */}
-                {/* ======================================== */}
-                <DetailSelectForm />
-
-                <Alert severity="info" className={classes.alert}>
-                    Helper Section with brief legal information, assisting the
-                    client through the process
-                </Alert>
-
-                <button className={classes.nextButton}>Next Step</button>
-            </Card>
+            {/*Trademark Form Card*/}
 
             <CountryCard />
             <ConfirmOrder />
@@ -105,12 +60,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2%',
         display: 'flex',
         flexDirection: 'column',
-    },
-
-    searchCard: {
-        width: '75%',
-        margin: 'auto',
-        marginBottom: '3%',
     },
 
     nextButton: {

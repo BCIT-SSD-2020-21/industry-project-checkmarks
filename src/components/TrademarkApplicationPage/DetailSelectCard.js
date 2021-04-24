@@ -5,7 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const DetailSelectForm = () => {
+const DetailSelectCard = () => {
     const classes = useStyles();
     return (
         <Card className={classes.detailsCard}>
@@ -57,7 +57,7 @@ const DetailSelectForm = () => {
     );
 };
 
-export default DetailSelectForm;
+export default DetailSelectCard;
 const useStyles = makeStyles((theme) => ({
     detailsCard: {
         width: '75%',
