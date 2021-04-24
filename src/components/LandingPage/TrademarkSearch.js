@@ -69,7 +69,7 @@ export default function TrademarkSearch() {
                 </FormControl>
             </Box>
             {searchTerm.length > 2 && (
-                <Box>
+                <Box className={classes.results}>
                     {searchResults.length > 2 ? (
                         // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
                         <SearchResults data={searchResults} />
@@ -90,8 +90,6 @@ export const searchBoxStyles = makeStyles(() => ({
         alignItems: 'center',
         width: '100%',
         minHeight: '160px',
-
-        // width: '300px',
     },
     searchBox: {
         alignItems: 'center',
@@ -99,14 +97,14 @@ export const searchBoxStyles = makeStyles(() => ({
         borderRadius: '22px',
         display: 'flex',
         flexDirection: 'column',
-        margin: '10% auto',
+        margin: '2% auto',
         '&:hover': {
             backgroundColor: checkmarksTheme.hoverLight,
         },
-        // padding: '10px',
-        // boxShadow: '10px 10px 0 0 rgba(0, 0, 0, 0.3)',
-        // width: '90%',
-        // maxWidth: '500px',
+    },
+    results: {
+        width: '100%',
+        backgroundColor: 'blue',
     },
     form: {
         margin: '5px auto',

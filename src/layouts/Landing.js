@@ -94,20 +94,25 @@ const useStyles = makeStyles(() => ({
         width: window.innerWidth,
     },
     actions: {
+        // border: '1px solid black',
         display: 'flex',
         flexDirection: 'column',
-        justifySelf: 'space-around',
+        justifyContent: 'space-around',
+        width: '90%',
     },
     search: {
+        // border: '1px solid black',
         margin: 'auto',
-        minHeight: '100px',
+        width: '100%',
+        // minHeight: '100px',
     },
     buttons: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // width: '60%',
+        margin: '10% 0 5% 0',
+        width: '100%',
         // margin: '0 auto',
     },
     buttonLogin: {
@@ -118,7 +123,7 @@ const useStyles = makeStyles(() => ({
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         color: checkmarksTheme.buttonTextSecondary,
         padding: '5px 0',
-        width: '39%',
+        width: '40%',
     },
     buttonRegister: {
         backgroundColor: checkmarksTheme.buttonPrimary,
@@ -128,7 +133,7 @@ const useStyles = makeStyles(() => ({
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         color: checkmarksTheme.buttonTextPrimary,
         padding: '5px 0',
-        width: '58%',
+        width: '55%',
     },
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,

@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
-import Paper from '@material-ui/core/Paper';
+import { Paper, TableCell, Typography } from '@material-ui/core';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
 const styles = (theme) => ({
@@ -191,36 +190,25 @@ export default function SearchResults({ data }) {
     return (
         <Paper style={{ height: 400, width: '100%' }}>
             <VirtualizedTable
+                // style={{ height: 400, width: '100%' }}
                 rowCount={data.length} // row or data
                 rowGetter={({ index }) => data[index]} // row or data
                 columns={[
                     {
-                        width: 200,
+                        width: 160,
                         label: 'Title',
                         dataKey: 'title',
                     },
                     {
-                        width: 200,
-                        label: 'File Date',
-                        dataKey: 'fileDate',
-                        // numeric: true,
-                    },
-                    {
-                        width: 200,
-                        label: 'NICE Classes',
-                        dataKey: 'niceClasses',
-                        // numeric: true,
-                    },
-                    {
-                        width: 200,
+                        width: 120,
                         label: 'Status',
                         dataKey: 'statusDescEn',
                         // numeric: true,
                     },
                     {
-                        width: 120,
-                        label: 'Protein\u00A0(g)',
-                        dataKey: 'protein',
+                        width: 150,
+                        label: 'File Date',
+                        dataKey: 'fileDate',
                         // numeric: true,
                     },
                 ]}
