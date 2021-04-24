@@ -18,7 +18,7 @@ export default function Landing() {
 
     const [authenticated, setAuthenticated] = useState(false);
     const [loggingIn, setLoggingIn] = useState(false);
-    const [searching, setSearching] = useState(false);
+    const [searching, setSearching] = useState(true);
 
     console.log(window.innerHeight);
     return (
