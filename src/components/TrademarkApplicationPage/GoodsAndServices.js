@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MaterialTable from 'material-table';
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     CardContent,
@@ -417,6 +418,10 @@ export default function GoodsAndServices() {
                             </Typography>
                         </CardContent>
                     </Card>
+                    <Alert severity="info" className={classes.alert}>
+                        Helper section with brief legal information, assisting
+                        the client through the process.
+                    </Alert>
                     <div className={classes.buttonContainer}>
                         <Button
                             type="submit"
@@ -533,5 +538,10 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             fontSize: '8px',
         },
+    },
+    alert: {
+        margin: '3% auto',
+        color: '#2a9df4',
+        fontSize: '12px',
     },
 }));
