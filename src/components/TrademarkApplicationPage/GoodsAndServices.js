@@ -27,6 +27,7 @@ export default function GoodsAndServices() {
     const [searchError, setSearchError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [open, setOpen] = useState(false);
+
     // constructor(props) {
     //     super(props);
     //     this.clickContinue = this.clickContinue.bind(this);
@@ -266,7 +267,7 @@ export default function GoodsAndServices() {
         //         ' additional NICE Classes.';
         // }
         // return (
-        <Card className={classes.cardContainer}>
+        <Card className={classes.card}>
             <div>
                 <h1 className={classes.title}>Goods and Services</h1>
                 <Typography gutterBottom>
@@ -294,6 +295,7 @@ export default function GoodsAndServices() {
                             error={searchError != ''}
                             helperText={searchError}
                             value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             // onChange={handleTextFieldChange}
                         />
                         <Button
@@ -353,7 +355,7 @@ export default function GoodsAndServices() {
                     {/* ///////////////////////////selected terms section /////////////////////////// */}
                     <Card className={classes.selectedTerms}>
                         <CardContent>
-                            <Typography variant="h5" component="h2">
+                            <Typography variant="h6">
                                 <b>Selected Terms:</b>
                             </Typography>
 
@@ -406,7 +408,7 @@ export default function GoodsAndServices() {
                     {/* ///////////////////////////total amount section /////////////////////////// */}
                     <Card className={classes.amount}>
                         <CardContent>
-                            <Typography variant="h5" component="h2">
+                            <Typography variant="h6">
                                 <b>Amount:</b>
                                 {/* {amountText} */}
                             </Typography>
@@ -475,10 +477,10 @@ export default function GoodsAndServices() {
 }
 
 const useStyles = makeStyles((theme) => ({
-    cardContainer: {
-        padding: '0 2% ',
-        margin: '5% auto',
-        width: '80%',
+    card: {
+        padding: '2% ',
+        marginTop: '5%',
+        width: '75%',
     },
     title: {
         color: '#df3a48',
