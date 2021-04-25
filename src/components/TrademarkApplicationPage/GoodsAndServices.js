@@ -486,6 +486,9 @@ const useStyles = makeStyles((theme) => ({
         padding: '2% ',
         marginTop: '5%',
         width: '75%',
+        [theme.breakpoints.down('xs')]: {
+            padding: '8% ',
+        },
     },
     title: {
         color: '#df3a48',
