@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Box,
     Button,
@@ -10,6 +10,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import LoopIcon from '@material-ui/icons/Loop';
 import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './SearchResults';
@@ -58,15 +59,34 @@ export default function TrademarkSearch() {
             })();
         }
     }, [searchTerm]);
-    console.log('searchResults: ', searchResults);
+    // console.log('searchResults: ', searchResults);
+
+    // Loading Indicator
+    const { current: instance } = useRef({});
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        if (instance.delayTimer) {
+            clearTimeout(instance.delayTimer);
+        }
+        if (searchTerm !== '' && searchResults.length === 0) {
+            setLoading(true);
+            instance.delayTimer = setTimeout(() => {
+                setLoading(false); // after 3 seconds, stop Loading Indicator
+            }, 3000);
+        } else {
+            setLoading(false);
+        }
+    }, [searchTerm, searchResults]);
+    console.log(searchResults);
+    console.log('loading: ', loading);
 
     return (
-        <Box className={classes.container}>
+        <Box className={classes.containerTMSearch}>
             <Box boxShadow={2} className={classes.searchBox}>
                 <FormControl className={classes.form}>
-                    <InputLabel className={classes.label}>
+                    {/* <InputLabel className={classes.label}>
                         {'Search for a Trademark...'}
-                    </InputLabel>
+                    </InputLabel> */}
                     <Input
                         className={classes.input}
                         onChange={(e) => searchTrademark(e.target.value)}
@@ -79,6 +99,20 @@ export default function TrademarkSearch() {
                                 position="start"
                             >
                                 <SearchTwoToneIcon className={classes.icon} />
+                            </InputAdornment>
+                        }
+                        endAdornment={
+                            <InputAdornment
+                                className={classes.adornment}
+                                position="end"
+                            >
+                                <LoopIcon
+                                    className={
+                                        loading
+                                            ? classes.iconLoading
+                                            : classes.hidden
+                                    }
+                                />
                             </InputAdornment>
                         }
                     />
@@ -109,7 +143,10 @@ export default function TrademarkSearch() {
 
 export const searchBoxStyles = makeStyles(() => ({
     //
-    container: {
+    hidden: {
+        display: 'none',
+    },
+    containerTMSearch: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -122,6 +159,7 @@ export const searchBoxStyles = makeStyles(() => ({
         borderRadius: '22px',
         display: 'flex',
         flexDirection: 'column',
+        width: '90%',
         margin: '2% auto',
         '&:hover': {
             backgroundColor: checkmarksTheme.hoverLight,
@@ -132,6 +170,7 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     form: {
         // margin: '5px auto',
+        width: '90%',
         padding: '10px',
     },
     label: {
@@ -164,5 +203,13 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     noResultText: {
         textAlign: 'center',
+    },
+    iconLoading: {
+        animation: '$rotationAnimation 2s infinite',
+        color: checkmarksTheme.inputIcon,
+    },
+    '@keyframes rotationAnimation': {
+        from: { transform: 'rotate(0deg)' },
+        to: { transform: 'rotate(359deg)' },
     },
 }));
