@@ -5,6 +5,7 @@ import { checkmarksTheme } from '../styles/Themes';
 import { Box, IconButton, Button } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import bannerImage from '../images/bg_landing-chris-brignola.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';
@@ -26,56 +27,58 @@ export default function Landing() {
     return (
         <Box className={classes.root}>
             <MenuAppBar />
-            <Box className={classes.section}>
-                {/* <Fade in={true} exit={true} timeout={1000}> */}
-                {authenticated ? <UserDashboard /> : <HeaderBanner />}
-                {/* </Fade> */}
+            <Fade in={true} timeout={6000}>
+                <Box className={classes.section}>
+                    {/* <Fade in={true} exit={true} timeout={1000}> */}
+                    {authenticated ? <UserDashboard /> : <HeaderBanner />}
+                    {/* </Fade> */}
 
-                <Box className={classes.actions}>
-                    <Box className={classes.search}>
-                        {searching ? (
-                            <TrademarkSearch />
+                    <Box className={classes.actions}>
+                        <Box className={classes.search}>
+                            {searching ? (
+                                <TrademarkSearch />
+                            ) : (
+                                <IconButton
+                                    className={classes.buttonSearch}
+                                    onClick={() => {
+                                        setSearching(!searching);
+                                        setLoggingIn(false);
+                                    }}
+                                >
+                                    <SearchTwoToneIcon />
+                                </IconButton>
+                            )}
+                        </Box>
+                        {loggingIn ? (
+                            <Login />
                         ) : (
-                            <IconButton
-                                className={classes.buttonSearch}
-                                onClick={() => {
-                                    setSearching(!searching);
-                                    setLoggingIn(false);
-                                }}
-                            >
-                                <SearchTwoToneIcon />
-                            </IconButton>
+                            <Box className={classes.buttons}>
+                                <Button
+                                    className={classes.buttonRegister}
+                                    onClick={() => {
+                                        setSearching(false);
+                                        setLoggingIn(false);
+                                        history.push('/register');
+                                    }}
+                                    boxShadow={2}
+                                >
+                                    Register
+                                </Button>
+                                <Button
+                                    className={classes.buttonLogin}
+                                    onClick={() => {
+                                        setSearching(false);
+                                        setLoggingIn(!loggingIn);
+                                    }}
+                                    boxShadow={2}
+                                >
+                                    Login
+                                </Button>
+                            </Box>
                         )}
                     </Box>
-                    {loggingIn ? (
-                        <Login />
-                    ) : (
-                        <Box className={classes.buttons}>
-                            <Button
-                                className={classes.buttonRegister}
-                                onClick={() => {
-                                    setSearching(false);
-                                    setLoggingIn(false);
-                                    history.push('/register');
-                                }}
-                                boxShadow={2}
-                            >
-                                Register
-                            </Button>
-                            <Button
-                                className={classes.buttonLogin}
-                                onClick={() => {
-                                    setSearching(false);
-                                    setLoggingIn(!loggingIn);
-                                }}
-                                boxShadow={2}
-                            >
-                                Login
-                            </Button>
-                        </Box>
-                    )}
                 </Box>
-            </Box>
+            </Fade>
             <About />
             <Pricing />
             <Footer />
@@ -97,6 +100,11 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         height: window.innerHeight,
         width: window.innerWidth,
+        backgroundImage: `url(${bannerImage})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        // maxWidth: '100%',
     },
     actions: {
         // border: '1px solid black',
