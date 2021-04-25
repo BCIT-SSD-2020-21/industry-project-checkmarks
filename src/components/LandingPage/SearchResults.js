@@ -29,6 +29,8 @@ const styles = (theme) => ({
         },
     },
     tableCell: {
+        // backgroundColor: 'red',
+        fontSize: '10px',
         flex: 1,
     },
     noClick: {
@@ -172,8 +174,24 @@ export default function SearchResults({ data }) {
     //     return { id, dessert, calories, fat, carbs, protein };
     // }
 
-    console.log('data prop: ', data);
-
+    // console.log('data prop: ', data);
+    console.log('item: ', data[0]);
+    // FORMATTER
+    // let formattedData = [];
+    // const formatData = (data) => {
+    //     data.forEach((trademark) => {
+    //         let formattedDate = trademark.fileDate.substring(0, 10);
+    //         // console.log('formattedDate: ', formattedDate);
+    //         formattedData.push({
+    //             ...trademark,
+    //             fileDate: formattedDate,
+    //         });
+    //         // return {...data, fileDate: }
+    //     });
+    // };
+    // formattedData = formatData(data);
+    // console.log('data: ', data);
+    // console.log('formattedData: ', formattedData);
     // function createData(id, dessert, calories, fat, carbs, protein) {
     //     return { id, dessert, calories, fat, carbs, protein };
     // }
@@ -186,16 +204,16 @@ export default function SearchResults({ data }) {
     // }
 
     // console.log("rows (default): ", rows)
-    console.log('item: ', data[2]);
+
     return (
-        <Paper style={{ height: 400, width: '100%' }}>
+        <Paper style={{ height: (window.innerHeight * 2) / 5, width: '100%' }}>
             <VirtualizedTable
                 // style={{ height: 400, width: '100%' }}
                 rowCount={data.length} // row or data
                 rowGetter={({ index }) => data[index]} // row or data
                 columns={[
                     {
-                        width: 160,
+                        width: (window.innerHeight * 1) / 3,
                         label: 'Title',
                         dataKey: 'title',
                     },
@@ -207,8 +225,8 @@ export default function SearchResults({ data }) {
                     },
                     {
                         width: 150,
-                        label: 'File Date',
-                        dataKey: 'fileDate',
+                        label: 'File Date (yyyy-mm-dd)',
+                        dataKey: 'fileDateFormatted',
                         // numeric: true,
                     },
                 ]}

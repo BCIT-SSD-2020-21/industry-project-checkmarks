@@ -12,7 +12,7 @@ const colors = {
 
     white: '#FFFFFF',
     lightestGray: '#fafafa',
-    lighterGray: '#ececec',
+    lighterGray: '#f3f3f3',
     lightGray: '#969696',
     darkGray: '#434343',
     black: '#000000',

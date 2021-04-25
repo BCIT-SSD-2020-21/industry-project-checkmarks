@@ -37,7 +37,23 @@ export default function TrademarkSearch() {
             (async () => {
                 await fetch(checkmarksWebAPIbaseUrl + searchTerm)
                     .then((response) => response.json())
-                    .then((results) => setSearchResults(results.data))
+                    .then((results) => {
+                        // Formatting
+                        const formattedResultsData = [];
+                        results.data.forEach((item) => {
+                            // FORMAT DATE HERE
+                            let formattedItem = {
+                                ...item,
+                                fileDateFormatted: item.fileDate.substring(
+                                    0,
+                                    10
+                                ),
+                            };
+                            formattedResultsData.push(formattedItem);
+                        });
+                        setSearchResults(formattedResultsData);
+                        // setSearchResults(results.data)
+                    })
                     .catch((error) => console.log('Error: ', error));
             })();
         }
