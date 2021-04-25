@@ -272,7 +272,6 @@ export default function GoodsAndServices() {
                 <Typography gutterBottom>
                     Please select the NICE Class and Terms you want to register
                     your trademark under.
-                    <br />
                     <p>
                         <b>Please Note:</b> You are allowed selections from 1
                         NICE Class, any additional NICE Classes will cost an
@@ -280,31 +279,32 @@ export default function GoodsAndServices() {
                     </p>
                 </Typography>
             </div>
-            <div className="formLayout">
-                <div className="trademarkType">
+
+            <div>
+                <div>
                     {/* ///////////////////////////search trademark terms/////////////////////////// */}
                     <h3>Search for your Trademark Terms</h3>
-                    <TextField
-                        id="outlined-basic"
-                        placeholder="Enter a general term for your good/service "
-                        label="Search"
-                        fullWidth
-                        variant="outlined"
-                        error={searchError != ''}
-                        helperText={searchError}
-                        value={searchTerm}
-                        // onChange={handleTextFieldChange}
-                    />
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        // onClick={getSearchTerms}
-                    >
-                        Search
-                    </Button>
-
-                    <br />
-                    <br />
+                    <div className={classes.searchTermsContainer}>
+                        <TextField
+                            id="outlined-basic"
+                            placeholder="Enter a general term for your good/service "
+                            label="Search"
+                            fullWidth
+                            variant="outlined"
+                            error={searchError != ''}
+                            helperText={searchError}
+                            value={searchTerm}
+                            // onChange={handleTextFieldChange}
+                        />
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            className={classes.searchTermsButton}
+                            // onClick={getSearchTerms}
+                        >
+                            Search
+                        </Button>
+                    </div>
 
                     {/* /////////////////////////// Terms List Table /////////////////////////// */}
                     <MaterialTable
@@ -351,65 +351,61 @@ export default function GoodsAndServices() {
                             },
                         ]}
                     />
-                    <br />
                     {/* ///////////////////////////selected terms section /////////////////////////// */}
-                    <div>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h5" component="h2">
-                                    <b>Selected Terms:</b>
-                                </Typography>
+                    <Card className={classes.selectedTerms}>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                                <b>Selected Terms:</b>
+                            </Typography>
 
-                                <List>
-                                    {selectedClasses.map((classNum) => (
-                                        <div>
-                                            <h4>
-                                                {'Class: ' +
-                                                    classNum +
-                                                    ' - ' +
-                                                    this.getClassShortName(
-                                                        classNum
-                                                    )}
-                                            </h4>
-                                            <ListItem className="termDisplay">
-                                                {selectedTerms[
-                                                    selectedClasses.indexOf(
-                                                        classNum
-                                                    )
-                                                ].map((term) => (
-                                                    <div
-                                                        style={{
-                                                            margin: '4px',
-                                                        }}
+                            <List>
+                                {selectedClasses.map((classNum) => (
+                                    <div>
+                                        <h4>
+                                            {'Class: ' +
+                                                classNum +
+                                                ' - ' +
+                                                this.getClassShortName(
+                                                    classNum
+                                                )}
+                                        </h4>
+                                        <ListItem className="termDisplay">
+                                            {selectedTerms[
+                                                selectedClasses.indexOf(
+                                                    classNum
+                                                )
+                                            ].map((term) => (
+                                                <div
+                                                    style={{
+                                                        margin: '4px',
+                                                    }}
+                                                >
+                                                    <ListItemText
+                                                        primary={'Term:'}
+                                                        secondary={term}
+                                                    />
+                                                    <Button
+                                                        color="secondary"
+                                                        variant="contained"
+                                                        // onClick={() =>
+                                                        //     this.handleRemove(
+                                                        //         classNum,
+                                                        //         term
+                                                        //     )
+                                                        // }
                                                     >
-                                                        <ListItemText
-                                                            primary={'Term:'}
-                                                            secondary={term}
-                                                        />
-                                                        <Button
-                                                            color="secondary"
-                                                            variant="contained"
-                                                            // onClick={() =>
-                                                            //     this.handleRemove(
-                                                            //         classNum,
-                                                            //         term
-                                                            //     )
-                                                            // }
-                                                        >
-                                                            Remove
-                                                        </Button>
-                                                    </div>
-                                                ))}
-                                            </ListItem>
-                                        </div>
-                                    ))}
-                                </List>
-                            </CardContent>
-                        </Card>
-                    </div>
-                    <br />
+                                                        Remove
+                                                    </Button>
+                                                </div>
+                                            ))}
+                                        </ListItem>
+                                    </div>
+                                ))}
+                            </List>
+                        </CardContent>
+                    </Card>
                     {/* ///////////////////////////total amount section /////////////////////////// */}
-                    <Card>
+                    <Card className={classes.amount}>
                         <CardContent>
                             <Typography variant="h5" component="h2">
                                 <b>Amount:</b>
@@ -420,25 +416,24 @@ export default function GoodsAndServices() {
                             </Typography>
                         </CardContent>
                     </Card>
-
-                    <br />
-                    <br />
-                    <Button
-                        style={{ margin: '4px' }}
-                        color="secondary"
-                        variant="contained"
-                        // onClick={this.back}
-                    >
-                        Back
-                    </Button>
-                    <Button
-                        style={{ margin: '4px' }}
-                        color="primary"
-                        variant="contained"
-                        // onClick={this.clickContinue}
-                    >
-                        Continue
-                    </Button>
+                    <div className={classes.buttonContainer}>
+                        <Button
+                            style={{ margin: '4px' }}
+                            color="secondary"
+                            variant="contained"
+                            // onClick={this.back}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            style={{ margin: '4px' }}
+                            color="primary"
+                            variant="contained"
+                            // onClick={this.clickContinue}
+                        >
+                            Continue
+                        </Button>
+                    </div>
                 </div>
                 {/* ///////////////////////////warning section /////////////////////////// */}
                 <Dialog
@@ -482,8 +477,26 @@ export default function GoodsAndServices() {
 
 const useStyles = makeStyles((theme) => ({
     cardContainer: {
-        padding: '2%',
+        padding: '0 2% ',
         margin: '5% auto',
         width: '80%',
+    },
+    searchTermsContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: '3%',
+    },
+    searchTermsButton: {
+        marginLeft: '1%',
+        width: '15%',
+    },
+    selectedTerms: {
+        margin: '3% 0',
+    },
+    amount: {
+        margin: '3% 0',
+    },
+    buttonContainer: {
+        margin: '2% 0',
     },
 }));
