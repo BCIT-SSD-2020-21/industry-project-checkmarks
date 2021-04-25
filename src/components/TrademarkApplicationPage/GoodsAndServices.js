@@ -267,8 +267,8 @@ export default function GoodsAndServices() {
         // }
         // return (
         <Card className={classes.cardContainer}>
-            <div className="applicationFormTitle">
-                <h1>3. Goods and Services</h1>
+            <div>
+                <h1 className={classes.title}>Goods and Services</h1>
                 <Typography gutterBottom>
                     Please select the NICE Class and Terms you want to register
                     your trademark under.
@@ -297,7 +297,6 @@ export default function GoodsAndServices() {
                             // onChange={handleTextFieldChange}
                         />
                         <Button
-                            color="primary"
                             variant="contained"
                             className={classes.searchTermsButton}
                             // onClick={getSearchTerms}
@@ -418,16 +417,16 @@ export default function GoodsAndServices() {
                     </Card>
                     <div className={classes.buttonContainer}>
                         <Button
-                            style={{ margin: '4px' }}
-                            color="secondary"
+                            type="submit"
                             variant="contained"
+                            className={classes.backButton}
                             // onClick={this.back}
                         >
                             Back
                         </Button>
                         <Button
-                            style={{ margin: '4px' }}
-                            color="primary"
+                            className={classes.continueButton}
+                            type="submit"
                             variant="contained"
                             // onClick={this.clickContinue}
                         >
@@ -481,6 +480,9 @@ const useStyles = makeStyles((theme) => ({
         margin: '5% auto',
         width: '80%',
     },
+    title: {
+        color: '#df3a48',
+    },
     searchTermsContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -489,6 +491,9 @@ const useStyles = makeStyles((theme) => ({
     searchTermsButton: {
         marginLeft: '1%',
         width: '15%',
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
     },
     selectedTerms: {
         margin: '3% 0',
@@ -497,6 +502,34 @@ const useStyles = makeStyles((theme) => ({
         margin: '3% 0',
     },
     buttonContainer: {
-        margin: '2% 0',
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '4% 0',
+    },
+    continueButton: {
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
+        marginLeft: '1%',
+        width: '20%',
+        height: '40px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        width: '20%',
+        height: '40px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: '1px solid #df3a48',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
     },
 }));
