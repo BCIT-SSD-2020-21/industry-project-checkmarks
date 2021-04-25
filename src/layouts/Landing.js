@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
 import { Box, IconButton, Button } from '@material-ui/core';
+import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
@@ -23,8 +25,11 @@ export default function Landing() {
     console.log(window.innerHeight);
     return (
         <Box className={classes.root}>
+            <MenuAppBar />
             <Box className={classes.section}>
+                {/* <Fade in={true} exit={true} timeout={1000}> */}
                 {authenticated ? <UserDashboard /> : <HeaderBanner />}
+                {/* </Fade> */}
 
                 <Box className={classes.actions}>
                     <Box className={classes.search}>
@@ -127,6 +132,7 @@ const useStyles = makeStyles(() => ({
         color: checkmarksTheme.buttonTextSecondary,
         padding: '5px 0',
         width: '40%',
+        maxWidth: '120px',
     },
     buttonRegister: {
         backgroundColor: checkmarksTheme.buttonPrimary,
@@ -138,6 +144,7 @@ const useStyles = makeStyles(() => ({
         color: checkmarksTheme.buttonTextPrimary,
         padding: '5px 0',
         width: '55%',
+        maxWidth: '200px',
     },
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,
