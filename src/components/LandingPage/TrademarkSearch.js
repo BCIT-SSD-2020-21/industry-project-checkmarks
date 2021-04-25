@@ -9,6 +9,7 @@ import {
     InputAdornment,
     Typography,
 } from '@material-ui/core';
+import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import LoopIcon from '@material-ui/icons/Loop';
 import { checkmarksTheme } from '../../styles/Themes';
@@ -82,60 +83,80 @@ export default function TrademarkSearch() {
 
     return (
         <Box className={classes.containerTMSearch}>
-            <Box boxShadow={2} className={classes.searchBox}>
-                <FormControl className={classes.form}>
-                    {/* <InputLabel className={classes.label}>
+            <Fade in={true} exit={true} timeout={5500}>
+                <Box
+                    boxShadow={2}
+                    className={`${classes.searchBox} ${
+                        searchTerm.length > 0 && classes.searchBoxShifted
+                    }`}
+                >
+                    <FormControl className={classes.form}>
+                        {/* <InputLabel className={classes.label}>
                         {'Search for a Trademark...'}
                     </InputLabel> */}
-                    <Input
-                        className={classes.input}
-                        onChange={(e) => searchTrademark(e.target.value)}
-                        id="searchBox"
-                        placeholder={'Enter Text...'}
-                        disableUnderline={true}
-                        startAdornment={
-                            <InputAdornment
-                                className={classes.adornment}
-                                position="start"
-                            >
-                                <SearchTwoToneIcon className={classes.icon} />
-                            </InputAdornment>
-                        }
-                        endAdornment={
-                            <InputAdornment
-                                className={classes.adornment}
-                                position="end"
-                            >
-                                <LoopIcon
-                                    className={
-                                        loading
-                                            ? classes.iconLoading
-                                            : classes.hidden
-                                    }
-                                />
-                            </InputAdornment>
-                        }
-                    />
-                </FormControl>
-            </Box>
-            {searchTerm.length > 2 && (
-                <Box className={classes.results}>
-                    {searchResults.length > 2 ? (
-                        // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
-                        <SearchResults data={searchResults} />
-                    ) : (
-                        <Card className={classes.noResultContainer}>
-                            <Typography className={classes.noResultText}>
-                                {
-                                    'No match found, so this Trademark may not be registered yet.'
-                                }
-                            </Typography>
-                            <Typography className={classes.noResultText}>
-                                {`"${searchTerm}" may be available. Would you like to start an application?`}
-                            </Typography>
-                        </Card>
-                    )}
+                        <Input
+                            className={classes.input}
+                            // onClick={(e) => console.log(e.target)}
+                            onChange={(e) => searchTrademark(e.target.value)}
+                            id="searchBox"
+                            placeholder={'Enter Text...'}
+                            disableUnderline={true}
+                            startAdornment={
+                                <InputAdornment
+                                    className={classes.adornment}
+                                    position="start"
+                                >
+                                    <SearchTwoToneIcon
+                                        className={classes.icon}
+                                    />
+                                </InputAdornment>
+                            }
+                            endAdornment={
+                                <InputAdornment
+                                    className={classes.adornment}
+                                    position="end"
+                                >
+                                    <LoopIcon
+                                        className={
+                                            loading
+                                                ? classes.iconLoading
+                                                : classes.hidden
+                                        }
+                                    />
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                 </Box>
+            </Fade>
+            {searchTerm.length > 2 && (
+                <Fade in={true} exit={true}>
+                    <Box
+                        className={`${classes.results} ${
+                            searchTerm.length > 0 &&
+                            classes.searchResultsShifted
+                        }`}
+                    >
+                        {searchResults.length > 2 ? (
+                            // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
+
+                            <SearchResults data={searchResults} />
+                        ) : (
+                            // <Fade in={true} exit={true}>
+                            <Card className={classes.noResultContainer}>
+                                <Typography className={classes.noResultText}>
+                                    {
+                                        'No match found, so this Trademark may not be registered yet.'
+                                    }
+                                </Typography>
+                                <Typography className={classes.noResultText}>
+                                    {`"${searchTerm}" may be available. Would you like to start an application?`}
+                                </Typography>
+                            </Card>
+                            // </Fade>
+                        )}
+                    </Box>
+                </Fade>
             )}
         </Box>
     );
@@ -161,10 +182,17 @@ export const searchBoxStyles = makeStyles(() => ({
         flexDirection: 'column',
         width: '90%',
         margin: '2% auto',
-        '&:hover': {
-            backgroundColor: checkmarksTheme.hoverLight,
-        },
+        // '&:hover': {
+        //     backgroundColor: checkmarksTheme.hoverLight,
+        // },
     },
+    searchBoxShifted: {
+        transform: 'translateY(-200%)',
+    },
+    searchResultsShifted: {
+        transform: 'translateY(-20%)',
+    },
+
     results: {
         width: '100%',
     },
@@ -187,10 +215,13 @@ export const searchBoxStyles = makeStyles(() => ({
         width: '100%',
         padding: '0 8px',
         borderRadius: '15px',
+        '&.Mui-focused': {
+            border: '0.5px solid red',
+            animation: 'shiftUp 1s',
+        },
     },
     adornment: {},
     icon: {
-        // margin: '2%',
         color: checkmarksTheme.inputIcon,
     },
     noResultContainer: {
@@ -211,5 +242,9 @@ export const searchBoxStyles = makeStyles(() => ({
     '@keyframes rotationAnimation': {
         from: { transform: 'rotate(0deg)' },
         to: { transform: 'rotate(359deg)' },
+    },
+    '@keyframes shiftUp': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-100px)' },
     },
 }));

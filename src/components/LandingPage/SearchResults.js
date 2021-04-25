@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, TableCell, Typography } from '@material-ui/core';
+import Fade from '@material-ui/core/Fade';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
 const styles = (theme) => ({
@@ -55,22 +56,24 @@ class MuiVirtualizedTable extends React.PureComponent {
     cellRenderer = ({ cellData, columnIndex }) => {
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
-            <TableCell
-                component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, {
-                    [classes.noClick]: onRowClick == null,
-                })}
-                variant="body"
-                style={{ height: rowHeight }}
-                align={
-                    (columnIndex != null && columns[columnIndex].numeric) ||
-                    false
-                        ? 'right'
-                        : 'left'
-                }
-            >
-                {cellData}
-            </TableCell>
+            <Fade in={true} exit={true} timeout={1000}>
+                <TableCell
+                    component="div"
+                    className={clsx(classes.tableCell, classes.flexContainer, {
+                        [classes.noClick]: onRowClick == null,
+                    })}
+                    variant="body"
+                    style={{ height: rowHeight }}
+                    align={
+                        (columnIndex != null && columns[columnIndex].numeric) ||
+                        false
+                            ? 'right'
+                            : 'left'
+                    }
+                >
+                    {cellData}
+                </TableCell>
+            </Fade>
         );
     };
 
@@ -175,7 +178,7 @@ export default function SearchResults({ data }) {
     // }
 
     // console.log('data prop: ', data);
-    console.log('item: ', data[0]);
+    // console.log('item: ', data[0]);
     // FORMATTER
     // let formattedData = [];
     // const formatData = (data) => {
@@ -213,18 +216,18 @@ export default function SearchResults({ data }) {
                 rowGetter={({ index }) => data[index]} // row or data
                 columns={[
                     {
-                        width: (window.innerHeight * 1) / 3,
+                        width: (window.innerHeight * 1) / 2,
                         label: 'Title',
                         dataKey: 'title',
                     },
                     {
-                        width: 120,
+                        width: (window.innerHeight * 1) / 4,
                         label: 'Status',
                         dataKey: 'statusDescEn',
                         // numeric: true,
                     },
                     {
-                        width: 150,
+                        width: (window.innerHeight * 1) / 4,
                         label: 'File Date (yyyy-mm-dd)',
                         dataKey: 'fileDateFormatted',
                         // numeric: true,

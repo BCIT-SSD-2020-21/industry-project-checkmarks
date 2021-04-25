@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../images/checkmark logo.PNG';
 import { Box, Typography, Tabs, Tab, Card } from '@material-ui/core';
+import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
 
 export default function HeaderBanner() {
@@ -14,12 +15,14 @@ export default function HeaderBanner() {
 
     return (
         <Box className={classes.container}>
-            <img
-                className={classes.image}
-                onClick={() => toLanding()}
-                src={logo}
-                alt="Logo"
-            />
+            <Fade in={true} exit={true} timeout={2500}>
+                <img
+                    className={classes.image}
+                    onClick={() => toLanding()}
+                    src={logo}
+                    alt="Logo"
+                />
+            </Fade>
         </Box>
     );
 }
