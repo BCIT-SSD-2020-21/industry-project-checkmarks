@@ -11,7 +11,9 @@ const colors = {
     teal: '#128B83',
 
     white: '#FFFFFF',
+    whiteOpq0: '#FFFFFF00',
     whiteOpq: '#FFFFFF40',
+    whiteOpq2: '#FFFFFFB3',
     lightestGray: '#fafafa',
     lighterGray: '#f3f3f3',
     lighterGrayOpq: '#f3f3f340',
@@ -23,7 +25,9 @@ const colors = {
 
 export const checkmarksTheme = {
     bgPrimary: colors.whiteOpq, // applied to Root Background
+    bgDrawer: colors.whiteOpq2, // applied to Drawer Background
     bgSecondary: colors.lightRed, // light red (background for About section)
+    bgTransparent: colors.whiteOpq0, // applied to transparent containers
     // bgContainer: colors.white, // applied to Container Background
 
     textLabel: colors.darkGray, // applied to Text Label

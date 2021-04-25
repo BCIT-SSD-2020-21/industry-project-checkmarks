@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { checkmarksTheme } from '../../styles/Themes';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, TableCell, Typography } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
@@ -11,17 +12,23 @@ const styles = (theme) => ({
         display: 'flex',
         alignItems: 'center',
         boxSizing: 'border-box',
+        backgroundColor: checkmarksTheme.bgDrawer,
     },
     table: {
         // temporary right-to-left patch, waiting for
         // https://github.com/bvaughn/react-virtualized/issues/454
+        backgroundColor: checkmarksTheme.bgTransparent,
+        // opacity: 0,
+
         '& .ReactVirtualized__Table__headerRow': {
             flip: false,
             paddingRight:
                 theme.direction === 'rtl' ? '0 !important' : undefined,
         },
+        // backgroundColor: checkmarksTheme.bgDrawer,
     },
     tableRow: {
+        backgroundColor: checkmarksTheme.bgTransparent,
         cursor: 'pointer',
     },
     tableRowHover: {
@@ -31,6 +38,7 @@ const styles = (theme) => ({
     },
     tableCell: {
         // backgroundColor: 'red',
+        backgroundColor: checkmarksTheme.bgPrimary,
         fontSize: '10px',
         flex: 1,
     },
@@ -209,7 +217,13 @@ export default function SearchResults({ data }) {
     // console.log("rows (default): ", rows)
 
     return (
-        <Paper style={{ height: (window.innerHeight * 2) / 5, width: '100%' }}>
+        <Paper
+            style={{
+                backgroundColor: checkmarksTheme.bgPrimary,
+                height: (window.innerHeight * 2) / 5,
+                width: '100%',
+            }}
+        >
             <VirtualizedTable
                 // style={{ height: 400, width: '100%' }}
                 rowCount={data.length} // row or data

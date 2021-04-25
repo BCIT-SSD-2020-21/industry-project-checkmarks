@@ -86,6 +86,7 @@ export const navbarStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
+        backgroundColor: checkmarksTheme.bgDrawer,
         width: drawerWidth,
     },
     drawerHeader: {
