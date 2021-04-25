@@ -17,14 +17,6 @@ import {
     TextField,
 } from '@material-ui/core';
 
-var sectionStyle = {
-    overflowY: 'hidden',
-    overflowX: 'hidden',
-    height: '100%',
-    width: 'auto',
-};
-
-// export class TrademarkForm2 extends Component {
 export default function GoodsAndServices() {
     const classes = useStyles();
 
@@ -275,219 +267,215 @@ export default function GoodsAndServices() {
         // }
         // return (
         <Card className={classes.cardContainer}>
-            <section style={sectionStyle}>
-                <div className="applicationFormTitle">
-                    <h1>3. Goods and Services</h1>
-                    <Typography gutterBottom>
-                        Please select the NICE Class and Terms you want to
-                        register your trademark under.
-                        <br />
-                        <p>
-                            <b>Please Note:</b> You are allowed selections from
-                            1 NICE Class, any additional NICE Classes will cost
-                            an additional $100.
-                        </p>
-                    </Typography>
-                </div>
-                <div className="formLayout">
-                    <div className="trademarkType">
-                        {/* ///////////////////////////search trademark terms/////////////////////////// */}
-                        <h3>Search for your Trademark Terms</h3>
-                        <TextField
-                            id="outlined-basic"
-                            placeholder="Enter a general term for your good/service "
-                            label="Search"
-                            fullWidth
-                            variant="outlined"
-                            error={searchError != ''}
-                            helperText={searchError}
-                            value={searchTerm}
-                            // onChange={handleTextFieldChange}
-                        />
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            // onClick={getSearchTerms}
-                        >
-                            Search
-                        </Button>
+            <div className="applicationFormTitle">
+                <h1>3. Goods and Services</h1>
+                <Typography gutterBottom>
+                    Please select the NICE Class and Terms you want to register
+                    your trademark under.
+                    <br />
+                    <p>
+                        <b>Please Note:</b> You are allowed selections from 1
+                        NICE Class, any additional NICE Classes will cost an
+                        additional $100.
+                    </p>
+                </Typography>
+            </div>
+            <div className="formLayout">
+                <div className="trademarkType">
+                    {/* ///////////////////////////search trademark terms/////////////////////////// */}
+                    <h3>Search for your Trademark Terms</h3>
+                    <TextField
+                        id="outlined-basic"
+                        placeholder="Enter a general term for your good/service "
+                        label="Search"
+                        fullWidth
+                        variant="outlined"
+                        error={searchError != ''}
+                        helperText={searchError}
+                        value={searchTerm}
+                        // onChange={handleTextFieldChange}
+                    />
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        // onClick={getSearchTerms}
+                    >
+                        Search
+                    </Button>
 
-                        <br />
-                        <br />
+                    <br />
+                    <br />
 
-                        {/* /////////////////////////// Terms List Table /////////////////////////// */}
-                        <MaterialTable
-                            title="Terms List"
-                            columns={[
-                                {
-                                    title: 'Term ID',
-                                    field: 'id',
-                                    cellStyle: {
-                                        minWidth: 10,
-                                        padding: 10,
-                                    },
-                                    headerStyle: {
-                                        minWidth: 10,
-                                        padding: 10,
-                                    },
+                    {/* /////////////////////////// Terms List Table /////////////////////////// */}
+                    <MaterialTable
+                        title="Terms List"
+                        columns={[
+                            {
+                                title: 'Term ID',
+                                field: 'id',
+                                cellStyle: {
+                                    minWidth: 10,
+                                    padding: 10,
                                 },
-                                { title: 'Term Name', field: 'termName' },
-                                { title: 'NICE Class', field: 'termClass' },
-                                {
-                                    title: 'NICE Class Description',
-                                    field: 'classShortName',
+                                headerStyle: {
+                                    minWidth: 10,
+                                    padding: 10,
                                 },
-                            ]}
-                            data={terms}
-                            options={{
-                                selection: true,
-                                showSelectAllCheckbox: false,
-                            }}
-                            actions={[
-                                {
-                                    tooltip: 'Add All Selected Terms/Classes',
-                                    icon: () => (
-                                        <Button
-                                            variant="contained"
-                                            component="label"
-                                            color="primary"
-                                        >
-                                            Add selected items
-                                        </Button>
-                                    ),
-                                    // onClick: (evt, data) =>
-                                    //     this.handleAdd(data),
-                                },
-                            ]}
-                        />
-                        <br />
-                        {/* ///////////////////////////selected terms section /////////////////////////// */}
-                        <div>
-                            <Card>
-                                <CardContent>
-                                    <Typography variant="h5" component="h2">
-                                        <b>Selected Terms:</b>
-                                    </Typography>
-
-                                    <List>
-                                        {selectedClasses.map((classNum) => (
-                                            <div>
-                                                <h4>
-                                                    {'Class: ' +
-                                                        classNum +
-                                                        ' - ' +
-                                                        this.getClassShortName(
-                                                            classNum
-                                                        )}
-                                                </h4>
-                                                <ListItem className="termDisplay">
-                                                    {selectedTerms[
-                                                        selectedClasses.indexOf(
-                                                            classNum
-                                                        )
-                                                    ].map((term) => (
-                                                        <div
-                                                            style={{
-                                                                margin: '4px',
-                                                            }}
-                                                        >
-                                                            <ListItemText
-                                                                primary={
-                                                                    'Term:'
-                                                                }
-                                                                secondary={term}
-                                                            />
-                                                            <Button
-                                                                color="secondary"
-                                                                variant="contained"
-                                                                // onClick={() =>
-                                                                //     this.handleRemove(
-                                                                //         classNum,
-                                                                //         term
-                                                                //     )
-                                                                // }
-                                                            >
-                                                                Remove
-                                                            </Button>
-                                                        </div>
-                                                    ))}
-                                                </ListItem>
-                                            </div>
-                                        ))}
-                                    </List>
-                                </CardContent>
-                            </Card>
-                        </div>
-                        <br />
-                        {/* ///////////////////////////total amount section /////////////////////////// */}
+                            },
+                            { title: 'Term Name', field: 'termName' },
+                            { title: 'NICE Class', field: 'termClass' },
+                            {
+                                title: 'NICE Class Description',
+                                field: 'classShortName',
+                            },
+                        ]}
+                        data={terms}
+                        options={{
+                            selection: true,
+                            showSelectAllCheckbox: false,
+                        }}
+                        actions={[
+                            {
+                                tooltip: 'Add All Selected Terms/Classes',
+                                icon: () => (
+                                    <Button
+                                        variant="contained"
+                                        component="label"
+                                        color="primary"
+                                    >
+                                        Add selected items
+                                    </Button>
+                                ),
+                                // onClick: (evt, data) =>
+                                //     this.handleAdd(data),
+                            },
+                        ]}
+                    />
+                    <br />
+                    {/* ///////////////////////////selected terms section /////////////////////////// */}
+                    <div>
                         <Card>
                             <CardContent>
                                 <Typography variant="h5" component="h2">
-                                    <b>Amount:</b>
-                                    {/* {amountText} */}
+                                    <b>Selected Terms:</b>
                                 </Typography>
-                                <Typography variant="body1" component="p">
-                                    {/* {additionalNICE} */}
-                                </Typography>
+
+                                <List>
+                                    {selectedClasses.map((classNum) => (
+                                        <div>
+                                            <h4>
+                                                {'Class: ' +
+                                                    classNum +
+                                                    ' - ' +
+                                                    this.getClassShortName(
+                                                        classNum
+                                                    )}
+                                            </h4>
+                                            <ListItem className="termDisplay">
+                                                {selectedTerms[
+                                                    selectedClasses.indexOf(
+                                                        classNum
+                                                    )
+                                                ].map((term) => (
+                                                    <div
+                                                        style={{
+                                                            margin: '4px',
+                                                        }}
+                                                    >
+                                                        <ListItemText
+                                                            primary={'Term:'}
+                                                            secondary={term}
+                                                        />
+                                                        <Button
+                                                            color="secondary"
+                                                            variant="contained"
+                                                            // onClick={() =>
+                                                            //     this.handleRemove(
+                                                            //         classNum,
+                                                            //         term
+                                                            //     )
+                                                            // }
+                                                        >
+                                                            Remove
+                                                        </Button>
+                                                    </div>
+                                                ))}
+                                            </ListItem>
+                                        </div>
+                                    ))}
+                                </List>
                             </CardContent>
                         </Card>
+                    </div>
+                    <br />
+                    {/* ///////////////////////////total amount section /////////////////////////// */}
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                                <b>Amount:</b>
+                                {/* {amountText} */}
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {/* {additionalNICE} */}
+                            </Typography>
+                        </CardContent>
+                    </Card>
 
-                        <br />
-                        <br />
+                    <br />
+                    <br />
+                    <Button
+                        style={{ margin: '4px' }}
+                        color="secondary"
+                        variant="contained"
+                        // onClick={this.back}
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        style={{ margin: '4px' }}
+                        color="primary"
+                        variant="contained"
+                        // onClick={this.clickContinue}
+                    >
+                        Continue
+                    </Button>
+                </div>
+                {/* ///////////////////////////warning section /////////////////////////// */}
+                <Dialog
+                    open={open}
+                    // onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {'Continue without selecting any terms?'}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            You have not selected any trademark terms. This can
+                            be figured out at a later time. Do you wish to
+                            continue?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
                         <Button
-                            style={{ margin: '4px' }}
                             color="secondary"
                             variant="contained"
-                            // onClick={this.back}
+                            // onClick={this.handleClose}
                         >
                             Back
                         </Button>
                         <Button
-                            style={{ margin: '4px' }}
                             color="primary"
                             variant="contained"
-                            // onClick={this.clickContinue}
+                            // onClick={this.continue}
+                            autoFocus
                         >
                             Continue
                         </Button>
-                    </div>
-                    {/* ///////////////////////////warning section /////////////////////////// */}
-                    <Dialog
-                        open={open}
-                        // onClose={this.handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">
-                            {'Continue without selecting any terms?'}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                                You have not selected any trademark terms. This
-                                can be figured out at a later time. Do you wish
-                                to continue?
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button
-                                color="secondary"
-                                variant="contained"
-                                // onClick={this.handleClose}
-                            >
-                                Back
-                            </Button>
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                // onClick={this.continue}
-                                autoFocus
-                            >
-                                Continue
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
-            </section>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </Card>
     );
 }
