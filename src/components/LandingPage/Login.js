@@ -23,7 +23,6 @@ export default function IndividualForm() {
     };
 
     return (
-        // <div className={classes.root}>
         <Card className={classes.container}>
             <Typography className={classes.title}>Sign up</Typography>
             <FormControl fullWidth={true}>
@@ -70,15 +69,10 @@ export default function IndividualForm() {
     );
 }
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    // },
     container: {
         padding: '2%',
         margin: 'auto',
-        width: '90%',
+        width: '30%',
     },
     input: {
         width: '60%',
