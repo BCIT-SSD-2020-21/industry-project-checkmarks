@@ -25,7 +25,7 @@ export default function PaymentForm() {
     const [country, setCountry] = useState('');
 
     //handle Submit
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         alert('Successfully Complete');
     };
@@ -223,15 +223,14 @@ const useStyles = makeStyles((theme) => ({
         margin: '3%',
     },
     completeButton: {
-        color: '#df3a48',
-        backgroundColor: '#FFF',
+        color: '#FFF',
+        backgroundColor: '#df3a48',
         fontWeight: 'bold',
         width: '40%',
         height: '30px',
         fontSize: '10px',
         margin: '3% auto',
         borderRadius: '10px',
-        border: '1px solid #df3a48',
         [theme.breakpoints.down('xs')]: {
             fontSize: '8px',
         },
