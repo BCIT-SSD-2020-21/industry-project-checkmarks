@@ -9,7 +9,7 @@ export default function PaymentForm() {
     const history = useHistory();
 
     //handle Submit
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         alert('Successfully Confirm ');
     };
@@ -192,8 +192,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '3%',
     },
     completeButton: {
-        color: '#df3a48',
-        backgroundColor: '#FFF',
+        color: '#FFF',
+        backgroundColor: '#df3a48',
         fontWeight: 'bold',
         width: '50%',
         height: '30px',
