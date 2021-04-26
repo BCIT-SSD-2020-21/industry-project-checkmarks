@@ -11,16 +11,23 @@ const colors = {
     teal: '#128B83',
 
     white: '#FFFFFF',
+    whiteOpq0: '#FFFFFF00',
+    whiteOpq: '#FFFFFF40',
+    whiteOpq2: '#FFFFFFB3',
     lightestGray: '#fafafa',
-    lighterGray: '#ececec',
+    lighterGray: '#f3f3f3',
+    lighterGrayOpq: '#f3f3f340',
     lightGray: '#969696',
+    lightGrayOpq: '#96969640',
     darkGray: '#434343',
     black: '#000000',
 };
 
 export const checkmarksTheme = {
-    bgPrimary: colors.white, // applied to Root Background
+    bgPrimary: colors.whiteOpq, // applied to Root Background
+    bgDrawer: colors.whiteOpq2, // applied to Drawer Background
     bgSecondary: colors.lightRed, // light red (background for About section)
+    bgTransparent: colors.whiteOpq0, // applied to transparent containers
     // bgContainer: colors.white, // applied to Container Background
 
     textLabel: colors.darkGray, // applied to Text Label
@@ -28,7 +35,8 @@ export const checkmarksTheme = {
 
     inputLabel: colors.darkRed,
     inputIcon: colors.darkRed,
-    inputBackground: colors.lighterGray,
+    inputValue: colors.darkRed,
+    inputBackground: colors.lighterGrayOpq,
     inputPlaceholder: colors.lightGray,
 
     textActive: colors.activeBlue,
@@ -42,7 +50,7 @@ export const checkmarksTheme = {
     buttonSecondary: colors.white,
 
     hoverDark: colors.darkGray,
-    hoverLight: colors.lightestGray,
+    hoverLight: colors.lightGrayOpq,
     hoverBright: colors.darkRed,
     hoverSoft: colors.lightRed,
 

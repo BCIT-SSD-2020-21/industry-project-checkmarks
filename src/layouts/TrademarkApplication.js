@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AskALawyer from '../components/AskALawyer';
-import Logo2 from '../images/CheckmarksLogo2.png';
+import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
