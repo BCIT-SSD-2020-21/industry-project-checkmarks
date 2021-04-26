@@ -29,7 +29,7 @@ const CountryCard = () => {
         <Card className={classes.countryCard}>
             <h1 className={classes.title}> International Information</h1>
             <div className={classes.formContainer}>
-                <Typography className={classes.text}>
+                <Typography className={classes.question}>
                     Have you filed or applied for this trademark in any other
                     country?
                 </Typography>
@@ -128,8 +128,12 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontWeight: 'bold',
-        // marginBottom: '2% ',
         marginTop: '2% ',
+    },
+    question: {
+        fontWeight: 'bold',
+        marginTop: '2% ',
+        marginBottom: '2%',
     },
     input: {
         marginTop: '3%',
