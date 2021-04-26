@@ -6,6 +6,7 @@ import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkForm';
+import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -20,6 +21,7 @@ const TrademarkApplication = () => {
             </div>
 
             <TrademarkForm />
+            <GoodsAndServices />
             <CountryCard />
             <ConfirmOrder />
             <PaymentForm />

@@ -16,9 +16,7 @@ export default function PaymentForm() {
 
     return (
         <Card className={classes.card}>
-            <Typography className={classes.title} component="p">
-                Confirm Your Information
-            </Typography>
+            <h1 className={classes.title}>Confirm Your Information</h1>
             {/* ////////////////////////////////////// Payment info ////////////////////////////////////////////*/}
 
             {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
@@ -160,8 +158,6 @@ const useStyles = makeStyles((theme) => ({
         padding: '2%',
     },
     title: {
-        fontSize: '20px',
-        fontWeight: 'bold',
         color: '#df3a48',
         marginBottom: '5%',
     },

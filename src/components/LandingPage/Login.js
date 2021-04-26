@@ -69,11 +69,6 @@ export default function IndividualForm() {
     );
 }
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    // },
     container: {
         animation: '$shiftUp-login 0.5s',
         // animation: '$shiftUp-login 1s',

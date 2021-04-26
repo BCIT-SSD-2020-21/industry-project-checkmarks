@@ -32,9 +32,7 @@ export default function PaymentForm() {
 
     return (
         <Card className={classes.card}>
-            <Typography className={classes.title} component="p">
-                Place a Trust Payment
-            </Typography>
+            <h1 className={classes.title}> Place a Trust Payment</h1>
             {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
             <Typography className={classes.text} component="p">
                 Credit Card
@@ -180,8 +178,6 @@ const useStyles = makeStyles((theme) => ({
         width: '75%',
     },
     title: {
-        fontSize: '20px',
-        fontWeight: 'bold',
         color: '#df3a48',
         marginBottom: '5%',
     },
