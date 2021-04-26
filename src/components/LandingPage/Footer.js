@@ -50,13 +50,41 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(0.5),
       paddingBottom: theme.spacing(0.5),
     },
-    language: {
-      marginTop: theme.spacing(1),
-      width: 150,
-    },
   }));
+
+  // FB - Add two more footer section
   
 
 export default function Footer() {
-    return <div>Footer</div>;
+    const classes = useStyles;
+
+    return (
+        <Typography component="footer" className={classes.root}> 
+            <Container className={classes.container}>
+                <Grid container spacing={5}>
+                    <Grid item xs={6} sm={4} md={3}>
+                        <Grid
+                            container
+                            direction="column"
+                            justify="flex-end"
+                            className={classes.iconsWrapper}
+                            spacing={2}
+                            >
+                            <Grid item className={classes.icons}>
+                                <a href="checkmarks.ca/" className={classes.icon}>
+                                <img src="../../images/checkmark-logo.png" alt="checkmark-logo" />
+                                </a>
+                                <a href="https://twitter.com/" className={classes.icon}>
+                                <img src="/../../images/twitter.png" alt="twitter" />
+                                </a>
+                            </Grid>
+                            <Grid item>
+                                <Copyright />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Typography>
+    );
 }
