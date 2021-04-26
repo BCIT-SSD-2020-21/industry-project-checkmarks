@@ -7,13 +7,16 @@ import {
     TextField,
     Card,
     Button,
+    Typography,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 const CountryCard = () => {
     const classes = useStyles();
 
-    const [checked, setChecked] = useState('No');
+    const [checked, setChecked] = useState('');
+    // const [checked, setChecked] = useState('');
+    // const [checked, setChecked] = useState('');
 
     //handle Submit
     const handleSubmit = (event) => {
@@ -21,14 +24,16 @@ const CountryCard = () => {
         alert('Successfully Confirm ');
     };
 
+    console.log(checked);
+
     return (
         <Card className={classes.countryCard}>
             <h1 className={classes.title}> International Information</h1>
             <div className={classes.formContainer}>
-                <p className={classes.text}>
+                <Typography className={classes.text}>
                     Have you filed or applied for this trademark in any other
                     country?
-                </p>
+                </Typography>
 
                 <RadioGroup
                     aria-label="userType"
@@ -49,9 +54,9 @@ const CountryCard = () => {
                 </RadioGroup>
                 {checked == 'Yes' && (
                     <div className={classes.form}>
-                        <p className={classes.text}>
+                        <Typography className={classes.text}>
                             Please fill out information below (if known)
-                        </p>
+                        </Typography>
                         <TextField
                             id="outlined-basic"
                             label="Country of filing"
@@ -61,9 +66,13 @@ const CountryCard = () => {
                         />
                         <TextField
                             id="outlined-basic"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             label="Filing date"
                             variant="outlined"
                             size="small"
+                            type="date"
                             className={classes.input}
                         />
                         <TextField
@@ -112,7 +121,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    text: { fontWeight: 'bold' },
+    text: {
+        fontWeight: 'bold',
+        marginBottom: '2% ',
+        marginTop: '2% ',
+    },
     input: {
         marginTop: '2%',
     },
