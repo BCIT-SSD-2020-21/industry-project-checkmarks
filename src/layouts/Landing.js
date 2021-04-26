@@ -130,6 +130,7 @@ const useStyles = makeStyles(() => ({
         width: '100%',
     },
     buttons: {
+        animation: 'shiftUp-buttons 1s',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -177,6 +178,11 @@ const useStyles = makeStyles(() => ({
         },
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         color: checkmarksTheme.buttonTextSecondary,
+        marginBottom: '2% auto',
         padding: '5px',
+    },
+    '@keyframes shiftUp-buttons': {
+        from: { transform: 'translateY(20%)' },
+        to: { transform: 'translateY(0px)' },
     },
 }));

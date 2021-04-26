@@ -83,7 +83,7 @@ export default function TrademarkSearch() {
 
     return (
         <Box className={classes.containerTMSearch}>
-            <Fade in={true} exit={true} timeout={5500}>
+            <Fade in={true} exit={true} timeout={2000}>
                 <Box
                     boxShadow={2}
                     className={`${classes.searchBox} ${
