@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { checkmarksTheme } from '../../styles/Themes';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, TableCell, Typography } from '@material-ui/core';
+import Fade from '@material-ui/core/Fade';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
 const styles = (theme) => ({
@@ -10,17 +12,23 @@ const styles = (theme) => ({
         display: 'flex',
         alignItems: 'center',
         boxSizing: 'border-box',
+        backgroundColor: checkmarksTheme.bgDrawer,
     },
     table: {
         // temporary right-to-left patch, waiting for
         // https://github.com/bvaughn/react-virtualized/issues/454
+        backgroundColor: checkmarksTheme.bgTransparent,
+        // opacity: 0,
+
         '& .ReactVirtualized__Table__headerRow': {
             flip: false,
             paddingRight:
                 theme.direction === 'rtl' ? '0 !important' : undefined,
         },
+        // backgroundColor: checkmarksTheme.bgDrawer,
     },
     tableRow: {
+        backgroundColor: checkmarksTheme.bgTransparent,
         cursor: 'pointer',
     },
     tableRowHover: {
@@ -29,6 +37,9 @@ const styles = (theme) => ({
         },
     },
     tableCell: {
+        // backgroundColor: 'red',
+        backgroundColor: checkmarksTheme.bgPrimary,
+        fontSize: '10px',
         flex: 1,
     },
     noClick: {
@@ -53,22 +64,24 @@ class MuiVirtualizedTable extends React.PureComponent {
     cellRenderer = ({ cellData, columnIndex }) => {
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
-            <TableCell
-                component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, {
-                    [classes.noClick]: onRowClick == null,
-                })}
-                variant="body"
-                style={{ height: rowHeight }}
-                align={
-                    (columnIndex != null && columns[columnIndex].numeric) ||
-                    false
-                        ? 'right'
-                        : 'left'
-                }
-            >
-                {cellData}
-            </TableCell>
+            <Fade in={true} exit={true} timeout={1000}>
+                <TableCell
+                    component="div"
+                    className={clsx(classes.tableCell, classes.flexContainer, {
+                        [classes.noClick]: onRowClick == null,
+                    })}
+                    variant="body"
+                    style={{ height: rowHeight }}
+                    align={
+                        (columnIndex != null && columns[columnIndex].numeric) ||
+                        false
+                            ? 'right'
+                            : 'left'
+                    }
+                >
+                    {cellData}
+                </TableCell>
+            </Fade>
         );
     };
 
@@ -172,8 +185,24 @@ export default function SearchResults({ data }) {
     //     return { id, dessert, calories, fat, carbs, protein };
     // }
 
-    console.log('data prop: ', data);
-
+    // console.log('data prop: ', data);
+    // console.log('item: ', data[0]);
+    // FORMATTER
+    // let formattedData = [];
+    // const formatData = (data) => {
+    //     data.forEach((trademark) => {
+    //         let formattedDate = trademark.fileDate.substring(0, 10);
+    //         // console.log('formattedDate: ', formattedDate);
+    //         formattedData.push({
+    //             ...trademark,
+    //             fileDate: formattedDate,
+    //         });
+    //         // return {...data, fileDate: }
+    //     });
+    // };
+    // formattedData = formatData(data);
+    // console.log('data: ', data);
+    // console.log('formattedData: ', formattedData);
     // function createData(id, dessert, calories, fat, carbs, protein) {
     //     return { id, dessert, calories, fat, carbs, protein };
     // }
@@ -186,29 +215,35 @@ export default function SearchResults({ data }) {
     // }
 
     // console.log("rows (default): ", rows)
-    console.log('item: ', data[2]);
+
     return (
-        <Paper style={{ height: 400, width: '100%' }}>
+        <Paper
+            style={{
+                backgroundColor: checkmarksTheme.bgPrimary,
+                height: (window.innerHeight * 2) / 5,
+                width: '100%',
+            }}
+        >
             <VirtualizedTable
                 // style={{ height: 400, width: '100%' }}
                 rowCount={data.length} // row or data
                 rowGetter={({ index }) => data[index]} // row or data
                 columns={[
                     {
-                        width: 160,
+                        width: (window.innerHeight * 1) / 2,
                         label: 'Title',
                         dataKey: 'title',
                     },
                     {
-                        width: 120,
+                        width: (window.innerHeight * 1) / 4,
                         label: 'Status',
                         dataKey: 'statusDescEn',
                         // numeric: true,
                     },
                     {
-                        width: 150,
-                        label: 'File Date',
-                        dataKey: 'fileDate',
+                        width: (window.innerHeight * 1) / 4,
+                        label: 'File Date (yyyy-mm-dd)',
+                        dataKey: 'fileDateFormatted',
                         // numeric: true,
                     },
                 ]}
