@@ -75,7 +75,7 @@ export default function Footer() {
                                 <img src="../../images/checkmark-logo.png" alt="checkmark-logo" />
                                 </a>
                                 <a href="https://twitter.com/" className={classes.icon}>
-                                <img src="/../../images/twitter.png" alt="twitter" />
+                                <img src="../../images/twitter.png" alt="twitter" />
                                 </a>
                             </Grid>
                             <Grid item>
@@ -97,9 +97,18 @@ export default function Footer() {
                         </ul>
                     </Grid>
                     <Grid item xs={6} sm={4} md={3}>
-
+                        <Typography variant="h6" marked="left" gutterBottom>
+                            Site Map
+                        </Typography>
+                        <ul className={classes.list}>
+                            <li className={classes.listItem}>
+                                <Link href="https://checkmarks.ca/">About Us</Link>
+                            </li>
+                            <li className={classes.listItem}>
+                                <Link href="https://checkmarks.ca/">Register Your Brand</Link>
+                            </li>
+                        </ul>
                     </Grid>
-
                 </Grid>
             </Container>
         </Typography>
