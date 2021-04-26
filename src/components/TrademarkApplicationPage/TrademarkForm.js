@@ -10,8 +10,8 @@ const TrademarkForm = () => {
     const classes = useStyles();
     return (
         <Card className={classes.outerCard}>
+            <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
-                <p style={{ color: 'red' }}>What type of Trademark? </p>
                 <p style={{ color: 'red', fontSize: 15 }}>
                     Select all that apply
                 </p>
@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2%',
         display: 'flex',
         flexDirection: 'column',
+    },
+    title: {
+        color: '#df3a48',
     },
     outerText: {
         justifyContent: 'flex-start',
