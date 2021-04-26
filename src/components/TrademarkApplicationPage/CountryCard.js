@@ -128,11 +128,11 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontWeight: 'bold',
-        marginBottom: '2% ',
+        // marginBottom: '2% ',
         marginTop: '2% ',
     },
     input: {
-        marginTop: '2%',
+        marginTop: '3%',
     },
     buttonContainer: {
         display: 'flex',
@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     alert: {
-        margin: '2% auto',
+        margin: '3% auto',
         color: '#2a9df4',
         fontSize: '12px',
     },
