@@ -83,6 +83,23 @@ export default function Footer() {
                             </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={6} sm={4} md={3}>
+                        <Typography variant="h6" marked="left" gutterBottom>
+                            Legal Assistant
+                        </Typography>
+                        <ul className={classes.list}>
+                            <li className={classes.listItem}>
+                                <Link href="https://checkmarks.ca/">Terms and Conditions</Link>
+                            </li>
+                            <li className={classes.listItem}>
+                                <Link href="https://checkmarks.ca/">Privacy</Link>
+                            </li>
+                        </ul>
+                    </Grid>
+                    <Grid item xs={6} sm={4} md={3}>
+
+                    </Grid>
+
                 </Grid>
             </Container>
         </Typography>
