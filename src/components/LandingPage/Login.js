@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, FormControl, Card, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { checkmarksTheme } from '../../styles/Themes';
 
 export default function IndividualForm() {
     const classes = useStyles();
@@ -24,7 +25,7 @@ export default function IndividualForm() {
 
     return (
         <Card className={classes.container}>
-            <Typography className={classes.title}>Sign up</Typography>
+            <Typography className={classes.title}>Login</Typography>
             <FormControl fullWidth={true}>
                 <input
                     className={classes.input}
@@ -52,7 +53,7 @@ export default function IndividualForm() {
                     onClick={handleSignUp}
                     className={classes.signUpButton}
                 >
-                    Sign Up
+                    Register
                 </Button>
                 <Button
                     type="submit"
@@ -65,60 +66,86 @@ export default function IndividualForm() {
             </div>
             <Typography className={classes.text}>Forgot password?</Typography>
         </Card>
-        // </div>
     );
 }
 const useStyles = makeStyles((theme) => ({
     container: {
-        padding: '2%',
+        animation: '$shiftUp-login 0.5s',
+        // animation: '$shiftUp-login 1s',
+        backgroundColor: checkmarksTheme.bgDrawer,
+        borderRadius: '25px',
+        padding: '2% 8%',
         margin: 'auto',
+<<<<<<< HEAD
         width: '30%',
+=======
+        minWidth: 320,
+        width: '80%',
+        maxWidth: 500,
+>>>>>>> main
     },
     input: {
-        width: '60%',
-        margin: '3% auto',
-        padding: '3%',
-        borderRadius: '10px',
+        border: '1px solid #ccc',
+        borderRadius: '25px',
+        fontSize: '12px',
+        padding: '3% 6%',
+        margin: '5% auto',
+        width: '100%',
         '&:focus': {
+            border: `1px solid ${checkmarksTheme.buttonTextSecondary}`,
             outline: 'none',
         },
-        border: '1px solid #ccc',
     },
     title: {
-        margin: '5%',
-        fontSize: '20px',
+        margin: '2%',
+        fontSize: '24px',
         fontWeight: 'bold',
-        color: '#df3a48',
+        color: checkmarksTheme.buttonTextSecondary,
         textAlign: 'center',
     },
     text: {
-        color: '#df3a48',
+        color: checkmarksTheme.buttonTextSecondary,
         fontWeight: 'bold',
+        padding: '2%',
         textAlign: 'right',
-        fontSize: '10px',
+        fontSize: '14px',
     },
     submitButtonContainer: {
         display: 'flex',
-        margin: '3%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: '5% auto',
     },
     loginButton: {
-        backgroundColor: '#df3a48',
-        color: '#FFF',
-        width: '50%',
-        height: '40px',
-        margin: '3%',
-        borderRadius: '10px',
-        fontSize: '10px',
+        backgroundColor: checkmarksTheme.buttonSecondary,
+        '&:hover': {
+            color: checkmarksTheme.buttonPrimary,
+            background: checkmarksTheme.hoverLight,
+        },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '25px',
+        color: checkmarksTheme.buttonTextSecondary,
+        fontWeight: 'bold',
+        opacity: 0.7,
+        width: '45%',
     },
     signUpButton: {
-        color: '#df3a48',
-        backgroundColor: '#FFF',
+        backgroundColor: checkmarksTheme.buttonPrimary,
+        '&:hover': {
+            color: checkmarksTheme.buttonPrimary,
+            background: checkmarksTheme.hoverSoft,
+        },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '25px',
+        color: checkmarksTheme.buttonTextPrimary,
         fontWeight: 'bold',
-        width: '50%',
-        height: '40px',
-        fontSize: '10px',
-        margin: '3%',
-        borderRadius: '10px',
-        border: '1px solid #df3a48',
+        fontWeight: 'bold',
+        // height: '40px',
+        opacity: 0.8,
+        width: '45%',
+    },
+    '@keyframes shiftUp-login': {
+        from: { transform: 'translateY(10%)' },
+        to: { transform: 'translateY(0px)' },
     },
 }));
