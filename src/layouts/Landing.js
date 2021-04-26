@@ -15,6 +15,8 @@ import About from '../components/LandingPage/About';
 import Pricing from '../components/LandingPage/Pricing';
 import Footer from '../components/LandingPage/Footer';
 
+// export const LandingContext = React.createContext();
+
 export default function Landing() {
     const classes = useStyles();
     const history = useHistory();
@@ -26,7 +28,12 @@ export default function Landing() {
     console.log(window.innerHeight);
     return (
         <Box className={classes.root}>
-            <MenuAppBar />
+            <MenuAppBar
+                authenticated={authenticated}
+                loggingIn={loggingIn}
+                setLoggingIn={setLoggingIn}
+                setSearching={setSearching}
+            />
             <Fade in={true} timeout={6000}>
                 <Box className={classes.section}>
                     {/* <Fade in={true} exit={true} timeout={1000}> */}
@@ -135,11 +142,14 @@ const useStyles = makeStyles(() => ({
     buttonLogin: {
         backgroundColor: checkmarksTheme.buttonSecondary,
         '&:hover': {
+            color: checkmarksTheme.buttonPrimary,
             background: checkmarksTheme.hoverLight,
         },
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextSecondary,
+        fontWeight: 'bold',
+        opacity: 0.7,
         padding: '5px 0',
         width: '40%',
         maxWidth: '120px',
@@ -147,12 +157,15 @@ const useStyles = makeStyles(() => ({
     buttonRegister: {
         backgroundColor: checkmarksTheme.buttonPrimary,
         '&:hover': {
+            color: checkmarksTheme.buttonPrimary,
             background: checkmarksTheme.hoverSoft,
         },
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
+        fontWeight: 'bold',
         marginRight: '35px',
+        opacity: 0.7,
         padding: '5px 0',
         width: '55%',
         maxWidth: '200px',

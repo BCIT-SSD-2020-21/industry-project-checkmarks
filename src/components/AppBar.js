@@ -48,6 +48,8 @@ export const navbarStyles = makeStyles((theme) => ({
         // backgroundColor: holisticTheme.bgDrawer,
     },
     menuItem: {
+        color: checkmarksTheme.inputIcon,
+        // fontSize: '1.125renm',
         display: 'flex',
         flexDirection: 'row',
         fontSize: 14,
@@ -164,7 +166,12 @@ export const navbarStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuAppBar({ dataUser }) {
+export default function MenuAppBar({
+    authenticated,
+    loggingIn,
+    setLoggingIn,
+    setSearching,
+}) {
     const classes = navbarStyles();
     const theme = useTheme();
     const history = useHistory();
@@ -225,26 +232,31 @@ export default function MenuAppBar({ dataUser }) {
                     {/* <Link className={classes.appBarNavLink} to="/">
                         Dash
                     </Link> */}
-                    <Box className={classes.buttons}>
-                        <Button
-                            className={classes.buttonRegister}
-                            onClick={() => {
-                                history.push('/register');
-                            }}
-                            boxShadow={2}
-                        >
-                            Register
-                        </Button>
-                        <Button
-                            className={classes.buttonLogin}
-                            onClick={() => {
-                                // setLoggingIn(!loggingIn);
-                            }}
-                            boxShadow={2}
-                        >
-                            Login
-                        </Button>
-                    </Box>
+                    {!authenticated && !loggingIn && (
+                        <Box className={classes.buttons}>
+                            <Button
+                                className={classes.buttonRegister}
+                                onClick={() => {
+                                    setLoggingIn(false);
+                                    setSearching(false);
+                                    history.push('/register');
+                                }}
+                                boxShadow={2}
+                            >
+                                Register
+                            </Button>
+                            <Button
+                                className={classes.buttonLogin}
+                                onClick={() => {
+                                    setSearching(false);
+                                    setLoggingIn(!loggingIn);
+                                }}
+                                boxShadow={2}
+                            >
+                                Login
+                            </Button>
+                        </Box>
+                    )}
 
                     <div>
                         <IconButton
@@ -279,40 +291,48 @@ export default function MenuAppBar({ dataUser }) {
                             open={open}
                             onClose={handleClose}
                         >
-                            <MenuItem
-                                className={classes.menuItem}
-                                // onClick={() => toUserProfile(dataUser.id)}
-                            >
-                                <VpnKeyIcon className={classes.menuItemIcon} />
-                                Login
-                            </MenuItem>
-                            <MenuItem
-                                className={classes.menuItem}
-                                // onClick={() => toUserProfile(dataUser.id)}
-                            >
-                                <AccountBoxTwoToneIcon
-                                    className={classes.menuItemIcon}
-                                />
-                                Register
-                            </MenuItem>
+                            {authenticated ? (
+                                <MenuItem
+                                    className={classes.menuItem}
+                                    onClick={() => {
+                                        //   userSignOut()
+                                        history.push('/');
+                                    }}
+                                >
+                                    <ExitToAppIcon
+                                        className={classes.menuItemIcon}
+                                    />
+                                    SignOut
+                                </MenuItem>
+                            ) : (
+                                <>
+                                    <MenuItem
+                                        className={classes.menuItem}
+                                        // onClick={() => toUserProfile(dataUser.id)}
+                                    >
+                                        <VpnKeyIcon
+                                            className={classes.menuItemIcon}
+                                        />
+                                        Login
+                                    </MenuItem>
+                                    <MenuItem
+                                        className={classes.menuItem}
+                                        // onClick={() => toUserProfile(dataUser.id)}
+                                    >
+                                        <AccountBoxTwoToneIcon
+                                            className={classes.menuItemIcon}
+                                        />
+                                        Register
+                                    </MenuItem>
+                                </>
+                            )}
+
                             {/* <MenuItem className={classes.menuItem}>
                                 <SettingsIcon
                                     className={classes.menuItemIcon}
                                 />
                                 Settings
                             </MenuItem> */}
-                            <MenuItem
-                                className={classes.menuItem}
-                                onClick={() => {
-                                    //   userSignOut()
-                                    history.push('/');
-                                }}
-                            >
-                                <ExitToAppIcon
-                                    className={classes.menuItemIcon}
-                                />
-                                SignOut
-                            </MenuItem>
                         </Menu>
                     </div>
                 </Toolbar>
