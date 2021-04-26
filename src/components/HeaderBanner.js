@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import logo from '../images/checkmark logo.PNG';
+import logo from '../images/logo_checkmarks_vp.svg';
 import { Box, Typography, Tabs, Tab, Card } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
