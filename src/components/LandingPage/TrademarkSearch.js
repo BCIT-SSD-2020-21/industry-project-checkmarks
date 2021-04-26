@@ -182,6 +182,7 @@ export const searchBoxStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         width: '90%',
+        maxWidth: '768px',
         margin: '2% auto',
         animation: '$shiftDown-searchBox 1s',
         // '&:hover': {
@@ -203,9 +204,9 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     form: {
         // margin: '5px auto',
-        width: '90%',
-        padding: '10px',
         boxSizing: 'border-box',
+        padding: '10px',
+        width: '90%',
     },
     label: {
         color: checkmarksTheme.inputLabel,
@@ -219,7 +220,9 @@ export const searchBoxStyles = makeStyles(() => ({
         backgroundColor: checkmarksTheme.inputBackground,
         color: checkmarksTheme.inputValue,
         textAlign: 'left',
-        fontSize: '0.9rem',
+        fontSize: '0.7rem',
+        ['@media (min-width:768px)']: { fontSize: '0.9rem' },
+        ['@media (min-width:1280px)']: { fontSize: '1.1rem' },
         fontWeight: 'bold',
         width: '100%',
         padding: '2px 12px',
