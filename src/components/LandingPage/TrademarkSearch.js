@@ -99,7 +99,7 @@ export default function TrademarkSearch() {
                             // onClick={(e) => console.log(e.target)}
                             onChange={(e) => searchTrademark(e.target.value)}
                             id="searchBox"
-                            placeholder={'Enter Text...'}
+                            placeholder={'Check if your Trademark exists...'}
                             disableUnderline={true}
                             startAdornment={
                                 <InputAdornment
@@ -145,13 +145,14 @@ export default function TrademarkSearch() {
                             // <Fade in={true} exit={true}>
                             <Card className={classes.noResultContainer}>
                                 <Typography className={classes.noResultText}>
-                                    {
-                                        'No match found, so this Trademark may not be registered yet.'
-                                    }
+                                    {`No match found for "${searchTerm}", so this text may not be registered yet as a Trademark.`}
                                 </Typography>
                                 <Typography className={classes.noResultText}>
-                                    {`"${searchTerm}" may be available. Would you like to start an application?`}
+                                    {'Would you like to start an application?'}
                                 </Typography>
+                                <Button className={classes.startButton}>
+                                    Absolutely!
+                                </Button>
                             </Card>
                             // </Fade>
                         )}
@@ -182,24 +183,29 @@ export const searchBoxStyles = makeStyles(() => ({
         flexDirection: 'column',
         width: '90%',
         margin: '2% auto',
+        animation: '$shiftDown-searchBox 1s',
         // '&:hover': {
         //     backgroundColor: checkmarksTheme.hoverLight,
         // },
     },
     searchBoxShifted: {
+        animation: '$shiftUp-searchBox 1s',
         transform: 'translateY(-200%)',
     },
     searchResultsShifted: {
-        transform: 'translateY(-20%)',
+        // animation: '$shiftUp-results 1s',
+        // transform: 'translateY(-20%)',
     },
 
     results: {
+        height: (window.innerHeight * 2) / 3,
         width: '100%',
     },
     form: {
         // margin: '5px auto',
         width: '90%',
         padding: '10px',
+        boxSizing: 'border-box',
     },
     label: {
         color: checkmarksTheme.inputLabel,
@@ -211,40 +217,74 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     input: {
         backgroundColor: checkmarksTheme.inputBackground,
+        color: checkmarksTheme.inputValue,
         textAlign: 'left',
+        fontSize: '18px',
+        fontWeight: 'bold',
         width: '100%',
-        padding: '0 8px',
+        padding: '2px 12px',
         borderRadius: '15px',
+        boxSizing: 'border-box',
+        margin: '1px',
+        border: '0.5px solid #FFFFFF00',
         '&.Mui-focused': {
             border: '0.5px solid red',
-            animation: 'shiftUp 1s',
+            // animation: '$shiftUp-searchBox 1s',
+            // transform: 'translateY(-200%)'
         },
     },
     adornment: {},
     icon: {
         color: checkmarksTheme.inputIcon,
     },
+    iconLoading: {
+        animation: '$rotationAnimation 2s infinite',
+        color: checkmarksTheme.inputIcon,
+    },
     noResultContainer: {
+        backgroundColor: checkmarksTheme.bgPrimary,
         borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
+        alignItems: 'center',
         padding: '5% 10%',
-        height: '100%',
+        margin: '0 auto',
+        minWidth: 320,
+        width: '60%',
+        maxWidth: 500,
+        // height: '100%',
     },
     noResultText: {
         textAlign: 'center',
+        marginBottom: '5%',
     },
-    iconLoading: {
-        animation: '$rotationAnimation 2s infinite',
-        color: checkmarksTheme.inputIcon,
+    startButton: {
+        backgroundColor: checkmarksTheme.buttonPrimary,
+        '&:hover': {
+            background: checkmarksTheme.hoverSoft,
+        },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '25px',
+        color: checkmarksTheme.buttonTextPrimary,
+        padding: '5px 0',
+        width: '55%',
+        maxWidth: '200px',
     },
     '@keyframes rotationAnimation': {
         from: { transform: 'rotate(0deg)' },
         to: { transform: 'rotate(359deg)' },
     },
-    '@keyframes shiftUp': {
+    '@keyframes shiftUp-results': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-100px)' },
+        to: { transform: 'translateY(-20%)' },
+    },
+    '@keyframes shiftUp-searchBox': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-200%)' },
+    },
+    '@keyframes shiftDown-searchBox': {
+        from: { transform: 'translateY(-200%)' },
+        to: { transform: 'translateY(0px)' },
     },
 }));
