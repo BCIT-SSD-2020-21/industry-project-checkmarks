@@ -522,7 +522,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginLeft: '1%',
         width: '20%',
-        height: '40px',
+        height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
         [theme.breakpoints.down('xs')]: {
@@ -534,7 +534,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         width: '20%',
-        height: '40px',
+        height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
         border: '1px solid #df3a48',

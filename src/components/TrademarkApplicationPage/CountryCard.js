@@ -101,7 +101,7 @@ const CountryCard = () => {
                     onClick={handleSubmit}
                     className={classes.nextButton}
                 >
-                    Confirm and go to payment
+                    Next
                 </Button>
             </div>
         </Card>
