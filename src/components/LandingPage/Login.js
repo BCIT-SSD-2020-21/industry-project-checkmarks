@@ -76,13 +76,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '25px',
         padding: '2% 8%',
         margin: 'auto',
-<<<<<<< HEAD
-        width: '30%',
-=======
         minWidth: 320,
         width: '80%',
         maxWidth: 500,
->>>>>>> main
     },
     input: {
         border: '1px solid #ccc',
