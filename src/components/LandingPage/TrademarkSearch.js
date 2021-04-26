@@ -219,7 +219,7 @@ export const searchBoxStyles = makeStyles(() => ({
         backgroundColor: checkmarksTheme.inputBackground,
         color: checkmarksTheme.inputValue,
         textAlign: 'left',
-        fontSize: '18px',
+        fontSize: '0.9rem',
         fontWeight: 'bold',
         width: '100%',
         padding: '2px 12px',

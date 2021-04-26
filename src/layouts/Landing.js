@@ -129,6 +129,8 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         margin: '10% 0 5% 0',
         width: '100%',
+        ['@media (min-width:768px)']: { justifyContent: 'flex-end' },
+        ['@media (min-width:1280px)']: { display: 'none' },
     },
     buttonLogin: {
         backgroundColor: checkmarksTheme.buttonSecondary,
@@ -150,6 +152,7 @@ const useStyles = makeStyles(() => ({
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
+        marginRight: '35px',
         padding: '5px 0',
         width: '55%',
         maxWidth: '200px',

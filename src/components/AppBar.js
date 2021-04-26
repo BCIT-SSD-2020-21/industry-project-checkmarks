@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import {
     AppBar,
+    Box,
+    Button,
     CssBaseline,
     Drawer,
     Divider,
@@ -124,6 +126,42 @@ export const navbarStyles = makeStyles((theme) => ({
         marginLeft: 0,
     },
     themeIcon: {},
+    // AUTH Buttons - only visible on Laptop screens and above
+    buttons: {
+        display: 'none',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        // margin: '10% 0 5% 0',
+        width: '100%',
+        // ['@media (min-width:768px)']: { justifyContent: 'flex-end' },
+        ['@media (min-width:1280px)']: { display: 'flex' },
+    },
+    buttonLogin: {
+        backgroundColor: checkmarksTheme.buttonSecondary,
+        '&:hover': {
+            background: checkmarksTheme.hoverLight,
+        },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '5px',
+        color: checkmarksTheme.buttonTextSecondary,
+        padding: '5px 0',
+        width: '40%',
+        maxWidth: '100px',
+    },
+    buttonRegister: {
+        backgroundColor: checkmarksTheme.buttonPrimary,
+        '&:hover': {
+            background: checkmarksTheme.hoverSoft,
+        },
+        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+        borderRadius: '5px',
+        color: checkmarksTheme.buttonTextPrimary,
+        marginRight: '10px',
+        padding: '5px 0',
+        width: '55%',
+        maxWidth: '130px',
+    },
 }));
 
 export default function MenuAppBar({ dataUser }) {
@@ -187,6 +225,26 @@ export default function MenuAppBar({ dataUser }) {
                     {/* <Link className={classes.appBarNavLink} to="/">
                         Dash
                     </Link> */}
+                    <Box className={classes.buttons}>
+                        <Button
+                            className={classes.buttonRegister}
+                            onClick={() => {
+                                history.push('/register');
+                            }}
+                            boxShadow={2}
+                        >
+                            Register
+                        </Button>
+                        <Button
+                            className={classes.buttonLogin}
+                            onClick={() => {
+                                // setLoggingIn(!loggingIn);
+                            }}
+                            boxShadow={2}
+                        >
+                            Login
+                        </Button>
+                    </Box>
 
                     <div>
                         <IconButton
