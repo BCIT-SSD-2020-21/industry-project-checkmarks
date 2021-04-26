@@ -15,16 +15,15 @@ const CountryCard = () => {
     const classes = useStyles();
 
     const [checked, setChecked] = useState('');
-    // const [checked, setChecked] = useState('');
-    // const [checked, setChecked] = useState('');
+    const [country, setCountry] = useState('');
+    const [date, setDate] = useState('');
+    const [appNumber, setAppNumber] = useState('');
 
     //handle Submit
     const handleSubmit = (event) => {
         event.preventDefault();
         alert('Successfully Confirm ');
     };
-
-    console.log(checked);
 
     return (
         <Card className={classes.countryCard}>
@@ -62,6 +61,8 @@ const CountryCard = () => {
                             label="Country of filing"
                             variant="outlined"
                             size="small"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
                             className={classes.input}
                         />
                         <TextField
@@ -73,6 +74,8 @@ const CountryCard = () => {
                             variant="outlined"
                             size="small"
                             type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
                             className={classes.input}
                         />
                         <TextField
@@ -80,6 +83,8 @@ const CountryCard = () => {
                             label="Application file number"
                             variant="outlined"
                             size="small"
+                            value={appNumber}
+                            onChange={(e) => setAppNumber(e.target.value)}
                             className={classes.input}
                         />
                     </div>
