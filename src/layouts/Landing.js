@@ -5,7 +5,7 @@ import { checkmarksTheme } from '../styles/Themes';
 import { Box, IconButton, Button } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-import bannerImage from '../images/bg_landing-chris-brignola.jpg';
+import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';

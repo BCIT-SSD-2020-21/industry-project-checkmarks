@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import logo from '../images/logo_checkmarks_vp.svg';
+import logo from '../assets/images/logo_checkmarks_vp.svg';
 import { Box, Typography, Tabs, Tab, Card } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,6 +34,7 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: (window.innerHeight * 1) / 3,
+        marginTop: '4%',
         // width: (window.innerWidth * 1) / 4,
     },
     image: {

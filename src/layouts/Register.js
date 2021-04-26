@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../images/checkmark logo.PNG';
+import logo from '../assets/images/logo_checkmarks_vp.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import { Typography, Tabs, Tab, Card } from '@material-ui/core';
