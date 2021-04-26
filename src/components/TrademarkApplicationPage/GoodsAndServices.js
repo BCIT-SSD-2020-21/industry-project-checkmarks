@@ -269,8 +269,8 @@ export default function GoodsAndServices() {
         // }
         // return (
         <Card className={classes.card}>
-            <div>
-                <h1 className={classes.title}>Goods and Services</h1>
+            <h1 className={classes.title}>Goods and Services</h1>
+            <div className={classes.formContainer}>
                 <Typography gutterBottom>
                     Please select the NICE Class and Terms you want to register
                     your trademark under.
@@ -280,9 +280,7 @@ export default function GoodsAndServices() {
                         additional $100.
                     </p>
                 </Typography>
-            </div>
 
-            <div>
                 <div>
                     {/* ///////////////////////////search trademark terms/////////////////////////// */}
                     <h3>Search for your Trademark Terms</h3>
@@ -422,61 +420,60 @@ export default function GoodsAndServices() {
                         Helper section with brief legal information, assisting
                         the client through the process.
                     </Alert>
-                    <div className={classes.buttonContainer}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            className={classes.backButton}
-                            // onClick={this.back}
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            className={classes.continueButton}
-                            type="submit"
-                            variant="contained"
-                            // onClick={this.clickContinue}
-                        >
-                            Continue
-                        </Button>
-                    </div>
                 </div>
-                {/* ///////////////////////////warning section /////////////////////////// */}
-                <Dialog
-                    open={open}
-                    // onClose={this.handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">
-                        {'Continue without selecting any terms?'}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            You have not selected any trademark terms. This can
-                            be figured out at a later time. Do you wish to
-                            continue?
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            // onClick={this.handleClose}
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            // onClick={this.continue}
-                            autoFocus
-                        >
-                            Continue
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                <div className={classes.buttonContainer}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        className={classes.backButton}
+                        // onClick={this.back}
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        className={classes.continueButton}
+                        type="submit"
+                        variant="contained"
+                        // onClick={this.clickContinue}
+                    >
+                        Continue
+                    </Button>
+                </div>
             </div>
+            {/* ///////////////////////////warning section /////////////////////////// */}
+            <Dialog
+                open={open}
+                // onClose={this.handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {'Continue without selecting any terms?'}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        You have not selected any trademark terms. This can be
+                        figured out at a later time. Do you wish to continue?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        // onClick={this.handleClose}
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        // onClick={this.continue}
+                        autoFocus
+                    >
+                        Continue
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Card>
     );
 }
@@ -490,8 +487,12 @@ const useStyles = makeStyles((theme) => ({
             padding: '8% ',
         },
     },
+    formContainer: {
+        margin: '3%',
+    },
     title: {
         color: '#df3a48',
+        marginBottom: '3%',
     },
     searchTermsContainer: {
         display: 'flex',
