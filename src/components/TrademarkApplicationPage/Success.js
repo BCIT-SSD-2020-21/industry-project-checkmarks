@@ -14,14 +14,14 @@ export default function Success() {
 
     return (
         <div className={classes.root}>
-            <h1>
+            <h1 className={classes.text}>
                 <b>Thank You For Your Submission!</b>
             </h1>
-            <h3>
+            <p className={classes.text}>
                 Your Trademark Registration request has been sent. You will
-                receive an email within 2-3 business days regarding your
-                request.
-            </h3>
+                receive an email within <strong>2-3 business days </strong>
+                regarding your request.
+            </p>
             <br />
             <Button
                 variant="contained"
@@ -55,5 +55,9 @@ const useStyles = makeStyles((theme) => ({
             fontSize: '8px',
             width: '40%',
         },
+    },
+    text: {
+        textAlign: 'center',
+        fontWeight: 400,
     },
 }));
