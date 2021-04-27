@@ -8,7 +8,6 @@ export default function Success() {
     const classes = useStyles();
 
     //handle back button
-
     const handleSubmit = () => {
         history.push('/');
     };

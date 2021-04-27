@@ -8,27 +8,21 @@ import {
     TextField,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
 
 export default function PaymentForm({ navigation }) {
     const classes = useStyles();
-    const history = useHistory();
 
-    const [cardholderName, setCardholderName] = useState('');
-    const [creditcardNumber, setCreditcardNumber] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [CVV, setCVV] = useState('');
-    const [streetAddress, setStreetAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [province, setProvince] = useState('');
-    const [postalCode, setPostalCode] = useState('');
-    const [country, setCountry] = useState('');
-
-    //handle Submit
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     alert('Successfully Complete');
-    // };
+    const [creditCardInfo, setCreditCardInfo] = useState({
+        cardholderName: '',
+        creditcardNumber: '',
+        expiryDate: '',
+        CVV: '',
+        streetAddress: '',
+        city: '',
+        province: '',
+        postalCode: '',
+        country: '',
+    });
 
     return (
         <Card className={classes.card}>
@@ -45,9 +39,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={cardholderName}
+                    value={creditCardInfo.cardholderName}
                     autoComplete="on"
-                    onChange={(e) => setCardholderName(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            cardholderName: e.target.value,
+                        })
+                    }
                 />
             </FormControl>
             <FormControl fullWidth={true}>
@@ -58,9 +57,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={creditcardNumber}
+                    value={creditCardInfo.creditcardNumber}
                     autoComplete="on"
-                    onChange={(e) => setCreditcardNumber(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            creditcardNumber: e.target.value,
+                        })
+                    }
                 />
             </FormControl>
             <div className={classes.flexContainer}>
@@ -71,9 +75,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={expiryDate}
+                    value={creditCardInfo.expiryDate}
                     autoComplete="on"
-                    onChange={(e) => setExpiryDate(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            expiryDate: e.target.value,
+                        })
+                    }
                 />
 
                 <TextField
@@ -83,9 +92,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={CVV}
+                    value={creditCardInfo.CVV}
                     autoComplete="on"
-                    onChange={(e) => setCVV(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            CVV: e.target.value,
+                        })
+                    }
                 />
             </div>
             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
@@ -100,9 +114,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={streetAddress}
+                    value={creditCardInfo.streetAddress}
                     autoComplete="on"
-                    onChange={(e) => setStreetAddress(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            streetAddress: e.target.value,
+                        })
+                    }
                 />
             </FormControl>
             <div className={classes.flexContainer}>
@@ -113,9 +132,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={city}
+                    value={creditCardInfo.city}
                     autoComplete="on"
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            city: e.target.value,
+                        })
+                    }
                 />
                 <TextField
                     id="outlined-basic"
@@ -124,9 +148,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={province}
+                    value={creditCardInfo.province}
                     autoComplete="on"
-                    onChange={(e) => setProvince(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            province: e.target.value,
+                        })
+                    }
                 />
             </div>
             <div className={classes.flexContainer}>
@@ -137,9 +166,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={postalCode}
+                    value={creditCardInfo.postalCode}
                     autoComplete="on"
-                    onChange={(e) => setPostalCode(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            postalCode: e.target.value,
+                        })
+                    }
                 />
 
                 <TextField
@@ -149,9 +183,14 @@ export default function PaymentForm({ navigation }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={country}
+                    value={creditCardInfo.country}
                     autoComplete="on"
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) =>
+                        setCreditCardInfo({
+                            ...creditCardInfo,
+                            country: e.target.value,
+                        })
+                    }
                 />
             </div>
             <Alert severity="info" className={classes.alert}>

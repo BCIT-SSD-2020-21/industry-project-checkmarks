@@ -11,19 +11,8 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
-const CountryCard = ({ navigation }) => {
+const CountryCard = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
-
-    const [checked, setChecked] = useState('');
-    const [country, setCountry] = useState('');
-    const [date, setDate] = useState('');
-    const [appNumber, setAppNumber] = useState('');
-
-    //handle Submit
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     alert('Successfully Confirm ');
-    // };
 
     return (
         <Card className={classes.countryCard}>
@@ -38,7 +27,13 @@ const CountryCard = ({ navigation }) => {
                     aria-label="userType"
                     id="userType"
                     name="userType"
-                    onChange={(e) => setChecked(e.target.value)}
+                    value={info.filedInOtherCountry}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            filedInOtherCountry: e.target.value,
+                        })
+                    }
                 >
                     <FormControlLabel
                         value="Yes"
@@ -51,21 +46,27 @@ const CountryCard = ({ navigation }) => {
                         label="No"
                     />
                 </RadioGroup>
-                {checked == 'Yes' && (
+                {info.filedInOtherCountry == 'Yes' && (
                     <div className={classes.form}>
                         <Typography className={classes.text}>
                             Please fill out information below (if known)
                         </Typography>
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             label="Country of filing"
                             variant="outlined"
                             size="small"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                            className={classes.input}
+                            value={info.countryOfFiling}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    countryOfFiling: e.target.value,
+                                })
+                            }
                         />
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             InputLabelProps={{
                                 shrink: true,
@@ -74,18 +75,27 @@ const CountryCard = ({ navigation }) => {
                             variant="outlined"
                             size="small"
                             type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            className={classes.input}
+                            value={info.fillingDate}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    fillingDate: e.target.value,
+                                })
+                            }
                         />
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             label="Application file number"
                             variant="outlined"
                             size="small"
-                            value={appNumber}
-                            onChange={(e) => setAppNumber(e.target.value)}
-                            className={classes.input}
+                            value={info.fillingNumber}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    fillingNumber: e.target.value,
+                                })
+                            }
                         />
                     </div>
                 )}

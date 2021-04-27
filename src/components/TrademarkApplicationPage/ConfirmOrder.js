@@ -6,13 +6,6 @@ import { useHistory } from 'react-router-dom';
 
 export default function PaymentForm({ navigation }) {
     const classes = useStyles();
-    const history = useHistory();
-
-    //handle Submit
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     alert('Successfully Confirm ');
-    // };
 
     return (
         <Card className={classes.card}>
