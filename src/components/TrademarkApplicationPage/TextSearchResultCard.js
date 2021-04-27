@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-const TextSearchResultCard = () => {
+const TrademarkTextCard = () => {
     const classes = useStyles();
     return (
         <Card className={classes.resultCard}>
@@ -29,7 +29,7 @@ const TextSearchResultCard = () => {
     );
 };
 
-export default TextSearchResultCard;
+export default TrademarkTextCard;
 const useStyles = makeStyles((theme) => ({
     resultCard: {
         width: '75%',
