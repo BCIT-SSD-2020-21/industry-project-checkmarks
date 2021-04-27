@@ -18,6 +18,7 @@ const TrademarkApplication = () => {
         trademarkType: [],
         characterText: '',
         fileName: '',
+        trademarkName: '',
 
         // Goods and Services
         classesSelected: [],

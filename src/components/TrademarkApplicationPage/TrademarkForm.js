@@ -8,7 +8,7 @@ import TextSearchCard from './TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const TrademarkForm = ({ navigation }) => {
+const TrademarkForm = ({ navigation, info, setInfo }) => {
     const [textTrademarkChecked, setTextTrademarkChecked] = useState(false);
     const [designChecked, setDesignChecked] = useState(false);
     const [detailChecked, setDetailChecked] = useState(false);
@@ -32,9 +32,12 @@ const TrademarkForm = ({ navigation }) => {
             <FormControlLabel
                 control={<Checkbox />}
                 label="Standard Characters"
+                value="standardCharacter"
                 onChange={() => setTextTrademarkChecked(!textTrademarkChecked)}
             />
-            {textTrademarkChecked === true && <TextSearchCard />}
+            {textTrademarkChecked === true && (
+                <TextSearchCard info={info} setInfo={setInfo} />
+            )}
 
             {/* ======================================== */}
             {/* Logo card */}
@@ -44,7 +47,9 @@ const TrademarkForm = ({ navigation }) => {
                 label="Logos or Design"
                 onChange={() => setDesignChecked(!designChecked)}
             />
-            {designChecked === true && <DesignCard />}
+            {designChecked === true && (
+                <DesignCard info={info} setInfo={setInfo} />
+            )}
 
             {/* ======================================== */}
             {/* detail selection card */}
@@ -54,7 +59,9 @@ const TrademarkForm = ({ navigation }) => {
                 label="Others "
                 onChange={() => setDetailChecked(!detailChecked)}
             />
-            {detailChecked === true && <DetailSelectCard />}
+            {detailChecked === true && (
+                <DetailSelectCard info={info} setInfo={setInfo} />
+            )}
 
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the

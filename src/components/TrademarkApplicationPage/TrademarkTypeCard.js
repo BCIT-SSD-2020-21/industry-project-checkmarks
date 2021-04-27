@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import { TextField, Card } from '@material-ui/core';
 
-const TrademarkTypeCard = () => {
+const TrademarkTypeCard = ({ info, setInfo }) => {
     const classes = useStyles();
-    const [trademark, setTrademark] = useState({
-        trademarkName: '',
-    });
+    // const [trademark, setTrademark] = useState({
+    //     trademarkName: '',
+    // });
 
     return (
         <Card className={classes.trademarkTypeCard}>
@@ -21,11 +21,11 @@ const TrademarkTypeCard = () => {
                     variant="outlined"
                     size="small"
                     type="text"
-                    value={trademark.trademarkName}
+                    value={info.trademarkName}
                     autoComplete="on"
                     onChange={(e) =>
-                        setTrademark({
-                            ...trademark,
+                        setInfo({
+                            ...info,
                             trademarkName: e.target.value,
                         })
                     }
