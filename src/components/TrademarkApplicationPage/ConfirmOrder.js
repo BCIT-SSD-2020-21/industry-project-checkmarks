@@ -136,10 +136,18 @@ export default function PaymentForm() {
                 <Button
                     type="submit"
                     variant="contained"
-                    onClick={handleSubmit}
-                    className={classes.completeButton}
+                    className={classes.backButton}
+                    // onClick={this.back}
                 >
-                    Confirm and go to payment
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    // onClick={this.clickContinue}
+                >
+                    Continue
                 </Button>
             </div>
         </Card>
@@ -189,21 +197,33 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
-        margin: '3%',
+        justifyContent: 'center',
+        margin: '4% 0',
     },
-    completeButton: {
+    continueButton: {
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        width: '50%',
+        marginLeft: '1%',
+        width: '20%',
         height: '30px',
-        fontSize: '8px',
-        margin: '3% auto',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
         borderRadius: '10px',
         border: '1px solid #df3a48',
-        [theme.breakpoints.up('sm')]: {
-            fontSize: '10px',
-            width: '40%',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
         },
     },
     alert: {

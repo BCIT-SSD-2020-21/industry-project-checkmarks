@@ -98,10 +98,18 @@ const CountryCard = () => {
                 <Button
                     type="submit"
                     variant="contained"
-                    onClick={handleSubmit}
-                    className={classes.nextButton}
+                    className={classes.backButton}
+                    // onClick={this.back}
                 >
-                    Next
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    // onClick={this.clickContinue}
+                >
+                    Continue
                 </Button>
             </div>
         </Card>
@@ -155,6 +163,37 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             fontSize: '10px',
             width: '40%',
+        },
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '4% 0',
+    },
+    continueButton: {
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
+        marginLeft: '1%',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: '1px solid #df3a48',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
         },
     },
     alert: {
