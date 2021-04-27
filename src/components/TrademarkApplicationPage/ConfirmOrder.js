@@ -4,15 +4,8 @@ import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 
-export default function PaymentForm() {
+export default function PaymentForm({ navigation }) {
     const classes = useStyles();
-    const history = useHistory();
-
-    //handle Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert('Successfully Confirm ');
-    };
 
     return (
         <Card className={classes.card}>
@@ -136,26 +129,28 @@ export default function PaymentForm() {
                 <Button
                     type="submit"
                     variant="contained"
-                    onClick={handleSubmit}
-                    className={classes.completeButton}
+                    className={classes.backButton}
+                    onClick={() => navigation.previous()}
                 >
-                    Confirm and go to payment
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    onClick={() => navigation.next()}
+                >
+                    Continue
                 </Button>
             </div>
         </Card>
     );
 }
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '5%',
-    },
     card: {
-        marginTop: '5%',
+        margin: '3%',
         width: '75%',
-        padding: '2%',
+        padding: '0 2% ',
     },
     title: {
         color: '#df3a48',
@@ -189,25 +184,36 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
-        margin: '3%',
+        justifyContent: 'center',
+        margin: '4% 0',
     },
-    completeButton: {
+    continueButton: {
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        width: '50%',
+        marginLeft: '1%',
+        width: '20%',
         height: '30px',
-        fontSize: '8px',
-        margin: '3% auto',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
         borderRadius: '10px',
         border: '1px solid #df3a48',
-        [theme.breakpoints.up('sm')]: {
-            fontSize: '10px',
-            width: '40%',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
         },
     },
     alert: {
-        width: '80%',
         margin: '3% auto',
         color: '#2a9df4',
         fontSize: '12px',

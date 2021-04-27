@@ -8,7 +8,7 @@ import TextSearchCard from './TrademarkTextCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const TrademarkForm = () => {
+const TrademarkForm = ({ navigation }) => {
     const [textTrademarkChecked, setTextTrademarkChecked] = useState(false);
     const classes = useStyles();
     return (
@@ -45,7 +45,12 @@ const TrademarkForm = () => {
                 client through the process
             </Alert>
 
-            <button className={classes.nextButton}>Next Step</button>
+            <button
+                className={classes.nextButton}
+                onClick={() => navigation.next()}
+            >
+                Next Step
+            </button>
         </Card>
     );
 };
@@ -54,7 +59,7 @@ export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
         width: '75%',
-        marginTop: '2%',
+        margin: '5%',
         display: 'flex',
         flexDirection: 'column',
     },

@@ -11,19 +11,8 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
-const CountryCard = () => {
+const CountryCard = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
-
-    const [checked, setChecked] = useState('');
-    const [country, setCountry] = useState('');
-    const [date, setDate] = useState('');
-    const [appNumber, setAppNumber] = useState('');
-
-    //handle Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert('Successfully Confirm ');
-    };
 
     return (
         <Card className={classes.countryCard}>
@@ -38,7 +27,13 @@ const CountryCard = () => {
                     aria-label="userType"
                     id="userType"
                     name="userType"
-                    onChange={(e) => setChecked(e.target.value)}
+                    value={info.filedInOtherCountry}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            filedInOtherCountry: e.target.value,
+                        })
+                    }
                 >
                     <FormControlLabel
                         value="Yes"
@@ -51,21 +46,27 @@ const CountryCard = () => {
                         label="No"
                     />
                 </RadioGroup>
-                {checked == 'Yes' && (
+                {info.filedInOtherCountry == 'Yes' && (
                     <div className={classes.form}>
                         <Typography className={classes.text}>
                             Please fill out information below (if known)
                         </Typography>
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             label="Country of filing"
                             variant="outlined"
                             size="small"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                            className={classes.input}
+                            value={info.countryOfFiling}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    countryOfFiling: e.target.value,
+                                })
+                            }
                         />
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             InputLabelProps={{
                                 shrink: true,
@@ -74,18 +75,27 @@ const CountryCard = () => {
                             variant="outlined"
                             size="small"
                             type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            className={classes.input}
+                            value={info.fillingDate}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    fillingDate: e.target.value,
+                                })
+                            }
                         />
                         <TextField
+                            className={classes.input}
                             id="outlined-basic"
                             label="Application file number"
                             variant="outlined"
                             size="small"
-                            value={appNumber}
-                            onChange={(e) => setAppNumber(e.target.value)}
-                            className={classes.input}
+                            value={info.fillingNumber}
+                            onChange={(e) =>
+                                setInfo({
+                                    ...info,
+                                    fillingNumber: e.target.value,
+                                })
+                            }
                         />
                     </div>
                 )}
@@ -98,10 +108,18 @@ const CountryCard = () => {
                 <Button
                     type="submit"
                     variant="contained"
-                    onClick={handleSubmit}
-                    className={classes.nextButton}
+                    className={classes.backButton}
+                    onClick={() => navigation.previous()}
                 >
-                    Next
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    onClick={() => navigation.next()}
+                >
+                    Continue
                 </Button>
             </div>
         </Card>
@@ -111,8 +129,8 @@ const CountryCard = () => {
 export default CountryCard;
 const useStyles = makeStyles((theme) => ({
     countryCard: {
-        padding: '2%',
-        marginTop: '5%',
+        padding: '0 2% ',
+        margin: '3%',
         width: '75%',
     },
     title: {
@@ -155,6 +173,37 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             fontSize: '10px',
             width: '40%',
+        },
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '4% 0',
+    },
+    continueButton: {
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
+        marginLeft: '1%',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        width: '20%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: '1px solid #df3a48',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
         },
     },
     alert: {
