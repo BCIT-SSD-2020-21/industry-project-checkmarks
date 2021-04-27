@@ -297,7 +297,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     alert: {
-        width: '80%',
         margin: '3% auto',
         color: '#2a9df4',
         fontSize: '12px',
