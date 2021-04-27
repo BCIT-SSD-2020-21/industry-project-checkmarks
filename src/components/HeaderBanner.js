@@ -39,6 +39,7 @@ const useStyles = makeStyles(() => ({
     },
     image: {
         paddingTop: '15%',
+        cursor: 'pointer',
         // padding: '0 20% 0 15%',
         // padding: '0 10%',
         width: '85%',
