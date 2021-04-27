@@ -178,7 +178,9 @@ export const searchBoxStyles = makeStyles(() => ({
     },
 
     results: {
-        height: (window.innerHeight * 2) / 3,
+        animation: '$shiftUp-results 1s',
+        transform: 'translateY(-20%)',
+        // height: (window.innerHeight * 2) / 3,
         width: '100%',
     },
     form: {
