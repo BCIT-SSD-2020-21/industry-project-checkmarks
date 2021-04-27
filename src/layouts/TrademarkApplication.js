@@ -53,7 +53,7 @@ const TrademarkApplication = () => {
                 <img src={Logo2} alt="Logo" />
             </div>
             <div className={classes.root}>
-                {/* <AskALawyer /> */}
+                <AskALawyer />
 
                 {(() => {
                     switch (step.id) {
