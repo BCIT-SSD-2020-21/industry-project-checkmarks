@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
-import TrademarkAppSearchBar from '../TrademarkAppSearchBar';
+import { FormControl, Input } from '@material-ui/core';
+import CreateIcon from '@material-ui/icons/Create';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const TextSearchCard = () => {
     const classes = useStyles();
@@ -11,7 +13,16 @@ const TextSearchCard = () => {
             <p style={{ color: 'red', fontSize: 15 }}>
                 Type out your trademark
             </p>
-            <TrademarkAppSearchBar />
+            <FormControl>
+                <Input
+                    type="text"
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <CreateIcon />
+                        </InputAdornment>
+                    }
+                />
+            </FormControl>
 
             <Alert severity="info" className={classes.alert}>
                 A Trademark cannot be 'primarily merely a surname'
@@ -23,7 +34,7 @@ const TextSearchCard = () => {
 export default TextSearchCard;
 const useStyles = makeStyles((theme) => ({
     searchCard: {
-        width: '75%',
+        width: '90%',
         margin: 'auto',
         marginBottom: '3%',
     },

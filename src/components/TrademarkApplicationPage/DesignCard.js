@@ -8,7 +8,6 @@ const LogoForm = () => {
     const classes = useStyles();
     return (
         <Card className={classes.logoCard}>
-            <FormControlLabel control={<Checkbox />} label="Design or Logo" />
             <div>
                 <p>select a file to upload</p>
                 <button>browse</button>

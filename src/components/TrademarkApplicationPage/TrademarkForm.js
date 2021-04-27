@@ -96,7 +96,6 @@ const useStyles = makeStyles((theme) => ({
         height: '30px',
         fontWeight: 'bold',
         margin: '3%',
-
         borderRadius: '30px',
         marginBottom: '5%',
         margin: 'auto',
