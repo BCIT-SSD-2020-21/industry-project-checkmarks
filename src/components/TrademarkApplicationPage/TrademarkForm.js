@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation }) => {
     const [textTrademarkChecked, setTextTrademarkChecked] = useState(false);
     const [designChecked, setDesignChecked] = useState(false);
+    const [detailChecked, setDetailChecked] = useState(false);
 
     const classes = useStyles();
     return (
@@ -36,17 +37,20 @@ const TrademarkForm = ({ navigation }) => {
             {/* ======================================== */}
             <FormControlLabel
                 control={<Checkbox />}
-                label="Others "
+                label="Logos or Design"
                 onChange={() => setDesignChecked(!designChecked)}
             />
-
             {designChecked === true && <DesignCard />}
 
             {/* ======================================== */}
             {/* detail selection card */}
             {/* ======================================== */}
-
-            <DetailSelectCard />
+            <FormControlLabel
+                control={<Checkbox />}
+                label="Others "
+                onChange={() => setDetailChecked(!detailChecked)}
+            />
+            {detailChecked === true && <DetailSelectCard />}
 
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the

@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import Alert from '@material-ui/lab/Alert';
 import TrademarkAppSearchBar from '../TrademarkAppSearchBar';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const TextSearchCard = () => {
     const classes = useStyles();
