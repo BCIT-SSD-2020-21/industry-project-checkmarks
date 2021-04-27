@@ -71,8 +71,9 @@ export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
         width: '75%',
-        margin: '5%',
+        margin: '3%',
         display: 'flex',
+        padding: '0 2% ',
         flexDirection: 'column',
     },
     title: {
@@ -91,9 +92,11 @@ const useStyles = makeStyles((theme) => ({
     nextButton: {
         backgroundColor: '#df3a48',
         color: '#FFF',
-        width: '40%',
-        height: '50px',
+        width: '20%',
+        height: '30px',
+        fontWeight: 'bold',
         margin: '3%',
+
         borderRadius: '30px',
         marginBottom: '5%',
         margin: 'auto',
