@@ -64,11 +64,11 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 
 ### Figma Prototypes [(View on Figma)]("https://www.figma.com/file/7NR2yH2BINwQlmqxNspD1f/Checkmarks_Prototype?node-id=0%3A1")
 
-<img src="https://i.imgur.com/OsEGEQ9.jpg" width="500px"/>
+<img src="https://i.imgur.com/N11dFZC.jpg" width="500px"/>
 
 ### Use Case Diagram [(View on Figma)](https://www.figma.com/file/RH0Ymf55Rw6M7UCZY7ly33/Checkmarks_UseCaseDiagram?node-id=0%3A1)
 
-<img src="https://i.imgur.com/kK7fKRH.jpg" width="500px"/>
+<img src="https://i.imgur.com/OsEGEQ9.jpg" width="500px"/>
 
 ### Entity Relationship Diagram [(View on Figma)](https://www.figma.com/file/TtxwukepFAnA06lk5HaXL4/Untitled?node-id=0%3A1)
 
