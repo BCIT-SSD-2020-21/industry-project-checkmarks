@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { checkmarksTheme } from '../../styles/Themes';
+import {
+    Fade,
+    IconButton,
+    Paper,
+    TableCell,
+    Typography,
+} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, TableCell, Typography } from '@material-ui/core';
-import Fade from '@material-ui/core/Fade';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
 const styles = (theme) => ({
@@ -13,13 +20,15 @@ const styles = (theme) => ({
         alignItems: 'center',
         boxSizing: 'border-box',
         backgroundColor: checkmarksTheme.bgDrawer,
+        // padding: '5%',
     },
     table: {
         // temporary right-to-left patch, waiting for
         // https://github.com/bvaughn/react-virtualized/issues/454
         backgroundColor: checkmarksTheme.bgTransparent,
+        // padding: '2%',
         // opacity: 0,
-
+        // borderRadius: '25px',
         '& .ReactVirtualized__Table__headerRow': {
             flip: false,
             paddingRight:
@@ -79,6 +88,17 @@ class MuiVirtualizedTable extends React.PureComponent {
                             : 'left'
                     }
                 >
+                    {/* <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                    >
+                        {open ? (
+                            <KeyboardArrowUpIcon />
+                        ) : (
+                            <KeyboardArrowDownIcon />
+                        )}
+                    </IconButton> */}
                     {cellData}
                 </TableCell>
             </Fade>
@@ -216,10 +236,12 @@ export default function SearchResults({ data }) {
 
     // console.log("rows (default): ", rows)
 
+    // const [detailedView, setDetailedView] = useState(false);
+
     return (
         <Paper
             style={{
-                backgroundColor: checkmarksTheme.bgPrimary,
+                backgroundColor: checkmarksTheme.bgTransparent,
                 height: (window.innerHeight * 2) / 5,
                 width: '100%',
             }}
@@ -230,18 +252,18 @@ export default function SearchResults({ data }) {
                 rowGetter={({ index }) => data[index]} // row or data
                 columns={[
                     {
-                        width: (window.innerHeight * 1) / 2,
+                        width: (window.innerWidth * 1) / 2,
                         label: 'Title',
                         dataKey: 'title',
                     },
                     {
-                        width: (window.innerHeight * 1) / 4,
+                        width: (window.innerWidth * 1) / 4,
                         label: 'Status',
                         dataKey: 'statusDescEn',
                         // numeric: true,
                     },
                     {
-                        width: (window.innerHeight * 1) / 4,
+                        width: (window.innerWidth * 1) / 4,
                         label: 'File Date (yyyy-mm-dd)',
                         dataKey: 'fileDateFormatted',
                         // numeric: true,
