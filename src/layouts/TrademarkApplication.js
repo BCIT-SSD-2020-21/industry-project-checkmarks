@@ -48,68 +48,64 @@ const TrademarkApplication = () => {
     });
 
     return (
-        <div className={classes.root}>
+        <>
             <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div>
-            <AskALawyer />
-            <div className={classes.title}>
-                <span className={classes.text}>Trademark Application</span>
+            <div className={classes.root}>
+                {/* <AskALawyer /> */}
+                <div className={classes.title}>
+                    <span className={classes.text}>Trademark Application</span>
+                </div>
+
+                {(() => {
+                    switch (step.id) {
+                        case 'Trademark-Type':
+                            return (
+                                <TrademarkForm
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'Goods-and-Services':
+                            return (
+                                <GoodsAndServices
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'International-Information':
+                            return (
+                                <CountryCard
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'Confirmation':
+                            return (
+                                <ConfirmOrder
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'Payment':
+                            return (
+                                <PaymentForm
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'Success':
+                            return <Success navigation={navigation} />;
+                    }
+                })()}
             </div>
-
-            {(() => {
-                switch (step.id) {
-                    case 'Trademark-Type':
-                        return (
-                            <TrademarkForm
-                                navigation={navigation}
-                                info={info}
-                                setInfo={setInfo}
-                            />
-                        );
-                    case 'Goods-and-Services':
-                        return (
-                            <GoodsAndServices
-                                navigation={navigation}
-                                info={info}
-                                setInfo={setInfo}
-                            />
-                        );
-                    case 'International-Information':
-                        return (
-                            <CountryCard
-                                navigation={navigation}
-                                info={info}
-                                setInfo={setInfo}
-                            />
-                        );
-                    case 'Confirmation':
-                        return (
-                            <ConfirmOrder
-                                navigation={navigation}
-                                info={info}
-                                setInfo={setInfo}
-                            />
-                        );
-                    case 'Payment':
-                        return (
-                            <PaymentForm
-                                navigation={navigation}
-                                info={info}
-                                setInfo={setInfo}
-                            />
-                        );
-                    case 'Success':
-                        return <Success navigation={navigation} />;
-                }
-            })()}
-
-            {/* <TrademarkForm />
-            <GoodsAndServices />
-            <CountryCard />
-            <ConfirmOrder />
-            <PaymentForm /> */}
-        </div>
+        </>
     );
 };
 
