@@ -212,7 +212,7 @@ export default function PaymentForm({ navigation }) {
                     variant="contained"
                     onClick={() => navigation.next()}
                 >
-                    Continue
+                    Confirm Payment
                 </Button>
             </div>
         </Card>
