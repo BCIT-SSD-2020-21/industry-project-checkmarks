@@ -18,7 +18,7 @@ import {
     TextField,
 } from '@material-ui/core';
 
-export default function GoodsAndServices() {
+export default function GoodsAndServices({ navigation }) {
     const classes = useStyles();
 
     const [terms, setTerms] = useState([]);
@@ -426,7 +426,7 @@ export default function GoodsAndServices() {
                         type="submit"
                         variant="contained"
                         className={classes.backButton}
-                        // onClick={this.back}
+                        onClick={() => navigation.previous()}
                     >
                         Back
                     </Button>
@@ -434,7 +434,7 @@ export default function GoodsAndServices() {
                         className={classes.continueButton}
                         type="submit"
                         variant="contained"
-                        // onClick={this.clickContinue}
+                        onClick={() => navigation.next()}
                     >
                         Continue
                     </Button>
@@ -480,8 +480,8 @@ export default function GoodsAndServices() {
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        padding: '2% ',
-        marginTop: '5%',
+        padding: '0 2% ',
+        margin: '3%',
         width: '75%',
         [theme.breakpoints.down('xs')]: {
             padding: '8% ',
