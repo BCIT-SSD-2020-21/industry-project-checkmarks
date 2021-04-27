@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     trademarkTypeCard: {
         width: '90%',
         margin: 'auto',
+        padding: '0 5% 5% 5%',
+        [theme.breakpoints.up('md')]: {
+            width: '60%',
+            padding: '0 2% ',
+        },
     },
 
     alert: {

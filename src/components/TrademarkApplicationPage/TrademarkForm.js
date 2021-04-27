@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, Typography } from '@material-ui/core';
+import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from './DesignCard';
 import DetailSelectCard from './DetailSelectCard';
@@ -61,12 +61,12 @@ const TrademarkForm = ({ navigation }) => {
                 client through the process
             </Alert>
 
-            <button
+            <Button
                 className={classes.nextButton}
                 onClick={() => navigation.next()}
             >
                 Next Step
-            </button>
+            </Button>
         </Card>
     );
 };
@@ -76,11 +76,12 @@ const useStyles = makeStyles((theme) => ({
     outerCard: {
         margin: '3%',
         display: 'flex',
-        padding: '0 2% ',
+        padding: '0 5% 5% 5%',
         flexDirection: 'column',
         width: '70%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
+            padding: '0 2% ',
         },
         border: '1px solid #696969',
     },
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 550,
     },
     alert: {
-        width: '80%',
+        width: '100%',
         margin: '2% auto',
         color: '#2a9df4',
         fontSize: '12px',
@@ -103,13 +104,13 @@ const useStyles = makeStyles((theme) => ({
         width: '20%',
         height: '30px',
         fontWeight: 'bold',
-        margin: '3%',
         fontSize: '10px',
         borderRadius: '10px',
-        margin: 'auto',
-        marginBottom: '3%',
-        [theme.breakpoints.down('xs')]: {
+        margin: ' 2% auto 4% auto',
+        [theme.breakpoints.down('sm')]: {
             fontSize: '8px',
+            margin: ' 4% auto 0 auto',
+            width: '30%',
         },
     },
     trademarkMessage: {

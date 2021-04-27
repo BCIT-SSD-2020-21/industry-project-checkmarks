@@ -129,20 +129,18 @@ const CountryCard = ({ navigation, info, setInfo }) => {
 export default CountryCard;
 const useStyles = makeStyles((theme) => ({
     countryCard: {
-        padding: '0 2% ',
         margin: '3%',
         width: '70%',
+        border: '1px solid #696969',
+        padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
+            padding: '0 2% ',
         },
-        border: '1px solid #696969',
     },
     title: {
         color: '#df3a48',
         marginBottom: '5%',
-    },
-    formContainer: {
-        margin: '3%',
     },
     form: {
         display: 'flex',
@@ -158,61 +156,48 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '2%',
     },
     input: {
-        marginTop: '3%',
-    },
-    buttonContainer: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    nextButton: {
-        color: '#FFF',
-        backgroundColor: '#df3a48',
-        fontWeight: 'bold',
-        width: '50%',
-        height: '30px',
-        fontSize: '8px',
-        margin: '3% auto',
-        borderRadius: '10px',
-        border: '1px solid #df3a48',
-        [theme.breakpoints.up('sm')]: {
-            fontSize: '10px',
-            width: '40%',
+        marginTop: '5%',
+        [theme.breakpoints.up('md')]: {
+            marginTop: '3%',
         },
     },
     buttonContainer: {
         display: 'flex',
         justifyContent: 'center',
-        margin: '4% 0',
     },
     continueButton: {
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        marginLeft: '1%',
-        width: '20%',
+        margin: '10% 0 2% 3%',
+        width: '30%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '8px',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
         },
     },
     backButton: {
         color: '#df3a48',
         backgroundColor: '#FFF',
         fontWeight: 'bold',
-        width: '20%',
+        margin: '10% 0 2% 0%',
+        width: '30%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
         border: '1px solid #df3a48',
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '8px',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
         },
     },
     alert: {
-        margin: '3% auto',
+        marginTop: '8%',
         color: '#2a9df4',
         fontSize: '12px',
+        [theme.breakpoints.up('md')]: {
+            marginTop: '3%',
+        },
     },
 }));
