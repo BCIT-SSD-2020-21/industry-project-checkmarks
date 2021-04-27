@@ -137,6 +137,9 @@ const useStyles = makeStyles((theme) => ({
             width: '60%',
             padding: '0 2% ',
         },
+        [theme.breakpoints.between('sm', 'md')]: {
+            padding: '0 5% 4% 5%',
+        },
     },
     title: {
         color: '#df3a48',
@@ -169,35 +172,42 @@ const useStyles = makeStyles((theme) => ({
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        margin: '10% 0 2% 3%',
+        marginTop: '10%',
+        marginLeft: '3%',
         width: '30%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
         [theme.breakpoints.up('md')]: {
-            margin: '5% 3% 5% 0',
+            margin: '5% 3% 2% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
         },
     },
     backButton: {
         color: '#df3a48',
         backgroundColor: '#FFF',
         fontWeight: 'bold',
-        margin: '10% 0 2% 0%',
+        marginTop: '10%',
         width: '30%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
         border: '1px solid #df3a48',
         [theme.breakpoints.up('md')]: {
-            margin: '5% 3% 5% 0',
+            margin: '5% 3% 2% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
         },
     },
     alert: {
-        marginTop: '8%',
         color: '#2a9df4',
+        marginTop: '10%',
         fontSize: '12px',
-        [theme.breakpoints.up('md')]: {
-            marginTop: '3%',
+        [theme.breakpoints.up('sm')]: {
+            marginTop: '5%',
         },
     },
 }));

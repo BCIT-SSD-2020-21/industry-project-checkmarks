@@ -488,6 +488,9 @@ const useStyles = makeStyles((theme) => ({
             width: '60%',
             padding: '0 2% ',
         },
+        [theme.breakpoints.between('sm', 'md')]: {
+            padding: '0 5% 2% 5%',
+        },
     },
     formContainer: {
         margin: '3%',
@@ -531,6 +534,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             margin: '5% 3% 2% 0',
         },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
+        },
     },
     backButton: {
         color: '#df3a48',
@@ -545,10 +551,16 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             margin: '5% 3% 2% 0',
         },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
+        },
     },
     alert: {
         color: '#2a9df4',
-        marginTop: '5%',
+        marginTop: '10%',
         fontSize: '12px',
+        [theme.breakpoints.up('sm')]: {
+            marginTop: '5%',
+        },
     },
 }));
