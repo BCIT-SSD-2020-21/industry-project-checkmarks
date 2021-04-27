@@ -15,9 +15,7 @@ import LoopIcon from '@material-ui/icons/Loop';
 import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './SearchResults';
-
-const checkmarksWebAPIbaseUrl =
-    'https://checkmarkswebapi.azurewebsites.net/api/trademark/';
+import { searchTrademarks } from '../../services/checkmarks';
 
 export default function TrademarkSearch() {
     const classes = searchBoxStyles();
@@ -37,30 +35,11 @@ export default function TrademarkSearch() {
     useEffect(() => {
         if (searchTerm) {
             (async () => {
-                await fetch(checkmarksWebAPIbaseUrl + searchTerm)
-                    .then((response) => response.json())
-                    .then((results) => {
-                        // Formatting
-                        const formattedResultsData = [];
-                        results.data.forEach((item) => {
-                            // FORMAT DATE HERE
-                            let formattedItem = {
-                                ...item,
-                                fileDateFormatted: item.fileDate.substring(
-                                    0,
-                                    10
-                                ),
-                            };
-                            formattedResultsData.push(formattedItem);
-                        });
-                        setSearchResults(formattedResultsData);
-                        // setSearchResults(results.data)
-                    })
-                    .catch((error) => console.log('Error: ', error));
+                const result = await searchTrademarks(searchTerm);
+                setSearchResults(result);
             })();
         }
     }, [searchTerm]);
-    // console.log('searchResults: ', searchResults);
 
     // Loading Indicator
     const { current: instance } = useRef({});
@@ -69,7 +48,7 @@ export default function TrademarkSearch() {
         if (instance.delayTimer) {
             clearTimeout(instance.delayTimer);
         }
-        if (searchTerm !== '' && searchResults.length === 0) {
+        if (searchTerm !== '' && searchResults?.length === 0) {
             setLoading(true);
             instance.delayTimer = setTimeout(() => {
                 setLoading(false); // after 3 seconds, stop Loading Indicator
@@ -137,7 +116,7 @@ export default function TrademarkSearch() {
                             classes.searchResultsShifted
                         }`}
                     >
-                        {searchResults.length > 2 ? (
+                        {searchResults?.length > 0 ? (
                             // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
 
                             <SearchResults data={searchResults} />
@@ -199,7 +178,9 @@ export const searchBoxStyles = makeStyles(() => ({
     },
 
     results: {
-        height: (window.innerHeight * 2) / 3,
+        animation: '$shiftUp-results 1s',
+        transform: 'translateY(-20%)',
+        // height: (window.innerHeight * 2) / 3,
         width: '100%',
     },
     form: {

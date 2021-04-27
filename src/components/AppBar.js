@@ -23,7 +23,8 @@ import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import PlayCircleFilledTwoToneIcon from '@material-ui/icons/PlayCircleFilledTwoTone';
+// import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import WbSunnyTwoToneIcon from '@material-ui/icons/WbSunnyTwoTone';
 import NightsStayTwoToneIcon from '@material-ui/icons/NightsStayTwoTone';
@@ -69,6 +70,11 @@ export const navbarStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
+    },
+    appBarTitle: {
+        color: checkmarksTheme.inputValue,
+        fontSize: '24px',
+        fontWeight: 'bold',
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -139,19 +145,7 @@ export const navbarStyles = makeStyles((theme) => ({
         // ['@media (min-width:768px)']: { justifyContent: 'flex-end' },
         ['@media (min-width:1280px)']: { display: 'flex' },
     },
-    buttonLogin: {
-        backgroundColor: checkmarksTheme.buttonSecondary,
-        '&:hover': {
-            background: checkmarksTheme.hoverLight,
-        },
-        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-        borderRadius: '5px',
-        color: checkmarksTheme.buttonTextSecondary,
-        padding: '5px 0',
-        width: '40%',
-        maxWidth: '100px',
-    },
-    buttonRegister: {
+    buttonStart: {
         backgroundColor: checkmarksTheme.buttonPrimary,
         '&:hover': {
             background: checkmarksTheme.hoverSoft,
@@ -159,11 +153,36 @@ export const navbarStyles = makeStyles((theme) => ({
         border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
         borderRadius: '5px',
         color: checkmarksTheme.buttonTextPrimary,
-        marginRight: '10px',
         padding: '5px 0',
-        width: '55%',
-        maxWidth: '130px',
+        minWidth: '250px',
+        width: '40%',
+        maxWidth: '300px',
     },
+    // buttonLogin: {
+    //     backgroundColor: checkmarksTheme.buttonSecondary,
+    //     '&:hover': {
+    //         background: checkmarksTheme.hoverLight,
+    //     },
+    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+    //     borderRadius: '5px',
+    //     color: checkmarksTheme.buttonTextSecondary,
+    //     padding: '5px 0',
+    //     width: '40%',
+    //     maxWidth: '100px',
+    // },
+    // buttonRegister: {
+    //     backgroundColor: checkmarksTheme.buttonPrimary,
+    //     '&:hover': {
+    //         background: checkmarksTheme.hoverSoft,
+    //     },
+    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+    //     borderRadius: '5px',
+    //     color: checkmarksTheme.buttonTextPrimary,
+    //     marginRight: '10px',
+    //     padding: '5px 0',
+    //     width: '55%',
+    //     maxWidth: '130px',
+    // },
 }));
 
 export default function MenuAppBar({
@@ -226,6 +245,9 @@ export default function MenuAppBar({
                     >
                         <MenuIcon />
                     </IconButton>
+                    <Typography className={classes.appBarTitle}>
+                        Checkmarks
+                    </Typography>
                     {/* <Link className={classes.appBarNavLink} to="/feed">
                         <AskALawyer />
                     </Link> */}
@@ -234,7 +256,18 @@ export default function MenuAppBar({
                     </Link> */}
                     {!authenticated && !loggingIn && (
                         <Box className={classes.buttons}>
-                            <Button
+                            {/* <Button
+                                className={classes.buttonStart}
+                                onClick={() => {
+                                    setLoggingIn(false);
+                                    setSearching(false);
+                                    history.push('/register');
+                                }}
+                                boxShadow={2}
+                            >
+                                Start Trademark Application
+                            </Button> */}
+                            {/* <Button
                                 className={classes.buttonRegister}
                                 onClick={() => {
                                     setLoggingIn(false);
@@ -254,7 +287,7 @@ export default function MenuAppBar({
                                 boxShadow={2}
                             >
                                 Login
-                            </Button>
+                            </Button> */}
                         </Box>
                     )}
 
@@ -308,6 +341,19 @@ export default function MenuAppBar({
                                 <>
                                     <MenuItem
                                         className={classes.menuItem}
+                                        onClick={() => {
+                                            setLoggingIn(false);
+                                            setSearching(false);
+                                            history.push('/register');
+                                        }}
+                                    >
+                                        <PlayCircleFilledTwoToneIcon
+                                            className={classes.menuItemIcon}
+                                        />
+                                        Start Trademark Application
+                                    </MenuItem>
+                                    {/* <MenuItem
+                                        className={classes.menuItem}
                                         // onClick={() => toUserProfile(dataUser.id)}
                                     >
                                         <VpnKeyIcon
@@ -323,7 +369,7 @@ export default function MenuAppBar({
                                             className={classes.menuItemIcon}
                                         />
                                         Register
-                                    </MenuItem>
+                                    </MenuItem> */}
                                 </>
                             )}
 

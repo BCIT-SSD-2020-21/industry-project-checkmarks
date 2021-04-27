@@ -5,6 +5,7 @@ import { checkmarksTheme } from '../styles/Themes';
 import { Box, IconButton, Button } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
@@ -56,7 +57,7 @@ export default function Landing() {
                                 </IconButton>
                             )}
                         </Box>
-                        {loggingIn ? (
+                        {/* {loggingIn ? (
                             <Login />
                         ) : (
                             <Box className={classes.buttons}>
@@ -82,7 +83,19 @@ export default function Landing() {
                                     Login
                                 </Button>
                             </Box>
-                        )}
+                        )} */}
+                        <Button
+                            className={classes.buttonStart}
+                            onClick={() => {
+                                setSearching(false);
+                                setLoggingIn(false);
+                                history.push('/register');
+                            }}
+                            boxShadow={2}
+                        >
+                            <PlayArrowTwoToneIcon />
+                            Start Trademark Application
+                        </Button>
                     </Box>
                 </Box>
             </Fade>
@@ -115,6 +128,7 @@ const useStyles = makeStyles(() => ({
     },
     actions: {
         // border: '1px solid black',
+        // animation: '$shiftUp-actions 1s',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -130,7 +144,7 @@ const useStyles = makeStyles(() => ({
         width: '100%',
     },
     buttons: {
-        animation: 'shiftUp-buttons 1s',
+        // animation: 'shiftUp-buttons 1s',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -140,22 +154,7 @@ const useStyles = makeStyles(() => ({
         ['@media (min-width:768px)']: { justifyContent: 'flex-end' },
         ['@media (min-width:1280px)']: { display: 'none' },
     },
-    buttonLogin: {
-        backgroundColor: checkmarksTheme.buttonSecondary,
-        '&:hover': {
-            color: checkmarksTheme.buttonPrimary,
-            background: checkmarksTheme.hoverLight,
-        },
-        border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-        borderRadius: '25px',
-        color: checkmarksTheme.buttonTextSecondary,
-        fontWeight: 'bold',
-        opacity: 0.7,
-        padding: '5px 0',
-        width: '40%',
-        maxWidth: '120px',
-    },
-    buttonRegister: {
+    buttonStart: {
         backgroundColor: checkmarksTheme.buttonPrimary,
         '&:hover': {
             color: checkmarksTheme.buttonPrimary,
@@ -165,12 +164,44 @@ const useStyles = makeStyles(() => ({
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
         fontWeight: 'bold',
-        marginRight: '35px',
+        margin: 'auto',
         opacity: 0.7,
-        padding: '5px 0',
-        width: '55%',
-        maxWidth: '200px',
+        padding: '7px 0',
+        minWidth: '300px',
+        width: '50%',
+        maxWidth: '320px',
     },
+    // buttonLogin: {
+    //     backgroundColor: checkmarksTheme.buttonSecondary,
+    //     '&:hover': {
+    //         color: checkmarksTheme.buttonPrimary,
+    //         background: checkmarksTheme.hoverLight,
+    //     },
+    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+    //     borderRadius: '25px',
+    //     color: checkmarksTheme.buttonTextSecondary,
+    //     fontWeight: 'bold',
+    //     opacity: 0.7,
+    //     padding: '5px 0',
+    //     width: '40%',
+    //     maxWidth: '120px',
+    // },
+    // buttonRegister: {
+    //     backgroundColor: checkmarksTheme.buttonPrimary,
+    //     '&:hover': {
+    //         color: checkmarksTheme.buttonPrimary,
+    //         background: checkmarksTheme.hoverSoft,
+    //     },
+    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
+    //     borderRadius: '25px',
+    //     color: checkmarksTheme.buttonTextPrimary,
+    //     fontWeight: 'bold',
+    //     marginRight: '35px',
+    //     opacity: 0.7,
+    //     padding: '5px 0',
+    //     width: '55%',
+    //     maxWidth: '200px',
+    // },
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,
         '&:hover': {
@@ -184,5 +215,9 @@ const useStyles = makeStyles(() => ({
     '@keyframes shiftUp-buttons': {
         from: { transform: 'translateY(20%)' },
         to: { transform: 'translateY(0px)' },
+    },
+    '@keyframes shiftUp-actions': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-20%)' },
     },
 }));
