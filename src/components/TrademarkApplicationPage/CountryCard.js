@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
-const CountryCard = () => {
+const CountryCard = ({ navigation }) => {
     const classes = useStyles();
 
     const [checked, setChecked] = useState('');
@@ -20,10 +20,10 @@ const CountryCard = () => {
     const [appNumber, setAppNumber] = useState('');
 
     //handle Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert('Successfully Confirm ');
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     alert('Successfully Confirm ');
+    // };
 
     return (
         <Card className={classes.countryCard}>
@@ -99,7 +99,7 @@ const CountryCard = () => {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    // onClick={this.back}
+                    onClick={() => navigation.previous()}
                 >
                     Back
                 </Button>
@@ -107,7 +107,7 @@ const CountryCard = () => {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    // onClick={this.clickContinue}
+                    onClick={() => navigation.next()}
                 >
                     Continue
                 </Button>

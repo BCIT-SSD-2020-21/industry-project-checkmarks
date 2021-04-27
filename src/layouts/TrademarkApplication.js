@@ -22,8 +22,10 @@ const TrademarkApplication = () => {
 
     const { step, navigation } = useStep({
         steps,
+        initialStep: 0,
     });
 
+    console.log(step);
     return (
         <div className={classes.root}>
             <div className={classes.logo}>
@@ -34,11 +36,26 @@ const TrademarkApplication = () => {
                 <span className={classes.text}>Trademark Application</span>
             </div>
 
-            <TrademarkForm />
+            {(() => {
+                switch (step.id) {
+                    case 'Trademark-Type':
+                        return <TrademarkForm navigation={navigation} />;
+                    case 'Goods-and-Services':
+                        return <GoodsAndServices navigation={navigation} />;
+                    case 'International-Information':
+                        return <CountryCard navigation={navigation} />;
+                    case 'Confirmation':
+                        return <ConfirmOrder navigation={navigation} />;
+                    case 'Payment':
+                        return <PaymentForm navigation={navigation} />;
+                }
+            })()}
+
+            {/* <TrademarkForm />
             <GoodsAndServices />
             <CountryCard />
             <ConfirmOrder />
-            <PaymentForm />
+            <PaymentForm /> */}
         </div>
     );
 };

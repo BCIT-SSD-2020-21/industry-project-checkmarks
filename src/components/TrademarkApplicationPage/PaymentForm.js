@@ -10,7 +10,7 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 
-export default function PaymentForm() {
+export default function PaymentForm({ navigation }) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -163,7 +163,7 @@ export default function PaymentForm() {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    // onClick={this.back}
+                    onClick={() => navigation.previous()}
                 >
                     Back
                 </Button>
@@ -171,7 +171,7 @@ export default function PaymentForm() {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    // onClick={this.clickContinue}
+                    onClick={() => navigation.next()}
                 >
                     Continue
                 </Button>
