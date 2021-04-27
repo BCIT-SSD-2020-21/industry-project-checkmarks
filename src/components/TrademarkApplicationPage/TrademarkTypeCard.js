@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
-import { FormControl, TextField, Card } from '@material-ui/core';
+import { TextField, Card } from '@material-ui/core';
 
 const TrademarkTypeCard = () => {
     const classes = useStyles();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import { Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from './DesignCard';
 import DetailSelectCard from './DetailSelectCard';
@@ -18,9 +18,13 @@ const TrademarkForm = ({ navigation }) => {
         <Card className={classes.outerCard}>
             <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
-                <p style={{ color: 'red', fontSize: 15 }}>
-                    Select all that apply
-                </p>
+                <Typography className={classes.trademarkMessage}>
+                    Please{' '}
+                    <span style={{ color: '#df3a48' }}>
+                        <strong>select all </strong>{' '}
+                    </span>
+                    that apply, and provide additional information as you can:
+                </Typography>
             </div>
             {/* ======================================== */}
             {/* Text Search Form */}
@@ -96,11 +100,16 @@ const useStyles = makeStyles((theme) => ({
         height: '30px',
         fontWeight: 'bold',
         margin: '3%',
-        borderRadius: '30px',
-        marginBottom: '5%',
+        fontSize: '10px',
+        borderRadius: '10px',
         margin: 'auto',
-        [theme.breakpoints.up('sm')]: {
-            width: '20%',
+        marginBottom: '3%',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '8px',
         },
+    },
+    trademarkMessage: {
+        marginBottom: '3%',
+        fontSize: 17,
     },
 }));

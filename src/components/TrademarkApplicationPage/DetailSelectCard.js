@@ -9,9 +9,9 @@ const DetailSelectCard = () => {
     const classes = useStyles();
     return (
         <Card className={classes.detailsCard}>
-            <p style={{ color: 'red' }}>Select all that Apply </p>
+            <p style={{ color: 'red' }}>Select all that apply </p>
             <p style={{ color: 'red', fontSize: 12 }}>
-                For below selections, <strong>contact with lawyer</strong> is
+                For below selections, <strong>Contact with a lawyer</strong> is
                 required to process the application.
             </p>
 
@@ -60,7 +60,7 @@ const DetailSelectCard = () => {
 export default DetailSelectCard;
 const useStyles = makeStyles((theme) => ({
     detailsCard: {
-        width: '75%',
+        width: '90%',
         margin: 'auto',
         marginTop: '3%',
     },
