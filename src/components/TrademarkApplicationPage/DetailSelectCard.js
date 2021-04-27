@@ -9,7 +9,6 @@ const DetailSelectCard = () => {
     const classes = useStyles();
     return (
         <Card className={classes.detailsCard}>
-            <FormControlLabel control={<Checkbox />} label="Others " />
             <p style={{ color: 'red' }}>Select all that Apply </p>
             <p style={{ color: 'red', fontSize: 12 }}>
                 For below selections, <strong>contact with lawyer</strong> is
