@@ -482,9 +482,6 @@ const useStyles = makeStyles((theme) => ({
     card: {
         padding: '0 2% ',
         margin: '3%',
-        [theme.breakpoints.down('xs')]: {
-            padding: '8% ',
-        },
         width: '70%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
