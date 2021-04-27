@@ -147,14 +147,8 @@ export default function PaymentForm({ navigation }) {
     );
 }
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '5%',
-    },
     card: {
-        marginTop: '5%',
+        margin: '3%',
         width: '75%',
         padding: '2%',
     },

@@ -54,9 +54,6 @@ const TrademarkApplication = () => {
             </div>
             <div className={classes.root}>
                 {/* <AskALawyer /> */}
-                <div className={classes.title}>
-                    <span className={classes.text}>Trademark Application</span>
-                </div>
 
                 {(() => {
                     switch (step.id) {
@@ -117,18 +114,16 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '5%',
     },
     title: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '5%',
+        marginTop: '2%',
     },
 
     text: {
         fontSize: 30,
-        color: 'red',
         fontWeight: 500,
     },
 }));

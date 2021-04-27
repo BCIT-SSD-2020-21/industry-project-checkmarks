@@ -52,7 +52,7 @@ export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
         width: '75%',
-        marginTop: '2%',
+        margin: '5%',
         display: 'flex',
         flexDirection: 'column',
     },

@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        margin: '3%',
     },
     button: {
         color: '#FFF',

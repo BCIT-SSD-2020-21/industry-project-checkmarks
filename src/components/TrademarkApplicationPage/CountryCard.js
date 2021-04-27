@@ -130,7 +130,7 @@ export default CountryCard;
 const useStyles = makeStyles((theme) => ({
     countryCard: {
         padding: '2%',
-        marginTop: '5%',
+        margin: '3%',
         width: '75%',
     },
     title: {
