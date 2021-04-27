@@ -10,10 +10,10 @@ function Copyright() {
     return (
         <React.Fragment>
             {'© '}
-            <Link color="inherit" href="https://material-ui.com/">
+            {new Date().getFullYear()}
+            <Link color="inherit" href="https://checkmarks.ca/">
                 Checkmarks
             </Link>{' '}
-            {new Date().getFullYear()}
         </React.Fragment>
     );
 }
@@ -75,14 +75,14 @@ export default function Footer() {
                             className={classes.iconsWrapper}
                             spacing={2}
                             >
-                            <Grid item className={classes.icons}>
+                            {/* <Grid item className={classes.icons}>
                                 <a href="checkmarks.ca/" className={classes.icon}>
-                                <img src="../../images/checkmark-logo.png" alt="checkmark-logo" />
+                                <img src="" alt="checkmark-logo" />
                                 </a>
                                 <a href="https://twitter.com/" className={classes.icon}>
                                 <img src="../../images/twitter.png" alt="twitter" />
                                 </a>
-                            </Grid>
+                            </Grid> */}
                             <Grid item>
                                 <Copyright />
                             </Grid>
