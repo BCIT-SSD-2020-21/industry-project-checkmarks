@@ -7,9 +7,23 @@ import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkForm';
 import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
+import { useStep } from 'react-hooks-helper';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
+
+    const steps = [
+        { id: 'Trademark-Type' },
+        { id: 'Goods-and-Services' },
+        { id: 'International-Information' },
+        { id: 'Confirmation' },
+        { id: 'Payment' },
+    ];
+
+    const { step, navigation } = useStep({
+        steps,
+    });
+
     return (
         <div className={classes.root}>
             <div className={classes.logo}>
