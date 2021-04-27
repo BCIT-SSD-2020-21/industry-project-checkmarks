@@ -150,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         margin: '3%',
         width: '75%',
-        padding: '2%',
+        padding: '0 2% ',
     },
     title: {
         color: '#df3a48',

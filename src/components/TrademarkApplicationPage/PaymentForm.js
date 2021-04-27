@@ -220,7 +220,7 @@ export default function PaymentForm({ navigation }) {
 }
 const useStyles = makeStyles((theme) => ({
     card: {
-        padding: '2%',
+        padding: '0 2% ',
         margin: '3%',
         width: '75%',
     },

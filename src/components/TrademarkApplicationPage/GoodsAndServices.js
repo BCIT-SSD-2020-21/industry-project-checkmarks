@@ -480,7 +480,7 @@ export default function GoodsAndServices({ navigation }) {
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        padding: '2% ',
+        padding: '0 2% ',
         margin: '3%',
         width: '75%',
         [theme.breakpoints.down('xs')]: {
