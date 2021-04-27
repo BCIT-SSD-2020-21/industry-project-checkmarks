@@ -6,7 +6,7 @@ import DesignCard from './DesignCard';
 import DetailSelectCard from './DetailSelectCard';
 import TextSearchCard from './TextSearchCard';
 
-const TrademarkForm = () => {
+const TrademarkForm = ({ navigation }) => {
     const classes = useStyles();
     return (
         <Card className={classes.outerCard}>
@@ -38,7 +38,12 @@ const TrademarkForm = () => {
                 client through the process
             </Alert>
 
-            <button className={classes.nextButton}>Next Step</button>
+            <button
+                className={classes.nextButton}
+                onClick={() => navigation.next()}
+            >
+                Next Step
+            </button>
         </Card>
     );
 };
@@ -47,7 +52,7 @@ export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
         width: '75%',
-        marginTop: '2%',
+        margin: '5%',
         display: 'flex',
         flexDirection: 'column',
     },
