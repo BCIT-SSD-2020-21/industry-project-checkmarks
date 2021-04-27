@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from './DesignCard';
 import DetailSelectCard from './DetailSelectCard';
-import TextSearchCard from './TrademarkTextCard';
+import TextSearchCard from './TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
