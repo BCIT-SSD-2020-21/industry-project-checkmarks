@@ -18,6 +18,7 @@ const TrademarkApplication = () => {
         trademarkType: [],
         characterText: '',
         fileName: '',
+        trademarkName: '',
 
         // Goods and Services
         classesSelected: [],
@@ -53,7 +54,7 @@ const TrademarkApplication = () => {
                 <img src={Logo2} alt="Logo" />
             </div>
             <div className={classes.root}>
-                {/* <AskALawyer /> */}
+                <AskALawyer />
 
                 {(() => {
                     switch (step.id) {
