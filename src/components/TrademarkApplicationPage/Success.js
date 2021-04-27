@@ -51,8 +51,9 @@ const useStyles = makeStyles((theme) => ({
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             fontSize: '8px',
+            width: '40%',
         },
     },
 }));
