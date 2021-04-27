@@ -41,11 +41,11 @@ const TrademarkTypeCard = () => {
 
 export default TrademarkTypeCard;
 const useStyles = makeStyles((theme) => ({
-    searchCard: {
+    trademarkTypeCard: {
         width: '90%',
         margin: 'auto',
-        marginBottom: '3%',
     },
+
     alert: {
         margin: ' auto',
         color: '#2a9df4',
