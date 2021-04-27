@@ -222,7 +222,11 @@ const useStyles = makeStyles((theme) => ({
     card: {
         padding: '0 2% ',
         margin: '3%',
-        width: '75%',
+        width: '70%',
+        [theme.breakpoints.up('md')]: {
+            width: '60%',
+        },
+        border: '1px solid #696969',
     },
     title: {
         color: '#df3a48',

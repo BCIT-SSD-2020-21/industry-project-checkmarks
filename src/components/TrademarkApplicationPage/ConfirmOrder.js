@@ -149,8 +149,13 @@ export default function PaymentForm({ navigation }) {
 const useStyles = makeStyles((theme) => ({
     card: {
         margin: '3%',
-        width: '75%',
+
         padding: '0 2% ',
+        width: '70%',
+        [theme.breakpoints.up('md')]: {
+            width: '60%',
+        },
+        border: '1px solid #696969',
     },
     title: {
         color: '#df3a48',

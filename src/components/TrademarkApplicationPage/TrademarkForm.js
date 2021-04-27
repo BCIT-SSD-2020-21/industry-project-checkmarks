@@ -74,11 +74,15 @@ const TrademarkForm = ({ navigation }) => {
 export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
-        width: '75%',
         margin: '3%',
         display: 'flex',
         padding: '0 2% ',
         flexDirection: 'column',
+        width: '70%',
+        [theme.breakpoints.up('md')]: {
+            width: '60%',
+        },
+        border: '1px solid #696969',
     },
     title: {
         color: '#df3a48',
