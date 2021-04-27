@@ -9,10 +9,10 @@ export default function PaymentForm({ navigation }) {
     const history = useHistory();
 
     //handle Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert('Successfully Confirm ');
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     alert('Successfully Confirm ');
+    // };
 
     return (
         <Card className={classes.card}>

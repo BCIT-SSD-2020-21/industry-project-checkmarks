@@ -25,10 +25,10 @@ export default function PaymentForm({ navigation }) {
     const [country, setCountry] = useState('');
 
     //handle Submit
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert('Successfully Complete');
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     alert('Successfully Complete');
+    // };
 
     return (
         <Card className={classes.card}>

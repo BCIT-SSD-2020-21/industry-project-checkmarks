@@ -8,16 +8,19 @@ import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
 import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkForm';
 import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
 import { useStep } from 'react-hooks-helper';
+import Success from '../components/TrademarkApplicationPage/Success';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
 
+    //Give each step an id
     const steps = [
         { id: 'Trademark-Type' },
         { id: 'Goods-and-Services' },
         { id: 'International-Information' },
         { id: 'Confirmation' },
         { id: 'Payment' },
+        { id: 'Success' },
     ];
 
     const { step, navigation } = useStep({
@@ -48,6 +51,8 @@ const TrademarkApplication = () => {
                         return <ConfirmOrder navigation={navigation} />;
                     case 'Payment':
                         return <PaymentForm navigation={navigation} />;
+                    case 'Success':
+                        return <Success navigation={navigation} />;
                 }
             })()}
 
