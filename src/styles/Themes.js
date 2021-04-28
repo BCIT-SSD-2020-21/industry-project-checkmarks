@@ -13,7 +13,7 @@ const colors = {
     white: '#FFFFFF',
     whiteOpq0: '#FFFFFF00',
     whiteOpq: '#FFFFFF40',
-    whiteOpq2: '#FFFFFFB3',
+    whiteOpq2: '#FFFFFF8C',
     lightestGray: '#fafafa',
     lighterGray: '#f3f3f3',
     lighterGrayOpq: '#f3f3f340',
