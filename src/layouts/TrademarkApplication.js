@@ -9,6 +9,7 @@ import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkType/
 import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
 import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';
+import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -38,6 +39,7 @@ const TrademarkApplication = () => {
 
     //Give each step an id
     const steps = [
+        { id: 'Application-Information' },
         { id: 'Trademark-Type' },
         { id: 'Goods-and-Services' },
         { id: 'International-Information' },
@@ -49,7 +51,7 @@ const TrademarkApplication = () => {
     //use useStep from hook-helper to navigate the steps
     const { step, navigation } = useStep({
         steps,
-        initialStep: 0,
+        initialStep: 1,
     });
 
     return (
@@ -63,6 +65,14 @@ const TrademarkApplication = () => {
                         case 'Trademark-Type':
                             return (
                                 <TrademarkForm
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
+                        case 'Application-Information':
+                            return (
+                                <ApplicationInfo
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}

@@ -102,12 +102,24 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 Helper Section with brief legal information, assisting the
                 client through the process
             </Alert>
-            <Button
-                className={classes.nextButton}
-                onClick={() => navigation.next()}
-            >
-                Next Step
-            </Button>
+            <div className={classes.buttonContainer}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    className={classes.backButton}
+                    onClick={() => navigation.previous()}
+                >
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    onClick={() => navigation.next()}
+                >
+                    Continue
+                </Button>
+            </div>
         </Card>
     );
 };
@@ -149,19 +161,42 @@ const useStyles = makeStyles((theme) => ({
             margin: '0',
         },
     },
-    nextButton: {
-        backgroundColor: '#DF3A48',
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    continueButton: {
         color: '#FFF',
-        width: '20%',
-        height: '30px',
+        backgroundColor: '#df3a48',
         fontWeight: 'bold',
+        marginTop: '10%',
+        marginLeft: '3%',
+        width: '30%',
+        height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
-        margin: ' 2% auto 4% auto',
-        [theme.breakpoints.down('sm')]: {
-            fontSize: '8px',
-            margin: ' 4% auto 0 auto',
-            width: '30%',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        marginTop: '10%',
+        width: '30%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: '1px solid #df3a48',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
         },
     },
     trademarkMessage: {
