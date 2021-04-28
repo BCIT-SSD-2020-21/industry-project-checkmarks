@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
     //selection of all the other trademark type
-    const otherTypes = [
+    const otherTypesSelection = [
         'Color',
         'Position',
         'Hologram',
@@ -89,7 +89,7 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 required to process the application.
             </p>
             {info.isOther === true &&
-                otherTypes.map((otherType, index) => (
+                otherTypesSelection.map((otherType, index) => (
                     <DetailSelectCard
                         otherType={otherType}
                         info={info}
