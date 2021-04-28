@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
+    //selection of all the other trademark type
     const otherTypes = [
         'Color',
         'Position',
@@ -78,15 +79,23 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                     setInfo({
                         ...info,
                         isOther: !info.isOther,
+                        OtherTypes: [],
                     })
                 }
             />
+            <p style={{ color: 'red' }}>Select all that apply </p>
+            <p style={{ color: 'red', fontSize: 12 }}>
+                For below selections, <strong>Contact with a lawyer</strong> is
+                required to process the application.
+            </p>
             {info.isOther === true &&
-                otherTypes.map((otherType) => (
+                otherTypes.map((otherType, index) => (
                     <DetailSelectCard
                         otherType={otherType}
                         info={info}
                         setInfo={setInfo}
+                        index={index}
+                        key={index}
                     />
                 ))}
             <Alert severity="info" className={classes.alert}>

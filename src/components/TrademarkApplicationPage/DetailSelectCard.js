@@ -5,7 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const DetailSelectCard = ({ otherType, info, setInfo }) => {
+const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
     const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
 
@@ -48,7 +48,6 @@ const DetailSelectCard = ({ otherType, info, setInfo }) => {
         <div className={classes.detailsCard}>
             {/* Selection section */}
             <div className={classes.selectionFlex}>
-                {/* column 1 */}
                 <FormGroup column>
                     <FormControlLabel
                         control={
@@ -59,28 +58,7 @@ const DetailSelectCard = ({ otherType, info, setInfo }) => {
                         }
                         label={otherType}
                     />
-                    {/* <FormControlLabel control={<Checkbox />} label="Position" />
-                    <FormControlLabel control={<Checkbox />} label="Hologram" />
-                    <FormControlLabel control={<Checkbox />} label="Motion" />
-                    <FormControlLabel control={<Checkbox />} label="Motion" />
-                    <FormControlLabel
-                        control={<Checkbox />}
-                        label="Mode of packaging goods"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox />}
-                        label="Three dimensional"
-                    /> */}
                 </FormGroup>
-
-                {/* column 2 */}
-
-                {/* <FormGroup column>
-                    <FormControlLabel control={<Checkbox />} label="Sound" />
-                    <FormControlLabel control={<Checkbox />} label="Taste" />
-                    <FormControlLabel control={<Checkbox />} label="Scent" />
-                    <FormControlLabel control={<Checkbox />} label="Texture" />
-                </FormGroup> */}
             </div>
         </div>
     );
