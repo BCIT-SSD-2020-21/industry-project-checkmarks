@@ -7,20 +7,29 @@ import DetailSelectCard from './DetailSelectCard';
 import TextSearchCard from './TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 const TrademarkForm = ({ navigation, info, setInfo }) => {
-    const [textTrademarkChecked, setTextTrademarkChecked] = useState(false);
-    const [designChecked, setDesignChecked] = useState(false);
-    const [detailChecked, setDetailChecked] = useState(false);
-
     const classes = useStyles();
+    //selection of all the other trademark type
+    const otherTypesSelection = [
+        'Color',
+        'Position',
+        'Hologram',
+        'Motion',
+        'Mode of packaging goods',
+        'Three dimensional',
+        'Sound',
+        'Taste',
+        'Scent',
+        'Texture',
+    ];
+
     return (
         <Card className={classes.outerCard}>
             <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
                     Please{' '}
-                    <span style={{ color: '#df3a48' }}>
+                    <span style={{ color: '#DF3A48' }}>
                         <strong>select all </strong>{' '}
                     </span>
                     that apply, and provide additional information as you can:
@@ -30,44 +39,69 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
             {/* Text Search Form */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isText} />}
                 label="Standard Characters"
                 value="standardCharacter"
-                onChange={() => setTextTrademarkChecked(!textTrademarkChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isText: !info.isText,
+                    })
+                }
             />
-            {textTrademarkChecked === true && (
-                <TextSearchCard info={info} setInfo={setInfo} />
-            )}
-
+            {info.isText && <TextSearchCard info={info} setInfo={setInfo} />}
             {/* ======================================== */}
             {/* Logo card */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isLogo} />}
                 label="Logos or Design"
-                onChange={() => setDesignChecked(!designChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isLogo: !info.isLogo,
+                    })
+                }
             />
-            {designChecked === true && (
-                <DesignCard info={info} setInfo={setInfo} />
-            )}
-
+            {info.isLogo && <DesignCard info={info} setInfo={setInfo} />}
             {/* ======================================== */}
             {/* detail selection card */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isOther} />}
                 label="Others "
-                onChange={() => setDetailChecked(!detailChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isOther: !info.isOther,
+                        OtherTypes: [],
+                    })
+                }
             />
-            {detailChecked === true && (
-                <DetailSelectCard info={info} setInfo={setInfo} />
-            )}
 
+            {/* <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
+                <p style={{ color: '#DF3A48', fontSize: 12 }}>
+                    For below selections, <strong>Contact with a lawyer</strong>{' '}
+                    is required to process the application.
+                </p> */}
+
+            <div className={classes.detailSelectCardContainer}>
+                {/* map other Types Selection */}
+                {info.isOther &&
+                    otherTypesSelection.map((otherType, index) => (
+                        <DetailSelectCard
+                            otherType={otherType}
+                            info={info}
+                            setInfo={setInfo}
+                            index={index}
+                            key={index}
+                        />
+                    ))}
+            </div>
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
                 client through the process
             </Alert>
-
             <Button
                 className={classes.nextButton}
                 onClick={() => navigation.next()}
@@ -77,7 +111,6 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
         </Card>
     );
 };
-
 export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
@@ -93,20 +126,31 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid #696969',
     },
     title: {
-        color: '#df3a48',
+        color: '#DF3A48',
     },
     outerText: {
         justifyContent: 'flex-start',
         fontWeight: 550,
     },
+    detailSelectCardContainer: {
+        columns: '1 auto',
+        width: '90%',
+        margin: '0 auto',
+        padding: '3%',
+        [theme.breakpoints.up('sm')]: {
+            columns: '2 auto',
+        },
+    },
     alert: {
-        width: '100%',
-        margin: '2% auto',
         color: '#2a9df4',
+        margin: '2% 0 5% 0',
         fontSize: '12px',
+        [theme.breakpoints.up('sm')]: {
+            margin: '0',
+        },
     },
     nextButton: {
-        backgroundColor: '#df3a48',
+        backgroundColor: '#DF3A48',
         color: '#FFF',
         width: '20%',
         height: '30px',

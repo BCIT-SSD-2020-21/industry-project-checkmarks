@@ -15,7 +15,11 @@ const TrademarkApplication = () => {
 
     const [info, setInfo] = useState({
         //Trademark Type
-        trademarkType: [],
+        isText: false,
+        isLogo: false,
+        isOther: false,
+        OtherTypes: [],
+
         characterText: '',
         fileName: '',
         trademarkName: '',
@@ -54,8 +58,6 @@ const TrademarkApplication = () => {
                 <img src={Logo2} alt="Logo" />
             </div>
             <div className={classes.root}>
-                <AskALawyer />
-
                 {(() => {
                     switch (step.id) {
                         case 'Trademark-Type':

@@ -235,9 +235,6 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: '#df3a48',
         marginBottom: '5%',
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '25px',
-        },
     },
     text: {
         color: '#808080',
@@ -286,7 +283,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginTop: '10%',
         marginLeft: '3%',
-        width: '30%',
+        width: '40%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
@@ -302,7 +299,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         marginTop: '10%',
-        width: '30%',
+        width: '40%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
