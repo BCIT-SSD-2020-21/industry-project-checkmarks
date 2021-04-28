@@ -21,6 +21,7 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
         });
     }, []);
 
+    //handle when checkbox is clicked
     const selectOtherType = () => {
         const infoOfOtherType = info.OtherTypes;
 

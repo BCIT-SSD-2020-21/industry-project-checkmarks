@@ -83,11 +83,14 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                     })
                 }
             />
+
             <p style={{ color: 'red' }}>Select all that apply </p>
             <p style={{ color: 'red', fontSize: 12 }}>
                 For below selections, <strong>Contact with a lawyer</strong> is
                 required to process the application.
             </p>
+
+            {/* map other Types Selection */}
             {info.isOther === true &&
                 otherTypesSelection.map((otherType, index) => (
                     <DetailSelectCard
