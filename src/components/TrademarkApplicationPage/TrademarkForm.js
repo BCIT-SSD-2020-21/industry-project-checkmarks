@@ -7,20 +7,16 @@ import DetailSelectCard from './DetailSelectCard';
 import TextSearchCard from './TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 const TrademarkForm = ({ navigation, info, setInfo }) => {
-    const [textTrademarkChecked, setTextTrademarkChecked] = useState(false);
-    const [designChecked, setDesignChecked] = useState(false);
-    const [detailChecked, setDetailChecked] = useState(false);
-
     const classes = useStyles();
+    console.log(info);
     return (
         <Card className={classes.outerCard}>
             <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
                     Please{' '}
-                    <span style={{ color: '#df3a48' }}>
+                    <span style={{ color: '#DF3A48' }}>
                         <strong>select all </strong>{' '}
                     </span>
                     that apply, and provide additional information as you can:
@@ -30,44 +26,55 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
             {/* Text Search Form */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isText} />}
                 label="Standard Characters"
                 value="standardCharacter"
-                onChange={() => setTextTrademarkChecked(!textTrademarkChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isText: !info.isText,
+                    })
+                }
             />
-            {textTrademarkChecked === true && (
+            {info.isText === true && (
                 <TextSearchCard info={info} setInfo={setInfo} />
             )}
-
             {/* ======================================== */}
             {/* Logo card */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isLogo} />}
                 label="Logos or Design"
-                onChange={() => setDesignChecked(!designChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isLogo: !info.isLogo,
+                    })
+                }
             />
-            {designChecked === true && (
+            {info.isLogo === true && (
                 <DesignCard info={info} setInfo={setInfo} />
             )}
-
             {/* ======================================== */}
             {/* detail selection card */}
             {/* ======================================== */}
             <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={info.isOther} />}
                 label="Others "
-                onChange={() => setDetailChecked(!detailChecked)}
+                onChange={(e) =>
+                    setInfo({
+                        ...info,
+                        isOther: !info.isOther,
+                    })
+                }
             />
-            {detailChecked === true && (
+            {info.isOther === true && (
                 <DetailSelectCard info={info} setInfo={setInfo} />
             )}
-
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
                 client through the process
             </Alert>
-
             <Button
                 className={classes.nextButton}
                 onClick={() => navigation.next()}
@@ -77,7 +84,6 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
         </Card>
     );
 };
-
 export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
@@ -93,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid #696969',
     },
     title: {
-        color: '#df3a48',
+        color: '#DF3A48',
     },
     outerText: {
         justifyContent: 'flex-start',
@@ -102,11 +108,11 @@ const useStyles = makeStyles((theme) => ({
     alert: {
         width: '100%',
         margin: '2% auto',
-        color: '#2a9df4',
+        color: '#2A9DF4',
         fontSize: '12px',
     },
     nextButton: {
-        backgroundColor: '#df3a48',
+        backgroundColor: '#DF3A48',
         color: '#FFF',
         width: '20%',
         height: '30px',

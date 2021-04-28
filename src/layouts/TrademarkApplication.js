@@ -15,7 +15,10 @@ const TrademarkApplication = () => {
 
     const [info, setInfo] = useState({
         //Trademark Type
-        trademarkType: [],
+        isText: false,
+        isLogo: false,
+        isOther: false,
+
         characterText: '',
         fileName: '',
         trademarkName: '',
