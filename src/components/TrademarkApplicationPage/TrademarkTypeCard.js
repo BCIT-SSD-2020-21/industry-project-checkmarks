@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
-import { TextField, Card } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 const TrademarkTypeCard = ({ info, setInfo }) => {
     const classes = useStyles();
-    // const [trademark, setTrademark] = useState({
-    //     trademarkName: '',
-    // });
 
     return (
         <div className={classes.trademarkTypeCard}>

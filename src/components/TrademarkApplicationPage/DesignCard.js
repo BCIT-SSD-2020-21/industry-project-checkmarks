@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import Alert from '@material-ui/lab/Alert';
+import { Button } from '@material-ui/core';
 
 const LogoForm = () => {
     const classes = useStyles();
@@ -9,7 +9,7 @@ const LogoForm = () => {
         <div className={classes.logoCard} fullwidth>
             <div>
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
-                <button className={classes.browseButton}>Choose File</button>
+                <Button className={classes.browseButton}>Choose File</Button>
             </div>
             <Alert severity="info" className={classes.alert}>
                 Single image file should be under 2MB

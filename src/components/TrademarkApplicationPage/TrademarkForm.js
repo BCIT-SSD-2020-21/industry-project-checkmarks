@@ -143,10 +143,10 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         color: '#2a9df4',
-        marginTop: '10%',
+        marginTop: '2%',
         fontSize: '12px',
         [theme.breakpoints.up('sm')]: {
-            marginTop: '5%',
+            marginTop: '0%',
         },
     },
     nextButton: {
