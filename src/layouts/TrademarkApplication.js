@@ -5,7 +5,7 @@ import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
-import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkForm';
+import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkType/index';
 import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
 import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';

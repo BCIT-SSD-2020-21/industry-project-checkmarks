@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import DesignCard from './DesignCard';
-import DetailSelectCard from './DetailSelectCard';
-import TextSearchCard from './TrademarkTypeCard';
+import DesignCard from '../TrademarkType/DesignCard';
+import DetailSelectCard from '../TrademarkType/DetailSelectCard';
+import TextSearchCard from '../TrademarkType/TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
