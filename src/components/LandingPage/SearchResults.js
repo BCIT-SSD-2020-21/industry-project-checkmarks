@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { checkmarksTheme } from '../../styles/Themes';
 import {
+    Button,
+    Card,
     Fade,
     IconButton,
     Paper,
     TableCell,
     Typography,
 } from '@material-ui/core';
+import { AutoSizer, Column, Table } from 'react-virtualized';
 import { withStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import ResultDetail from './ResultDetail';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -199,6 +202,9 @@ const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 export default function SearchResults({ data }) {
     const [detailedView, setDetailedView] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
+    // useEffect(() => {
+
+    // })
 
     // const rowClick = (e) => {
     //     console.log('clicked', e.target);
@@ -213,31 +219,38 @@ export default function SearchResults({ data }) {
                 width: '100%',
             }}
         >
-            <VirtualizedTable
-                // style={{ height: 400, width: '100%' }}
-                rowCount={data.length} // row or data
-                rowGetter={({ index }) => data[index]} // row or data
-                onRowClick={(e) => setSelectedRow(e.index)}
-                columns={[
-                    {
-                        width: (window.innerWidth * 1) / 2,
-                        label: 'Title',
-                        dataKey: 'title',
-                    },
-                    {
-                        width: (window.innerWidth * 1) / 4,
-                        label: 'Status',
-                        dataKey: 'statusDescEn',
-                        // numeric: true,
-                    },
-                    {
-                        width: (window.innerWidth * 1) / 4,
-                        label: 'File Date (yyyy-mm-dd)',
-                        dataKey: 'fileDateFormatted',
-                        // numeric: true,
-                    },
-                ]}
-            />
+            {selectedRow === null ? (
+                <VirtualizedTable
+                    // style={{ height: 400, width: '100%' }}
+                    rowCount={data.length} // row or data
+                    rowGetter={({ index }) => data[index]} // row or data
+                    onRowClick={(e) => setSelectedRow(e.index)}
+                    columns={[
+                        {
+                            width: (window.innerWidth * 1) / 2,
+                            label: 'Title',
+                            dataKey: 'title',
+                        },
+                        {
+                            width: (window.innerWidth * 1) / 4,
+                            label: 'Status',
+                            dataKey: 'statusDescEn',
+                            // numeric: true,
+                        },
+                        {
+                            width: (window.innerWidth * 1) / 4,
+                            label: 'File Date (yyyy-mm-dd)',
+                            dataKey: 'fileDateFormatted',
+                            // numeric: true,
+                        },
+                    ]}
+                />
+            ) : (
+                <ResultDetail
+                    data={data[selectedRow]}
+                    setSelectedRow={setSelectedRow}
+                />
+            )}
         </Paper>
     );
 }
