@@ -2,6 +2,8 @@
 
 # Checkmarks
 
+[(Netlify Deployment)](https://gracious-jepsen-1b653c.netlify.app)
+
 An industry project <strong>by:</strong> Tilman, Vlad, Fatma, Karen, Kalvin
 
 <!-- <strong>Live Link: </strong> here  -->
