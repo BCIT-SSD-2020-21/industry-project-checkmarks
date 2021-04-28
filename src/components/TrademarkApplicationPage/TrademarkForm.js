@@ -9,8 +9,22 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
+    const otherTypes = [
+        'Color',
+        'Position',
+        'Hologram',
+        'Motion',
+        'Mode of packaging goods',
+        'Three dimensional',
+        'Sound',
+        'Taste',
+        'Scent',
+        'Texture',
+    ];
+
     return (
         <Card className={classes.outerCard}>
+            {console.log(info)}
             <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
@@ -67,9 +81,14 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                     })
                 }
             />
-            {info.isOther === true && (
-                <DetailSelectCard info={info} setInfo={setInfo} />
-            )}
+            {info.isOther === true &&
+                otherTypes.map((otherType) => (
+                    <DetailSelectCard
+                        otherType={otherType}
+                        info={info}
+                        setInfo={setInfo}
+                    />
+                ))}
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
                 client through the process
