@@ -12,8 +12,8 @@ const styles = (theme) => ({
         overflow: 'hidden',
       },
       container: {
-        marginTop: theme.spacing(10),
-        marginBottom: theme.spacing(15),
+        marginTop: theme.spacing(8),
+        marginBottom: theme.spacing(10),
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
