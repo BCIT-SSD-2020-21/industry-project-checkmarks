@@ -10,7 +10,7 @@ const TrademarkTypeCard = ({ info, setInfo }) => {
     // });
 
     return (
-        <Card className={classes.trademarkTypeCard}>
+        <div className={classes.trademarkTypeCard}>
             <div>
                 <TextField
                     id="outlined-basic"
@@ -35,7 +35,7 @@ const TrademarkTypeCard = ({ info, setInfo }) => {
                     A Trademark cannot be 'primarily merely a surname'
                 </Alert>
             </div>
-        </Card>
+        </div>
     );
 };
 
@@ -44,23 +44,19 @@ const useStyles = makeStyles((theme) => ({
     trademarkTypeCard: {
         width: '90%',
         margin: 'auto',
-        padding: '0 5% 5% 5%',
-        [theme.breakpoints.up('md')]: {
-            width: '60%',
-            padding: '0 2% ',
-        },
+        marginBottom: '3%',
     },
 
     alert: {
-        margin: ' auto',
+        margin: '3% auto',
         color: '#2a9df4',
         fontSize: '13px',
-        marginBottom: '3%',
     },
     input: {
         borderRadius: '10px',
-        [theme.breakpoints.up('sm')]: {
-            margin: '2% auto',
+        marginTop: '3%',
+        [theme.breakpoints.down('xs')]: {
+            margin: '5% auto',
         },
     },
 }));

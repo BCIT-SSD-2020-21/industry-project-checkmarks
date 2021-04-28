@@ -6,7 +6,7 @@ import Alert from '@material-ui/lab/Alert';
 const LogoForm = () => {
     const classes = useStyles();
     return (
-        <Card className={classes.logoCard} fullwidth>
+        <div className={classes.logoCard} fullwidth>
             <div>
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
                 <button className={classes.browseButton}>Choose File</button>
@@ -14,17 +14,16 @@ const LogoForm = () => {
             <Alert severity="info" className={classes.alert}>
                 Single image file should be under 2MB
             </Alert>
-        </Card>
+        </div>
     );
 };
 
 export default LogoForm;
 const useStyles = makeStyles((theme) => ({
     alert: {
-        margin: ' auto',
         color: '#2a9df4',
         fontSize: '13px',
-        marginBottom: '3%',
+        margin: '3% auto',
     },
     logoCard: {
         width: '90%',
@@ -32,12 +31,19 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3%',
     },
     browseButton: {
-        backgroundColor: '#df3a48',
+        backgroundColor: '#DF3A48',
         color: '#FFF',
-        marginTop: '3%',
-        marginBottom: '3%',
-
+        width: '20%',
+        height: '30px',
         fontWeight: 'bold',
-        borderRadius: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: 'none',
+        margin: 'auto',
+        [theme.breakpoints.down('xs')]: {
+            margin: '2% auto 5% auto',
+            width: '40%',
+            fontSize: '10px',
+        },
     },
 }));

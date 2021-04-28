@@ -133,16 +133,21 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 550,
     },
     detailSelectCardContainer: {
-        columns: '2 auto',
+        columns: '1 auto',
         width: '90%',
         margin: '0 auto',
         padding: '3%',
+        [theme.breakpoints.up('sm')]: {
+            columns: '2 auto',
+        },
     },
     alert: {
-        width: '100%',
-        margin: '2% auto',
-        color: '#2A9DF4',
+        color: '#2a9df4',
+        marginTop: '10%',
         fontSize: '12px',
+        [theme.breakpoints.up('sm')]: {
+            marginTop: '5%',
+        },
     },
     nextButton: {
         backgroundColor: '#DF3A48',
