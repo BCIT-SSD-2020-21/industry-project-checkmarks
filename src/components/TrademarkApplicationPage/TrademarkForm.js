@@ -9,7 +9,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
     const classes = useStyles();
-    console.log(info);
     return (
         <Card className={classes.outerCard}>
             <h1 className={classes.title}>Trademark Type</h1>
