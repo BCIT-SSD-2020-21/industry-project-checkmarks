@@ -84,23 +84,25 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 }
             />
 
-            <p style={{ color: 'red' }}>Select all that apply </p>
-            <p style={{ color: 'red', fontSize: 12 }}>
-                For below selections, <strong>Contact with a lawyer</strong> is
-                required to process the application.
-            </p>
+            {/* <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
+                <p style={{ color: '#DF3A48', fontSize: 12 }}>
+                    For below selections, <strong>Contact with a lawyer</strong>{' '}
+                    is required to process the application.
+                </p> */}
 
-            {/* map other Types Selection */}
-            {info.isOther === true &&
-                otherTypesSelection.map((otherType, index) => (
-                    <DetailSelectCard
-                        otherType={otherType}
-                        info={info}
-                        setInfo={setInfo}
-                        index={index}
-                        key={index}
-                    />
-                ))}
+            <div className={classes.detailSelectCardContainer}>
+                {/* map other Types Selection */}
+                {info.isOther === true &&
+                    otherTypesSelection.map((otherType, index) => (
+                        <DetailSelectCard
+                            otherType={otherType}
+                            info={info}
+                            setInfo={setInfo}
+                            index={index}
+                            key={index}
+                        />
+                    ))}
+            </div>
             <Alert severity="info" className={classes.alert}>
                 Helper Section with brief legal information, assisting the
                 client through the process
@@ -134,6 +136,12 @@ const useStyles = makeStyles((theme) => ({
     outerText: {
         justifyContent: 'flex-start',
         fontWeight: 550,
+    },
+    detailSelectCardContainer: {
+        columns: '2 auto',
+        width: '90%',
+        margin: '0 auto',
+        padding: '3%',
     },
     alert: {
         width: '100%',

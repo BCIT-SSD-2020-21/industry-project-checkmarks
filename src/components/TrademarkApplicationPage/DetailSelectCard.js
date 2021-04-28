@@ -6,7 +6,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
-    const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
 
     // when user go back to the page , if type is already in the OtherTypes
@@ -46,35 +45,21 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
     };
 
     return (
-        <div className={classes.detailsCard}>
-            {/* Selection section */}
-            <div className={classes.selectionFlex}>
-                <FormGroup column>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                onClick={selectOtherType}
-                                checked={isSelected}
-                            />
-                        }
-                        label={otherType}
-                    />
-                </FormGroup>
-            </div>
+        // Selection section
+        <div>
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            onClick={selectOtherType}
+                            checked={isSelected}
+                        />
+                    }
+                    label={otherType}
+                />
+            </FormGroup>
         </div>
     );
 };
 
 export default DetailSelectCard;
-const useStyles = makeStyles((theme) => ({
-    detailsCard: {
-        width: '90%',
-        margin: 'auto',
-        marginTop: '3%',
-    },
-    selectionFlex: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-    },
-}));

@@ -8,7 +8,7 @@ const LogoForm = () => {
     return (
         <Card className={classes.logoCard} fullwidth>
             <div>
-                <p style={{ color: 'red' }}>Select a file to upload</p>
+                <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
                 <button className={classes.browseButton}>Choose File</button>
             </div>
             <Alert severity="info" className={classes.alert}>
