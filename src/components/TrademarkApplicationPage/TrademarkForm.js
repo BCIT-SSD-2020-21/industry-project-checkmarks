@@ -49,9 +49,7 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                     })
                 }
             />
-            {info.isText === true && (
-                <TextSearchCard info={info} setInfo={setInfo} />
-            )}
+            {info.isText && <TextSearchCard info={info} setInfo={setInfo} />}
             {/* ======================================== */}
             {/* Logo card */}
             {/* ======================================== */}
@@ -65,9 +63,7 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                     })
                 }
             />
-            {info.isLogo === true && (
-                <DesignCard info={info} setInfo={setInfo} />
-            )}
+            {info.isLogo && <DesignCard info={info} setInfo={setInfo} />}
             {/* ======================================== */}
             {/* detail selection card */}
             {/* ======================================== */}
@@ -91,7 +87,7 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
 
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
-                {info.isOther === true &&
+                {info.isOther &&
                     otherTypesSelection.map((otherType, index) => (
                         <DetailSelectCard
                             otherType={otherType}
