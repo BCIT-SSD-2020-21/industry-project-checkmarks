@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { checkmarksTheme } from '../../styles/Themes';
@@ -64,17 +64,20 @@ class MuiVirtualizedTable extends React.PureComponent {
 
     getRowClassName = ({ index }) => {
         const { classes, onRowClick } = this.props;
-
+        // console.log('onRowClick: ', onRowClick);
         return clsx(classes.tableRow, classes.flexContainer, {
             [classes.tableRowHover]: index !== -1 && onRowClick != null,
         });
     };
 
-    cellRenderer = ({ cellData, columnIndex }) => {
+    cellRenderer = ({ cellData, columnIndex, rowIndex }) => {
+        // ,onClick
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
             <Fade in={true} exit={true} timeout={1000}>
                 <TableCell
+                    // onClick={() => console.log(rowIndex)}
+                    // onRowClick={(e) => console.log(e.target)} // ADDED
                     component="div"
                     className={clsx(classes.tableCell, classes.flexContainer, {
                         [classes.noClick]: onRowClick == null,
@@ -133,10 +136,12 @@ class MuiVirtualizedTable extends React.PureComponent {
             headerHeight,
             ...tableProps
         } = this.props;
+        // console.log('tableProps:', tableProps);
         return (
             <AutoSizer>
                 {({ height, width }) => (
                     <Table
+                        // onRowClick={() => console.log(this)} // ADDED
                         height={height}
                         width={width}
                         rowHeight={rowHeight}
@@ -192,52 +197,14 @@ const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 // ---
 
 export default function SearchResults({ data }) {
-    // Sample DATA
-    // const data = [
-    //     ['Frozen yoghurt', 159, 6.0, 24, 4.0],
-    //     ['Ice cream sandwich', 237, 9.0, 37, 4.3],
-    //     ['Eclair', 262, 16.0, 24, 6.0],
-    //     ['Cupcake', 305, 3.7, 67, 4.3],
-    //     ['Gingerbread', 356, 16.0, 49, 3.9],
-    // ];
+    const [detailedView, setDetailedView] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
-    // function createData(id, dessert, calories, fat, carbs, protein) {
-    //     return { id, dessert, calories, fat, carbs, protein };
-    // }
-
-    // console.log('data prop: ', data);
-    // console.log('item: ', data[0]);
-    // FORMATTER
-    // let formattedData = [];
-    // const formatData = (data) => {
-    //     data.forEach((trademark) => {
-    //         let formattedDate = trademark.fileDate.substring(0, 10);
-    //         // console.log('formattedDate: ', formattedDate);
-    //         formattedData.push({
-    //             ...trademark,
-    //             fileDate: formattedDate,
-    //         });
-    //         // return {...data, fileDate: }
-    //     });
+    // const rowClick = (e) => {
+    //     console.log('clicked', e.target);
     // };
-    // formattedData = formatData(data);
-    // console.log('data: ', data);
-    // console.log('formattedData: ', formattedData);
-    // function createData(id, dessert, calories, fat, carbs, protein) {
-    //     return { id, dessert, calories, fat, carbs, protein };
-    // }
 
-    // const rows = []; // array of objects
-    // //  NUMBER OF ROWS Input
-    // for (let i = 0; i < 3; i += 1) {
-    // const randomSelection = data[Math.floor(Math.random() * data.length)];
-    // rows.push(createData(i, ...randomSelection)); // randomSelection or data
-    // }
-
-    // console.log("rows (default): ", rows)
-
-    // const [detailedView, setDetailedView] = useState(false);
-
+    console.log(selectedRow);
     return (
         <Paper
             style={{
@@ -250,6 +217,7 @@ export default function SearchResults({ data }) {
                 // style={{ height: 400, width: '100%' }}
                 rowCount={data.length} // row or data
                 rowGetter={({ index }) => data[index]} // row or data
+                onRowClick={(e) => setSelectedRow(e.index)}
                 columns={[
                     {
                         width: (window.innerWidth * 1) / 2,
@@ -273,3 +241,47 @@ export default function SearchResults({ data }) {
         </Paper>
     );
 }
+
+// Sample DATA
+// const data = [
+//     ['Frozen yoghurt', 159, 6.0, 24, 4.0],
+//     ['Ice cream sandwich', 237, 9.0, 37, 4.3],
+//     ['Eclair', 262, 16.0, 24, 6.0],
+//     ['Cupcake', 305, 3.7, 67, 4.3],
+//     ['Gingerbread', 356, 16.0, 49, 3.9],
+// ];
+
+// function createData(id, dessert, calories, fat, carbs, protein) {
+//     return { id, dessert, calories, fat, carbs, protein };
+// }
+
+// console.log('data prop: ', data);
+// console.log('item: ', data[0]);
+// FORMATTER
+// let formattedData = [];
+// const formatData = (data) => {
+//     data.forEach((trademark) => {
+//         let formattedDate = trademark.fileDate.substring(0, 10);
+//         // console.log('formattedDate: ', formattedDate);
+//         formattedData.push({
+//             ...trademark,
+//             fileDate: formattedDate,
+//         });
+//         // return {...data, fileDate: }
+//     });
+// };
+// formattedData = formatData(data);
+// console.log('data: ', data);
+// console.log('formattedData: ', formattedData);
+// function createData(id, dessert, calories, fat, carbs, protein) {
+//     return { id, dessert, calories, fat, carbs, protein };
+// }
+
+// const rows = []; // array of objects
+// //  NUMBER OF ROWS Input
+// for (let i = 0; i < 3; i += 1) {
+// const randomSelection = data[Math.floor(Math.random() * data.length)];
+// rows.push(createData(i, ...randomSelection)); // randomSelection or data
+// }
+
+// console.log("rows (default): ", rows)
