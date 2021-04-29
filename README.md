@@ -86,6 +86,13 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 -   clone this repo
 -   `npm i`
 -   `npm start`
+-   `add a .env file to the root folder`
+-   `add the following variables: `
+
+```
+REACT_APP_BASE_URL=https://checkmarkswebapi.azurewebsites.net/
+REACT_APP_CIPO_BASE_URL=https://cipo-gsm-ised-isde-apicast-production.api.canada.ca/v1/
+```
 
 </details>
 
