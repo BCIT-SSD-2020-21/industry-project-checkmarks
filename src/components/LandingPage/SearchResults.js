@@ -78,24 +78,24 @@ class MuiVirtualizedTable extends React.PureComponent {
         // ,onClick
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
-            <Fade in={true} exit={true} timeout={1000}>
-                <TableCell
-                    // onClick={() => console.log(rowIndex)}
-                    // onRowClick={(e) => console.log(e.target)} // ADDED
-                    component="div"
-                    className={clsx(classes.tableCell, classes.flexContainer, {
-                        [classes.noClick]: onRowClick == null,
-                    })}
-                    variant="body"
-                    style={{ height: rowHeight }}
-                    align={
-                        (columnIndex != null && columns[columnIndex].numeric) ||
-                        false
-                            ? 'right'
-                            : 'left'
-                    }
-                >
-                    {/* <IconButton
+            // <Fade in={true} exit={true} timeout={1000}>
+            <TableCell
+                // onClick={() => console.log(rowIndex)}
+                // onRowClick={(e) => console.log(e.target)} // ADDED
+                component="div"
+                className={clsx(classes.tableCell, classes.flexContainer, {
+                    [classes.noClick]: onRowClick == null,
+                })}
+                variant="body"
+                style={{ height: rowHeight }}
+                align={
+                    (columnIndex != null && columns[columnIndex].numeric) ||
+                    false
+                        ? 'right'
+                        : 'left'
+                }
+            >
+                {/* <IconButton
                         aria-label="expand row"
                         size="small"
                         onClick={() => setOpen(!open)}
@@ -106,15 +106,14 @@ class MuiVirtualizedTable extends React.PureComponent {
                             <KeyboardArrowDownIcon />
                         )}
                     </IconButton> */}
-                    {cellData}
-                </TableCell>
-            </Fade>
+                {cellData}
+            </TableCell>
+            // </Fade>
         );
     };
 
     headerRenderer = ({ label, columnIndex, dataKey }) => {
         const { headerHeight, columns, classes } = this.props;
-        console.log('dataKey', dataKey);
         return (
             <TableCell
                 component="div"
@@ -229,7 +228,6 @@ export default function SearchResults({ data }) {
             dataStatuses.push(tm.statusDescEn);
         }
     });
-    console.log('dataStatuses: ', dataStatuses);
     // File Date options
     const sortOptions = ['Sort Ascending', 'Sort Descending'];
 
@@ -240,12 +238,10 @@ export default function SearchResults({ data }) {
         // console.log('filter clicked', e.currentTarget.value);
         setFilterSelection(e.currentTarget.value);
     };
-    console.log();
     const onMenuSelection = (e) => {
         setMenuSelection(e.currentTarget.value);
     };
 
-    console.log(selectedRow);
     return (
         <Paper
             style={{
