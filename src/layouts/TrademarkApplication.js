@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import Progress from '../components/TrademarkApplicationPage/Progress';
@@ -67,12 +68,12 @@ const TrademarkApplication = () => {
     });
 
     return (
-        <>
-            <div className={classes.logo}>
+        <Paper className={classes.root}>
+            {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
-            </div>
-            <Progress step={step} />
-            <div className={classes.root}>
+            </div> */}
+            <Progress step={step} steps={steps} />
+            <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
                         case 'Application-Information':
@@ -128,7 +129,7 @@ const TrademarkApplication = () => {
                     }
                 })()}
             </div>
-        </>
+        </Paper>
     );
 };
 
@@ -138,8 +139,16 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
+        // justifyContent: 'space-around',
+        alignItems: 'center',
+        width: window.innerWindow,
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: '15%',
     },
     title: {
         display: 'flex',
