@@ -112,9 +112,9 @@ class MuiVirtualizedTable extends React.PureComponent {
         );
     };
 
-    headerRenderer = ({ label, sublabel, columnIndex, onFilterClick }) => {
+    headerRenderer = ({ label, columnIndex, dataKey }) => {
         const { headerHeight, columns, classes } = this.props;
-
+        console.log('dataKey', dataKey);
         return (
             <TableCell
                 component="div"
@@ -129,9 +129,9 @@ class MuiVirtualizedTable extends React.PureComponent {
             >
                 <span>
                     <FilterMenu
+                        dataKey={dataKey}
                         label={label}
-                        sublabel={sublabel}
-                        onClick={onFilterClick}
+                        // onClick={onFilterClick}
                     />
                     {/* {label} */}
                 </span>
@@ -194,7 +194,6 @@ MuiVirtualizedTable.propTypes = {
         PropTypes.shape({
             dataKey: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
-            sublabel: PropTypes.string.isRequired,
             numeric: PropTypes.bool,
             width: PropTypes.number.isRequired,
         })
@@ -209,8 +208,11 @@ const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 // ---
 
 export default function SearchResults({ data }) {
-    const [detailedView, setDetailedView] = useState(false);
+    // const [detailedView, setDetailedView] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
+    const [filterSelection, setFilterSelection] = useState(null);
+    const [menuSelection, setMenuSelection] = useState(null);
+
     // useEffect(() => {
 
     // })
@@ -219,7 +221,12 @@ export default function SearchResults({ data }) {
     //     console.log('clicked', e.target);
     // };
     const onFilterClick = (e) => {
-        console.log('filter clicked', e.currentTarget.value);
+        // console.log('filter clicked', e.currentTarget.value);
+        setFilterSelection(e.currentTarget.value);
+    };
+    console.log();
+    const onMenuSelection = (e) => {
+        setMenuSelection(e.currentTarget.value);
     };
 
     console.log(selectedRow);
@@ -240,18 +247,22 @@ export default function SearchResults({ data }) {
                     onFilterClick={onFilterClick}
                     columns={[
                         {
-                            width: (window.innerWidth * 1) / 2,
+                            width: (window.innerWidth * 1) / 3,
                             label: ['Title', '', onFilterClick],
                             dataKey: 'title',
                         },
                         {
-                            width: (window.innerWidth * 1) / 4,
-                            label: ['Status', '', onFilterClick],
-                            dataKey: 'statusDescEn',
-                            // numeric: true,
+                            width: (window.innerWidth * 1) / 6,
+                            label: ['TM Types', '', onFilterClick],
+                            dataKey: 'tmTypeDescriptions',
                         },
                         {
-                            width: (window.innerWidth * 1) / 4,
+                            width: (window.innerWidth * 1) / 6,
+                            label: ['Status', '', onFilterClick],
+                            dataKey: 'statusDescEn',
+                        },
+                        {
+                            width: (window.innerWidth * 1) / 3,
                             label: ['File Date', '(yyyy-mm-dd)', onFilterClick],
                             dataKey: 'fileDateFormatted',
                             // numeric: true,
