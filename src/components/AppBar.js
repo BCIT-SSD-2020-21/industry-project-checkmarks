@@ -215,8 +215,8 @@ export default function MenuAppBar({
     };
 
     const [switchState, setSwitchState] = useState({
-        switchCheckedA: true,
-        switchCheckedB: true,
+        switchCheckedA: false,
+        switchCheckedB: false,
     });
     const switchChange = (e) => {
         setSwitchState({ ...switchState, [e.target.name]: e.target.checked });
