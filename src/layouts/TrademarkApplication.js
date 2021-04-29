@@ -50,7 +50,7 @@ const TrademarkApplication = () => {
     //use useStep from hook-helper to navigate the steps
     const { step, navigation } = useStep({
         steps,
-        initialStep: 1,
+        initialStep: 0,
     });
 
     return (
