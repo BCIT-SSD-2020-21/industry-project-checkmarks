@@ -338,7 +338,7 @@ export default function MenuAppBar({
                                     SignOut
                                 </MenuItem>
                             ) : (
-                                <>
+                                <Box>
                                     <MenuItem
                                         className={classes.menuItem}
                                         onClick={() => {
@@ -370,7 +370,7 @@ export default function MenuAppBar({
                                         />
                                         Register
                                     </MenuItem> */}
-                                </>
+                                </Box>
                             )}
 
                             {/* <MenuItem className={classes.menuItem}>
