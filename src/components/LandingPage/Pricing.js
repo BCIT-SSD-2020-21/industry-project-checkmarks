@@ -1,8 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -12,18 +20,21 @@ const useStyles = makeStyles((theme) => ({
       listStyle: 'none',
     },
   },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
   heroContent: {
     padding: theme.spacing(8, 0, 6),
   },
   cardHeader: {
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
+      theme.palette.type === 'dark' ? theme.palette.grey[200] : theme.palette.grey[700],
   },
   cardPricing: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'baseline',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(6),
   },
 }));
 
@@ -119,7 +130,6 @@ export default function Pricing() {
             ))}
           </Grid>
       </Container>
-
     </React.Fragment>
   );
 }
