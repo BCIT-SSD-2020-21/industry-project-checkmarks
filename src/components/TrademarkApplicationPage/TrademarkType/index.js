@@ -79,11 +79,16 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 }
             />
 
-            {/* <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
-                <p style={{ color: '#DF3A48', fontSize: 12 }}>
-                    For below selections, <strong>Contact with a lawyer</strong>{' '}
-                    is required to process the application.
-                </p> */}
+            {info.isOther && (
+                <div>
+                    <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
+                    <p style={{ color: '#DF3A48', fontSize: 12 }}>
+                        For below selections,{' '}
+                        <strong>Contact with a lawyer</strong> is required to
+                        process the application.
+                    </p>
+                </div>
+            )}
 
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
