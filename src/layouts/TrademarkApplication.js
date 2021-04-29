@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
+import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
@@ -50,13 +51,13 @@ const TrademarkApplication = () => {
 
     //Give each step an id
     const steps = [
-        { id: 'Application-Information' },
-        { id: 'Trademark-Type' },
-        { id: 'Goods-and-Services' },
-        { id: 'International-Information' },
-        { id: 'Confirmation' },
-        { id: 'Payment' },
-        { id: 'Success' },
+        { id: 'Application-Information', num: 1 },
+        { id: 'Trademark-Type', num: 2 },
+        { id: 'Goods-and-Services', num: 3 },
+        { id: 'International-Information', num: 4 },
+        { id: 'Confirmation', num: 5 },
+        { id: 'Payment', num: 6 },
+        { id: 'Success', num: 7 },
     ];
 
     //use useStep from hook-helper to navigate the steps
@@ -70,6 +71,7 @@ const TrademarkApplication = () => {
             <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div>
+            <Progress step={step} />
             <div className={classes.root}>
                 {(() => {
                     switch (step.id) {
