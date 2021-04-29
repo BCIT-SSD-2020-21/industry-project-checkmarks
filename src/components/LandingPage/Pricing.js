@@ -27,6 +27,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const tiers = [
+  {
+    title: 'Basic',
+    price: '10',
+    description: ['Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet'],
+    buttonText: 'Sign up for free',
+    buttonVariant: 'outlined',
+  },
+  {
+    title: 'Pro',
+    subheader: 'Most Popular',
+    price: '20',
+    description: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+    buttonText: 'Get started',
+    buttonVariant: 'contained',
+  },
+  {
+    title: 'Enterprise',
+    price: '30',
+    description: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet'
+    ],
+    buttonText: 'Contact us',
+    buttonVariant: 'outlined',
+  },
+];
+
+
 export default function Pricing() {
   const classes = useStyles();
 
