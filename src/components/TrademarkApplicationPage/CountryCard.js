@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     RadioGroup,
@@ -179,7 +179,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '10px',
         borderRadius: '10px',
         [theme.breakpoints.up('md')]: {
-            margin: '5% 3% 2% 0',
+            margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '6% 3% 0% 0',
@@ -196,7 +196,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px',
         border: '1px solid #df3a48',
         [theme.breakpoints.up('md')]: {
-            margin: '5% 3% 2% 0',
+            margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '6% 3% 0% 0',

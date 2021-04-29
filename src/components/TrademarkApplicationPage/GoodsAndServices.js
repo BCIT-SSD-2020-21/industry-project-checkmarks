@@ -527,6 +527,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginTop: '10%',
         marginLeft: '3%',
+        margin: '10% 0 0 3%',
         width: '30%',
         height: '30px',
         fontSize: '10px',
