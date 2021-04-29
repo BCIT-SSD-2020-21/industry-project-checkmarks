@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ResultDetail from './ResultDetail';
+import FilterMenu from './FilterMenu';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -111,7 +112,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         );
     };
 
-    headerRenderer = ({ label, columnIndex }) => {
+    headerRenderer = ({ label, sublabel, columnIndex, onFilterClick }) => {
         const { headerHeight, columns, classes } = this.props;
 
         return (
@@ -126,7 +127,14 @@ class MuiVirtualizedTable extends React.PureComponent {
                 style={{ height: headerHeight }}
                 align={columns[columnIndex].numeric || false ? 'right' : 'left'}
             >
-                <span>{label}</span>
+                <span>
+                    <FilterMenu
+                        label={label}
+                        sublabel={sublabel}
+                        onClick={onFilterClick}
+                    />
+                    {/* {label} */}
+                </span>
             </TableCell>
         );
     };
@@ -186,6 +194,7 @@ MuiVirtualizedTable.propTypes = {
         PropTypes.shape({
             dataKey: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
+            sublabel: PropTypes.string.isRequired,
             numeric: PropTypes.bool,
             width: PropTypes.number.isRequired,
         })
@@ -209,6 +218,9 @@ export default function SearchResults({ data }) {
     // const rowClick = (e) => {
     //     console.log('clicked', e.target);
     // };
+    const onFilterClick = (e) => {
+        console.log('filter clicked', e.currentTarget.value);
+    };
 
     console.log(selectedRow);
     return (
@@ -225,21 +237,22 @@ export default function SearchResults({ data }) {
                     rowCount={data.length} // row or data
                     rowGetter={({ index }) => data[index]} // row or data
                     onRowClick={(e) => setSelectedRow(e.index)}
+                    onFilterClick={onFilterClick}
                     columns={[
                         {
                             width: (window.innerWidth * 1) / 2,
-                            label: 'Title',
+                            label: ['Title', '', onFilterClick],
                             dataKey: 'title',
                         },
                         {
                             width: (window.innerWidth * 1) / 4,
-                            label: 'Status',
+                            label: ['Status', '', onFilterClick],
                             dataKey: 'statusDescEn',
                             // numeric: true,
                         },
                         {
                             width: (window.innerWidth * 1) / 4,
-                            label: 'File Date (yyyy-mm-dd)',
+                            label: ['File Date', '(yyyy-mm-dd)', onFilterClick],
                             dataKey: 'fileDateFormatted',
                             // numeric: true,
                         },
