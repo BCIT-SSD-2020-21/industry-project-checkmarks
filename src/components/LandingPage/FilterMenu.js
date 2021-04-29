@@ -21,8 +21,9 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ResultDetail from './ResultDetail';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 
-export default function FilterMenu({ label, sublabel }) {
+export default function FilterMenu({ dataKey, label }) {
     const classes = headerStyles();
     // MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -35,16 +36,33 @@ export default function FilterMenu({ label, sublabel }) {
         setAnchorEl(null);
     };
 
+    console.log('label[3]: ', label[3]);
+
     return (
         <Box>
             <Box className={classes.container}>
-                <IconButton
-                    className={classes.button}
-                    value={label[0]}
-                    onClick={(e) => handleMenu(e)}
-                >
-                    <FilterListIcon className={classes.icon} value={label[0]} />{' '}
-                </IconButton>
+                {(dataKey === 'tmTypeDescriptions' ||
+                    dataKey === 'statusDescEn' ||
+                    dataKey === 'fileDateFormatted') && (
+                    <IconButton
+                        className={classes.button}
+                        value={label[0]}
+                        onClick={(e) => handleMenu(e)}
+                    >
+                        {anchorEl === null ? (
+                            <FilterListIcon
+                                className={classes.icon}
+                                value={label[0]}
+                            />
+                        ) : (
+                            <HighlightOffTwoToneIcon
+                                className={classes.icon}
+                                value={label[0]}
+                            />
+                        )}
+                    </IconButton>
+                )}
+
                 <Box className={classes.textBox}>
                     <Typography className={classes.label} children={label[0]} />
                     <Typography
@@ -75,7 +93,9 @@ export default function FilterMenu({ label, sublabel }) {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem>{label[0]}</MenuItem>
+                {label[3].map((item, index) => {
+                    return <MenuItem key={index}>{item}</MenuItem>;
+                })}
             </Menu>
         </Box>
     );
