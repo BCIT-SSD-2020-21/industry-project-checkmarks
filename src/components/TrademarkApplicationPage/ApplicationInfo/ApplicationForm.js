@@ -20,7 +20,6 @@ export default function IndividualForm({ info, setInfo, navigation }) {
             individualOrOrganization: e.target.value,
         });
     };
-    console.log(info);
     return (
         <div>
             {/* checkbox for indicidual or organization */}
