@@ -89,7 +89,7 @@ export default function Landing() {
                             onClick={() => {
                                 setSearching(false);
                                 setLoggingIn(false);
-                                history.push('/register');
+                                history.push('/application');
                             }}
                             boxShadow={2}
                         >
