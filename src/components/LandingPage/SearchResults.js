@@ -213,9 +213,22 @@ export default function SearchResults({ data }) {
     const [filterSelection, setFilterSelection] = useState(null);
     const [menuSelection, setMenuSelection] = useState(null);
 
-    // useEffect(() => {
+    // TM Types in data
+    // const dataTMTypes = [
+    //     ...new Set(data.map((item) => item.tmTypeDescriptions)),
+    // ];
+    const dataTMTypes = [];
+    data.map((tm) => {
+        tm.tmTypeDescriptions.map((item) => {
+            if (!dataTMTypes.includes(item)) {
+                dataTMTypes.push(item);
+            }
+        });
+    });
 
-    // })
+    console.log('dataTMTypes: ', dataTMTypes);
+
+    // Statuses in data
 
     // const rowClick = (e) => {
     //     console.log('clicked', e.target);
