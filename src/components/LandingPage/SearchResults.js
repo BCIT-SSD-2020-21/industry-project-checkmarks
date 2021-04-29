@@ -214,9 +214,6 @@ export default function SearchResults({ data }) {
     const [menuSelection, setMenuSelection] = useState(null);
 
     // TM Types in data
-    // const dataTMTypes = [
-    //     ...new Set(data.map((item) => item.tmTypeDescriptions)),
-    // ];
     const dataTMTypes = [];
     data.map((tm) => {
         tm.tmTypeDescriptions.map((item) => {
@@ -225,10 +222,16 @@ export default function SearchResults({ data }) {
             }
         });
     });
-
-    console.log('dataTMTypes: ', dataTMTypes);
-
     // Statuses in data
+    const dataStatuses = [];
+    data.map((tm) => {
+        if (!dataStatuses.includes(tm.statusDescEn)) {
+            dataStatuses.push(tm.statusDescEn);
+        }
+    });
+    console.log('dataStatuses: ', dataStatuses);
+    // File Date options
+    const sortOptions = ['Sort Ascending', 'Sort Descending'];
 
     // const rowClick = (e) => {
     //     console.log('clicked', e.target);
@@ -261,22 +264,27 @@ export default function SearchResults({ data }) {
                     columns={[
                         {
                             width: (window.innerWidth * 1) / 3,
-                            label: ['Title', '', onFilterClick],
+                            label: ['Title', '', onFilterClick, []],
                             dataKey: 'title',
                         },
                         {
                             width: (window.innerWidth * 1) / 6,
-                            label: ['TM Types', '', onFilterClick],
+                            label: ['TM Types', '', onFilterClick, dataTMTypes],
                             dataKey: 'tmTypeDescriptions',
                         },
                         {
                             width: (window.innerWidth * 1) / 6,
-                            label: ['Status', '', onFilterClick],
+                            label: ['Status', '', onFilterClick, dataStatuses],
                             dataKey: 'statusDescEn',
                         },
                         {
                             width: (window.innerWidth * 1) / 3,
-                            label: ['File Date', '(yyyy-mm-dd)', onFilterClick],
+                            label: [
+                                'File Date',
+                                '(yyyy-mm-dd)',
+                                onFilterClick,
+                                sortOptions,
+                            ],
                             dataKey: 'fileDateFormatted',
                             // numeric: true,
                         },
