@@ -1,13 +1,71 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, FormControl, TextField } from '@material-ui/core';
+import {
+    Button,
+    FormControl,
+    TextField,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 export default function IndividualForm({ info, setInfo, navigation }) {
     const classes = useStyles();
+
+    //handle seclection of individual or organization
+    const handleSelection = (e) => {
+        setInfo({
+            ...info,
+            individualOrOrganization: e.target.value,
+        });
+    };
     console.log(info);
     return (
         <div>
+            {/* checkbox for indicidual or organization */}
+            <div className={classes.selectionContainer}>
+                <RadioGroup
+                    row
+                    aria-label="individualOrOrganization"
+                    id="individualOrOrganization"
+                    name="individualOrOrganization"
+                    value={info.individualOrOrganization}
+                    onClick={handleSelection}
+                >
+                    <FormControlLabel
+                        value="Individual"
+                        control={<Radio />}
+                        label="Individual"
+                    />
+                    <FormControlLabel
+                        value="Organization"
+                        control={<Radio />}
+                        label="Organization"
+                    />
+                </RadioGroup>
+            </div>
+            {/* ///////////////////////personal info///////////////////////*/}
+            {info.individualOrOrganization == 'Organization' && (
+                <FormControl fullWidth={true}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Organization Name"
+                        type="text"
+                        value={info.organizationName}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                organizationName: e.target.value,
+                            })
+                        }
+                    />
+                </FormControl>
+            )}
+
             <FormControl fullWidth={true}>
                 <TextField
                     className={classes.input}
@@ -68,6 +126,7 @@ export default function IndividualForm({ info, setInfo, navigation }) {
                     </Button>
                 </div>
             </FormControl>
+            {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true}>
                 <TextField
                     className={classes.input}
@@ -180,6 +239,10 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'row',
             width: '100%',
         },
+    },
+    selectionContainer: {
+        display: 'flex',
+        justifyContent: 'center',
     },
     input: {
         width: '80%',

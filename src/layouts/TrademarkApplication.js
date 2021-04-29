@@ -15,6 +15,7 @@ const TrademarkApplication = () => {
 
     const [info, setInfo] = useState({
         //Application Informarion
+        individualOrOrganization: '',
         firstName: '',
         lastName: '',
         organizationName: '',

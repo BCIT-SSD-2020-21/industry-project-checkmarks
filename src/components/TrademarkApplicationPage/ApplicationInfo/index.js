@@ -20,7 +20,6 @@ export default function ApplicationInfo({ navigation, info, setInfo }) {
                 </span>
                 ?
             </Typography>
-
             <div className={classes.formContainer}>
                 <ApplicationForm
                     info={info}
