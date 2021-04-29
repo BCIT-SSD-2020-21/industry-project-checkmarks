@@ -57,86 +57,81 @@ export default function TrademarkSearch() {
             setLoading(false);
         }
     }, [searchTerm, searchResults]);
-    console.log(searchResults);
-    console.log('loading: ', loading);
 
     return (
         <Box className={classes.containerTMSearch}>
-            <Fade in={true} exit={true} timeout={2000}>
-                <Box
-                    boxShadow={2}
-                    className={`${classes.searchBox} ${
-                        searchTerm.length > 0 && classes.searchBoxShifted
-                    }`}
-                >
-                    <FormControl className={classes.form}>
-                        {/* <InputLabel className={classes.label}>
+            {/* <Fade in={true} exit={true} timeout={2000}> */}
+            <Box
+                boxShadow={2}
+                className={`${classes.searchBox} ${
+                    searchTerm.length > 0 && classes.searchBoxShifted
+                }`}
+            >
+                <FormControl className={classes.form}>
+                    {/* <InputLabel className={classes.label}>
                         {'Search for a Trademark...'}
                     </InputLabel> */}
-                        <Input
-                            className={classes.input}
-                            // onClick={(e) => console.log(e.target)}
-                            onChange={(e) => searchTrademark(e.target.value)}
-                            id="searchBox"
-                            placeholder={'Check if your Trademark exists...'}
-                            disableUnderline={true}
-                            startAdornment={
-                                <InputAdornment
-                                    className={classes.adornment}
-                                    position="start"
-                                >
-                                    <SearchTwoToneIcon
-                                        className={classes.icon}
-                                    />
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                <InputAdornment
-                                    className={classes.adornment}
-                                    position="end"
-                                >
-                                    <LoopIcon
-                                        className={
-                                            loading
-                                                ? classes.iconLoading
-                                                : classes.hidden
-                                        }
-                                    />
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                </Box>
-            </Fade>
+                    <Input
+                        className={classes.input}
+                        // onClick={(e) => console.log(e.target)}
+                        onChange={(e) => searchTrademark(e.target.value)}
+                        id="searchBox"
+                        placeholder={'Check if your Trademark exists...'}
+                        disableUnderline={true}
+                        startAdornment={
+                            <InputAdornment
+                                className={classes.adornment}
+                                position="start"
+                            >
+                                <SearchTwoToneIcon className={classes.icon} />
+                            </InputAdornment>
+                        }
+                        endAdornment={
+                            <InputAdornment
+                                className={classes.adornment}
+                                position="end"
+                            >
+                                <LoopIcon
+                                    className={
+                                        loading
+                                            ? classes.iconLoading
+                                            : classes.hidden
+                                    }
+                                />
+                            </InputAdornment>
+                        }
+                    />
+                </FormControl>
+            </Box>
+            {/* </Fade> */}
             {searchTerm.length > 2 && (
-                <Fade in={true} exit={true}>
-                    <Box
-                        className={`${classes.results} ${
-                            searchTerm.length > 0 &&
-                            classes.searchResultsShifted
-                        }`}
-                    >
-                        {searchResults?.length > 0 ? (
-                            // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
+                // <Fade in={true} exit={true}>
+                <Box
+                    className={`${classes.results} ${
+                        searchTerm.length > 0 && classes.searchResultsShifted
+                    }`}
+                >
+                    {searchResults?.length > 0 ? (
+                        // Table; TableRows = { Trademark=title, OwnedBy=owner, CIPO Status=statusDescEn, Image=images[x], NICE Classes = niceClasses[], Date Filed = fileDate }
 
-                            <SearchResults data={searchResults} />
-                        ) : (
-                            // <Fade in={true} exit={true}>
-                            <Card className={classes.noResultContainer}>
-                                <Typography className={classes.noResultText}>
-                                    {`No match found for "${searchTerm}", so this text may not be registered yet as a Trademark.`}
-                                </Typography>
-                                <Typography className={classes.noResultText}>
-                                    {'Would you like to start an application?'}
-                                </Typography>
-                                <Button className={classes.startButton}>
-                                    Absolutely!
-                                </Button>
-                            </Card>
-                            // </Fade>
-                        )}
-                    </Box>
-                </Fade>
+                        <SearchResults data={searchResults} />
+                    ) : (
+                        // <Fade in={true} exit={true}>
+                        <Card className={classes.noResultContainer}>
+                            <Typography className={classes.noResultText}>
+                                {`No match found for "${searchTerm}", so this text may not be registered yet as a Trademark.`}
+                            </Typography>
+                            <Typography className={classes.noResultText}>
+                                {'Would you like to start an application?'}
+                            </Typography>
+                            <Button className={classes.startButton}>
+                                Absolutely!
+                            </Button>
+                        </Card>
+                        // </Fade>
+                    )}
+                </Box>
+                // </Fade>
             )}
         </Box>
     );

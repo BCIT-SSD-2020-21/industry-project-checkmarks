@@ -26,7 +26,6 @@ export default function Landing() {
     const [loggingIn, setLoggingIn] = useState(false);
     const [searching, setSearching] = useState(true);
 
-    console.log(window.innerHeight);
     return (
         <Box className={classes.root}>
             <MenuAppBar
@@ -35,29 +34,29 @@ export default function Landing() {
                 setLoggingIn={setLoggingIn}
                 setSearching={setSearching}
             />
-            <Fade in={true} timeout={6000}>
-                <Box className={classes.section}>
-                    {/* <Fade in={true} exit={true} timeout={1000}> */}
-                    {authenticated ? <UserDashboard /> : <HeaderBanner />}
-                    {/* </Fade> */}
+            {/* <Fade in={true} timeout={6000}> */}
+            <Box className={classes.section}>
+                {/* <Fade in={true} exit={true} timeout={1000}> */}
+                {authenticated ? <UserDashboard /> : <HeaderBanner />}
+                {/* </Fade> */}
 
-                    <Box className={classes.actions}>
-                        <Box className={classes.search}>
-                            {searching ? (
-                                <TrademarkSearch />
-                            ) : (
-                                <IconButton
-                                    className={classes.buttonSearch}
-                                    onClick={() => {
-                                        setSearching(!searching);
-                                        setLoggingIn(false);
-                                    }}
-                                >
-                                    <SearchTwoToneIcon />
-                                </IconButton>
-                            )}
-                        </Box>
-                        {/* {loggingIn ? (
+                <Box className={classes.actions}>
+                    <Box className={classes.search}>
+                        {searching ? (
+                            <TrademarkSearch />
+                        ) : (
+                            <IconButton
+                                className={classes.buttonSearch}
+                                onClick={() => {
+                                    setSearching(!searching);
+                                    setLoggingIn(false);
+                                }}
+                            >
+                                <SearchTwoToneIcon />
+                            </IconButton>
+                        )}
+                    </Box>
+                    {/* {loggingIn ? (
                             <Login />
                         ) : (
                             <Box className={classes.buttons}>
@@ -84,20 +83,20 @@ export default function Landing() {
                                 </Button>
                             </Box>
                         )} */}
-                        <Button
-                            className={classes.buttonStart}
-                            onClick={() => {
-                                setSearching(false);
-                                setLoggingIn(false);
-                                history.push('/application');
-                            }}
-                        >
-                            <PlayArrowTwoToneIcon />
-                            Start Trademark Application
-                        </Button>
-                    </Box>
+                    <Button
+                        className={classes.buttonStart}
+                        onClick={() => {
+                            setSearching(false);
+                            setLoggingIn(false);
+                            history.push('/application');
+                        }}
+                    >
+                        <PlayArrowTwoToneIcon />
+                        Start Trademark Application
+                    </Button>
                 </Box>
-            </Fade>
+            </Box>
+            {/* </Fade> */}
             <About />
             <Pricing />
             <Footer />
