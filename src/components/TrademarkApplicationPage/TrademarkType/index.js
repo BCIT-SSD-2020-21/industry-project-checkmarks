@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import DesignCard from './DesignCard';
-import DetailSelectCard from './DetailSelectCard';
-import TextSearchCard from './TrademarkTypeCard';
+import DesignCard from '../TrademarkType/DesignCard';
+import DetailSelectCard from '../TrademarkType/DetailSelectCard';
+import TextSearchCard from '../TrademarkType/TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const TrademarkForm = ({ navigation, info, setInfo }) => {
@@ -79,11 +79,16 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 }
             />
 
-            {/* <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
-                <p style={{ color: '#DF3A48', fontSize: 12 }}>
-                    For below selections, <strong>Contact with a lawyer</strong>{' '}
-                    is required to process the application.
-                </p> */}
+            {info.isOther && (
+                <div>
+                    <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
+                    <p style={{ color: '#DF3A48', fontSize: 12 }}>
+                        For below selections,{' '}
+                        <strong>Contact with a lawyer</strong> is required to
+                        process the application.
+                    </p>
+                </div>
+            )}
 
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
@@ -102,12 +107,24 @@ const TrademarkForm = ({ navigation, info, setInfo }) => {
                 Helper Section with brief legal information, assisting the
                 client through the process
             </Alert>
-            <Button
-                className={classes.nextButton}
-                onClick={() => navigation.next()}
-            >
-                Next Step
-            </Button>
+            <div className={classes.buttonContainer}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    className={classes.backButton}
+                    onClick={() => navigation.previous()}
+                >
+                    Back
+                </Button>
+                <Button
+                    className={classes.continueButton}
+                    type="submit"
+                    variant="contained"
+                    onClick={() => navigation.next()}
+                >
+                    Continue
+                </Button>
+            </div>
         </Card>
     );
 };
@@ -141,6 +158,48 @@ const useStyles = makeStyles((theme) => ({
             columns: '2 auto',
         },
     },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    continueButton: {
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
+        marginTop: '10%',
+        marginLeft: '3%',
+        width: '30%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 2% 0% 0',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        fontWeight: 'bold',
+        marginTop: '10%',
+        width: '30%',
+        height: '30px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: '1px solid #df3a48',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 3% 0% 0',
+        },
+    },
+    trademarkMessage: {
+        marginBottom: '3%',
+        fontSize: 17,
+    },
     alert: {
         color: '#2a9df4',
         margin: '2% 0 5% 0',
@@ -148,24 +207,5 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             margin: '0',
         },
-    },
-    nextButton: {
-        backgroundColor: '#DF3A48',
-        color: '#FFF',
-        width: '20%',
-        height: '30px',
-        fontWeight: 'bold',
-        fontSize: '10px',
-        borderRadius: '10px',
-        margin: ' 2% auto 4% auto',
-        [theme.breakpoints.down('sm')]: {
-            fontSize: '8px',
-            margin: ' 4% auto 0 auto',
-            width: '30%',
-        },
-    },
-    trademarkMessage: {
-        marginBottom: '3%',
-        fontSize: 17,
     },
 }));
