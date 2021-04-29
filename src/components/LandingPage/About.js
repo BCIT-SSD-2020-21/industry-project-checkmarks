@@ -3,6 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -35,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const cards = [1, 2, 3];
 
 export default function About() {
   const classes = useStyles();
