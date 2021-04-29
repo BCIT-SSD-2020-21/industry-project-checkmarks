@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AskALawyer from '../components/AskALawyer';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
-import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkForm';
+import TrademarkForm from '../components/TrademarkApplicationPage/TrademarkType/index';
 import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndServices';
 import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';
+import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
 
     const [info, setInfo] = useState({
+        //Application Informarion
+        individualOrOrganization: '',
+        firstName: '',
+        lastName: '',
+        organizationName: '',
+        email: '',
+        userStreetAddress: '',
+        userCity: '',
+        userProvince: '',
+        userPostalCode: '',
+        userCountry: '',
+
         //Trademark Type
         isText: false,
         isLogo: false,
@@ -38,6 +50,7 @@ const TrademarkApplication = () => {
 
     //Give each step an id
     const steps = [
+        { id: 'Application-Information' },
         { id: 'Trademark-Type' },
         { id: 'Goods-and-Services' },
         { id: 'International-Information' },
@@ -60,6 +73,14 @@ const TrademarkApplication = () => {
             <div className={classes.root}>
                 {(() => {
                     switch (step.id) {
+                        case 'Application-Information':
+                            return (
+                                <ApplicationInfo
+                                    navigation={navigation}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            );
                         case 'Trademark-Type':
                             return (
                                 <TrademarkForm
