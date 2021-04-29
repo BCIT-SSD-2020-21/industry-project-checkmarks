@@ -1,88 +1,41 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
-    root: {
-      display: 'flex',
-      backgroundColor: theme.palette.secondary.light,
-      overflow: 'hidden',
+
+const useStyles = makeStyles((theme) => ({
+  '@global': {
+    ul: {
+      margin: 0,
+      padding: 0,
+      listStyle: 'none',
     },
-    container: {
-      marginTop: theme.spacing(10),
-      marginBottom: theme.spacing(15),
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    item: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: theme.spacing(0, 5),
-    },
-    title: {
-      marginBottom: theme.spacing(14),
-    },
-    number: {
-      fontSize: 24,
-      fontFamily: theme.typography.fontFamily,
-      color: theme.palette.secondary.main,
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    image: {
-      height: 100,
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(4),
-    },
-    curvyLines: {
-      pointerEvents: 'none',
-      position: 'absolute',
-      top: -180,
-      opacity: 0.7,
-    }
-  });
-  function About(props) {
-    const { classes } = props;
-  
-    return (
-      <section className={classes.root}>
-        <Container className={classes.container}>
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+  heroContent: {
+    padding: theme.spacing(8, 0, 6),
+  },
+}));
+
+export default function Pricing() {
+  const classes = useStyles();
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      {/* Hero unit */}
+        <Container maxWidth="sm" component="main" className={classes.heroContent}>
+          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
             About Us
           </Typography>
-          <div>
-            <Grid container spacing={5}>
-              <Grid item xs={12} md={6}>
-                <div className={classes.item}>
-                  <Typography variant="h5" align="center">
-                  {'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.'}
-                  {''}
-                  </Typography>
-                </div>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <div className={classes.item}>
-                  <img
-                    src="../../images/CheckmarksLogo2.png"
-                    alt="image-about-us"
-                    className={classes.image}
-                  />
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        </Container>
-      </section>
-    );
-  }
-  
-  About.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-  
-  export default withStyles(styles)(About);
+          <Typography variant="h5" align="center" color="textSecondary" component="p">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </Typography>
+        </Container>  
+    </React.Fragment>
+  );
+}
