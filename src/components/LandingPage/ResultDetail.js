@@ -26,7 +26,7 @@ export default function ResultDetail({ data, setSelectedRow }) {
                 Back to List View
             </Button>
             <Box className={classes.split}>
-                {(data.imageUrls || true) && (
+                {(data?.imageUrls || true) && (
                     <Box className={classes.image}>
                         <Typography>{'image'}</Typography>
                     </Box>
@@ -35,9 +35,17 @@ export default function ResultDetail({ data, setSelectedRow }) {
                     <Typography className={classes.title}>
                         {'Tradenark title: ' + data.title}
                     </Typography>
-                    <Typography className={classes.info}>
-                        {'Type: ' + data.tmType}
-                    </Typography>
+                    {data.tmTypeDescriptions.map((type, index) => {
+                        return (
+                            <Typography key={index} className={classes.info}>
+                                {type +
+                                    (data.niceClasses.length === index + 1
+                                        ? ''
+                                        : ', ')}
+                            </Typography>
+                        );
+                    })}
+
                     <Typography className={classes.info}>
                         {'Status: ' + data.statusDescEn}
                     </Typography>
