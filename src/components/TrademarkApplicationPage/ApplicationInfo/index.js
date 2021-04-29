@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import HelpIcon from '@material-ui/icons/Help';
-import { Typography, Tabs, Tab, Card } from '@material-ui/core';
-import HeaderBanner from '../../HeaderBanner';
-import IndividualForm from './IndividualForm';
-import OrganizationForm from './OrganizationForm';
+import { Typography, Card } from '@material-ui/core';
+import ApplicationForm from './ApplicationForm';
 
-export default function Register() {
+export default function ApplicationInfo({ navigation }) {
     const classes = useStyles();
     const [user, setUser] = useState({
         firstName: '',
@@ -17,98 +14,51 @@ export default function Register() {
         confirmPassword: '',
     });
 
-    //handle tab
-    const [tabValue, setTabValue] = useState(0);
-    const handleTabChange = (_, newValue) => {
-        setTabValue(newValue);
-    };
-
     return (
-        <div className={classes.root}>
-            {/* <div className={classes.lawyerText}>
-                <HelpIcon /> <span className={classes.text}>Ask a lawyer</span>
+        <Card className={classes.card}>
+            <h1 className={classes.title}> Application Information</h1>
+            <Typography>
+                Are you registering as an{' '}
+                <span style={{ color: '#DF3A48' }}>
+                    <strong>individual </strong>{' '}
+                </span>
+                , or representing an{' '}
+                <span style={{ color: '#DF3A48' }}>
+                    <strong>organization </strong>{' '}
+                </span>
+                ?
+            </Typography>
+
+            <div className={classes.formContainer}>
+                <ApplicationForm
+                    user={user}
+                    setUser={setUser}
+                    navigation={navigation}
+                />
             </div>
-            <HeaderBanner /> */}
-
-            <Card className={classes.card}>
-                <Typography className={classes.title}>Sign up</Typography>
-                <Typography className={classes.question}>
-                    Are you registering as an individual or representing an
-                    organization?
-                </Typography>
-                <div className={classes.formContainer}>
-                    {/* /////////////////////////////// Tab /////////////////////////////////////////////*/}
-                    <Tabs
-                        variant="fullWidth"
-                        classes={{
-                            indicator: classes.indicator,
-                        }}
-                        className={classes.tabs}
-                        value={tabValue}
-                        textColor="inherit"
-                        onChange={handleTabChange}
-                    >
-                        <Tab label="Individual" />
-                        <Tab label="Organization" />
-                    </Tabs>
-
-                    {tabValue === 0 ? (
-                        /////////////////////////////// Register for individual /////////////////////////////////////////////
-                        <IndividualForm user={user} setUser={setUser} />
-                    ) : (
-                        /////////////////////////////// Register for organization ////////////////////////////////////////////
-                        <OrganizationForm user={user} setUser={setUser} />
-                    )}
-                </div>
-            </Card>
-        </div>
+        </Card>
     );
 }
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     margin: '5%',
-    // },
-    lawyerText: {
-        display: 'flex',
-        alignItems: 'center',
-        color: '#df3a48',
-        fontWeight: 'bold',
-        position: 'absolute',
-        right: 20,
-        top: 10,
-    },
-    logo: {
-        marginTop: '15%',
-        [theme.breakpoints.up('sm')]: {
-            marginTop: '1%',
-        },
-    },
     card: {
-        width: '80%',
+        margin: '3%',
+        width: '70%',
+        border: '1px solid #696969',
+        padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
-            marginTop: '1%',
-            width: '50%',
+            width: '60%',
+            padding: '0 2% ',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            padding: '0 5% 2% 5%',
         },
     },
     formContainer: {
         marginTop: '5%',
     },
-    tabs: {
-        marginBottom: '5%',
-        indicator: {
-            backgroundColor: '#df3a48',
-        },
-    },
     title: {
-        margin: '5%',
-        fontSize: '20px',
-        fontWeight: 'bold',
         color: '#df3a48',
-        textAlign: 'center',
+        marginBottom: '5%',
     },
     question: {
         marginTop: '5%',

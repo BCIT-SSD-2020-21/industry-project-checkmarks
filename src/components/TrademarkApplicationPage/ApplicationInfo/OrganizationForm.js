@@ -6,18 +6,15 @@ import { useHistory } from 'react-router-dom';
 
 export default function IndividualForm({ user, setUser }) {
     const classes = useStyles();
-    const history = useHistory();
 
     //handle register as organzational
     const handleRegister = async (event) => {
         event.preventDefault();
-        history.push('/application');
     };
 
     //handle Existing User
     const haveAccountButton = async (event) => {
         event.preventDefault();
-        history.push('/');
     };
     console.log(user);
     return (

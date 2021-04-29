@@ -2,23 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, FormControl } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
 
-export default function IndividualForm({ user, setUser }) {
+export default function IndividualForm({ user, setUser, navigation }) {
     const classes = useStyles();
-    const history = useHistory();
-
-    //handle register as individual
-    const handleRegister = async (event) => {
-        event.preventDefault();
-        history.push('/application');
-    };
-
-    //handle Existing User
-    const haveAccountButton = async (event) => {
-        event.preventDefault();
-        history.push('/');
-    };
 
     return (
         <div>
@@ -110,22 +96,12 @@ export default function IndividualForm({ user, setUser }) {
                 Helper section with brief legal information, assisting the
                 client through the process.
             </Alert>
-            <div className={classes.submitButtonContainer}>
+            <div className={classes.nextButtonContainer}>
                 <Button
-                    type="submit"
-                    variant="contained"
-                    onClick={haveAccountButton}
-                    className={classes.haveAccountButton}
+                    className={classes.nextButton}
+                    onClick={() => navigation.next()}
                 >
-                    Back
-                </Button>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    className={classes.submitButton}
-                    onClick={handleRegister}
-                >
-                    Sign Up
+                    Next Step
                 </Button>
             </div>
         </div>
@@ -190,5 +166,25 @@ const useStyles = makeStyles((theme) => ({
         margin: '2% auto',
         color: '#2a9df4',
         fontSize: '12px',
+    },
+    nextButtonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    nextButton: {
+        backgroundColor: '#DF3A48',
+        color: '#FFF',
+        width: '20%',
+        height: '30px',
+        fontWeight: 'bold',
+        fontSize: '10px',
+        borderRadius: '10px',
+        margin: '0 auto 4% auto',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '8px',
+            margin: ' 4% auto 0 auto',
+            width: '30%',
+        },
     },
 }));

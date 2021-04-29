@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AskALawyer from '../components/AskALawyer';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
@@ -62,17 +61,17 @@ const TrademarkApplication = () => {
             <div className={classes.root}>
                 {(() => {
                     switch (step.id) {
-                        case 'Trademark-Type':
+                        case 'Application-Information':
                             return (
-                                <TrademarkForm
+                                <ApplicationInfo
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
                                 />
                             );
-                        case 'Application-Information':
+                        case 'Trademark-Type':
                             return (
-                                <ApplicationInfo
+                                <TrademarkForm
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
