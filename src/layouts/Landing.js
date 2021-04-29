@@ -91,7 +91,6 @@ export default function Landing() {
                                 setLoggingIn(false);
                                 history.push('/application');
                             }}
-                            boxShadow={2}
                         >
                             <PlayArrowTwoToneIcon />
                             Start Trademark Application
