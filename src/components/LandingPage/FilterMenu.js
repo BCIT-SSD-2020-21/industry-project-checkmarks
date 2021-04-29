@@ -36,8 +36,6 @@ export default function FilterMenu({ dataKey, label }) {
         setAnchorEl(null);
     };
 
-    console.log('label[3]: ', label[3]);
-
     return (
         <Box>
             <Box className={classes.container}>
