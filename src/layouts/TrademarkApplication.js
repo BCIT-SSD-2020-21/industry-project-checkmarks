@@ -14,6 +14,17 @@ const TrademarkApplication = () => {
     const classes = useStyles();
 
     const [info, setInfo] = useState({
+        //Application Informarion
+        firstName: '',
+        lastName: '',
+        organizationName: '',
+        email: '',
+        userStreetAddress: '',
+        userCity: '',
+        userProvince: '',
+        userPostalCode: '',
+        userCountry: '',
+
         //Trademark Type
         isText: false,
         isLogo: false,

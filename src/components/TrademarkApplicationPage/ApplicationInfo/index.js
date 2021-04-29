@@ -3,16 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Card } from '@material-ui/core';
 import ApplicationForm from './ApplicationForm';
 
-export default function ApplicationInfo({ navigation }) {
+export default function ApplicationInfo({ navigation, info, setInfo }) {
     const classes = useStyles();
-    const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
-        organizationName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
 
     return (
         <Card className={classes.card}>
@@ -31,8 +23,8 @@ export default function ApplicationInfo({ navigation }) {
 
             <div className={classes.formContainer}>
                 <ApplicationForm
-                    user={user}
-                    setUser={setUser}
+                    info={info}
+                    setInfo={setInfo}
                     navigation={navigation}
                 />
             </div>

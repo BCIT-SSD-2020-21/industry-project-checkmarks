@@ -158,14 +158,6 @@ const useStyles = makeStyles((theme) => ({
             columns: '2 auto',
         },
     },
-    alert: {
-        color: '#2a9df4',
-        margin: '2% 0 5% 0',
-        fontSize: '12px',
-        [theme.breakpoints.up('sm')]: {
-            margin: '0',
-        },
-    },
     buttonContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -184,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
             margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '6% 3% 0% 0',
+            margin: '6% 2% 0% 0',
         },
     },
     backButton: {
@@ -207,5 +199,13 @@ const useStyles = makeStyles((theme) => ({
     trademarkMessage: {
         marginBottom: '3%',
         fontSize: 17,
+    },
+    alert: {
+        color: '#2a9df4',
+        margin: '2% 0 5% 0',
+        fontSize: '12px',
+        [theme.breakpoints.up('sm')]: {
+            margin: '0',
+        },
     },
 }));
