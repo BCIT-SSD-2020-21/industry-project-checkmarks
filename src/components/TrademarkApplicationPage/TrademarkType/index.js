@@ -176,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
             margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '6% 2% 5% 0',
+            margin: '6% 2% 1% 0',
         },
     },
     backButton: {
@@ -193,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
             margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '6% 3% 0% 0',
+            margin: '6% 3% 1% 0',
         },
     },
     trademarkMessage: {
