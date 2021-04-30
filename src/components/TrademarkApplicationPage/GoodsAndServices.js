@@ -58,58 +58,54 @@ export default function GoodsAndServices({ navigation }) {
         });
     };
     // console.log('terms: ', terms);
-    console.log('termTableData:', termTableData);
     const addSelectedTerms = (evt, data) => {
-        console.log('addSelectedTerms clicked');
-        console.log('evt: ', evt);
-        console.log('data: ', data);
         setSelectedTerms(data);
     };
     const removeTerm = (term) => {
-        console.log('remove term', term);
         // const newSelectedTerms = selectedTerms;
         let newSelectedTerms = selectedTerms.filter(
             (item) => item.termNumber !== term.termNumber
         );
         setSelectedTerms(newSelectedTerms);
     };
-    console.log('selectedTerms: ', selectedTerms);
+    // console.log('selectedTerms: ', selectedTerms);
     // filter selectedTerms, get list of selected classes (no duplicates)
+    console.log(selectedTerms);
     useEffect(() => {
-        if (selectedTerms) {
-            // TM Types in data
-            // const dataTMTypes = [];
-            const classesSelected = [];
-            selectedTerms.map((term) => {
-                console.log('useEffect, term: ', term);
-                if (classesSelected.length === 0) {
+        // setSelectedTerms([]);
+        // setSelectedClasses([]);
+        // console.log('useEffect, selectedTerms: ', selectedTerms);
+        const classesSelected = [];
+        if (selectedTerms.length > 0) {
+            selectedTerms.forEach((term) => {
+                // console.log("term: ", term)
+                let termClassExists = false;
+                classesSelected.forEach((niceClass) => {
+                    console.log(
+                        'niceClass: ',
+                        term.niceClass,
+                        niceClass.number
+                    );
+                    if (niceClass.number === term.termClass) {
+                        termClassExists = true;
+                    }
+                });
+                if (!termClassExists) {
                     classesSelected.push(term.niceClasses[0]);
-                } else {
-                    classesSelected.forEach((niceClass) => {
-                        console.log('useEffect, niceClass: ', niceClass);
-                        if (niceClass.number === term.termClass) {
-                        } else classesSelected.push(term.niceClasses[0]);
-                    });
                 }
-                // if (!classesSelected.includes(term.termClass)) {
-                //     classesSelected.push(term.niceClasses[0]);
-                // }
+                termClassExists = false;
             });
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
                     (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
                 );
+            } else if (classesSelected.length === 0) {
+                setTotalAmount(0);
             }
         }
-    }, [selectedTerms, totalAmount]);
-    console.log('setSelectedClasses: ', selectedClasses);
-    console.log('totalAmount: ', totalAmount);
-
-    console.log(
-        'index test: ',
-        selectedTerms[selectedClasses?.indexOf(selectedClasses[0]?.number)]
-    );
+    }, [selectedTerms]);
+    // console.log('selectedClasses: ', selectedClasses);
 
     return (
         // let amountText = '$' + 1500;
@@ -190,6 +186,11 @@ export default function GoodsAndServices({ navigation }) {
                         options={{
                             selection: true,
                             showSelectAllCheckbox: false,
+                            // selectionProps: (rowData) => ({
+                            //     checked: rowData.checked === true,
+                            //     onClick: (event, rowData) =>
+                            //         this.handleCheckboxClick(event, rowData),
+                            // }),
                         }}
                         actions={[
                             {
@@ -218,70 +219,72 @@ export default function GoodsAndServices({ navigation }) {
                             </Typography>
 
                             <List>
-                                {selectedClasses?.map((niceClass, index) => (
-                                    <div key={index}>
-                                        <h4>
-                                            {
-                                                // Selected Class Heading  (Number + Shortmame)
-                                                'Class: ' +
-                                                    niceClass.name +
-                                                    ' - ' +
-                                                    niceClass?.descriptions[0]
-                                                        .shortname
-                                                // this.getClassShortName(
-                                                //     classNum
-                                                // )
-                                            }
-                                        </h4>
-                                        <ListItem className="termDisplay">
-                                            {selectedTerms
-                                                // [selectedClasses?.indexOf(
-                                                //         classNum.number)]?
-                                                .map((term, index) => {
-                                                    if (
-                                                        term.termClass ===
-                                                        niceClass.number
-                                                    ) {
-                                                        return (
-                                                            <div
-                                                                key={index}
-                                                                style={{
-                                                                    margin:
-                                                                        '4px',
-                                                                }}
-                                                            >
-                                                                <ListItemText
-                                                                    primary={
-                                                                        'Term:'
-                                                                    }
-                                                                    secondary={
-                                                                        term.termName
-                                                                    }
-                                                                />
-                                                                <Button
-                                                                    color="secondary"
-                                                                    variant="contained"
-                                                                    onClick={() =>
-                                                                        removeTerm(
-                                                                            term
-                                                                        )
-                                                                    }
-                                                                    // onClick={() =>
-                                                                    //     this.handleRemove(
-                                                                    //         classNum,
-                                                                    //         term
-                                                                    //     )
-                                                                    // }
+                                {selectedClasses?.length > 0 &&
+                                    selectedClasses.map((niceClass, index) => (
+                                        <div key={index}>
+                                            <h4>
+                                                {
+                                                    // Selected Class Heading  (Number + Shortmame)
+                                                    'Class: ' +
+                                                        niceClass?.name +
+                                                        ' - ' +
+                                                        niceClass
+                                                            ?.descriptions[0]
+                                                            .shortname
+                                                    // this.getClassShortName(
+                                                    //     classNum
+                                                    // )
+                                                }
+                                            </h4>
+                                            <ListItem className="termDisplay">
+                                                {selectedTerms
+                                                    // [selectedClasses?.indexOf(
+                                                    //         classNum.number)]?
+                                                    .map((term, index) => {
+                                                        if (
+                                                            term.termClass ===
+                                                            niceClass.number
+                                                        ) {
+                                                            return (
+                                                                <div
+                                                                    key={index}
+                                                                    style={{
+                                                                        margin:
+                                                                            '4px',
+                                                                    }}
                                                                 >
-                                                                    Remove
-                                                                </Button>
-                                                            </div>
-                                                        );
-                                                    }
-                                                })}
-                                        </ListItem>
-                                    </div>
-                                ))}
+                                                                    <ListItemText
+                                                                        primary={
+                                                                            'Term:'
+                                                                        }
+                                                                        secondary={
+                                                                            term.termName
+                                                                        }
+                                                                    />
+                                                                    <Button
+                                                                        color="secondary"
+                                                                        variant="contained"
+                                                                        onClick={() =>
+                                                                            removeTerm(
+                                                                                term
+                                                                            )
+                                                                        }
+                                                                        // onClick={() =>
+                                                                        //     this.handleRemove(
+                                                                        //         classNum,
+                                                                        //         term
+                                                                        //     )
+                                                                        // }
+                                                                    >
+                                                                        Remove
+                                                                    </Button>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    })}
+                                            </ListItem>
+                                        </div>
+                                    ))}
                             </List>
                         </CardContent>
                     </Card>
