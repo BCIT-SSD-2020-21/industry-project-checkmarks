@@ -1,53 +1,48 @@
 import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../styles/Themes';
 
 const progressStyles = makeStyles((theme) => ({
     root: {
-        // display: 'flex',
-        // flexDirection: 'row',
-        // justifyContent: 'space-between',
-        // alignItems: 'center',
-        // border: '1px solid black',
-        // borderRadius: '25px',
-        backgroundColor: 'red',
-        // padding: '3px',
-        padding: '1.5%',
-        // borderRadius: '25px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: checkmarksTheme.buttonTextPrimary,
+        // padding: '12px',
         border: '1px solid black',
+        padding: '20px',
         height: '34px',
         width: '100%',
+        ['@media (min-height:735px)']: { padding: '12px' },
+        ['@media (min-height:812px)']: { padding: '7px' },
     },
     container: {
-        backgroundColor: 'white',
+        backgroundColor: checkmarksTheme.inputBackground,
         borderRadius: '25px',
-        border: '1px solid black',
+        border: `1px solid ${checkmarksTheme.textLabel}`,
         height: '32px',
-
         position: 'relative',
-        margin: 'auto',
+        // margin: '2% auto',
         width: '80%',
     },
     progress: {
-        // borderRadius: '25px',
-        backgroundColor: 'green',
-        border: '1px solid black',
-        // margin: 'auto',
-
+        backgroundColor: checkmarksTheme.buttonPrimary,
+        border: `0.5px solid ${checkmarksTheme.textLabel}`,
+        borderRadius: '25px 0 0 25px',
         height: '30px',
-        // width: '30px',
     },
     value: {
         backgroundColor: '#00000000',
         textAlign: 'center',
-        // border: '1px solid blue',
+        fontSize: '18px',
         fontWeight: 'bold',
         position: 'absolute',
         top: '0%',
         left: '50%',
-        marginTop: '5px',
-        transform: 'translate(-50%, 0)',
-        // background-color: #fff,
+        marginTop: '3px',
+        // transform: 'translate(-50%, 0)',
         zIndex: 1,
     },
 }));
@@ -61,9 +56,33 @@ export default function Progress({ step, steps }) {
             <Box className={classes.container}>
                 <Box
                     className={classes.progress}
-                    style={{ width: `${progressValue}%` }}
+                    style={{
+                        // animation: '$progressStep 1s',
+                        transition: 'width 1s ease-in-out',
+                        width: `${progressValue}%`,
+
+                        // '@keyframes progressStep': {
+                        //     from: {
+                        //         width: `${
+                        //             progressValue -
+                        //             Math.round(100 / steps.length)
+                        //         }%`,
+                        //     },
+                        //     to: { width: `${progressValue}%` },
+                        // },
+                    }}
                 ></Box>
-                <Typography className={classes.value}>
+                <Typography
+                    className={classes.value}
+                    style={{
+                        color: `${
+                            progressValue > 55
+                                ? checkmarksTheme.buttonTextPrimary
+                                : checkmarksTheme.buttonTextSecondary
+                        }`,
+                        transition: 'color 1s ease-in-out',
+                    }}
+                >
                     {progressValue + '%'}
                 </Typography>
             </Box>
