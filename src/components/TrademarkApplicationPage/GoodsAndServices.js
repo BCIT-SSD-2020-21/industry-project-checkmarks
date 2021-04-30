@@ -97,7 +97,9 @@ export default function GoodsAndServices({ navigation }) {
             });
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
-                setTotalAmount(1500 + 100 * (classesSelected.length - 1));
+                setTotalAmount(
+                    (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
+                );
             }
         }
     }, [selectedTerms, totalAmount]);
