@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
+    Checkbox,
     FormControl,
     TextField,
     RadioGroup,
@@ -9,6 +10,7 @@ import {
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import { checkmarksTheme } from '../../../styles/Themes';
 
 export default function IndividualForm({ info, setInfo, navigation }) {
     const classes = useStyles();
@@ -211,6 +213,28 @@ export default function IndividualForm({ info, setInfo, navigation }) {
                         })
                     }
                 />
+                <Alert severity="info" className={classes.alertRed}>
+                    Using Checkmarks does not guarantee that your Trademark will
+                    be registered. Your application will be reviewed by a lawyer
+                    prior to submission, however approval and registration
+                    determined upon submission to the Canadian Intellectual
+                    Property Office.
+                </Alert>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={info.agreedTermsOfService}
+                            onChange={() =>
+                                setInfo({
+                                    ...info,
+                                    agreedTermsOfService: !info.agreedTermsOfService,
+                                })
+                            }
+                            name="AgreeTermsOfService"
+                        />
+                    }
+                    label="I understand."
+                />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
@@ -307,5 +331,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             margin: '0 auto 5% auto',
         },
+    },
+    alertRed: {
+        color: checkmarksTheme.buttonTextSecondary,
+        // backgroundColor: checkmarksTheme.bgSecondary,
     },
 }));
