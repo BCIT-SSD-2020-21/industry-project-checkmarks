@@ -25,7 +25,7 @@ export default function GoodsAndServices({ navigation }) {
 
     const [terms, setTerms] = useState([]); // complete info on each term
     const [termTableData, setTermTableData] = useState([]); // used to render on Table
-    const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
+    // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
 
     const [classShortNames, setClassShortNames] = useState([]); // needed?
     const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Rerms summary
@@ -33,6 +33,8 @@ export default function GoodsAndServices({ navigation }) {
     const [searchError, setSearchError] = useState('');
     const [searchTerm, setSearchTerm] = useState(''); // user's search
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
+
+    const [totalAmount, setTotalAmount] = useState(0);
 
     // Below Commented Code Block Here (Ref# 12345678)
     // Temporary Test Data: services/sampleTermSearch.json
@@ -94,9 +96,13 @@ export default function GoodsAndServices({ navigation }) {
                 // }
             });
             setSelectedClasses(classesSelected);
+            if (classesSelected.length > 0) {
+                setTotalAmount(1500 + 100 * (classesSelected.length - 1));
+            }
         }
-    }, [selectedTerms]);
+    }, [selectedTerms, totalAmount]);
     console.log('setSelectedClasses: ', selectedClasses);
+    console.log('totalAmount: ', totalAmount);
 
     console.log(
         'index test: ',
@@ -282,10 +288,10 @@ export default function GoodsAndServices({ navigation }) {
                         <CardContent>
                             <Typography variant="h6">
                                 <b>Amount:</b>
-                                {/* {amountText} */}
                             </Typography>
                             <Typography variant="body1" component="p">
                                 {/* {additionalNICE} */}
+                                {`$${totalAmount.toString()}`}
                             </Typography>
                         </CardContent>
                     </Card>
