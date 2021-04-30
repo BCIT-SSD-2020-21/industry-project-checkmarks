@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'space-around',
+        // justifyContent: 'flex-start',
         alignItems: 'center',
         minHeight: window.innerHeight,
         width: window.innerWidth,
@@ -147,9 +147,12 @@ const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        // justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: '15%',
+        marginTop: '60px',
+        minHeight: window.innerHeight,
+        width: window.innerWidth,
     },
     title: {
         display: 'flex',
