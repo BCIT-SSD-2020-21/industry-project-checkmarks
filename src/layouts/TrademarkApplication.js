@@ -27,6 +27,7 @@ const TrademarkApplication = () => {
         userProvince: '',
         userPostalCode: '',
         userCountry: '',
+        agreedTermsOfService: false,
 
         //Trademark Type
         isText: false,

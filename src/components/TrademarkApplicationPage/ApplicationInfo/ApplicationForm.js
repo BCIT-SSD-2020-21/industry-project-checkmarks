@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+    Box,
     Button,
+    Checkbox,
     FormControl,
     TextField,
     RadioGroup,
@@ -9,6 +11,7 @@ import {
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import { checkmarksTheme } from '../../../styles/Themes';
 
 export default function IndividualForm({ info, setInfo, navigation }) {
     const classes = useStyles();
@@ -216,10 +219,35 @@ export default function IndividualForm({ info, setInfo, navigation }) {
                 Helper section with brief legal information, assisting the
                 client through the process.
             </Alert>
+            <Box className={classes.disclaimer}>
+                <Alert severity="info" className={classes.alertRed}>
+                    Using Checkmarks does not guarantee that your Trademark will
+                    be registered. Your application will be reviewed by a lawyer
+                    prior to submission, however approval and registration
+                    determined upon submission to the Canadian Intellectual
+                    Property Office.
+                </Alert>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={info.agreedTermsOfService}
+                            onChange={() =>
+                                setInfo({
+                                    ...info,
+                                    agreedTermsOfService: !info.agreedTermsOfService,
+                                })
+                            }
+                            name="AgreeTermsOfService"
+                        />
+                    }
+                    label="I understand."
+                />
+            </Box>
             <div className={classes.nextButtonContainer}>
                 <Button
                     className={classes.nextButton}
                     onClick={() => navigation.next()}
+                    // disabled={true}
                 >
                     Next Step
                 </Button>
@@ -307,5 +335,14 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             margin: '0 auto 5% auto',
         },
+    },
+    disclaimer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    alertRed: {
+        color: checkmarksTheme.buttonTextSecondary,
+        // backgroundColor: checkmarksTheme.bgSecondary,
     },
 }));
