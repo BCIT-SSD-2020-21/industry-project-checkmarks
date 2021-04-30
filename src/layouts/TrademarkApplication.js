@@ -141,7 +141,8 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         // justifyContent: 'space-around',
         alignItems: 'center',
-        width: window.innerWindow,
+        minHeight: window.innerHeight,
+        width: window.innerWidth,
     },
     container: {
         display: 'flex',
