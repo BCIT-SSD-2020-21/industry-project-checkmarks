@@ -18,6 +18,7 @@ import {
     TextField,
 } from '@material-ui/core';
 import { searchTerms } from '../../services/cipo';
+import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({ navigation }) {
     const classes = useStyles();
@@ -31,9 +32,17 @@ export default function GoodsAndServices({ navigation }) {
     const [open, setOpen] = useState(false);
 
     // Below Commented Code Block Here (Ref# 12345678)
+    // Temporary Test Data: services/sampleTermSearch.json
+    console.log('sampleTermSearch: ', sampleTermSearch.result);
     const getSearchTerms = async () => {
-        const result = await searchTerms(searchTerm, 'service', null, null);
-        setTerms(result);
+        const termResults = [];
+        sampleTermSearch.result.forEach((result) => {
+            result.resultsReturned.map((term) => {
+                termResults.push(term);
+            });
+        });
+        console.log(termResults);
+        setTerms(termResults);
     };
 
     return (
