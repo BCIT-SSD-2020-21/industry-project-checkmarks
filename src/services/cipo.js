@@ -16,15 +16,16 @@ export const searchTerms = async (
         termType ? '&termType=' + termType : ''
     }${searchType ? '&searchType=' + searchType : ''}${
         niceClass ? '&niceClasses=' + niceClass : ''
-    }`;
+    }&api_key=2fdf2b0b9560b5e71f707c1ff726415c`;
     console.log(url);
     const response = await fetch(url, {
         method: 'GET',
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
-            'API-KEY': '2fdf2b0b9560b5e71f707c1ff726415c',
+            // 'API-KEY': '2fdf2b0b9560b5e71f707c1ff726415c',
             // Accept: 'application/json',
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
+            // Authorization: 'Bearer 2fdf2b0b9560b5e71f707c1ff726415c',
         },
     })
         // .then((response) => response.json())
