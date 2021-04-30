@@ -15,14 +15,14 @@ export default function HeaderBanner() {
 
     return (
         <Box className={classes.container}>
-            <Fade in={true} exit={true} timeout={2500}>
-                <img
-                    className={classes.image}
-                    onClick={() => toLanding()}
-                    src={logo}
-                    alt="Logo"
-                />
-            </Fade>
+            {/* <Fade in={true} exit={true} timeout={2500}> */}
+            <img
+                className={classes.image}
+                onClick={() => toLanding()}
+                src={logo}
+                alt="Logo"
+            />
+            {/* </Fade> */}
         </Box>
     );
 }

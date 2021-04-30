@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
+import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
 import PaymentForm from '../components/TrademarkApplicationPage/PaymentForm';
@@ -50,13 +52,13 @@ const TrademarkApplication = () => {
 
     //Give each step an id
     const steps = [
-        { id: 'Application-Information' },
-        { id: 'Trademark-Type' },
-        { id: 'Goods-and-Services' },
-        { id: 'International-Information' },
-        { id: 'Confirmation' },
-        { id: 'Payment' },
-        { id: 'Success' },
+        { id: 'Application-Information', num: 1 },
+        { id: 'Trademark-Type', num: 2 },
+        { id: 'Goods-and-Services', num: 3 },
+        { id: 'International-Information', num: 4 },
+        { id: 'Confirmation', num: 5 },
+        { id: 'Payment', num: 6 },
+        { id: 'Success', num: 7 },
     ];
 
     //use useStep from hook-helper to navigate the steps
@@ -66,11 +68,12 @@ const TrademarkApplication = () => {
     });
 
     return (
-        <>
-            <div className={classes.logo}>
+        <Paper className={classes.root}>
+            {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
-            </div>
-            <div className={classes.root}>
+            </div> */}
+            <Progress step={step} steps={steps} />
+            <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
                         case 'Application-Information':
@@ -126,7 +129,7 @@ const TrademarkApplication = () => {
                     }
                 })()}
             </div>
-        </>
+        </Paper>
     );
 };
 
@@ -136,8 +139,20 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        // justifyContent: 'flex-start',
         alignItems: 'center',
+        minHeight: window.innerHeight,
+        width: window.innerWidth,
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        // justifyContent: 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: '60px',
+        minHeight: window.innerHeight,
+        width: window.innerWidth,
     },
     title: {
         display: 'flex',

@@ -215,8 +215,8 @@ export default function MenuAppBar({
     };
 
     const [switchState, setSwitchState] = useState({
-        switchCheckedA: true,
-        switchCheckedB: true,
+        switchCheckedA: false,
+        switchCheckedB: false,
     });
     const switchChange = (e) => {
         setSwitchState({ ...switchState, [e.target.name]: e.target.checked });
@@ -338,7 +338,7 @@ export default function MenuAppBar({
                                     SignOut
                                 </MenuItem>
                             ) : (
-                                <>
+                                <Box>
                                     <MenuItem
                                         className={classes.menuItem}
                                         onClick={() => {
@@ -370,7 +370,7 @@ export default function MenuAppBar({
                                         />
                                         Register
                                     </MenuItem> */}
-                                </>
+                                </Box>
                             )}
 
                             {/* <MenuItem className={classes.menuItem}>

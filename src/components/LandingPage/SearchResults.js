@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ResultDetail from './ResultDetail';
+import FilterMenu from './FilterMenu';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -77,24 +78,24 @@ class MuiVirtualizedTable extends React.PureComponent {
         // ,onClick
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
-            <Fade in={true} exit={true} timeout={1000}>
-                <TableCell
-                    // onClick={() => console.log(rowIndex)}
-                    // onRowClick={(e) => console.log(e.target)} // ADDED
-                    component="div"
-                    className={clsx(classes.tableCell, classes.flexContainer, {
-                        [classes.noClick]: onRowClick == null,
-                    })}
-                    variant="body"
-                    style={{ height: rowHeight }}
-                    align={
-                        (columnIndex != null && columns[columnIndex].numeric) ||
-                        false
-                            ? 'right'
-                            : 'left'
-                    }
-                >
-                    {/* <IconButton
+            // <Fade in={true} exit={true} timeout={1000}>
+            <TableCell
+                // onClick={() => console.log(rowIndex)}
+                // onRowClick={(e) => console.log(e.target)} // ADDED
+                component="div"
+                className={clsx(classes.tableCell, classes.flexContainer, {
+                    [classes.noClick]: onRowClick == null,
+                })}
+                variant="body"
+                style={{ height: rowHeight }}
+                align={
+                    (columnIndex != null && columns[columnIndex].numeric) ||
+                    false
+                        ? 'right'
+                        : 'left'
+                }
+            >
+                {/* <IconButton
                         aria-label="expand row"
                         size="small"
                         onClick={() => setOpen(!open)}
@@ -105,15 +106,14 @@ class MuiVirtualizedTable extends React.PureComponent {
                             <KeyboardArrowDownIcon />
                         )}
                     </IconButton> */}
-                    {cellData}
-                </TableCell>
-            </Fade>
+                {cellData}
+            </TableCell>
+            // </Fade>
         );
     };
 
-    headerRenderer = ({ label, columnIndex }) => {
+    headerRenderer = ({ label, columnIndex, dataKey }) => {
         const { headerHeight, columns, classes } = this.props;
-
         return (
             <TableCell
                 component="div"
@@ -126,7 +126,14 @@ class MuiVirtualizedTable extends React.PureComponent {
                 style={{ height: headerHeight }}
                 align={columns[columnIndex].numeric || false ? 'right' : 'left'}
             >
-                <span>{label}</span>
+                <span>
+                    <FilterMenu
+                        dataKey={dataKey}
+                        label={label}
+                        // onClick={onFilterClick}
+                    />
+                    {/* {label} */}
+                </span>
             </TableCell>
         );
     };
@@ -200,17 +207,41 @@ const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 // ---
 
 export default function SearchResults({ data }) {
-    const [detailedView, setDetailedView] = useState(false);
+    // const [detailedView, setDetailedView] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-    // useEffect(() => {
+    const [filterSelection, setFilterSelection] = useState(null);
+    const [menuSelection, setMenuSelection] = useState(null);
 
-    // })
+    // TM Types in data
+    const dataTMTypes = [];
+    data.map((tm) => {
+        tm.tmTypeDescriptions.map((item) => {
+            if (!dataTMTypes.includes(item)) {
+                dataTMTypes.push(item);
+            }
+        });
+    });
+    // Statuses in data
+    const dataStatuses = [];
+    data.map((tm) => {
+        if (!dataStatuses.includes(tm.statusDescEn)) {
+            dataStatuses.push(tm.statusDescEn);
+        }
+    });
+    // File Date options
+    const sortOptions = ['Sort Ascending', 'Sort Descending'];
 
     // const rowClick = (e) => {
     //     console.log('clicked', e.target);
     // };
+    const onFilterClick = (e) => {
+        // console.log('filter clicked', e.currentTarget.value);
+        setFilterSelection(e.currentTarget.value);
+    };
+    const onMenuSelection = (e) => {
+        setMenuSelection(e.currentTarget.value);
+    };
 
-    console.log(selectedRow);
     return (
         <Paper
             style={{
@@ -225,21 +256,31 @@ export default function SearchResults({ data }) {
                     rowCount={data.length} // row or data
                     rowGetter={({ index }) => data[index]} // row or data
                     onRowClick={(e) => setSelectedRow(e.index)}
+                    onFilterClick={onFilterClick}
                     columns={[
                         {
-                            width: (window.innerWidth * 1) / 2,
-                            label: 'Title',
+                            width: (window.innerWidth * 1) / 3,
+                            label: ['Title', '', onFilterClick, []],
                             dataKey: 'title',
                         },
                         {
-                            width: (window.innerWidth * 1) / 4,
-                            label: 'Status',
-                            dataKey: 'statusDescEn',
-                            // numeric: true,
+                            width: (window.innerWidth * 1) / 6,
+                            label: ['TM Types', '', onFilterClick, dataTMTypes],
+                            dataKey: 'tmTypeDescriptions',
                         },
                         {
-                            width: (window.innerWidth * 1) / 4,
-                            label: 'File Date (yyyy-mm-dd)',
+                            width: (window.innerWidth * 1) / 6,
+                            label: ['Status', '', onFilterClick, dataStatuses],
+                            dataKey: 'statusDescEn',
+                        },
+                        {
+                            width: (window.innerWidth * 1) / 3,
+                            label: [
+                                'File Date',
+                                '(yyyy-mm-dd)',
+                                onFilterClick,
+                                sortOptions,
+                            ],
                             dataKey: 'fileDateFormatted',
                             // numeric: true,
                         },
