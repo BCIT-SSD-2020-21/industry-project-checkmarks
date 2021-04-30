@@ -33,7 +33,7 @@ export default function GoodsAndServices({ navigation }) {
 
     // Below Commented Code Block Here (Ref# 12345678)
     // Temporary Test Data: services/sampleTermSearch.json
-    console.log('sampleTermSearch: ', sampleTermSearch.result);
+    // console.log('sampleTermSearch: ', sampleTermSearch.result);
     const getSearchTerms = async () => {
         const termResults = [];
         sampleTermSearch.result.forEach((result) => {
@@ -41,9 +41,16 @@ export default function GoodsAndServices({ navigation }) {
                 termResults.push(term);
             });
         });
-        console.log(termResults);
         setTerms(termResults);
     };
+    console.log('terms: ', terms);
+    const addSelectedTerms = (evt, data) => {
+        console.log('addSelectedTerms clicked');
+        console.log('evt: ', evt);
+        console.log('data: ', data);
+        setSelectedTerms(data);
+    };
+    console.log('selectedTerms: ', selectedTerms);
 
     return (
         // let amountText = '$' + 1500;
@@ -130,6 +137,7 @@ export default function GoodsAndServices({ navigation }) {
                                 tooltip: 'Add All Selected Terms/Classes',
                                 icon: () => (
                                     <Button
+                                        // onClick={() => addSelectedTerms()}
                                         variant="contained"
                                         component="label"
                                         color="primary"
@@ -137,8 +145,9 @@ export default function GoodsAndServices({ navigation }) {
                                         Add selected items
                                     </Button>
                                 ),
-                                // onClick: (evt, data) =>
-                                //     this.handleAdd(data),
+                                onClick: (evt, data) =>
+                                    addSelectedTerms(evt, data),
+                                // this.handleAdd(data),
                             },
                         ]}
                     />
