@@ -18,8 +18,16 @@ export const searchTerms = async (
         niceClass ? '&niceClasses=' + niceClass : ''
     }`;
     console.log(url);
-    const response = await fetch(url)
-        .then((response) => response.json())
+    const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'API-KEY': '2fdf2b0b9560b5e71f707c1ff726415c',
+            // Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+        // .then((response) => response.json())
         .catch((error) => console.log('Error: ', error));
     console.log(response);
     // return response?.data;
