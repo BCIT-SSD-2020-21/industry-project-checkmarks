@@ -29,7 +29,7 @@ const progressStyles = makeStyles((theme) => ({
     },
     progress: {
         backgroundColor: checkmarksTheme.buttonPrimary,
-        border: `0.5px solid ${checkmarksTheme.textLabel}`,
+        // border: `0.5px solid ${checkmarksTheme.textLabel}`,
         borderRadius: '25px 0 0 25px',
         height: '30px',
     },
