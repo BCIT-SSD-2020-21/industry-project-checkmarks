@@ -71,9 +71,19 @@ export default function GoodsAndServices({ navigation }) {
             // const dataTMTypes = [];
             const classesSelected = [];
             selectedTerms.map((term) => {
-                if (!classesSelected.includes(term.termClass)) {
+                console.log('useEffect, term: ', term);
+                if (classesSelected.length === 0) {
                     classesSelected.push(term.niceClasses[0]);
+                } else {
+                    classesSelected.forEach((niceClass) => {
+                        console.log('useEffect, niceClass: ', niceClass);
+                        if (niceClass.number === term.termClass) {
+                        } else classesSelected.push(term.niceClasses[0]);
+                    });
                 }
+                // if (!classesSelected.includes(term.termClass)) {
+                //     classesSelected.push(term.niceClasses[0]);
+                // }
             });
             setSelectedClasses(classesSelected);
         }
@@ -192,15 +202,15 @@ export default function GoodsAndServices({ navigation }) {
                             </Typography>
 
                             <List>
-                                {selectedClasses.map((niceClass) => (
-                                    <div>
+                                {selectedClasses?.map((niceClass, index) => (
+                                    <div key={index}>
                                         <h4>
                                             {
                                                 // Selected Class Heading  (Number + Shortmame)
                                                 'Class: ' +
                                                     niceClass.name +
                                                     ' - ' +
-                                                    niceClass.descriptions[0]
+                                                    niceClass?.descriptions[0]
                                                         .shortname
                                                 // this.getClassShortName(
                                                 //     classNum
