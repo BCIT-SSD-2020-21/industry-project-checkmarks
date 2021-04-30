@@ -160,7 +160,7 @@ export default function ResultDetail({ data, setSelectedRow }) {
 const detailStyles = makeStyles(() => ({
     container: {
         backgroundColor: checkmarksTheme.bgDrawer,
-        height: 'auto',
+        height: '100%',
         paddingBottom: '10px',
         width: '100%',
     },
