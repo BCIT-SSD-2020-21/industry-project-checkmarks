@@ -17,7 +17,6 @@ import { AutoSizer, Column, Table } from 'react-virtualized';
 export default function ResultDetail({ data, setSelectedRow }) {
     const classes = detailStyles();
 
-    console.log(data);
     return (
         <Card className={classes.container}>
             <Button
@@ -30,10 +29,10 @@ export default function ResultDetail({ data, setSelectedRow }) {
             {/* <Box className={classes.split}> */}
 
             <Box className={classes.details}>
-                {data?.mediaUrls[0] && (
+                {data?.mediaUrls && (
                     <CardMedia
                         className={classes.image}
-                        image={data.mediaUrls[0]}
+                        image={data.mediaUrls[0] ? data.mediaUrls[0] : ''}
                         title={'Trademark Image'}
                         component="img"
                     />
