@@ -23,27 +23,36 @@ import sampleTermSearch from '../../services/sampleTermSearch.json';
 export default function GoodsAndServices({ navigation }) {
     const classes = useStyles();
 
-    const [terms, setTerms] = useState([]);
-    const [classShortNames, setClassShortNames] = useState([]);
-    const [selectedClasses, setSelectedClasses] = useState([]);
-    const [selectedTerms, setSelectedTerms] = useState([]);
+    const [terms, setTerms] = useState([]); // complete info on each term
+    const [termTableData, setTermTableData] = useState([]); // used to render on Table
+    const [classShortNames, setClassShortNames] = useState([]); // needed?
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Rerms summary
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Rerms summary
     const [searchError, setSearchError] = useState('');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [open, setOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(''); // user's search
+    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
     // Below Commented Code Block Here (Ref# 12345678)
     // Temporary Test Data: services/sampleTermSearch.json
     // console.log('sampleTermSearch: ', sampleTermSearch.result);
     const getSearchTerms = async () => {
-        const termResults = [];
+        // GET request to API - simulated with fake data: sampleTermSearch
+        const termData = []; // formatted to fit table
         sampleTermSearch.result.forEach((result) => {
             result.resultsReturned.map((term) => {
-                termResults.push(term);
+                let termTableDataFormat = {
+                    id: term.termNumber,
+                    termName: term.termName,
+                    termClass: term.niceClasses[0].number,
+                    classShortName: term.niceClasses[0].descriptions[0].name,
+                };
+                termData.push(termTableDataFormat);
             });
+            setTermTableData(termData);
         });
-        setTerms(termResults);
     };
-    console.log('terms: ', terms);
+    // console.log('terms: ', terms);
+    console.log('termTableData:', termTableData);
     const addSelectedTerms = (evt, data) => {
         console.log('addSelectedTerms clicked');
         console.log('evt: ', evt);
@@ -127,7 +136,7 @@ export default function GoodsAndServices({ navigation }) {
                                 field: 'classShortName',
                             },
                         ]}
-                        data={terms}
+                        data={termTableData}
                         options={{
                             selection: true,
                             showSelectAllCheckbox: false,
