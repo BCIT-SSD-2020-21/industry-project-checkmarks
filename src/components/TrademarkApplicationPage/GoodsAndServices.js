@@ -63,6 +63,14 @@ export default function GoodsAndServices({ navigation }) {
         console.log('data: ', data);
         setSelectedTerms(data);
     };
+    const removeTerm = (term) => {
+        console.log('remove term', term);
+        // const newSelectedTerms = selectedTerms;
+        let newSelectedTerms = selectedTerms.filter(
+            (item) => item.termNumber !== term.termNumber
+        );
+        setSelectedTerms(newSelectedTerms);
+    };
     console.log('selectedTerms: ', selectedTerms);
     // filter selectedTerms, get list of selected classes (no duplicates)
     useEffect(() => {
@@ -245,6 +253,11 @@ export default function GoodsAndServices({ navigation }) {
                                                                 <Button
                                                                     color="secondary"
                                                                     variant="contained"
+                                                                    onClick={() =>
+                                                                        removeTerm(
+                                                                            term
+                                                                        )
+                                                                    }
                                                                     // onClick={() =>
                                                                     //     this.handleRemove(
                                                                     //         classNum,
