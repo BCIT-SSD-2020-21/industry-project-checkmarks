@@ -48,7 +48,9 @@ const progressStyles = makeStyles((theme) => ({
 }));
 
 export default function Progress({ step, steps }) {
-    const progressValue = Math.round((step.num * 100) / steps.length);
+    const progressValue = Math.round(
+        ((step.num - 1) * 100) / (steps.length - 1)
+    );
 
     const classes = progressStyles();
     return (
