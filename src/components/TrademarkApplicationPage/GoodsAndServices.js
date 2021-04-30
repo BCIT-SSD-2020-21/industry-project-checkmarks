@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,6 +25,8 @@ export default function GoodsAndServices({ navigation }) {
 
     const [terms, setTerms] = useState([]); // complete info on each term
     const [termTableData, setTermTableData] = useState([]); // used to render on Table
+    const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
+
     const [classShortNames, setClassShortNames] = useState([]); // needed?
     const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Rerms summary
     const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Rerms summary
@@ -39,8 +41,10 @@ export default function GoodsAndServices({ navigation }) {
         // GET request to API - simulated with fake data: sampleTermSearch
         const termData = []; // formatted to fit table
         sampleTermSearch.result.forEach((result) => {
+            // format to fit table
             result.resultsReturned.map((term) => {
                 let termTableDataFormat = {
+                    ...term,
                     id: term.termNumber,
                     termName: term.termName,
                     termClass: term.niceClasses[0].number,
@@ -60,6 +64,26 @@ export default function GoodsAndServices({ navigation }) {
         setSelectedTerms(data);
     };
     console.log('selectedTerms: ', selectedTerms);
+    // filter selectedTerms, get list of selected classes (no duplicates)
+    useEffect(() => {
+        if (selectedTerms) {
+            // TM Types in data
+            // const dataTMTypes = [];
+            const classesSelected = [];
+            selectedTerms.map((term) => {
+                if (!classesSelected.includes(term.termClass)) {
+                    classesSelected.push(term.niceClasses[0]);
+                }
+            });
+            setSelectedClasses(classesSelected);
+        }
+    }, [selectedTerms]);
+    console.log('setSelectedClasses: ', selectedClasses);
+
+    console.log(
+        'index test: ',
+        selectedTerms[selectedClasses?.indexOf(selectedClasses[0]?.number)]
+    );
 
     return (
         // let amountText = '$' + 1500;
@@ -168,45 +192,62 @@ export default function GoodsAndServices({ navigation }) {
                             </Typography>
 
                             <List>
-                                {selectedClasses.map((classNum) => (
+                                {selectedClasses.map((niceClass) => (
                                     <div>
                                         <h4>
-                                            {'Class: ' +
-                                                classNum +
-                                                ' - ' +
-                                                this.getClassShortName(
-                                                    classNum
-                                                )}
+                                            {
+                                                // Selected Class Heading  (Number + Shortmame)
+                                                'Class: ' +
+                                                    niceClass.name +
+                                                    ' - ' +
+                                                    niceClass.descriptions[0]
+                                                        .shortname
+                                                // this.getClassShortName(
+                                                //     classNum
+                                                // )
+                                            }
                                         </h4>
                                         <ListItem className="termDisplay">
-                                            {selectedTerms[
-                                                selectedClasses.indexOf(
-                                                    classNum
-                                                )
-                                            ].map((term) => (
-                                                <div
-                                                    style={{
-                                                        margin: '4px',
-                                                    }}
-                                                >
-                                                    <ListItemText
-                                                        primary={'Term:'}
-                                                        secondary={term}
-                                                    />
-                                                    <Button
-                                                        color="secondary"
-                                                        variant="contained"
-                                                        // onClick={() =>
-                                                        //     this.handleRemove(
-                                                        //         classNum,
-                                                        //         term
-                                                        //     )
-                                                        // }
-                                                    >
-                                                        Remove
-                                                    </Button>
-                                                </div>
-                                            ))}
+                                            {selectedTerms
+                                                // [selectedClasses?.indexOf(
+                                                //         classNum.number)]?
+                                                .map((term, index) => {
+                                                    if (
+                                                        term.termClass ===
+                                                        niceClass.number
+                                                    ) {
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                style={{
+                                                                    margin:
+                                                                        '4px',
+                                                                }}
+                                                            >
+                                                                <ListItemText
+                                                                    primary={
+                                                                        'Term:'
+                                                                    }
+                                                                    secondary={
+                                                                        term.termName
+                                                                    }
+                                                                />
+                                                                <Button
+                                                                    color="secondary"
+                                                                    variant="contained"
+                                                                    // onClick={() =>
+                                                                    //     this.handleRemove(
+                                                                    //         classNum,
+                                                                    //         term
+                                                                    //     )
+                                                                    // }
+                                                                >
+                                                                    Remove
+                                                                </Button>
+                                                            </div>
+                                                        );
+                                                    }
+                                                })}
                                         </ListItem>
                                     </div>
                                 ))}
