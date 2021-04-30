@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
         width: '90%',
         margin: '0 auto',
         padding: '3%',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             columns: '2 auto',
         },
     },
@@ -176,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
             margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '6% 2% 0% 0',
+            margin: '6% 2% 5% 0',
         },
     },
     backButton: {
