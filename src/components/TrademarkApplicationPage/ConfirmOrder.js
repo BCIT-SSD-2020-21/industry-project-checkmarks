@@ -1,24 +1,39 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, Typography } from '@material-ui/core';
+import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 
-export default function PaymentForm({ navigation }) {
+export default function PaymentForm({ navigation, info }) {
     const classes = useStyles();
+
+    console.log('info: ', info);
+    console.log('info: ', info.classesSelected);
+    console.log('info: ', info.classesSelected.length);
 
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Confirm Your Information</h1>
             {/* ////////////////////////////////////// Payment info ////////////////////////////////////////////*/}
 
+            {/* ////////////////////////////////////// Organization name ////////////////////////////////////////////*/}
+            {info.organizationName && (
+                <div className={classes.textContainer}>
+                    <Typography className={classes.subtitle} component="p">
+                        Organization Name
+                    </Typography>
+                    <Typography className={classes.text} component="p">
+                        {info.organizationName}
+                    </Typography>
+                </div>
+            )}
             {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
                     First Name
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    John
+                    {info.firstName}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// Last Name ////////////////////////////////////////////*/}
@@ -27,7 +42,7 @@ export default function PaymentForm({ navigation }) {
                     Last Name
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    Doe
+                    {info.lastName}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// Street Address ////////////////////////////////////////////*/}
@@ -36,7 +51,7 @@ export default function PaymentForm({ navigation }) {
                     Street Address
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    555 Happy Road
+                    {info.userStreetAddress}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// City ////////////////////////////////////////////*/}
@@ -45,7 +60,7 @@ export default function PaymentForm({ navigation }) {
                     City
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    Vancouver
+                    {info.userCity}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// Province ////////////////////////////////////////////*/}
@@ -54,16 +69,7 @@ export default function PaymentForm({ navigation }) {
                     Province
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    BC
-                </Typography>
-            </div>
-            {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
-            <div className={classes.textContainer}>
-                <Typography className={classes.subtitle} component="p">
-                    Country
-                </Typography>
-                <Typography className={classes.text} component="p">
-                    Canada
+                    {info.userProvince}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// Postal Code ////////////////////////////////////////////*/}
@@ -72,16 +78,35 @@ export default function PaymentForm({ navigation }) {
                     Postal Code
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    V6K 5Q8
+                    {info.userPostalCode}
                 </Typography>
             </div>
+            {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Country
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    {info.userCountry}
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Agreed to Disclaimer (Termso of Service) ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Agreed To Terms of Service
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    {info.agreedTermsOfService}
+                </Typography>
+            </div>
+
             {/* ////////////////////////////////////// Email ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
                     Email
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    John@checkmark.com
+                    {info.email}
                 </Typography>
             </div>
             {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
@@ -89,27 +114,73 @@ export default function PaymentForm({ navigation }) {
                 <Typography className={classes.subtitle} component="p">
                     Trademark Types
                 </Typography>
-                <Typography className={classes.text} component="p">
-                    Standard Characters
-                </Typography>
+                {info.isText && (
+                    <Typography className={classes.text} component="p">
+                        {'Standard Characters'}
+                    </Typography>
+                )}
+                {info.isLogo && (
+                    <Typography className={classes.text} component="p">
+                        {'Logo or Design'}
+                    </Typography>
+                )}
+                {info.isOther && (
+                    <Typography className={classes.text} component="p">
+                        {'Other'}
+                    </Typography>
+                )}
             </div>
             {/* ////////////////////////////////////// Classes Selected ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
                     Classes Selected
                 </Typography>
-                <Typography className={classes.text} component="p">
-                    Class: 11,13
-                </Typography>
+                {info.classesSelected.length > 0 ? (
+                    <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                        {info.classesSelected.map((niceClass, index) => {
+                            return (
+                                <Typography
+                                    key={index}
+                                    className={classes.text}
+                                    component="p"
+                                >
+                                    {niceClass.number +
+                                        ' - ' +
+                                        niceClass.descriptions[0].name}
+                                </Typography>
+                            );
+                        })}
+                    </Box>
+                ) : (
+                    <Typography className={classes.text} component="p">
+                        None
+                    </Typography>
+                )}
             </div>
             {/* ////////////////////////////////////// Terms Selected ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
                     Terms Selected
                 </Typography>
-                <Typography className={classes.text} component="p">
-                    water softening units
-                </Typography>
+                {info.termsSelected.length > 0 ? (
+                    <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                        {info.termsSelected.map((term, index) => {
+                            return (
+                                <Typography
+                                    key={index}
+                                    className={classes.text}
+                                    component="p"
+                                >
+                                    {term.termNumber + ' - ' + term.termName}
+                                </Typography>
+                            );
+                        })}
+                    </Box>
+                ) : (
+                    <Typography className={classes.text} component="p">
+                        None
+                    </Typography>
+                )}
             </div>
             {/* //////////////////////////////////////  Filed in other country  ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
@@ -117,9 +188,37 @@ export default function PaymentForm({ navigation }) {
                     Filed in other country
                 </Typography>
                 <Typography className={classes.text} component="p">
-                    No
+                    {info.filedInOtherCountry ? 'Yes' : 'No'}
                 </Typography>
             </div>
+            {info.filedInOtherCountry && (
+                <>
+                    <div className={classes.textContainer}>
+                        <Typography className={classes.subtitle} component="p">
+                            Country of filing:
+                        </Typography>
+                        <Typography className={classes.text} component="p">
+                            {info.countryOfFiling}
+                        </Typography>
+                    </div>
+                    {/* <div className={classes.textContainer}>
+                        <Typography className={classes.subtitle} component="p">
+                            Filing Date:
+                        </Typography>
+                        <Typography className={classes.text} component="p">
+                            {info.filingDate}
+                        </Typography>
+                    </div>
+                    <div className={classes.textContainer}>
+                        <Typography className={classes.subtitle} component="p">
+                            Filing Number:
+                        </Typography>
+                        <Typography className={classes.text} component="p">
+                            {info.filingNumber}
+                        </Typography>
+                    </div> */}
+                </>
+            )}
 
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the

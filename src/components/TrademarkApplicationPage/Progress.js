@@ -29,9 +29,9 @@ const progressStyles = makeStyles((theme) => ({
     },
     progress: {
         backgroundColor: checkmarksTheme.buttonPrimary,
-        border: `0.5px solid ${checkmarksTheme.textLabel}`,
+        // border: `0.5px solid ${checkmarksTheme.textLabel}`,
         borderRadius: '25px 0 0 25px',
-        height: '30px',
+        height: '100%',
     },
     value: {
         backgroundColor: '#00000000',
@@ -48,7 +48,9 @@ const progressStyles = makeStyles((theme) => ({
 }));
 
 export default function Progress({ step, steps }) {
-    const progressValue = Math.round((step.num * 100) / steps.length);
+    const progressValue = Math.round(
+        ((step.num - 1) * 100) / (steps.length - 1)
+    );
 
     const classes = progressStyles();
     return (

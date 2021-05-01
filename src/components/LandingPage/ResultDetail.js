@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Card,
+    CardMedia,
     Fade,
     IconButton,
     Paper,
@@ -16,7 +17,6 @@ import { AutoSizer, Column, Table } from 'react-virtualized';
 export default function ResultDetail({ data, setSelectedRow }) {
     const classes = detailStyles();
 
-    console.log(data);
     return (
         <Card className={classes.container}>
             <Button
@@ -25,86 +25,134 @@ export default function ResultDetail({ data, setSelectedRow }) {
             >
                 Back to List View
             </Button>
-            <Box className={classes.split}>
-                {(data?.imageUrls || true) && (
-                    <Box className={classes.image}>
-                        <Typography>{'image'}</Typography>
-                    </Box>
+
+            {/* <Box className={classes.split}> */}
+
+            <Box className={classes.details}>
+                {data?.mediaUrls && (
+                    <CardMedia
+                        className={classes.image}
+                        image={data.mediaUrls[0] ? data.mediaUrls[0] : ''}
+                        title={'Trademark Image'}
+                        component="img"
+                    />
                 )}
-                <Box className={classes.details}>
-                    <Typography className={classes.title}>
-                        {'Tradenark title: ' + data.title}
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Trademark Title: '}
                     </Typography>
+                    <Typography className={classes.value}>
+                        {data.title}
+                    </Typography>
+                </Box>
+
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Owner: '}
+                    </Typography>
+                    <Typography className={classes.value}>
+                        {data.owner}
+                    </Typography>
+                </Box>
+
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Types: '}
+                    </Typography>
+                    <Box className={classes.listing}></Box>
                     {data.tmTypeDescriptions.map((type, index) => {
                         return (
-                            <Typography key={index} className={classes.info}>
+                            <Typography key={index} className={classes.value}>
                                 {type +
-                                    (data.niceClasses.length === index + 1
+                                    (data.tmTypeDescriptions.length ===
+                                    index + 1
                                         ? ''
                                         : ', ')}
                             </Typography>
                         );
                     })}
+                </Box>
 
-                    <Typography className={classes.info}>
-                        {'Status: ' + data.statusDescEn}
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Status: '}
                     </Typography>
-
-                    <Typography className={classes.info}>
-                        {'File date: ' + data.fileDateFormatted}
-                    </Typography>
-                    <Typography className={classes.info}>
-                        {'Registration date: ' + data.regDate}
-                    </Typography>
-                    <Typography className={classes.info}>
-                        {'Renew date: ' + data.intrnlRenewDate}
-                    </Typography>
-                    <Typography className={classes.info}>
-                        {'Owner: ' + data.owner}
+                    <Typography className={classes.value}>
+                        {data.statusDescEn}
                     </Typography>
                 </Box>
-            </Box>
-            <Box className={classes.details}>
-                <Typography className={classes.info}>{'lorem'}</Typography>
-                <Box className={classes.niceClasses}>
-                    <Typography className={classes.info}>
+
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'File Date (yyyy-mm-dd): '}
+                    </Typography>
+                    <Typography className={classes.value}>
+                        {data.fileDateFormatted}
+                    </Typography>
+                </Box>
+
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Registration Date: '}
+                    </Typography>
+                    <Typography className={classes.value}>
+                        {data.regDate}
+                    </Typography>
+                </Box>
+
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
+                        {'Renewal date: '}
+                    </Typography>
+                    <Typography className={classes.value}>
+                        {data.intrnlRenewDate}
+                    </Typography>
+                </Box>
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
                         {'NICE Classes: '}
                     </Typography>
-                    {data.niceClasses.map((item, index) => {
-                        return (
-                            <Typography
-                                className={classes.niceClass}
-                                key={index}
-                            >
-                                {`${item}${
-                                    data.niceClasses.length === index + 1
-                                        ? ''
-                                        : ', '
-                                }`}
-                            </Typography>
-                        );
-                    })}
+                    <Box className={classes.listing}>
+                        {data.niceClasses.map((item, index) => {
+                            return (
+                                <Typography
+                                    className={classes.value}
+                                    key={index}
+                                >
+                                    {`${item}${
+                                        data.niceClasses.length === index + 1
+                                            ? ''
+                                            : ', '
+                                    }`}
+                                </Typography>
+                            );
+                        })}
+                    </Box>
                 </Box>
-                <Box className={classes.niceClasses}>
-                    <Typography className={classes.info}>
+                <Box className={classes.field}>
+                    <Typography className={classes.label}>
                         {'Application Numbers: '}
                     </Typography>
-                    {data.applicationNumberL.map((item, index) => {
-                        return (
-                            <Typography
-                                className={classes.niceClass}
-                                key={index}
-                            >
-                                {`${item}${
-                                    data.applicationNumberL.length === index + 1
-                                        ? ''
-                                        : ', '
-                                }`}
-                            </Typography>
-                        );
-                    })}
+                    <Box className={classes.listing}>
+                        {data.applicationNumberL.map((item, index) => {
+                            return (
+                                <Typography
+                                    className={classes.value}
+                                    key={index}
+                                >
+                                    {`${item}${
+                                        data.applicationNumberL.length ===
+                                        index + 1
+                                            ? ''
+                                            : ', '
+                                    }`}
+                                </Typography>
+                            );
+                        })}
+                    </Box>
                 </Box>
             </Box>
+            {/* </Box> */}
         </Card>
     );
 }
@@ -113,7 +161,18 @@ const detailStyles = makeStyles(() => ({
     container: {
         backgroundColor: checkmarksTheme.bgDrawer,
         height: '100%',
+        paddingBottom: '10px',
         width: '100%',
+    },
+    details: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 'auto',
+        width: '90%',
+        ['@media (min-width:768px)']: { width: '80%' },
+        ['@media (min-width:1280px)']: { width: '70%' },
     },
     split: {
         display: 'flex',
@@ -122,14 +181,33 @@ const detailStyles = makeStyles(() => ({
         margin: '1%',
     },
     image: {
-        backgroundColor: 'gray',
-        margin: '1%',
-        height: '150px',
-        width: '200px',
+        maxHeight: '200px',
+        // ['@media (min-height:768px)']: { width: '80%' },
+        // ['@media (min-height:1280px)']: { width: '70%' },
+        // width: '40%',
     },
-    info: {
+    field: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: '10px',
+        width: '100%',
+    },
+    label: {
         fontSize: '12px',
+        marginRight: '6px',
     },
+    value: {
+        fontSize: '12px',
+        marginLeft: '6px',
+    },
+    listing: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    // info: {
+    //     fontSize: '12px',
+    // },
     niceClasses: {
         display: 'flex',
         flexDirection: 'row',

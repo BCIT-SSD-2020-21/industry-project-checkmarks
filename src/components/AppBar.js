@@ -344,7 +344,7 @@ export default function MenuAppBar({
                                         onClick={() => {
                                             setLoggingIn(false);
                                             setSearching(false);
-                                            history.push('/register');
+                                            history.push('/application');
                                         }}
                                     >
                                         <PlayCircleFilledTwoToneIcon
