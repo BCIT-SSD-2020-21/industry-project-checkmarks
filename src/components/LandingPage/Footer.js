@@ -1,121 +1,94 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 
-// First Footer Section
 function Copyright() {
-    return (
-        <React.Fragment>
-            {'© '}
-            {new Date().getFullYear()}
-            <Link color="inherit" href="https://checkmarks.ca/">
-                Checkmarks
-            </Link>{' '}
-        </React.Fragment>
-    );
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://checkmarks.ca/">
+        Checkmarks
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      backgroundColor: theme.palette.secondary.light,
-    },
-    container: {
-      marginTop: theme.spacing(8),
-      marginBottom: theme.spacing(8),
-      display: 'flex',
-    },
-    iconsWrapper: {
-      height: 120,
-    },
-    icons: {
-      display: 'flex',
-    },
-    icon: {
-      width: 32,
-      height: 32,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.palette.warning.main,
-      marginRight: theme.spacing(1),
-      '&:hover': {
-        backgroundColor: theme.palette.warning.dark,
-      },
-    },
-    list: {
+  '@global': {
+    ul: {
       margin: 0,
-      listStyle: 'none',
       padding: 0,
+      listStyle: 'none',
     },
-    listItem: {
-      paddingTop: theme.spacing(0.5),
-      paddingBottom: theme.spacing(0.5),
+  },
+  footer: {
+    borderTop: `1px solid ${theme.palette.divider}`,
+    marginTop: theme.spacing(8),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(6),
+      paddingBottom: theme.spacing(6),
     },
-  }));
+  },
+}));
 
-  // FB - Add two more footer section
-  
+const footers = [
+  {
+    title: 'Checkmarks',
+    description: ['Team', 'Contact Us', 'Location'],
+  },
+  {
+    title: 'Links',
+    description: ['Dearly', 'Clio', 'LawPay'],
+  },
+  {
+    title: 'Resources',
+    description: ['Resource', 'Resource name', 'Another resource'],
+  },
+  {
+    title: 'Legal Assistance',
+    description: ['Register Your Brand', 'Searh a Brand', 'Ask a Lawyer'],
+  },
+];
 
 export default function Footer() {
-    const classes = useStyles;
+  const classes = useStyles();
 
-    return (
-        <Typography component="footer" className={classes.root}> 
-            <Container className={classes.container}>
-                <Grid container spacing={5}>
-                    <Grid item xs={6} sm={4} md={3}>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="flex-end"
-                            className={classes.iconsWrapper}
-                            spacing={2}
-                            >
-                            {/* <Grid item className={classes.icons}>
-                                <a href="checkmarks.ca/" className={classes.icon}>
-                                <img src="" alt="checkmark-logo" />
-                                </a>
-                                <a href="https://twitter.com/" className={classes.icon}>
-                                <img src="../../images/twitter.png" alt="twitter" />
-                                </a>
-                            </Grid> */}
-                            <Grid item>
-                                <Copyright />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={6} sm={4} md={3}>
-                        <Typography variant="h6" marked="left" gutterBottom>
-                            Legal Assistant
-                        </Typography>
-                        <ul className={classes.list}>
-                            <li className={classes.listItem}>
-                                <Link href="https://checkmarks.ca/">Terms and Conditions</Link>
-                            </li>
-                            <li className={classes.listItem}>
-                                <Link href="https://checkmarks.ca/">Privacy</Link>
-                            </li>
-                        </ul>
-                    </Grid>
-                    <Grid item xs={6} sm={4} md={3}>
-                        <Typography variant="h6" marked="left" gutterBottom>
-                            Site Map
-                        </Typography>
-                        <ul className={classes.list}>
-                            <li className={classes.listItem}>
-                                <Link href="https://checkmarks.ca/">About Us</Link>
-                            </li>
-                            <li className={classes.listItem}>
-                                <Link href="https://checkmarks.ca/">Register Your Brand</Link>
-                            </li>
-                        </ul>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Typography>
-    );
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="md" component="footer" className={classes.footer}>
+        <Grid container spacing={4} justify="space-evenly">
+          {footers.map((footer) => (
+            <Grid item xs={6} sm={3} key={footer.title}>
+              <Typography variant="h6" color="textPrimary" gutterBottom>
+                {footer.title}
+              </Typography>
+              <ul>
+                {footer.description.map((item) => (
+                  <li key={item}>
+                    <Link href="#" variant="subtitle1" color="textSecondary">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Grid>
+          ))}
+        </Grid>
+        
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
+    </React.Fragment>
+  );
 }
