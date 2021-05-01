@@ -314,7 +314,7 @@ export const searchBoxStyles = makeStyles(() => ({
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
         padding: '5px 0',
-        width: '55%',
+        width: '70%',
         maxWidth: '200px',
     },
     '@keyframes rotationAnimation': {

@@ -32,15 +32,17 @@ const tmTypeDescription = (tmTypeArray) => {
 
 export const formatSearchResults = (data) => {
     const formattedData = [];
-    data?.forEach((item) => {
-        // FORMAT DATE HERE
-        let formattedItem = {
-            ...item,
-            tmTypeDescriptions: tmTypeDescription(item.tmType),
-            fileDateFormatted: item.fileDate.substring(0, 10),
-        };
-        formattedData.push(formattedItem);
-    });
+    if (data?.length > 0) {
+        data.forEach((item) => {
+            // FORMAT DATE HERE
+            let formattedItem = {
+                ...item,
+                tmTypeDescriptions: tmTypeDescription(item?.tmType),
+                fileDateFormatted: item?.fileDate?.substring(0, 10),
+            };
+            formattedData.push(formattedItem);
+        });
+    }
     return formattedData;
 };
 

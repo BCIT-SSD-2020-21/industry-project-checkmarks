@@ -52,7 +52,12 @@ const styles = (theme) => ({
     tableCell: {
         // backgroundColor: 'red',
         backgroundColor: checkmarksTheme.bgPrimary,
+        // margin: 'auto',
+        display: 'flex',
+        padding: '2px',
+        justifyContent: 'center',
         fontSize: '10px',
+        textAlign: 'center',
         flex: 1,
     },
     noClick: {

@@ -106,6 +106,9 @@ const headerStyles = makeStyles(() => ({
         alignItems: 'center',
     },
     button: {},
+    icon: {
+        fontSize: '20px',
+    },
     textBox: {
         display: 'flex',
         flexDirection: 'column',

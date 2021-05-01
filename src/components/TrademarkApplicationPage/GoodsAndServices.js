@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,24 +18,127 @@ import {
     TextField,
 } from '@material-ui/core';
 import { searchTerms } from '../../services/cipo';
+import sampleTermSearch from '../../services/sampleTermSearch.json';
 
-export default function GoodsAndServices({ navigation }) {
+export default function GoodsAndServices({ navigation, info, setInfo }) {
     const classes = useStyles();
 
-    const [terms, setTerms] = useState([]);
-    const [classShortNames, setClassShortNames] = useState([]);
-    const [selectedClasses, setSelectedClasses] = useState([]);
-    const [selectedTerms, setSelectedTerms] = useState([]);
+    const [terms, setTerms] = useState([]); // complete info on each term
+    const [termTableData, setTermTableData] = useState([]); // used to render on Table
+    // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
+
+    const [classShortNames, setClassShortNames] = useState([]); // needed?
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        // Initialize from info.classesSelected
+        setSelectedClasses(info.classesSelected);
+    }, []);
+
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        // Initialize from info.classesSelected
+        setSelectedTerms(info.termsSelected);
+    }, []);
+
     const [searchError, setSearchError] = useState('');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [open, setOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(''); // user's search
+    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
+
+    const [totalAmount, setTotalAmount] = useState(0);
 
     // Below Commented Code Block Here (Ref# 12345678)
+    // Temporary Test Data: services/sampleTermSearch.json
+    // console.log('sampleTermSearch: ', sampleTermSearch.result);
     const getSearchTerms = async () => {
-        const result = await searchTerms(searchTerm, 'service', null, null);
-        setTerms(result);
+        // GET request to API - simulated with fake data: sampleTermSearch
+        const termData = []; // formatted to fit table
+        sampleTermSearch.result.forEach((result) => {
+            // format to fit table
+            result.resultsReturned.map((term) => {
+                let termTableDataFormat = {
+                    ...term,
+                    id: term.termNumber,
+                    termName: term.termName,
+                    termClass: term.niceClasses[0].number,
+                    classShortName: term.niceClasses[0].descriptions[0].name,
+                };
+                termData.push(termTableDataFormat);
+            });
+            setTermTableData(termData);
+        });
     };
+    // console.log('terms: ', terms);
+    const addSelectedTerms = (evt, data) => {
+        setSelectedTerms(data);
+    };
+    const removeTerm = (term) => {
+        // const newSelectedTerms = selectedTerms;
+        let newSelectedTerms = selectedTerms.filter(
+            (item) => item.termNumber !== term.termNumber
+        );
+        setSelectedTerms(newSelectedTerms);
+    };
+    // console.log('selectedTerms: ', selectedTerms);
+    // filter selectedTerms, get list of selected classes (no duplicates)
+    console.log(selectedTerms);
+    useEffect(() => {
+        // setSelectedTerms([]);
+        // setSelectedClasses([]);
+        // console.log('useEffect, selectedTerms: ', selectedTerms);
+        const classesSelected = [];
+        if (selectedTerms.length > 0) {
+            selectedTerms.forEach((term) => {
+                // console.log("term: ", term)
+                let termClassExists = false;
+                classesSelected.forEach((niceClass) => {
+                    console.log(
+                        'niceClass: ',
+                        term.niceClass,
+                        niceClass.number
+                    );
+                    if (niceClass.number === term.termClass) {
+                        termClassExists = true;
+                    }
+                });
+                if (!termClassExists) {
+                    classesSelected.push(term.niceClasses[0]);
+                }
+                termClassExists = false;
+            });
 
+            setSelectedClasses(classesSelected);
+            if (classesSelected.length > 0) {
+                setTotalAmount(
+                    (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
+                );
+            } else if (classesSelected.length === 0) {
+                setTotalAmount(0);
+            }
+        }
+    }, [selectedTerms]);
+    // update form INFO
+    useEffect(() => {
+        // classesSelected
+        if (selectedClasses?.length > 0) {
+            setInfo({ ...info, classesSelected: selectedClasses });
+        }
+    }, [selectedClasses]);
+    useEffect(() => {
+        // termsSelected
+        if (selectedTerms?.length > 0) {
+            setInfo({ ...info, termsSelected: selectedTerms });
+        }
+    }, [selectedTerms]);
+    useEffect(() => {
+        // termsSelected
+        if (selectedTerms?.length > 0) {
+            setInfo({ ...info, amount: totalAmount });
+        }
+    }, [totalAmount]);
+
+    // console.log('selectedClasses: ', selectedClasses);
+
+    console.log('G&S info: ', info.classesSelected);
     return (
         // let amountText = '$' + 1500;
         // let additionalNICE = '';
@@ -111,16 +214,22 @@ export default function GoodsAndServices({ navigation }) {
                                 field: 'classShortName',
                             },
                         ]}
-                        data={terms}
+                        data={termTableData}
                         options={{
                             selection: true,
                             showSelectAllCheckbox: false,
+                            // selectionProps: (rowData) => ({
+                            //     checked: rowData.checked === true,
+                            //     onClick: (event, rowData) =>
+                            //         this.handleCheckboxClick(event, rowData),
+                            // }),
                         }}
                         actions={[
                             {
                                 tooltip: 'Add All Selected Terms/Classes',
                                 icon: () => (
                                     <Button
+                                        // onClick={() => addSelectedTerms()}
                                         variant="contained"
                                         component="label"
                                         color="primary"
@@ -128,8 +237,9 @@ export default function GoodsAndServices({ navigation }) {
                                         Add selected items
                                     </Button>
                                 ),
-                                // onClick: (evt, data) =>
-                                //     this.handleAdd(data),
+                                onClick: (evt, data) =>
+                                    addSelectedTerms(evt, data),
+                                // this.handleAdd(data),
                             },
                         ]}
                     />
@@ -141,48 +251,72 @@ export default function GoodsAndServices({ navigation }) {
                             </Typography>
 
                             <List>
-                                {selectedClasses.map((classNum) => (
-                                    <div>
-                                        <h4>
-                                            {'Class: ' +
-                                                classNum +
-                                                ' - ' +
-                                                this.getClassShortName(
-                                                    classNum
-                                                )}
-                                        </h4>
-                                        <ListItem className="termDisplay">
-                                            {selectedTerms[
-                                                selectedClasses.indexOf(
-                                                    classNum
-                                                )
-                                            ].map((term) => (
-                                                <div
-                                                    style={{
-                                                        margin: '4px',
-                                                    }}
-                                                >
-                                                    <ListItemText
-                                                        primary={'Term:'}
-                                                        secondary={term}
-                                                    />
-                                                    <Button
-                                                        color="secondary"
-                                                        variant="contained"
-                                                        // onClick={() =>
-                                                        //     this.handleRemove(
-                                                        //         classNum,
-                                                        //         term
-                                                        //     )
-                                                        // }
-                                                    >
-                                                        Remove
-                                                    </Button>
-                                                </div>
-                                            ))}
-                                        </ListItem>
-                                    </div>
-                                ))}
+                                {selectedClasses?.length > 0 &&
+                                    selectedClasses.map((niceClass, index) => (
+                                        <div key={index}>
+                                            <h4>
+                                                {
+                                                    // Selected Class Heading  (Number + Shortmame)
+                                                    'Class: ' +
+                                                        niceClass?.name +
+                                                        ' - ' +
+                                                        niceClass
+                                                            ?.descriptions[0]
+                                                            .shortname
+                                                    // this.getClassShortName(
+                                                    //     classNum
+                                                    // )
+                                                }
+                                            </h4>
+                                            <ListItem className="termDisplay">
+                                                {selectedTerms
+                                                    // [selectedClasses?.indexOf(
+                                                    //         classNum.number)]?
+                                                    .map((term, index) => {
+                                                        if (
+                                                            term.termClass ===
+                                                            niceClass.number
+                                                        ) {
+                                                            return (
+                                                                <div
+                                                                    key={index}
+                                                                    style={{
+                                                                        margin:
+                                                                            '4px',
+                                                                    }}
+                                                                >
+                                                                    <ListItemText
+                                                                        primary={
+                                                                            'Term:'
+                                                                        }
+                                                                        secondary={
+                                                                            term.termName
+                                                                        }
+                                                                    />
+                                                                    <Button
+                                                                        color="secondary"
+                                                                        variant="contained"
+                                                                        onClick={() =>
+                                                                            removeTerm(
+                                                                                term
+                                                                            )
+                                                                        }
+                                                                        // onClick={() =>
+                                                                        //     this.handleRemove(
+                                                                        //         classNum,
+                                                                        //         term
+                                                                        //     )
+                                                                        // }
+                                                                    >
+                                                                        Remove
+                                                                    </Button>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    })}
+                                            </ListItem>
+                                        </div>
+                                    ))}
                             </List>
                         </CardContent>
                     </Card>
@@ -191,10 +325,10 @@ export default function GoodsAndServices({ navigation }) {
                         <CardContent>
                             <Typography variant="h6">
                                 <b>Amount:</b>
-                                {/* {amountText} */}
                             </Typography>
                             <Typography variant="body1" component="p">
                                 {/* {additionalNICE} */}
+                                {`$${totalAmount.toString()}`}
                             </Typography>
                         </CardContent>
                     </Card>
