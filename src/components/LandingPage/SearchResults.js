@@ -65,22 +65,22 @@ const styles = (theme) => ({
     },
 });
 
-MuiVirtualizedTable.propTypes = {
-    classes: PropTypes.object.isRequired,
-    columns: PropTypes.arrayOf(
-        PropTypes.shape({
-            dataKey: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired,
-            numeric: PropTypes.bool,
-            width: PropTypes.number.isRequired,
-        })
-    ).isRequired,
-    headerHeight: PropTypes.number,
-    onRowClick: PropTypes.func,
-    rowHeight: PropTypes.number,
-};
+// MuiVirtualizedTable.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     columns: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             dataKey: PropTypes.string.isRequired,
+//             label: PropTypes.string.isRequired,
+//             numeric: PropTypes.bool,
+//             width: PropTypes.number.isRequired,
+//         })
+//     ).isRequired,
+//     headerHeight: PropTypes.number,
+//     onRowClick: PropTypes.func,
+//     rowHeight: PropTypes.number,
+// };
 
-const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
+// const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
 // ---
 
@@ -129,7 +129,7 @@ export default function SearchResults({ data }) {
             }}
         >
             {selectedRow === null ? (
-                <VirtualizedTable
+                <MuiVirtualizedTable
                     // style={{ height: 400, width: '100%' }}
                     rowCount={data.length} // row or data
                     rowGetter={({ index }) => data[index]} // row or data

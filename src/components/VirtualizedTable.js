@@ -18,7 +18,54 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ResultDetail from './LandingPage/ResultDetail';
 import FilterMenu from './FilterMenu';
 
-export default class MuiVirtualizedTable extends React.PureComponent {
+const styles = (theme) => ({
+    flexContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        backgroundColor: checkmarksTheme.bgDrawer,
+        // padding: '5%',
+    },
+    table: {
+        // temporary right-to-left patch, waiting for
+        // https://github.com/bvaughn/react-virtualized/issues/454
+        backgroundColor: checkmarksTheme.bgTransparent,
+        // padding: '2%',
+        // opacity: 0,
+        // borderRadius: '25px',
+        '& .ReactVirtualized__Table__headerRow': {
+            flip: false,
+            paddingRight:
+                theme.direction === 'rtl' ? '0 !important' : undefined,
+        },
+        // backgroundColor: checkmarksTheme.bgDrawer,
+    },
+    tableRow: {
+        backgroundColor: checkmarksTheme.bgTransparent,
+        cursor: 'pointer',
+    },
+    tableRowHover: {
+        '&:hover': {
+            backgroundColor: theme.palette.grey[200],
+        },
+    },
+    tableCell: {
+        // backgroundColor: 'red',
+        backgroundColor: checkmarksTheme.bgPrimary,
+        // margin: 'auto',
+        display: 'flex',
+        padding: '2px',
+        justifyContent: 'center',
+        fontSize: '10px',
+        textAlign: 'center',
+        flex: 1,
+    },
+    noClick: {
+        cursor: 'initial',
+    },
+});
+
+class MuiVirtualizedTable extends React.PureComponent {
     static defaultProps = {
         headerHeight: 48,
         rowHeight: 48,
@@ -144,3 +191,20 @@ export default class MuiVirtualizedTable extends React.PureComponent {
         );
     }
 }
+
+MuiVirtualizedTable.propTypes = {
+    classes: PropTypes.object.isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({
+            dataKey: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+            numeric: PropTypes.bool,
+            width: PropTypes.number.isRequired,
+        })
+    ).isRequired,
+    headerHeight: PropTypes.number,
+    onRowClick: PropTypes.func,
+    rowHeight: PropTypes.number,
+};
+
+export default withStyles(styles)(MuiVirtualizedTable);
