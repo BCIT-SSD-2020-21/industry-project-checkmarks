@@ -4,21 +4,25 @@ import {
     Button,
     Card,
     FormControl,
+    IconButton,
     Input,
     InputLabel,
     InputAdornment,
     Typography,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import LoopIcon from '@material-ui/icons/Loop';
 import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './SearchResults';
 import { searchTrademarks } from '../../services/checkmarks';
 
-export default function TrademarkSearch() {
+export default function TrademarkSearch({ searching, setSearching }) {
     const classes = searchBoxStyles();
+    const history = useHistory();
 
     // user input search term
     const [searchTerm, setSearchTerm] = useState('');
@@ -38,6 +42,11 @@ export default function TrademarkSearch() {
                 const result = await searchTrademarks(searchTerm);
                 setSearchResults(result);
             })();
+        }
+        if (searchTerm.length > 0) {
+            setSearching(true);
+        } else {
+            setSearching(false);
         }
     }, [searchTerm]);
 
@@ -77,6 +86,7 @@ export default function TrademarkSearch() {
                         onChange={(e) => searchTrademark(e.target.value)}
                         id="searchBox"
                         placeholder={'Check if your Trademark exists...'}
+                        style={{ position: 'relative' }}
                         disableUnderline={true}
                         startAdornment={
                             <InputAdornment
@@ -101,6 +111,20 @@ export default function TrademarkSearch() {
                             </InputAdornment>
                         }
                     />
+                    {/* {searching && ( */}
+                    <IconButton
+                        style={{
+                            display: searching ? 'block' : 'none',
+                            // transition: 'display 1s ease-in-out',
+                        }}
+                        className={classes.edgeButton}
+                        // className={
+                        //     searchTerm ? classes.edgeButton : classes.hidden
+                        // }
+                        onClick={() => history.push('/application')}
+                    >
+                        <PlayArrowTwoToneIcon />
+                    </IconButton>
                 </FormControl>
             </Box>
             {/* </Fade> */}
@@ -140,6 +164,7 @@ export default function TrademarkSearch() {
 export const searchBoxStyles = makeStyles(() => ({
     //
     hidden: {
+        opacity: 0,
         display: 'none',
     },
     containerTMSearch: {
@@ -169,9 +194,26 @@ export const searchBoxStyles = makeStyles(() => ({
         //     backgroundColor: checkmarksTheme.hoverLight,
         // },
     },
+    edgeButton: {
+        animation: '1s $edgeButtonFadeIn',
+        width: '10px',
+        height: '54px',
+        // height: '100%',
+        color: 'white',
+        opacity: 0.6,
+        borderRadius: '0 100px 100px 0',
+        backgroundColor: 'red',
+        position: 'absolute',
+        right: -30,
+        top: 0,
+        // opacity: 1,
+        // transitionDelay: '1s',
+        // transitionTimingFunction: 'linear',
+        transition: 'opacity 1s linear',
+    },
     searchBoxShifted: {
         animation: '$shiftUp-searchBox-mobile 1s',
-        transform: 'translateY(-400%)',
+        transform: 'translateY(-360%)',
         ['@media (min-width:768px)']: {
             animation: '$shiftUp-searchBox-tablet 1s',
             transform: 'translateY(-300%)',
@@ -182,12 +224,14 @@ export const searchBoxStyles = makeStyles(() => ({
         },
     },
     searchResultsShifted: {
+        // flex: 1,
+        // width: '100%',
         // animation: '$shiftUp-results 1s',
         // transform: 'translateY(-20%)',
     },
     results: {
         animation: '$shiftUp-results-mobile 1s',
-        transform: 'translateY(-60%)',
+        transform: 'translateY(-48%)',
         ['@media (min-width:768px)']: {
             animation: '$shiftUp-results-tablet 1s',
             transform: 'translateY(-40%)',
@@ -196,6 +240,8 @@ export const searchBoxStyles = makeStyles(() => ({
             animation: '$shiftUp-results-generic 1s',
             transform: 'translateY(-20%)',
         },
+        // flexGrow: 1,
+        // flexShrink: 0,
         // height: (window.innerHeight * 2) / 3,
         width: '100%',
     },
@@ -275,10 +321,14 @@ export const searchBoxStyles = makeStyles(() => ({
         from: { transform: 'rotate(0deg)' },
         to: { transform: 'rotate(359deg)' },
     },
+    '@keyframes edgeButtonFadeIn': {
+        from: { opacity: 0 },
+        to: { opacity: 0.5 },
+    },
     // SearchBox Animations
     '@keyframes shiftUp-searchBox-mobile': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-400%)' },
+        to: { transform: 'translateY(-360%)' },
     },
     '@keyframes shiftUp-searchBox-tablet': {
         from: { transform: 'translateY(0px)' },
@@ -289,7 +339,7 @@ export const searchBoxStyles = makeStyles(() => ({
         to: { transform: 'translateY(-200%)' },
     },
     '@keyframes shiftDown-searchBox-mobile': {
-        from: { transform: 'translateY(-400%)' },
+        from: { transform: 'translateY(-360%)' },
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftDown-searchBox-tablet': {
@@ -303,7 +353,7 @@ export const searchBoxStyles = makeStyles(() => ({
     // SearchResults Table Animations
     '@keyframes shiftUp-results-mobile': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-60%)' },
+        to: { transform: 'translateY(-48%)' },
     },
     '@keyframes shiftUp-results-tablet': {
         from: { transform: 'translateY(0px)' },
