@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import {
     CardContent,
     Checkbox,
@@ -68,6 +67,21 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
     const [totalAmount, setTotalAmount] = useState(0);
 
+    const toggleStatus = (e) => {
+        console.log('toggleStatus clicked: ', e.currentTarget.value);
+        // let newSelectedTerms = [];
+        // setSelectedTerms([...selectedTerms, ]);
+    };
+    const termSelector = (termNumber, status, toggleStatus) => {
+        return (
+            <Checkbox
+                value={termNumber}
+                checked={status}
+                onChange={(e) => toggleStatus(e)}
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+        );
+    };
     // Below Commented Code Block Here (Ref# 12345678)
     // Temporary Test Data: services/sampleTermSearch.json
     // console.log('sampleTermSearch: ', sampleTermSearch.result);
@@ -86,7 +100,11 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 });
                 let termTableDataFormat = {
                     ...item,
-                    selected: termSelected,
+                    selected: termSelector(
+                        item.termNumber,
+                        termSelected,
+                        toggleStatus
+                    ),
                     id: item.termNumber,
                     termName: item.termName,
                     termClass: item.niceClasses[0].number,
@@ -98,9 +116,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         });
     };
     console.log('termTableData: ', termTableData);
-    const addSelectedTerms = (evt, data) => {
-        setSelectedTerms(data);
-    };
+    // const addSelectedTerms = (evt, data) => {
+    //     setSelectedTerms(data);
+    // };
     const removeTerm = (term) => {
         // const newSelectedTerms = selectedTerms;
         let newSelectedTerms = selectedTerms.filter(
