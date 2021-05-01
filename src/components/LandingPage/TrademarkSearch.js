@@ -158,23 +158,44 @@ export const searchBoxStyles = makeStyles(() => ({
         width: '90%',
         maxWidth: '768px',
         margin: '2% auto',
-        animation: '$shiftDown-searchBox 1s',
+        animation: '$shiftDown-searchBox-mobile 1s',
+        ['@media (min-width:768px)']: {
+            animation: '$shiftDown-searchBox-tablet 1s',
+        },
+        ['@media (min-width:1280px)']: {
+            animation: '$shiftDown-searchBox-generic 1s',
+        },
         // '&:hover': {
         //     backgroundColor: checkmarksTheme.hoverLight,
         // },
     },
     searchBoxShifted: {
-        animation: '$shiftUp-searchBox 1s',
-        transform: 'translateY(-200%)',
+        animation: '$shiftUp-searchBox-mobile 1s',
+        transform: 'translateY(-400%)',
+        ['@media (min-width:768px)']: {
+            animation: '$shiftUp-searchBox-tablet 1s',
+            transform: 'translateY(-300%)',
+        },
+        ['@media (min-width:1280px)']: {
+            animation: '$shiftUp-searchBox-generic 1s',
+            transform: 'translateY(-200%)',
+        },
     },
     searchResultsShifted: {
         // animation: '$shiftUp-results 1s',
         // transform: 'translateY(-20%)',
     },
-
     results: {
-        animation: '$shiftUp-results 1s',
-        transform: 'translateY(-20%)',
+        animation: '$shiftUp-results-mobile 1s',
+        transform: 'translateY(-60%)',
+        ['@media (min-width:768px)']: {
+            animation: '$shiftUp-results-tablet 1s',
+            transform: 'translateY(-40%)',
+        },
+        ['@media (min-width:1280px)']: {
+            animation: '$shiftUp-results-generic 1s',
+            transform: 'translateY(-20%)',
+        },
         // height: (window.innerHeight * 2) / 3,
         width: '100%',
     },
@@ -254,16 +275,42 @@ export const searchBoxStyles = makeStyles(() => ({
         from: { transform: 'rotate(0deg)' },
         to: { transform: 'rotate(359deg)' },
     },
-    '@keyframes shiftUp-results': {
+    // SearchBox Animations
+    '@keyframes shiftUp-searchBox-mobile': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-20%)' },
+        to: { transform: 'translateY(-400%)' },
     },
-    '@keyframes shiftUp-searchBox': {
+    '@keyframes shiftUp-searchBox-tablet': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-300%)' },
+    },
+    '@keyframes shiftUp-searchBox-generic': {
         from: { transform: 'translateY(0px)' },
         to: { transform: 'translateY(-200%)' },
     },
-    '@keyframes shiftDown-searchBox': {
+    '@keyframes shiftDown-searchBox-mobile': {
+        from: { transform: 'translateY(-400%)' },
+        to: { transform: 'translateY(0px)' },
+    },
+    '@keyframes shiftDown-searchBox-tablet': {
+        from: { transform: 'translateY(-300%)' },
+        to: { transform: 'translateY(0px)' },
+    },
+    '@keyframes shiftDown-searchBox-generic': {
         from: { transform: 'translateY(-200%)' },
         to: { transform: 'translateY(0px)' },
+    },
+    // SearchResults Table Animations
+    '@keyframes shiftUp-results-mobile': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-60%)' },
+    },
+    '@keyframes shiftUp-results-tablet': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-40%)' },
+    },
+    '@keyframes shiftUp-results-generic': {
+        from: { transform: 'translateY(0px)' },
+        to: { transform: 'translateY(-20%)' },
     },
 }));
