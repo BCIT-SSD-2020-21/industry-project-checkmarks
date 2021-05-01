@@ -45,7 +45,7 @@ const TrademarkApplication = () => {
         amount: 150000,
 
         //International Information
-        filedInOtherCountry: '',
+        filedInOtherCountry: false,
         countryOfFiling: '',
         fillingDate: '',
         fillingNumber: '',
