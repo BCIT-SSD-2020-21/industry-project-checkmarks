@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import MaterialTable from 'material-table';
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
-import { checkmarksTheme } from '../../styles/Themes';
+import React, { useState, useEffect, useRef } from 'react';
+
 import {
     CardContent,
+    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
@@ -17,10 +15,13 @@ import {
     Paper,
     Typography,
     Button,
-    TextField,
 } from '@material-ui/core';
-import { searchTerms } from '../../services/cipo';
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../styles/Themes';
 import MuiVirtualizedTable from '../VirtualizedTable';
+import SearchField from '../SearchField';
+// import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({ navigation, info, setInfo }) {
@@ -33,27 +34,38 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         setFilterSelection(e.currentTarget.value);
     };
 
-    const [terms, setTerms] = useState([]); // complete info on each term
+    const [searchTerm, setSearchTerm] = useState(''); // user's search
     const [termTableData, setTermTableData] = useState([]); // used to render on Table
     // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
 
-    const [classShortNames, setClassShortNames] = useState([]); // needed?
-    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    // Loading Indicator
+    const { current: instance } = useRef({});
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        // Initialize from info.classesSelected
-        setSelectedClasses(info.classesSelected);
-    }, []);
+        if (instance.delayTimer) {
+            clearTimeout(instance.delayTimer);
+        }
+        if (searchTerm !== '' && termTableData?.length === 0) {
+            setLoading(true);
+            instance.delayTimer = setTimeout(() => {
+                setLoading(false); // after 3 seconds, stop Loading Indicator
+            }, 3000);
+        } else {
+            setLoading(false);
+        }
+    }, [searchTerm, termTableData]);
 
     const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
     useEffect(() => {
-        // Initialize from info.classesSelected
         setSelectedTerms(info.termsSelected);
+    }, []);
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedClasses(info.classesSelected);
     }, []);
 
     const [searchError, setSearchError] = useState('');
-    const [searchTerm, setSearchTerm] = useState(''); // user's search
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
-
     const [totalAmount, setTotalAmount] = useState(0);
 
     // Below Commented Code Block Here (Ref# 12345678)
@@ -64,20 +76,28 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         const termData = []; // formatted to fit table
         sampleTermSearch.result.forEach((result) => {
             // format to fit table
-            result.resultsReturned.map((term) => {
+            result.resultsReturned.map((item) => {
+                // determine if Term is Selected (if term exists in info.termsSelected)
+                let termSelected = false;
+                info.termsSelected.forEach((term) => {
+                    if (term.termNumber === item.termNumber) {
+                        termSelected = true;
+                    }
+                });
                 let termTableDataFormat = {
-                    ...term,
-                    id: term.termNumber,
-                    termName: term.termName,
-                    termClass: term.niceClasses[0].number,
-                    classShortName: term.niceClasses[0].descriptions[0].name,
+                    ...item,
+                    selected: termSelected,
+                    id: item.termNumber,
+                    termName: item.termName,
+                    termClass: item.niceClasses[0].number,
+                    classShortName: item.niceClasses[0].descriptions[0].name,
                 };
                 termData.push(termTableDataFormat);
             });
             setTermTableData(termData);
         });
     };
-    // console.log('terms: ', terms);
+    console.log('termTableData: ', termTableData);
     const addSelectedTerms = (evt, data) => {
         setSelectedTerms(data);
     };
@@ -170,19 +190,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
 
     console.log('G&S info: ', info.classesSelected);
     return (
-        // let amountText = '$' + 1500;
-        // let additionalNICE = '';
-
-        // if (this.state.selectedClasses.length > 1) {
-        //     amountText =
-        //         '$' +
-        //         String(1500 + (this.state.selectedClasses.length - 1) * 100);
-        //     additionalNICE =
-        //         '$1500 base fee + ' +
-        //         String(this.state.selectedClasses.length - 1) +
-        //         ' additional NICE Classes.';
-        // }
-        // return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>
             <div className={classes.formContainer}>
@@ -198,7 +205,11 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
 
                 {/* ///////////////////////////search trademark terms/////////////////////////// */}
                 <h3>Search for your Trademark Terms</h3>
-                <div className={classes.searchTermsContainer}>
+                <SearchField
+                    loading={loading}
+                    searchTrademark={getSearchTerms}
+                />
+                {/* <div className={classes.searchTermsContainer}>
                     <TextField
                         id="outlined-basic"
                         placeholder="Enter a general term for your good/service "
@@ -218,7 +229,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                     >
                         Search
                     </Button>
-                </div>
+                </div> */}
 
                 <Paper
                     className={classes.results}
@@ -238,7 +249,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                             {
                                 width: (window.innerWidth * 1) / 10,
                                 label: ['Selected', '', onFilterClick, []],
-                                dataKey: 'termName',
+                                dataKey: 'selected',
                             },
                             {
                                 width: (window.innerWidth * 3) / 10,
