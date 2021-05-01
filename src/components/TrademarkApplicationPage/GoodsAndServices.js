@@ -18,10 +18,18 @@ import {
     TextField,
 } from '@material-ui/core';
 import { searchTerms } from '../../services/cipo';
+import MuiVirtualizedTable from '../VirtualizedTable';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({ navigation, info, setInfo }) {
     const classes = useStyles();
+
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [filterSelection, setFilterSelection] = useState(null);
+    const onFilterClick = (e) => {
+        // console.log('filter clicked', e.currentTarget.value);
+        setFilterSelection(e.currentTarget.value);
+    };
 
     const [terms, setTerms] = useState([]); // complete info on each term
     const [termTableData, setTermTableData] = useState([]); // used to render on Table
@@ -138,6 +146,26 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
 
     // console.log('selectedClasses: ', selectedClasses);
 
+    //////// Functions Used for manipulating Data for the VirtualizedTable->FilterMenu
+    // TM Types in data
+    const dataTMTypes = [];
+    // terms.map((term) => {
+    //     term.tmTypeDescriptions.map((item) => {
+    //         if (!dataTMTypes.includes(item)) {
+    //             dataTMTypes.push(item);
+    //         }
+    //     });
+    // });
+    // // Statuses in data
+    const dataStatuses = [];
+    // terms.map((tm) => {
+    //     if (!dataStatuses.includes(tm.statusDescEn)) {
+    //         dataStatuses.push(tm.statusDescEn);
+    //     }
+    // });
+    // File Date options
+    const sortOptions = ['Sort Ascending', 'Sort Descending'];
+
     console.log('G&S info: ', info.classesSelected);
     return (
         // let amountText = '$' + 1500;
@@ -191,8 +219,53 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                         </Button>
                     </div>
 
+                    <MuiVirtualizedTable
+                        // style={{ height: 400, width: '100%' }}
+                        rowCount={termTableData.length} // row or data
+                        rowGetter={({ index }) => termTableData[index]} // row or data
+                        onRowClick={(e) => setSelectedRow(e.index)}
+                        onFilterClick={onFilterClick}
+                        columns={[
+                            {
+                                width: (window.innerWidth * 1) / 3,
+                                label: ['Term Name', '', onFilterClick, []],
+                                dataKey: 'termName',
+                            },
+                            {
+                                width: (window.innerWidth * 1) / 6,
+                                label: [
+                                    'NICE Class',
+                                    '',
+                                    onFilterClick,
+                                    dataTMTypes,
+                                ],
+                                dataKey: 'tmTypeDescriptions',
+                            },
+                            {
+                                width: (window.innerWidth * 1) / 6,
+                                label: [
+                                    'NICE Class Name',
+                                    '',
+                                    onFilterClick,
+                                    dataStatuses,
+                                ],
+                                dataKey: 'statusDescEn',
+                            },
+                            // {
+                            //     width: (window.innerWidth * 1) / 3,
+                            //     label: [
+                            //         'Class Description',
+                            //         '(yyyy-mm-dd)',
+                            //         onFilterClick,
+                            //         sortOptions,
+                            //     ],
+                            //     dataKey: 'fileDateFormatted',
+                            //     // numeric: true,
+                            // },
+                        ]}
+                    />
                     {/* /////////////////////////// Terms List Table /////////////////////////// */}
-                    <MaterialTable
+                    {/* <MaterialTable
                         title="Terms List"
                         columns={[
                             {
@@ -242,7 +315,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                 // this.handleAdd(data),
                             },
                         ]}
-                    />
+                    /> */}
                     {/* ///////////////////////////selected terms section /////////////////////////// */}
                     <Card className={classes.selectedTerms}>
                         <CardContent>
