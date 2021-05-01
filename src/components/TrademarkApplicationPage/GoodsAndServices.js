@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../styles/Themes';
 import {
     CardContent,
     Dialog,
@@ -13,6 +14,7 @@ import {
     List,
     ListItem,
     ListItemText,
+    Paper,
     Typography,
     Button,
     TextField,
@@ -194,31 +196,38 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                     </p>
                 </Typography>
 
-                <div>
-                    {/* ///////////////////////////search trademark terms/////////////////////////// */}
-                    <h3>Search for your Trademark Terms</h3>
-                    <div className={classes.searchTermsContainer}>
-                        <TextField
-                            id="outlined-basic"
-                            placeholder="Enter a general term for your good/service "
-                            label="Search"
-                            fullWidth
-                            variant="outlined"
-                            error={searchError != ''}
-                            helperText={searchError}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            // onChange={handleTextFieldChange}
-                        />
-                        <Button
-                            variant="contained"
-                            className={classes.searchTermsButton}
-                            onClick={getSearchTerms}
-                        >
-                            Search
-                        </Button>
-                    </div>
+                {/* ///////////////////////////search trademark terms/////////////////////////// */}
+                <h3>Search for your Trademark Terms</h3>
+                <div className={classes.searchTermsContainer}>
+                    <TextField
+                        id="outlined-basic"
+                        placeholder="Enter a general term for your good/service "
+                        label="Search"
+                        fullWidth
+                        variant="outlined"
+                        error={searchError != ''}
+                        helperText={searchError}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        // onChange={handleTextFieldChange}
+                    />
+                    <Button
+                        variant="contained"
+                        className={classes.searchTermsButton}
+                        onClick={getSearchTerms}
+                    >
+                        Search
+                    </Button>
+                </div>
 
+                <Paper
+                    className={classes.results}
+                    style={{
+                        backgroundColor: checkmarksTheme.bgTransparent,
+                        height: '500px', // (window.innerHeight * 4) / 5,
+                        width: '100%',
+                    }}
+                >
                     <MuiVirtualizedTable
                         // style={{ height: 400, width: '100%' }}
                         rowCount={termTableData.length} // row or data
@@ -227,12 +236,17 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                         onFilterClick={onFilterClick}
                         columns={[
                             {
-                                width: (window.innerWidth * 1) / 3,
+                                width: (window.innerWidth * 1) / 10,
+                                label: ['Selected', '', onFilterClick, []],
+                                dataKey: 'termName',
+                            },
+                            {
+                                width: (window.innerWidth * 3) / 10,
                                 label: ['Term Name', '', onFilterClick, []],
                                 dataKey: 'termName',
                             },
                             {
-                                width: (window.innerWidth * 1) / 6,
+                                width: (window.innerWidth * 1) / 10,
                                 label: [
                                     'NICE Class',
                                     '',
@@ -242,7 +256,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                 dataKey: 'tmTypeDescriptions',
                             },
                             {
-                                width: (window.innerWidth * 1) / 6,
+                                width: (window.innerWidth * 5) / 10,
                                 label: [
                                     'NICE Class Name',
                                     '',
@@ -264,8 +278,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                             // },
                         ]}
                     />
-                    {/* /////////////////////////// Terms List Table /////////////////////////// */}
-                    {/* <MaterialTable
+                </Paper>
+                {/* /////////////////////////// Terms List Table /////////////////////////// */}
+                {/* <MaterialTable
                         title="Terms List"
                         columns={[
                             {
@@ -316,100 +331,99 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                             },
                         ]}
                     /> */}
-                    {/* ///////////////////////////selected terms section /////////////////////////// */}
-                    <Card className={classes.selectedTerms}>
-                        <CardContent>
-                            <Typography variant="h6">
-                                <b>Selected Terms:</b>
-                            </Typography>
+                {/* ///////////////////////////selected terms section /////////////////////////// */}
+                <Card className={classes.selectedTerms}>
+                    <CardContent>
+                        <Typography variant="h6">
+                            <b>Selected Terms:</b>
+                        </Typography>
 
-                            <List>
-                                {selectedClasses?.length > 0 &&
-                                    selectedClasses.map((niceClass, index) => (
-                                        <div key={index}>
-                                            <h4>
-                                                {
-                                                    // Selected Class Heading  (Number + Shortmame)
-                                                    'Class: ' +
-                                                        niceClass?.name +
-                                                        ' - ' +
-                                                        niceClass
-                                                            ?.descriptions[0]
-                                                            .shortname
-                                                    // this.getClassShortName(
-                                                    //     classNum
-                                                    // )
-                                                }
-                                            </h4>
-                                            <ListItem className="termDisplay">
-                                                {selectedTerms
-                                                    // [selectedClasses?.indexOf(
-                                                    //         classNum.number)]?
-                                                    .map((term, index) => {
-                                                        if (
-                                                            term.termClass ===
-                                                            niceClass.number
-                                                        ) {
-                                                            return (
-                                                                <div
-                                                                    key={index}
-                                                                    style={{
-                                                                        margin:
-                                                                            '4px',
-                                                                    }}
+                        <List>
+                            {selectedClasses?.length > 0 &&
+                                selectedClasses.map((niceClass, index) => (
+                                    <div key={index}>
+                                        <h4>
+                                            {
+                                                // Selected Class Heading  (Number + Shortmame)
+                                                'Class: ' +
+                                                    niceClass?.name +
+                                                    ' - ' +
+                                                    niceClass?.descriptions[0]
+                                                        .shortname
+                                                // this.getClassShortName(
+                                                //     classNum
+                                                // )
+                                            }
+                                        </h4>
+                                        <ListItem className="termDisplay">
+                                            {selectedTerms
+                                                // [selectedClasses?.indexOf(
+                                                //         classNum.number)]?
+                                                .map((term, index) => {
+                                                    if (
+                                                        term.termClass ===
+                                                        niceClass.number
+                                                    ) {
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                style={{
+                                                                    margin:
+                                                                        '4px',
+                                                                }}
+                                                            >
+                                                                <ListItemText
+                                                                    primary={
+                                                                        'Term:'
+                                                                    }
+                                                                    secondary={
+                                                                        term.termName
+                                                                    }
+                                                                />
+                                                                <Button
+                                                                    color="secondary"
+                                                                    variant="contained"
+                                                                    onClick={() =>
+                                                                        removeTerm(
+                                                                            term
+                                                                        )
+                                                                    }
+                                                                    // onClick={() =>
+                                                                    //     this.handleRemove(
+                                                                    //         classNum,
+                                                                    //         term
+                                                                    //     )
+                                                                    // }
                                                                 >
-                                                                    <ListItemText
-                                                                        primary={
-                                                                            'Term:'
-                                                                        }
-                                                                        secondary={
-                                                                            term.termName
-                                                                        }
-                                                                    />
-                                                                    <Button
-                                                                        color="secondary"
-                                                                        variant="contained"
-                                                                        onClick={() =>
-                                                                            removeTerm(
-                                                                                term
-                                                                            )
-                                                                        }
-                                                                        // onClick={() =>
-                                                                        //     this.handleRemove(
-                                                                        //         classNum,
-                                                                        //         term
-                                                                        //     )
-                                                                        // }
-                                                                    >
-                                                                        Remove
-                                                                    </Button>
-                                                                </div>
-                                                            );
-                                                        }
-                                                    })}
-                                            </ListItem>
-                                        </div>
-                                    ))}
-                            </List>
-                        </CardContent>
-                    </Card>
-                    {/* ///////////////////////////total amount section /////////////////////////// */}
-                    <Card className={classes.amount}>
-                        <CardContent>
-                            <Typography variant="h6">
-                                <b>Amount:</b>
-                            </Typography>
-                            <Typography variant="body1" component="p">
-                                {/* {additionalNICE} */}
-                                {`$${totalAmount.toString()}`}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    <Alert severity="info" className={classes.alert}>
-                        Helper section with brief legal information, assisting
-                        the client through the process.
-                    </Alert>
-                </div>
+                                                                    Remove
+                                                                </Button>
+                                                            </div>
+                                                        );
+                                                    }
+                                                })}
+                                        </ListItem>
+                                    </div>
+                                ))}
+                        </List>
+                    </CardContent>
+                </Card>
+                {/* ///////////////////////////total amount section /////////////////////////// */}
+                <Card className={classes.amount}>
+                    <CardContent>
+                        <Typography variant="h6">
+                            <b>Amount:</b>
+                        </Typography>
+                        <Typography variant="body1" component="p">
+                            {/* {additionalNICE} */}
+                            {`$${totalAmount.toString()}`}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Alert severity="info" className={classes.alert}>
+                    Helper section with brief legal information, assisting the
+                    client through the process.
+                </Alert>
+
                 <div className={classes.buttonContainer}>
                     <Button
                         type="submit"
@@ -469,6 +483,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
 
 const useStyles = makeStyles((theme) => ({
     card: {
+        // backgroundColor: 'blue',
+        display: 'flex',
+        flexDirection: 'column',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',
@@ -482,6 +499,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     formContainer: {
+        border: '1px solid black',
+        display: 'flex',
+        flexDirection: 'column',
         margin: '3%',
     },
     title: {
