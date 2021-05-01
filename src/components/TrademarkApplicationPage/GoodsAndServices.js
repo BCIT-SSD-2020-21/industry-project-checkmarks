@@ -20,7 +20,7 @@ import {
 import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
-export default function GoodsAndServices({ navigation }) {
+export default function GoodsAndServices({ navigation, info, setInfo }) {
     const classes = useStyles();
 
     const [terms, setTerms] = useState([]); // complete info on each term
@@ -28,8 +28,18 @@ export default function GoodsAndServices({ navigation }) {
     // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
 
     const [classShortNames, setClassShortNames] = useState([]); // needed?
-    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Rerms summary
-    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Rerms summary
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        // Initialize from info.classesSelected
+        setSelectedClasses(info.classesSelected);
+    }, []);
+
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        // Initialize from info.classesSelected
+        setSelectedTerms(info.termsSelected);
+    }, []);
+
     const [searchError, setSearchError] = useState('');
     const [searchTerm, setSearchTerm] = useState(''); // user's search
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
@@ -95,6 +105,7 @@ export default function GoodsAndServices({ navigation }) {
                 }
                 termClassExists = false;
             });
+
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
@@ -105,8 +116,29 @@ export default function GoodsAndServices({ navigation }) {
             }
         }
     }, [selectedTerms]);
+    // update form INFO
+    useEffect(() => {
+        // classesSelected
+        if (selectedClasses?.length > 0) {
+            setInfo({ ...info, classesSelected: selectedClasses });
+        }
+    }, [selectedClasses]);
+    useEffect(() => {
+        // termsSelected
+        if (selectedTerms?.length > 0) {
+            setInfo({ ...info, termsSelected: selectedTerms });
+        }
+    }, [selectedTerms]);
+    useEffect(() => {
+        // termsSelected
+        if (selectedTerms?.length > 0) {
+            setInfo({ ...info, amount: totalAmount });
+        }
+    }, [totalAmount]);
+
     // console.log('selectedClasses: ', selectedClasses);
 
+    console.log('G&S info: ', info.classesSelected);
     return (
         // let amountText = '$' + 1500;
         // let additionalNICE = '';
