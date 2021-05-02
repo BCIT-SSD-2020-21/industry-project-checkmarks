@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
 import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
+import TermSelector from './TermSelector';
 // import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
@@ -104,19 +105,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             }
         }
     };
-    // RENDER CHECKBOX as Data Field
-    const termSelector = (termNumber, status, setTermBeingToggledNumber) => {
-        return (
-            <Checkbox
-                value={termNumber}
-                checked={status}
-                onChange={(e) =>
-                    setTermBeingToggledNumber(e.currentTarget.value)
-                }
-                inputProps={{ 'aria-label': 'primary checkbox' }}
-            />
-        );
-    };
     // GET TERM DATA (on Search)
     const getSearchTerms = async () => {
         // GET request to API - simulated with fake data: sampleTermSearch
@@ -134,10 +122,17 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 let termTableDataFormat = {
                     ...item,
                     selected: termSelected,
-                    selectionCheckbox: termSelector(
-                        item.termNumber,
-                        termSelected,
-                        setTermBeingToggledNumber
+                    // selectionCheckbox: termSelector(
+                    //     item.termNumber,
+                    //     termSelected,
+                    //     setTermBeingToggledNumber
+                    // ),
+                    selectionCheckbox: (
+                        <TermSelector
+                            number={item.termNumber}
+                            selected={termSelected}
+                            handler={setTermBeingToggledNumber}
+                        />
                     ),
                     id: item.termNumber,
                     termName: item.termName,
