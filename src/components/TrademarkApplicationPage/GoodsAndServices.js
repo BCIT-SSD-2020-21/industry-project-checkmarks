@@ -26,18 +26,33 @@ import sampleTermSearch from '../../services/sampleTermSearch.json';
 export default function GoodsAndServices({ navigation, info, setInfo }) {
     const classes = useStyles();
 
-    const [selectedRow, setSelectedRow] = useState(null);
-    const [filterSelection, setFilterSelection] = useState(null);
-    const onFilterClick = (e) => {
-        // console.log('filter clicked', e.currentTarget.value);
-        setFilterSelection(e.currentTarget.value);
-    };
-
+    // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
-    const [termTableData, setTermTableData] = useState([]); // used to render on Table
-    // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
+    const [searchError, setSearchError] = useState('');
+    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
-    // Loading Indicator
+    // DATA Active/Displayed
+    const [termTableData, setTermTableData] = useState([]); // used to render on Table
+
+    // SELECTION HANDLING
+    const [termBeingToggledNumber, setTermBeingToggledNumber] = useState(null);
+    useEffect(() => {
+        if (termBeingToggledNumber) {
+            toggleTermSelectionStatus(termBeingToggledNumber);
+        }
+        setTermBeingToggledNumber(null);
+    }, [termBeingToggledNumber]);
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedTerms(info.termsSelected);
+    }, []);
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedClasses(info.classesSelected);
+    }, []);
+    const [totalAmount, setTotalAmount] = useState(0);
+
+    // COSMETIC statevar (indicator)
     const { current: instance } = useRef({});
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -54,37 +69,55 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         }
     }, [searchTerm, termTableData]);
 
-    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedTerms(info.termsSelected);
-    }, []);
-    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedClasses(info.classesSelected);
-    }, []);
-
-    const [searchError, setSearchError] = useState('');
-    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
-    const [totalAmount, setTotalAmount] = useState(0);
-
-    const toggleStatus = (e) => {
-        console.log('toggleStatus clicked: ', e.currentTarget.value);
-        // let newSelectedTerms = [];
-        // setSelectedTerms([...selectedTerms, ]);
+    const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
+    const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
+    const onFilterClick = (e) => {
+        setFilterSelection(e.currentTarget.value);
     };
-    const termSelector = (termNumber, status, toggleStatus) => {
+
+    const toggleTermSelectionStatus = (termNumber) => {
+        let termIndex = termTableData.findIndex(
+            (term) => term.termNumber === termNumber
+        );
+        console.log(termIndex);
+        if (termIndex === -1) {
+            console.log('Term not found'); // handle error
+        } else {
+            let updatedTerm = {
+                ...termTableData[termIndex],
+                selected: !termTableData[termIndex].selected,
+            };
+            setTermTableData([
+                ...termTableData.slice(0, termIndex),
+                Object.assign({}, termTableData[termIndex], updatedTerm),
+                ...termTableData.slice(termIndex + 1),
+            ]);
+            // handle SELECTED TERMS & CLASSES
+            if (
+                updatedTerm.selected === true ||
+                termTableData[termIndex].selected === false
+            ) {
+            } else if (
+                updatedTerm.selected === false ||
+                termTableData[termIndex].selected === true
+            ) {
+            }
+        }
+    };
+    // RENDER CHECKBOX as Data Field
+    const termSelector = (termNumber, status, setTermBeingToggledNumber) => {
         return (
             <Checkbox
                 value={termNumber}
                 checked={status}
-                onChange={(e) => toggleStatus(e)}
+                onChange={(e) =>
+                    setTermBeingToggledNumber(e.currentTarget.value)
+                }
                 inputProps={{ 'aria-label': 'primary checkbox' }}
             />
         );
     };
-    // Below Commented Code Block Here (Ref# 12345678)
-    // Temporary Test Data: services/sampleTermSearch.json
-    // console.log('sampleTermSearch: ', sampleTermSearch.result);
+    // GET TERM DATA (on Search)
     const getSearchTerms = async () => {
         // GET request to API - simulated with fake data: sampleTermSearch
         const termData = []; // formatted to fit table
@@ -100,10 +133,11 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 });
                 let termTableDataFormat = {
                     ...item,
-                    selected: termSelector(
+                    selected: termSelected,
+                    selectionCheckbox: termSelector(
                         item.termNumber,
                         termSelected,
-                        toggleStatus
+                        setTermBeingToggledNumber
                     ),
                     id: item.termNumber,
                     termName: item.termName,
@@ -115,10 +149,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             setTermTableData(termData);
         });
     };
-    console.log('termTableData: ', termTableData);
-    // const addSelectedTerms = (evt, data) => {
-    //     setSelectedTerms(data);
-    // };
     const removeTerm = (term) => {
         // const newSelectedTerms = selectedTerms;
         let newSelectedTerms = selectedTerms.filter(
@@ -128,11 +158,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
     };
     // console.log('selectedTerms: ', selectedTerms);
     // filter selectedTerms, get list of selected classes (no duplicates)
-    console.log(selectedTerms);
+    // console.log(selectedTerms);
     useEffect(() => {
-        // setSelectedTerms([]);
-        // setSelectedClasses([]);
-        // console.log('useEffect, selectedTerms: ', selectedTerms);
         const classesSelected = [];
         if (selectedTerms.length > 0) {
             selectedTerms.forEach((term) => {
@@ -166,47 +193,21 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
     }, [selectedTerms]);
     // update form INFO
     useEffect(() => {
-        // classesSelected
         if (selectedClasses?.length > 0) {
             setInfo({ ...info, classesSelected: selectedClasses });
         }
     }, [selectedClasses]);
     useEffect(() => {
-        // termsSelected
         if (selectedTerms?.length > 0) {
             setInfo({ ...info, termsSelected: selectedTerms });
         }
     }, [selectedTerms]);
     useEffect(() => {
-        // termsSelected
         if (selectedTerms?.length > 0) {
             setInfo({ ...info, amount: totalAmount });
         }
     }, [totalAmount]);
 
-    // console.log('selectedClasses: ', selectedClasses);
-
-    //////// Functions Used for manipulating Data for the VirtualizedTable->FilterMenu
-    // TM Types in data
-    const dataTMTypes = [];
-    // terms.map((term) => {
-    //     term.tmTypeDescriptions.map((item) => {
-    //         if (!dataTMTypes.includes(item)) {
-    //             dataTMTypes.push(item);
-    //         }
-    //     });
-    // });
-    // // Statuses in data
-    const dataStatuses = [];
-    // terms.map((tm) => {
-    //     if (!dataStatuses.includes(tm.statusDescEn)) {
-    //         dataStatuses.push(tm.statusDescEn);
-    //     }
-    // });
-    // File Date options
-    const sortOptions = ['Sort Ascending', 'Sort Descending'];
-
-    console.log('G&S info: ', info.classesSelected);
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>
@@ -267,30 +268,25 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                             {
                                 width: (window.innerWidth * 1) / 10,
                                 label: ['Selected', '', onFilterClick, []],
-                                dataKey: 'selected',
+                                dataKey: 'selectionCheckbox',
                             },
                             {
-                                width: (window.innerWidth * 3) / 10,
+                                width: (window.innerWidth * 4) / 10,
                                 label: ['Term Name', '', onFilterClick, []],
                                 dataKey: 'termName',
                             },
                             {
                                 width: (window.innerWidth * 1) / 10,
-                                label: [
-                                    'NICE Class',
-                                    '',
-                                    onFilterClick,
-                                    dataTMTypes,
-                                ],
+                                label: ['NICE Class', '', onFilterClick, []],
                                 dataKey: 'tmTypeDescriptions',
                             },
                             {
-                                width: (window.innerWidth * 5) / 10,
+                                width: (window.innerWidth * 4) / 10,
                                 label: [
                                     'NICE Class Name',
                                     '',
                                     onFilterClick,
-                                    dataStatuses,
+                                    [],
                                 ],
                                 dataKey: 'statusDescEn',
                             },
