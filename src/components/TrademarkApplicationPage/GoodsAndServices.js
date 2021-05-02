@@ -278,7 +278,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                             {
                                 width: (window.innerWidth * 1) / 10,
                                 label: ['NICE Class', '', onFilterClick, []],
-                                dataKey: 'tmTypeDescriptions',
+                                dataKey: 'termClass',
                             },
                             {
                                 width: (window.innerWidth * 4) / 10,
@@ -288,7 +288,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                     onFilterClick,
                                     [],
                                 ],
-                                dataKey: 'statusDescEn',
+                                dataKey: 'classShortName',
                             },
                             // {
                             //     width: (window.innerWidth * 1) / 3,
