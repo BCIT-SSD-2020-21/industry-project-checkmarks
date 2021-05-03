@@ -10,7 +10,6 @@ export default function TermSelector({ number, selected, handler }) {
         handler(value);
         setChecked(!checked);
     };
-    // console.log('checked: ', checked);
 
     return (
         <Checkbox

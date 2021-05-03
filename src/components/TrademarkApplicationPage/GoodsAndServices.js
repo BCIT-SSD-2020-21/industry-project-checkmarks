@@ -32,6 +32,16 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
     const [searchError, setSearchError] = useState('');
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
+    // INITIALIZE From 'info' Statevar
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedTerms(info.termsSelected);
+    }, []);
+    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedClasses(info.classesSelected);
+    }, []);
+
     // DATA Active/Displayed
     const [termTableData, setTermTableData] = useState([]); // used to render on Table
 
@@ -43,14 +53,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         }
         setTermBeingToggledNumber(null);
     }, [termBeingToggledNumber]);
-    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedTerms(info.termsSelected);
-    }, []);
-    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedClasses(info.classesSelected);
-    }, []);
+
     const [totalAmount, setTotalAmount] = useState(0);
 
     // COSMETIC statevar (indicator)
@@ -76,6 +79,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         setFilterSelection(e.currentTarget.value);
     };
 
+    // Functions
     const toggleTermSelectionStatus = (termNumber) => {
         let termIndex = termTableData.findIndex(
             (term) => term.termNumber === termNumber
@@ -86,6 +90,13 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             let updatedTerm = {
                 ...termTableData[termIndex],
                 selected: !termTableData[termIndex].selected,
+                selectionCheckbox: (
+                    <TermSelector
+                        number={termNumber}
+                        selected={!termTableData[termIndex].selected}
+                        handler={setTermBeingToggledNumber}
+                    />
+                ),
             };
             setTermTableData([
                 ...termTableData.slice(0, termIndex),
@@ -182,7 +193,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             }
         }
     }, [selectedTerms]);
-    // update form INFO
+
+    // UPDATE PARENT Statevar 'info'
     useEffect(() => {
         if (selectedClasses?.length > 0) {
             setInfo({ ...info, classesSelected: selectedClasses });
@@ -199,6 +211,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         }
     }, [totalAmount]);
 
+    console.log('termTableData[0]: ', termTableData[0]);
+    console.log('info.termsSelected: ', info.termsSelected);
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>
