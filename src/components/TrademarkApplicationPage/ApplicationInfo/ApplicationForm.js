@@ -11,6 +11,8 @@ import {
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { checkmarksTheme } from '../../../styles/Themes';
 
 export default function IndividualForm({
@@ -18,17 +20,21 @@ export default function IndividualForm({
     setInfo,
     navigation,
     setDirty,
+    inputValidationValue,
 }) {
     const classes = useStyles();
 
     //handle seclection of individual or organization
     const handleSelection = (e) => {
+        console.log(e.target.value);
         setInfo({
             ...info,
             individualOrOrganization: e.target.value,
         });
     };
+
     setDirty();
+
     return (
         <div>
             {/* checkbox for indicidual or organization */}
@@ -55,7 +61,7 @@ export default function IndividualForm({
             </div>
             {/* ///////////////////////personal info///////////////////////*/}
             {info.individualOrOrganization == 'Organization' && (
-                <FormControl fullWidth={true}>
+                <FormControl fullWidth={true} className={classes.field}>
                     <TextField
                         className={classes.input}
                         variant="outlined"
@@ -71,10 +77,17 @@ export default function IndividualForm({
                             })
                         }
                     />
+                    {inputValidationValue?.individualOrOrganizationName ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
                 </FormControl>
             )}
 
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
                     variant="outlined"
@@ -90,8 +103,13 @@ export default function IndividualForm({
                         })
                     }
                 />
+                {inputValidationValue?.firstName ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
             </FormControl>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
                     variant="outlined"
@@ -107,8 +125,13 @@ export default function IndividualForm({
                         })
                     }
                 />
+                {inputValidationValue?.lastName ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
             </FormControl>
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
                     variant="outlined"
@@ -124,18 +147,28 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <div className={classes.uploadButtonContainer}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        className={classes.uploadButton}
-                    >
-                        Upload ID Document
-                    </Button>
-                </div>
+                {inputValidationValue?.email ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
             </FormControl>
+            <div className={classes.field}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    className={classes.uploadButton}
+                >
+                    Upload ID Document
+                </Button>
+                {inputValidationValue?.idDocumentUploaded ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
+            </div>
             {/* /////////////////////////// address /////////////////////// */}
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
                     variant="outlined"
@@ -151,75 +184,115 @@ export default function IndividualForm({
                         })
                     }
                 />
+                {inputValidationValue?.userStreetAddress ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
             </FormControl>
             <div className={classes.flexContainer}>
-                <TextField
-                    id="outlined-basic"
-                    label="City"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    autoComplete="on"
-                    value={info.userCity}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            userCity: e.target.value,
-                        })
-                    }
-                />
-                <TextField
-                    id="outlined-basic"
-                    label="Province"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    autoComplete="on"
-                    value={info.userProvince}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            userProvince: e.target.value,
-                        })
-                    }
-                />
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        id="outlined-basic"
+                        label="City"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="on"
+                        value={info.userCity}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                userCity: e.target.value,
+                            })
+                        }
+                    />
+                    {inputValidationValue?.userCity ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
+                </FormControl>
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        id="outlined-basic"
+                        label="Province"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="on"
+                        value={info.userProvince}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                userProvince: e.target.value,
+                            })
+                        }
+                    />
+                    {inputValidationValue?.userProvince ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
+                </FormControl>
             </div>
             <div className={classes.flexContainer}>
-                <TextField
-                    id="outlined-basic"
-                    label="Postal Code"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    autoComplete="on"
-                    value={info.userPostalCode}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            userPostalCode: e.target.value,
-                        })
-                    }
-                />
-
-                <TextField
-                    id="outlined-basic"
-                    label="Country"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    autoComplete="on"
-                    value={info.userCountry}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            userCountry: e.target.value,
-                        })
-                    }
-                />
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        id="outlined-basic"
+                        label="Postal Code"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="on"
+                        value={info.userPostalCode}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                userPostalCode: e.target.value,
+                            })
+                        }
+                    />
+                    {inputValidationValue?.userPostalCode ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
+                </FormControl>
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="on"
+                        value={info.userCountry}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                userCountry: e.target.value,
+                            })
+                        }
+                    />
+                    {inputValidationValue?.userCountry ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
+                </FormControl>
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
@@ -277,25 +350,35 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    field: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     input: {
-        width: '80%',
+        // position: 'relative',
+        width: '100%',
         margin: '3% auto',
         borderRadius: '10px',
         [theme.breakpoints.up('sm')]: {
             margin: '2% auto',
         },
     },
+    checkmark: {
+        // position: 'absolute',
+    },
     flexInput: {
-        width: '80%',
-        margin: '3%',
+        width: '100%',
+        margin: '3% 0',
         borderRadius: '10px',
         '&:focus': {
             outline: 'none',
         },
-        [theme.breakpoints.up('sm')]: {
-            width: '38%',
-            margin: '2%',
-        },
+        // [theme.breakpoints.up('sm')]: {
+        //     width: '38%',
+        //     margin: '2%',
+        // },
     },
     uploadButtonContainer: {
         display: 'flex',
