@@ -24,7 +24,10 @@ export default function App() {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <Landing />
+                            <Landing
+                                darkMode={darkMode}
+                                setDarkMode={setDarkMode}
+                            />
                         </Route>
                         <Route path="/application">
                             <TrademarkApplication />

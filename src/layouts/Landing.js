@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
+import bannerImageDark from '../assets/images/bg_application-nicolas-hoizey.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';
@@ -18,16 +19,28 @@ import Footer from '../components/LandingPage/Footer';
 
 // export const LandingContext = React.createContext();
 
-export default function Landing() {
+export default function Landing(darkMode, setDarkMode) {
     const classes = useStyles();
     const history = useHistory();
 
     const [searching, setSearching] = useState(false);
 
+    console.log('darkMode: ', darkMode.darkMode);
     return (
         <Box className={classes.root}>
-            <MenuAppBar setSearching={setSearching} />
-            <Box className={classes.section}>
+            <MenuAppBar
+                setSearching={setSearching}
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
+            />
+            <Box
+                className={classes.section}
+                style={{
+                    backgroundImage: `url(${
+                        darkMode.darkMode ? bannerImageDark : bannerImage
+                    })`,
+                }}
+            >
                 <HeaderBanner searching={searching} />
 
                 <Box className={classes.actions}>
@@ -37,16 +50,6 @@ export default function Landing() {
                             searching={searching}
                             setSearching={setSearching}
                         />
-                        {/* ) : ( */}
-                        {/* <IconButton
-                                className={classes.buttonSearch}
-                                onClick={() => {
-                                    setSearching(!searching);
-                                }}
-                            >
-                                <SearchTwoToneIcon />
-                            </IconButton>
-                        )} */}
                     </Box>
                     <Button
                         className={classes.buttonStart}
@@ -81,7 +84,7 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         height: window.innerHeight,
         width: window.innerWidth,
-        backgroundImage: `url(${bannerImage})`,
+        // backgroundImage: `url(${bannerImage})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
