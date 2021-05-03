@@ -8,6 +8,7 @@ import {
     DialogContentText,
     DialogTitle,
     Card,
+    IconButton,
     List,
     ListItem,
     ListItemText,
@@ -18,6 +19,7 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
@@ -218,13 +220,24 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             <h1 className={classes.title}>Goods and Services</h1>
             <div className={classes.formContainer}>
                 <Typography gutterBottom>
-                    Please select the NICE Class and Terms you want to register
-                    your trademark under.
-                    <p>
-                        <b>Please Note:</b> You are allowed selections from 1
-                        NICE Class, any additional NICE Classes will cost an
-                        additional $100.
-                    </p>
+                    A Trademark is registered under one or more{' '}
+                    <b>NICE class(es)</b>. <br />
+                    <br />
+                    This Trademark application service base price is $1,500.00
+                    and includes 1 (one) NICE Class applied to your Trademark.{' '}
+                    <br />
+                    <br />
+                    If your Trademark must be registered under additional NICE
+                    Classes,{' '}
+                    <b>
+                        an additional government fee of $100.00 will be applied
+                        per additional NICE class.
+                    </b>
+                    <br />
+                    <br />
+                    Please search for the <b>Terms</b> which may apply to your
+                    Trademark. Each <b>Term</b> is associated with a{' '}
+                    <b>NICE Class</b>.
                 </Typography>
 
                 {/* ///////////////////////////search trademark terms/////////////////////////// */}
@@ -310,19 +323,15 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                 selectedClasses.map((niceClass, index) => (
                                     <div key={index}>
                                         <h4>
-                                            {
-                                                // Selected Class Heading  (Number + Shortmame)
-                                                'Class: ' +
-                                                    niceClass?.name +
-                                                    ' - ' +
-                                                    niceClass?.descriptions[0]
-                                                        .shortname
-                                                // this.getClassShortName(
-                                                //     classNum
-                                                // )
-                                            }
+                                            {'Class: ' +
+                                                niceClass?.name +
+                                                ' - ' +
+                                                niceClass?.descriptions[0]
+                                                    .shortname}
                                         </h4>
-                                        <ListItem className="termDisplay">
+                                        <ListItem
+                                            className={classes.classTermList}
+                                        >
                                             {selectedTerms
                                                 // [selectedClasses?.indexOf(
                                                 //         classNum.number)]?
@@ -333,6 +342,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                                     ) {
                                                         return (
                                                             <div
+                                                                className={
+                                                                    classes.selectedTermListItem
+                                                                }
                                                                 key={index}
                                                                 style={{
                                                                     margin:
@@ -340,6 +352,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                                                 }}
                                                             >
                                                                 <ListItemText
+                                                                    // className={
+                                                                    //     classes.selectedTermListItem
+                                                                    // }
                                                                     primary={
                                                                         'Term:'
                                                                     }
@@ -347,7 +362,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                                                         term.termName
                                                                     }
                                                                 />
-                                                                <Button
+                                                                <IconButton
                                                                     color="secondary"
                                                                     variant="contained"
                                                                     onClick={() =>
@@ -356,8 +371,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                                                         )
                                                                     }
                                                                 >
-                                                                    Remove
-                                                                </Button>
+                                                                    <DeleteForeverTwoToneIcon />
+                                                                </IconButton>
                                                             </div>
                                                         );
                                                     }
@@ -369,8 +384,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                     </CardContent>
                 </Card>
                 {/* ///////////////////////////total amount section /////////////////////////// */}
-                <Card className={classes.amount}>
-                    <CardContent>
+                <Card>
+                    <CardContent className={classes.amount}>
                         <Typography variant="h6">
                             <b>Amount:</b>
                         </Typography>
@@ -448,7 +463,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: '3%',
-        width: '70%',
+        width: '95%',
         border: '1px solid #696969',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
@@ -462,6 +477,7 @@ const useStyles = makeStyles((theme) => ({
     formContainer: {
         border: '1px solid black',
         display: 'flex',
+        padding: '5px',
         flexDirection: 'column',
         margin: '3%',
     },
@@ -484,8 +500,21 @@ const useStyles = makeStyles((theme) => ({
     selectedTerms: {
         margin: '3% 0',
     },
+    classTermList: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    selectedTermListItem: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
     amount: {
-        margin: '3% 0',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: '2% 0',
     },
     buttonContainer: {
         display: 'flex',
