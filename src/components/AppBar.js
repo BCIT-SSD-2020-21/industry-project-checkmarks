@@ -306,13 +306,12 @@ export default function MenuAppBar({
                         
                         {/* Ask a Lawyer Button     */}
                         <Button
+                            size="large"
                             variant="contained"
                             color="secondary"
-                            href="/AskALawyer"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            className={classes.button}>
+                            component="a"
+                            target="blank"
+                            href="https://checkmarks.ca/">
                             Ask a Lawyer
                         </Button>
                       
