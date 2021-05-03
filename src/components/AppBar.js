@@ -291,8 +291,9 @@ export default function MenuAppBar({
                         </Box>
                     )}
 
+                    {/* User Button     */}
                     <div>
-                        <IconButton
+                        {/* <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
@@ -301,7 +302,20 @@ export default function MenuAppBar({
                             color="inherit"
                         >
                             <AccountCircleTwoToneIcon />
-                        </IconButton>
+                        </IconButton> */}
+                        
+                        {/* Ask a Lawyer Button     */}
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            href="/AskALawyer"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            className={classes.button}>
+                            Ask a Lawyer
+                        </Button>
+                      
                         <Menu
                             PaperProps={{
                                 style: {
