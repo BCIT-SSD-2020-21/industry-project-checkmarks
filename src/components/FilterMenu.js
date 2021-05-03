@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { checkmarksTheme } from '../../styles/Themes';
+import { checkmarksTheme } from '../styles/Themes';
 import {
     Box,
     Button,
@@ -19,7 +19,7 @@ import { AutoSizer, Column, Table } from 'react-virtualized';
 import { withStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import ResultDetail from './ResultDetail';
+import ResultDetail from './LandingPage/ResultDetail';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 

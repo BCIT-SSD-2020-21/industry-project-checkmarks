@@ -190,6 +190,8 @@ export default function MenuAppBar({
     loggingIn,
     setLoggingIn,
     setSearching,
+    darkMode,
+    setDarkMode,
 }) {
     const classes = navbarStyles();
     const theme = useTheme();
@@ -222,6 +224,7 @@ export default function MenuAppBar({
         setSwitchState({ ...switchState, [e.target.name]: e.target.checked });
     };
 
+    console.log('darkMode:', darkMode);
     return (
         <div>
             <CssBaseline />
@@ -394,12 +397,14 @@ export default function MenuAppBar({
             >
                 <div className={classes.drawerHeader}>
                     <Switch
-                        checked={switchState.switchCheckedA}
-                        onChange={switchChange}
+                        checked={darkMode.darkMode}
+                        onChange={() =>
+                            darkMode.setDarkMode(!darkMode.darkMode)
+                        }
                         name="switchCheckedA"
                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                     />
-                    {switchState.switchCheckedA ? (
+                    {darkMode ? (
                         <NightsStayTwoToneIcon className={classes.themeIcon} />
                     ) : (
                         <WbSunnyTwoToneIcon className={classes.themeIcon} />
