@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
-export default function PaymentForm({ navigation }) {
+export default function PaymentForm({ navigation, setPristine }) {
     const classes = useStyles();
 
     const [creditCardInfo, setCreditCardInfo] = useState({
@@ -210,7 +210,10 @@ export default function PaymentForm({ navigation }) {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => {
+                        navigation.next();
+                        setPristine();
+                    }}
                 >
                     Confirm Payment
                 </Button>
