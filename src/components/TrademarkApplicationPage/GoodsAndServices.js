@@ -80,7 +80,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         let termIndex = termTableData.findIndex(
             (term) => term.termNumber === termNumber
         );
-        console.log(termIndex);
         if (termIndex === -1) {
             console.log('Term not found'); // handle error
         } else {
@@ -98,10 +97,14 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 updatedTerm.selected === true ||
                 termTableData[termIndex].selected === false
             ) {
+                // ADD to Selected Terms
+                setSelectedTerms([...selectedTerms, termTableData[termIndex]]);
             } else if (
                 updatedTerm.selected === false ||
                 termTableData[termIndex].selected === true
             ) {
+                // REMOVE from Selected Terms
+                removeTerm(termTableData[termIndex]);
             }
         }
     };
@@ -122,11 +125,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 let termTableDataFormat = {
                     ...item,
                     selected: termSelected,
-                    // selectionCheckbox: termSelector(
-                    //     item.termNumber,
-                    //     termSelected,
-                    //     setTermBeingToggledNumber
-                    // ),
                     selectionCheckbox: (
                         <TermSelector
                             number={item.termNumber}
@@ -151,9 +149,7 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         );
         setSelectedTerms(newSelectedTerms);
     };
-    // console.log('selectedTerms: ', selectedTerms);
     // filter selectedTerms, get list of selected classes (no duplicates)
-    // console.log(selectedTerms);
     useEffect(() => {
         const classesSelected = [];
         if (selectedTerms.length > 0) {
@@ -285,72 +281,9 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                 ],
                                 dataKey: 'classShortName',
                             },
-                            // {
-                            //     width: (window.innerWidth * 1) / 3,
-                            //     label: [
-                            //         'Class Description',
-                            //         '(yyyy-mm-dd)',
-                            //         onFilterClick,
-                            //         sortOptions,
-                            //     ],
-                            //     dataKey: 'fileDateFormatted',
-                            //     // numeric: true,
-                            // },
                         ]}
                     />
                 </Paper>
-                {/* /////////////////////////// Terms List Table /////////////////////////// */}
-                {/* <MaterialTable
-                        title="Terms List"
-                        columns={[
-                            {
-                                title: 'Term ID',
-                                field: 'id',
-                                cellStyle: {
-                                    minWidth: 10,
-                                    padding: 10,
-                                },
-                                headerStyle: {
-                                    minWidth: 10,
-                                    padding: 10,
-                                },
-                            },
-                            { title: 'Term Name', field: 'termName' },
-                            { title: 'NICE Class', field: 'termClass' },
-                            {
-                                title: 'NICE Class Description',
-                                field: 'classShortName',
-                            },
-                        ]}
-                        data={termTableData}
-                        options={{
-                            selection: true,
-                            showSelectAllCheckbox: false,
-                            // selectionProps: (rowData) => ({
-                            //     checked: rowData.checked === true,
-                            //     onClick: (event, rowData) =>
-                            //         this.handleCheckboxClick(event, rowData),
-                            // }),
-                        }}
-                        actions={[
-                            {
-                                tooltip: 'Add All Selected Terms/Classes',
-                                icon: () => (
-                                    <Button
-                                        // onClick={() => addSelectedTerms()}
-                                        variant="contained"
-                                        component="label"
-                                        color="primary"
-                                    >
-                                        Add selected items
-                                    </Button>
-                                ),
-                                onClick: (evt, data) =>
-                                    addSelectedTerms(evt, data),
-                                // this.handleAdd(data),
-                            },
-                        ]}
-                    /> */}
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
                     <CardContent>
@@ -408,12 +341,6 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                                                                             term
                                                                         )
                                                                     }
-                                                                    // onClick={() =>
-                                                                    //     this.handleRemove(
-                                                                    //         classNum,
-                                                                    //         term
-                                                                    //     )
-                                                                    // }
                                                                 >
                                                                     Remove
                                                                 </Button>

@@ -7,10 +7,11 @@ import { checkmarksTheme } from '../../styles/Themes';
 export default function TermSelector({ number, selected, handler }) {
     const [checked, setChecked] = useState(selected);
     const handleSelection = (value) => {
-        setChecked(!checked);
         handler(value);
+        setChecked(!checked);
     };
-    console.log('checked: ', checked);
+    // console.log('checked: ', checked);
+
     return (
         <Checkbox
             value={number}
