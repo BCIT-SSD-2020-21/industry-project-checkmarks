@@ -13,7 +13,12 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { checkmarksTheme } from '../../../styles/Themes';
 
-export default function IndividualForm({ info, setInfo, navigation }) {
+export default function IndividualForm({
+    info,
+    setInfo,
+    navigation,
+    setDirty,
+}) {
     const classes = useStyles();
 
     //handle seclection of individual or organization
@@ -23,6 +28,7 @@ export default function IndividualForm({ info, setInfo, navigation }) {
             individualOrOrganization: e.target.value,
         });
     };
+    setDirty();
     return (
         <div>
             {/* checkbox for indicidual or organization */}

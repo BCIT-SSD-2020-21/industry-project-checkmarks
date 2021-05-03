@@ -15,111 +15,50 @@ import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import LoopIcon from '@material-ui/icons/Loop';
-import { checkmarksTheme } from '../../styles/Themes';
+import { checkmarksTheme } from '../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
-import SearchResults from './SearchResults';
-import SearchField from '../SearchField';
-import { searchTrademarks } from '../../services/checkmarks';
+import SearchResults from './LandingPage/SearchResults';
+import { searchTrademarks } from '../services/checkmarks';
 
-export default function TrademarkSearch({ searching, setSearching }) {
+export default function SearchField({ loading, searchTrademark }) {
     const classes = searchBoxStyles();
     const history = useHistory();
 
-    // user input search term
-    const [searchTerm, setSearchTerm] = useState('');
-    const searchTrademark = (text) => {
-        if (text.length > 2) {
-            setSearchTerm(text);
-        } else {
-            setSearchTerm('');
-        }
-    };
-
-    // webAPI search results
-    const [searchResults, setSearchResults] = useState([]);
-    useEffect(() => {
-        if (searchTerm) {
-            (async () => {
-                const result = await searchTrademarks(searchTerm);
-                setSearchResults(result);
-            })();
-        }
-        if (searchTerm.length > 0) {
-            setSearching(true);
-        } else {
-            setSearching(false);
-        }
-    }, [searchTerm]);
-
-    // Loading Indicator
-    const { current: instance } = useRef({});
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        if (instance.delayTimer) {
-            clearTimeout(instance.delayTimer);
-        }
-        if (searchTerm !== '' && searchResults?.length === 0) {
-            setLoading(true);
-            instance.delayTimer = setTimeout(() => {
-                setLoading(false); // after 3 seconds, stop Loading Indicator
-            }, 3000);
-        } else {
-            setLoading(false);
-        }
-    }, [searchTerm, searchResults]);
-
     return (
-        <Box className={classes.containerTMSearch}>
-            {/* <Fade in={true} exit={true} timeout={2000}> */}
-            <Box
-                boxShadow={2}
-                className={`${classes.searchBox} ${
-                    searchTerm.length > 0 && classes.searchBoxShifted
-                }`}
-            >
-                <SearchField
-                    loading={loading}
-                    searchTrademark={searchTrademark}
-                />
-                <IconButton
-                    style={{
-                        display: searching ? 'block' : 'none',
-                    }}
-                    className={classes.edgeButton}
-                    onClick={() => history.push('/application')}
-                >
-                    <PlayArrowTwoToneIcon />
-                </IconButton>
-            </Box>
-            {/* </Fade> */}
-            {searchTerm.length > 2 && (
-                // <Fade in={true} exit={true}>
-                <Box
-                    className={`${classes.results} ${
-                        searchTerm.length > 0 && classes.searchResultsShifted
-                    }`}
-                >
-                    {searchResults?.length > 0 ? (
-                        <SearchResults data={searchResults} />
-                    ) : (
-                        // <Fade in={true} exit={true}>
-                        <Card className={classes.noResultContainer}>
-                            <Typography className={classes.noResultText}>
-                                {`No match found for "${searchTerm}", so this text may not be registered yet as a Trademark.`}
-                            </Typography>
-                            <Typography className={classes.noResultText}>
-                                {'Would you like to start an application?'}
-                            </Typography>
-                            <Button className={classes.startButton}>
-                                Absolutely!
-                            </Button>
-                        </Card>
-                        // </Fade>
-                    )}
-                </Box>
-                // </Fade>
-            )}
-        </Box>
+        <FormControl className={classes.form}>
+            {/* <InputLabel className={classes.label}>
+                        {'Search for a Trademark...'}
+                    </InputLabel> */}
+            <Input
+                className={classes.input}
+                // onClick={(e) => console.log(e.target)}
+                onChange={(e) => searchTrademark(e.target.value)}
+                id="searchBox"
+                placeholder={'Check if your Trademark exists...'}
+                style={{ position: 'relative' }}
+                disableUnderline={true}
+                startAdornment={
+                    <InputAdornment
+                        className={classes.adornment}
+                        position="start"
+                    >
+                        <SearchTwoToneIcon className={classes.icon} />
+                    </InputAdornment>
+                }
+                endAdornment={
+                    <InputAdornment
+                        className={classes.adornment}
+                        position="end"
+                    >
+                        <LoopIcon
+                            className={
+                                loading ? classes.iconLoading : classes.hidden
+                            }
+                        />
+                    </InputAdornment>
+                }
+            />
+        </FormControl>
     );
 }
 

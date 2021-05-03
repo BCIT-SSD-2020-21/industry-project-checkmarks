@@ -1,75 +1,159 @@
-import React, { useState, useEffect } from 'react';
-import MaterialTable from 'material-table';
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     CardContent,
+    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
     Card,
+    IconButton,
     List,
     ListItem,
     ListItemText,
+    Paper,
     Typography,
     Button,
-    TextField,
 } from '@material-ui/core';
-import { searchTerms } from '../../services/cipo';
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../styles/Themes';
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
+import MuiVirtualizedTable from '../VirtualizedTable';
+import SearchField from '../SearchField';
+import TermSelector from './TermSelector';
+// import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({ navigation, info, setInfo }) {
     const classes = useStyles();
 
-    const [terms, setTerms] = useState([]); // complete info on each term
-    const [termTableData, setTermTableData] = useState([]); // used to render on Table
-    // const [selectedClassNumbers, setSelectedClassNumbers] = useState([]);
+    // INPUT statevar
+    const [searchTerm, setSearchTerm] = useState(''); // user's search
+    const [searchError, setSearchError] = useState('');
+    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
-    const [classShortNames, setClassShortNames] = useState([]); // needed?
+    // INITIALIZE From 'info' Statevar
+    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
+    useEffect(() => {
+        setSelectedTerms(info.termsSelected);
+    }, []);
     const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
     useEffect(() => {
-        // Initialize from info.classesSelected
         setSelectedClasses(info.classesSelected);
     }, []);
 
-    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        // Initialize from info.classesSelected
-        setSelectedTerms(info.termsSelected);
-    }, []);
+    // DATA Active/Displayed
+    const [termTableData, setTermTableData] = useState([]); // used to render on Table
 
-    const [searchError, setSearchError] = useState('');
-    const [searchTerm, setSearchTerm] = useState(''); // user's search
-    const [open, setOpen] = useState(false); // dialog box showing when no terms selected
+    // SELECTION HANDLING
+    const [termBeingToggledNumber, setTermBeingToggledNumber] = useState(null);
+    useEffect(() => {
+        if (termBeingToggledNumber) {
+            toggleTermSelectionStatus(termBeingToggledNumber);
+        }
+        setTermBeingToggledNumber(null);
+    }, [termBeingToggledNumber]);
 
     const [totalAmount, setTotalAmount] = useState(0);
 
-    // Below Commented Code Block Here (Ref# 12345678)
-    // Temporary Test Data: services/sampleTermSearch.json
-    // console.log('sampleTermSearch: ', sampleTermSearch.result);
+    // COSMETIC statevar (indicator)
+    const { current: instance } = useRef({});
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        if (instance.delayTimer) {
+            clearTimeout(instance.delayTimer);
+        }
+        if (searchTerm !== '' && termTableData?.length === 0) {
+            setLoading(true);
+            instance.delayTimer = setTimeout(() => {
+                setLoading(false); // after 3 seconds, stop Loading Indicator
+            }, 3000);
+        } else {
+            setLoading(false);
+        }
+    }, [searchTerm, termTableData]);
+
+    const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
+    const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
+    const onFilterClick = (e) => {
+        setFilterSelection(e.currentTarget.value);
+    };
+
+    // Functions
+    const toggleTermSelectionStatus = (termNumber) => {
+        let termIndex = termTableData.findIndex(
+            (term) => term.termNumber === termNumber
+        );
+        if (termIndex === -1) {
+            console.log('Term not found'); // handle error
+        } else {
+            let updatedTerm = {
+                ...termTableData[termIndex],
+                selected: !termTableData[termIndex].selected,
+                selectionCheckbox: (
+                    <TermSelector
+                        number={termNumber}
+                        selected={!termTableData[termIndex].selected}
+                        handler={setTermBeingToggledNumber}
+                    />
+                ),
+            };
+            setTermTableData([
+                ...termTableData.slice(0, termIndex),
+                Object.assign({}, termTableData[termIndex], updatedTerm),
+                ...termTableData.slice(termIndex + 1),
+            ]);
+            // handle SELECTED TERMS & CLASSES
+            if (
+                updatedTerm.selected === true ||
+                termTableData[termIndex].selected === false
+            ) {
+                // ADD to Selected Terms
+                setSelectedTerms([...selectedTerms, termTableData[termIndex]]);
+            } else if (
+                updatedTerm.selected === false ||
+                termTableData[termIndex].selected === true
+            ) {
+                // REMOVE from Selected Terms
+                removeTerm(termTableData[termIndex]);
+            }
+        }
+    };
+    // GET TERM DATA (on Search)
     const getSearchTerms = async () => {
         // GET request to API - simulated with fake data: sampleTermSearch
         const termData = []; // formatted to fit table
         sampleTermSearch.result.forEach((result) => {
             // format to fit table
-            result.resultsReturned.map((term) => {
+            result.resultsReturned.map((item) => {
+                // determine if Term is Selected (if term exists in info.termsSelected)
+                let termSelected = false;
+                info.termsSelected.forEach((term) => {
+                    if (term.termNumber === item.termNumber) {
+                        termSelected = true;
+                    }
+                });
                 let termTableDataFormat = {
-                    ...term,
-                    id: term.termNumber,
-                    termName: term.termName,
-                    termClass: term.niceClasses[0].number,
-                    classShortName: term.niceClasses[0].descriptions[0].name,
+                    ...item,
+                    selected: termSelected,
+                    selectionCheckbox: (
+                        <TermSelector
+                            number={item.termNumber}
+                            selected={termSelected}
+                            handler={setTermBeingToggledNumber}
+                        />
+                    ),
+                    id: item.termNumber,
+                    termName: item.termName,
+                    termClass: item.niceClasses[0].number,
+                    classShortName: item.niceClasses[0].descriptions[0].name,
                 };
                 termData.push(termTableDataFormat);
             });
             setTermTableData(termData);
         });
-    };
-    // console.log('terms: ', terms);
-    const addSelectedTerms = (evt, data) => {
-        setSelectedTerms(data);
     };
     const removeTerm = (term) => {
         // const newSelectedTerms = selectedTerms;
@@ -78,13 +162,8 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
         );
         setSelectedTerms(newSelectedTerms);
     };
-    // console.log('selectedTerms: ', selectedTerms);
     // filter selectedTerms, get list of selected classes (no duplicates)
-    console.log(selectedTerms);
     useEffect(() => {
-        // setSelectedTerms([]);
-        // setSelectedClasses([]);
-        // console.log('useEffect, selectedTerms: ', selectedTerms);
         const classesSelected = [];
         if (selectedTerms.length > 0) {
             selectedTerms.forEach((term) => {
@@ -116,227 +195,211 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
             }
         }
     }, [selectedTerms]);
-    // update form INFO
+
+    // UPDATE PARENT Statevar 'info'
     useEffect(() => {
-        // classesSelected
         if (selectedClasses?.length > 0) {
             setInfo({ ...info, classesSelected: selectedClasses });
         }
     }, [selectedClasses]);
     useEffect(() => {
-        // termsSelected
         if (selectedTerms?.length > 0) {
             setInfo({ ...info, termsSelected: selectedTerms });
         }
     }, [selectedTerms]);
     useEffect(() => {
-        // termsSelected
         if (selectedTerms?.length > 0) {
             setInfo({ ...info, amount: totalAmount });
         }
     }, [totalAmount]);
 
-    // console.log('selectedClasses: ', selectedClasses);
-
-    console.log('G&S info: ', info.classesSelected);
+    console.log('termTableData[0]: ', termTableData[0]);
+    console.log('info.termsSelected: ', info.termsSelected);
     return (
-        // let amountText = '$' + 1500;
-        // let additionalNICE = '';
-
-        // if (this.state.selectedClasses.length > 1) {
-        //     amountText =
-        //         '$' +
-        //         String(1500 + (this.state.selectedClasses.length - 1) * 100);
-        //     additionalNICE =
-        //         '$1500 base fee + ' +
-        //         String(this.state.selectedClasses.length - 1) +
-        //         ' additional NICE Classes.';
-        // }
-        // return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>
             <div className={classes.formContainer}>
                 <Typography gutterBottom>
-                    Please select the NICE Class and Terms you want to register
-                    your trademark under.
-                    <p>
-                        <b>Please Note:</b> You are allowed selections from 1
-                        NICE Class, any additional NICE Classes will cost an
-                        additional $100.
-                    </p>
+                    A Trademark is registered under one or more{' '}
+                    <b>NICE class(es)</b>. <br />
+                    <br />
+                    This Trademark application service base price is $1,500.00
+                    and includes 1 (one) NICE Class applied to your Trademark.{' '}
+                    <br />
+                    <br />
+                    If your Trademark must be registered under additional NICE
+                    Classes,{' '}
+                    <b>
+                        an additional government fee of $100.00 will be applied
+                        per additional NICE class.
+                    </b>
+                    <br />
+                    <br />
+                    Please search for the <b>Terms</b> which may apply to your
+                    Trademark. Each <b>Term</b> is associated with a{' '}
+                    <b>NICE Class</b>.
                 </Typography>
 
-                <div>
-                    {/* ///////////////////////////search trademark terms/////////////////////////// */}
-                    <h3>Search for your Trademark Terms</h3>
-                    <div className={classes.searchTermsContainer}>
-                        <TextField
-                            id="outlined-basic"
-                            placeholder="Enter a general term for your good/service "
-                            label="Search"
-                            fullWidth
-                            variant="outlined"
-                            error={searchError != ''}
-                            helperText={searchError}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            // onChange={handleTextFieldChange}
-                        />
-                        <Button
-                            variant="contained"
-                            className={classes.searchTermsButton}
-                            onClick={getSearchTerms}
-                        >
-                            Search
-                        </Button>
-                    </div>
+                {/* ///////////////////////////search trademark terms/////////////////////////// */}
+                <h3>Search for your Trademark Terms</h3>
+                <SearchField
+                    loading={loading}
+                    searchTrademark={getSearchTerms}
+                />
+                {/* <div className={classes.searchTermsContainer}>
+                    <TextField
+                        id="outlined-basic"
+                        placeholder="Enter a general term for your good/service "
+                        label="Search"
+                        fullWidth
+                        variant="outlined"
+                        error={searchError != ''}
+                        helperText={searchError}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        // onChange={handleTextFieldChange}
+                    />
+                    <Button
+                        variant="contained"
+                        className={classes.searchTermsButton}
+                        onClick={getSearchTerms}
+                    >
+                        Search
+                    </Button>
+                </div> */}
 
-                    {/* /////////////////////////// Terms List Table /////////////////////////// */}
-                    <MaterialTable
-                        title="Terms List"
+                <Paper
+                    className={classes.results}
+                    style={{
+                        backgroundColor: checkmarksTheme.bgTransparent,
+                        height: '500px', // (window.innerHeight * 4) / 5,
+                        width: '100%',
+                    }}
+                >
+                    <MuiVirtualizedTable
+                        // style={{ height: 400, width: '100%' }}
+                        rowCount={termTableData.length} // row or data
+                        rowGetter={({ index }) => termTableData[index]} // row or data
+                        onRowClick={(e) => setSelectedRow(e.index)}
+                        onFilterClick={onFilterClick}
                         columns={[
                             {
-                                title: 'Term ID',
-                                field: 'id',
-                                cellStyle: {
-                                    minWidth: 10,
-                                    padding: 10,
-                                },
-                                headerStyle: {
-                                    minWidth: 10,
-                                    padding: 10,
-                                },
+                                width: (window.innerWidth * 1) / 10,
+                                label: ['Selected', '', onFilterClick, []],
+                                dataKey: 'selectionCheckbox',
                             },
-                            { title: 'Term Name', field: 'termName' },
-                            { title: 'NICE Class', field: 'termClass' },
                             {
-                                title: 'NICE Class Description',
-                                field: 'classShortName',
+                                width: (window.innerWidth * 4) / 10,
+                                label: ['Term Name', '', onFilterClick, []],
+                                dataKey: 'termName',
                             },
-                        ]}
-                        data={termTableData}
-                        options={{
-                            selection: true,
-                            showSelectAllCheckbox: false,
-                            // selectionProps: (rowData) => ({
-                            //     checked: rowData.checked === true,
-                            //     onClick: (event, rowData) =>
-                            //         this.handleCheckboxClick(event, rowData),
-                            // }),
-                        }}
-                        actions={[
                             {
-                                tooltip: 'Add All Selected Terms/Classes',
-                                icon: () => (
-                                    <Button
-                                        // onClick={() => addSelectedTerms()}
-                                        variant="contained"
-                                        component="label"
-                                        color="primary"
-                                    >
-                                        Add selected items
-                                    </Button>
-                                ),
-                                onClick: (evt, data) =>
-                                    addSelectedTerms(evt, data),
-                                // this.handleAdd(data),
+                                width: (window.innerWidth * 1) / 10,
+                                label: ['NICE Class', '', onFilterClick, []],
+                                dataKey: 'termClass',
+                            },
+                            {
+                                width: (window.innerWidth * 4) / 10,
+                                label: [
+                                    'NICE Class Name',
+                                    '',
+                                    onFilterClick,
+                                    [],
+                                ],
+                                dataKey: 'classShortName',
                             },
                         ]}
                     />
-                    {/* ///////////////////////////selected terms section /////////////////////////// */}
-                    <Card className={classes.selectedTerms}>
-                        <CardContent>
-                            <Typography variant="h6">
-                                <b>Selected Terms:</b>
-                            </Typography>
+                </Paper>
+                {/* ///////////////////////////selected terms section /////////////////////////// */}
+                <Card className={classes.selectedTerms}>
+                    <CardContent>
+                        <Typography variant="h6">
+                            <b>Selected Terms:</b>
+                        </Typography>
 
-                            <List>
-                                {selectedClasses?.length > 0 &&
-                                    selectedClasses.map((niceClass, index) => (
-                                        <div key={index}>
-                                            <h4>
-                                                {
-                                                    // Selected Class Heading  (Number + Shortmame)
-                                                    'Class: ' +
-                                                        niceClass?.name +
-                                                        ' - ' +
-                                                        niceClass
-                                                            ?.descriptions[0]
-                                                            .shortname
-                                                    // this.getClassShortName(
-                                                    //     classNum
-                                                    // )
-                                                }
-                                            </h4>
-                                            <ListItem className="termDisplay">
-                                                {selectedTerms
-                                                    // [selectedClasses?.indexOf(
-                                                    //         classNum.number)]?
-                                                    .map((term, index) => {
-                                                        if (
-                                                            term.termClass ===
-                                                            niceClass.number
-                                                        ) {
-                                                            return (
-                                                                <div
-                                                                    key={index}
-                                                                    style={{
-                                                                        margin:
-                                                                            '4px',
-                                                                    }}
+                        <List>
+                            {selectedClasses?.length > 0 &&
+                                selectedClasses.map((niceClass, index) => (
+                                    <div key={index}>
+                                        <h4>
+                                            {'Class: ' +
+                                                niceClass?.name +
+                                                ' - ' +
+                                                niceClass?.descriptions[0]
+                                                    .shortname}
+                                        </h4>
+                                        <ListItem
+                                            className={classes.classTermList}
+                                        >
+                                            {selectedTerms
+                                                // [selectedClasses?.indexOf(
+                                                //         classNum.number)]?
+                                                .map((term, index) => {
+                                                    if (
+                                                        term.termClass ===
+                                                        niceClass.number
+                                                    ) {
+                                                        return (
+                                                            <div
+                                                                className={
+                                                                    classes.selectedTermListItem
+                                                                }
+                                                                key={index}
+                                                                style={{
+                                                                    margin:
+                                                                        '4px',
+                                                                }}
+                                                            >
+                                                                <ListItemText
+                                                                    // className={
+                                                                    //     classes.selectedTermListItem
+                                                                    // }
+                                                                    primary={
+                                                                        'Term:'
+                                                                    }
+                                                                    secondary={
+                                                                        term.termName
+                                                                    }
+                                                                />
+                                                                <IconButton
+                                                                    color="secondary"
+                                                                    variant="contained"
+                                                                    onClick={() =>
+                                                                        removeTerm(
+                                                                            term
+                                                                        )
+                                                                    }
                                                                 >
-                                                                    <ListItemText
-                                                                        primary={
-                                                                            'Term:'
-                                                                        }
-                                                                        secondary={
-                                                                            term.termName
-                                                                        }
-                                                                    />
-                                                                    <Button
-                                                                        color="secondary"
-                                                                        variant="contained"
-                                                                        onClick={() =>
-                                                                            removeTerm(
-                                                                                term
-                                                                            )
-                                                                        }
-                                                                        // onClick={() =>
-                                                                        //     this.handleRemove(
-                                                                        //         classNum,
-                                                                        //         term
-                                                                        //     )
-                                                                        // }
-                                                                    >
-                                                                        Remove
-                                                                    </Button>
-                                                                </div>
-                                                            );
-                                                        }
-                                                    })}
-                                            </ListItem>
-                                        </div>
-                                    ))}
-                            </List>
-                        </CardContent>
-                    </Card>
-                    {/* ///////////////////////////total amount section /////////////////////////// */}
-                    <Card className={classes.amount}>
-                        <CardContent>
-                            <Typography variant="h6">
-                                <b>Amount:</b>
-                            </Typography>
-                            <Typography variant="body1" component="p">
-                                {/* {additionalNICE} */}
-                                {`$${totalAmount.toString()}`}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    <Alert severity="info" className={classes.alert}>
-                        Helper section with brief legal information, assisting
-                        the client through the process.
-                    </Alert>
-                </div>
+                                                                    <DeleteForeverTwoToneIcon />
+                                                                </IconButton>
+                                                            </div>
+                                                        );
+                                                    }
+                                                })}
+                                        </ListItem>
+                                    </div>
+                                ))}
+                        </List>
+                    </CardContent>
+                </Card>
+                {/* ///////////////////////////total amount section /////////////////////////// */}
+                <Card>
+                    <CardContent className={classes.amount}>
+                        <Typography variant="h6">
+                            <b>Amount:</b>
+                        </Typography>
+                        <Typography variant="body1" component="p">
+                            {/* {additionalNICE} */}
+                            {`$${totalAmount.toString()}`}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Alert severity="info" className={classes.alert}>
+                    Helper section with brief legal information, assisting the
+                    client through the process.
+                </Alert>
+
                 <div className={classes.buttonContainer}>
                     <Button
                         type="submit"
@@ -396,8 +459,11 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
 
 const useStyles = makeStyles((theme) => ({
     card: {
+        // backgroundColor: 'blue',
+        display: 'flex',
+        flexDirection: 'column',
         margin: '3%',
-        width: '70%',
+        width: '95%',
         border: '1px solid #696969',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
@@ -409,6 +475,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     formContainer: {
+        border: '1px solid black',
+        display: 'flex',
+        padding: '5px',
+        flexDirection: 'column',
         margin: '3%',
     },
     title: {
@@ -430,8 +500,21 @@ const useStyles = makeStyles((theme) => ({
     selectedTerms: {
         margin: '3% 0',
     },
+    classTermList: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    selectedTermListItem: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
     amount: {
-        margin: '3% 0',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: '2% 0',
     },
     buttonContainer: {
         display: 'flex',
