@@ -19,6 +19,8 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
@@ -26,7 +28,12 @@ import TermSelector from './TermSelector';
 // import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
-export default function GoodsAndServices({ navigation, info, setInfo }) {
+export default function GoodsAndServices({
+    navigation,
+    info,
+    setInfo,
+    inputValidationValue,
+}) {
     const classes = useStyles();
 
     // INPUT statevar
@@ -313,6 +320,13 @@ export default function GoodsAndServices({ navigation, info, setInfo }) {
                 </Paper>
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
+                    {inputValidationValue?.trademarkTypeFormCompleted ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
+                        />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
                     <CardContent>
                         <Typography variant="h6">
                             <b>Selected Terms:</b>

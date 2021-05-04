@@ -8,6 +8,7 @@ export default function ApplicationInfo({
     info,
     setInfo,
     setDirty,
+    inputValidationValue,
 }) {
     const classes = useStyles();
 
@@ -31,6 +32,7 @@ export default function ApplicationInfo({
                     setInfo={setInfo}
                     navigation={navigation}
                     setDirty={setDirty}
+                    inputValidationValue={inputValidationValue}
                 />
             </div>
         </Card>

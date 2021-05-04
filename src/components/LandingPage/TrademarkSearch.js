@@ -1,20 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-    Box,
-    Button,
-    Card,
-    FormControl,
-    IconButton,
-    Input,
-    InputLabel,
-    InputAdornment,
-    Typography,
-} from '@material-ui/core';
+import { Box, Button, Card, IconButton, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import Fade from '@material-ui/core/Fade';
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+// import Fade from '@material-ui/core/Fade';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
-import LoopIcon from '@material-ui/icons/Loop';
 import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './SearchResults';

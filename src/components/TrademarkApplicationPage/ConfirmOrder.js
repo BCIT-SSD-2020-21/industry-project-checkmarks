@@ -2,9 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
 
-export default function PaymentForm({ navigation, info }) {
+export default function PaymentForm({ navigation, info, setInfo }) {
     const classes = useStyles();
 
     console.log('info: ', info);
@@ -237,9 +236,12 @@ export default function PaymentForm({ navigation, info }) {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => {
+                        navigation.next();
+                        setInfo({ ...info, infoConfirmed: true });
+                    }}
                 >
-                    Continue
+                    Confirm
                 </Button>
             </div>
         </Card>
