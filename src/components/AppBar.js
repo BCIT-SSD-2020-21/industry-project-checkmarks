@@ -294,8 +294,9 @@ export default function MenuAppBar({
                         </Box>
                     )}
 
+                    {/* User Button     */}
                     <div>
-                        <IconButton
+                        {/* <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
@@ -304,7 +305,18 @@ export default function MenuAppBar({
                             color="inherit"
                         >
                             <AccountCircleTwoToneIcon />
-                        </IconButton>
+                        </IconButton> */}
+                        
+                        {/* Ask a Lawyer Button     */}
+                        <Button
+                            size="large"
+                            variant="contained"
+                            color="secondary"
+                            component="a"
+                            target="blank"
+                            href="https://golbey.com/contact/">
+                            Ask a Lawyer
+                        </Button>
                         <Menu
                             PaperProps={{
                                 style: {
