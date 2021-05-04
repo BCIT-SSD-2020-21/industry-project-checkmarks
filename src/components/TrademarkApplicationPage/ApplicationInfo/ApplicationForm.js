@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { checkmarksTheme } from '../../../styles/Themes';
+import { createClioContact } from '../../../network';
+import { Info } from '@material-ui/icons';
 
 export default function IndividualForm({
     info,
@@ -29,6 +31,18 @@ export default function IndividualForm({
         });
     };
     setDirty();
+
+    console.log(info);
+
+    const handleSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            await createClioContact(info);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div>
             {/* checkbox for indicidual or organization */}
@@ -252,7 +266,8 @@ export default function IndividualForm({
             <div className={classes.nextButtonContainer}>
                 <Button
                     className={classes.nextButton}
-                    onClick={() => navigation.next()}
+                    onClick={(event) => handleSubmit(event)}
+                    // onClick={() => navigation.next()}
                     // disabled={true}
                 >
                     Next Step
