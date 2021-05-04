@@ -1,10 +1,7 @@
 export const createClioContact = async (info) => {
-    var name = info.firstName + ' ' + info.lastName;
-    var type = 'Person';
-
     var fnResponse = false;
 
-    await fetch('http://localhost:44397/api/Clio', {
+    await fetch('https://localhost:44397/api/Clio', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -12,8 +9,8 @@ export const createClioContact = async (info) => {
         },
         body: JSON.stringify({
             data: {
-                name: name,
-                type: type,
+                name: info.firstName + ' ' + info.lastName,
+                type: 'Person',
                 email_addresses: [
                     {
                         name: 'Other',
@@ -23,7 +20,7 @@ export const createClioContact = async (info) => {
                 phone_numbers: [
                     {
                         name: 'Other',
-                        number: info.phone,
+                        number: '999999',
                     },
                     {
                         name: 'Fax',
@@ -33,11 +30,11 @@ export const createClioContact = async (info) => {
                 addresses: [
                     {
                         name: 'Other',
-                        street: info.streetAdress,
-                        city: info.city,
-                        province: info.province,
-                        postal_code: info.postalCode,
-                        country: info.country,
+                        street: info.userStreetAddress,
+                        city: info.userCity,
+                        province: info.userProvince,
+                        postal_code: info.userPostalCode,
+                        country: info.userCountry,
                         primary: true,
                     },
                 ],
@@ -45,19 +42,21 @@ export const createClioContact = async (info) => {
         }),
     })
         .then((res) => {
+            console.log(info);
             if (res.status != 200) {
                 fnResponse = false;
             }
-            console.log(res.json());
-            // return res.json();
+            // console.log(res.json());
+            return res.json();
         })
-        // .then((data) => {
-        //     var matterIdd = data.data.display_number;
-        //     this.setState({
-        //       matterId: matterIdd
-        //     });
-        //     fnResponse = true;
-        // })
+        .then((data) => {
+            console.log(data);
+            // var matterIdd = data.data.display_number;
+            // this.setState({
+            //   matterId: matterIdd
+            // });
+            // fnResponse = true;
+        })
         .catch((err) => {
             console.log(err);
         });
