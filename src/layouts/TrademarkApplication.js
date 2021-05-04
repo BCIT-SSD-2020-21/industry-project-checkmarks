@@ -105,7 +105,7 @@ const TrademarkApplication = () => {
     });
     useEffect(() => {
         validateForm(info, inputValidationValue, setInputValidationValue);
-    }, [info, inputValidationValue]);
+    }, [info]);
 
     // custon hook, "Discard changes?" on Leave Page (defined in  utils folder)
     const [Prompt, setDirty, setPristine] = PageLeavePrompt();
