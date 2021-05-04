@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Checkbox } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
-import { checkmarksTheme } from '../../styles/Themes';
 
 export default function TermSelector({ number, selected, handler }) {
     const [checked, setChecked] = useState(selected);

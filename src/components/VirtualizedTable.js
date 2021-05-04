@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { checkmarksTheme } from '../styles/Themes';
-import {
-    Button,
-    Card,
-    Fade,
-    IconButton,
-    Paper,
-    TableCell,
-    Typography,
-} from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import { withStyles } from '@material-ui/core/styles';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import ResultDetail from './LandingPage/ResultDetail';
 import FilterMenu from './FilterMenu';
 
 const styles = (theme) => ({

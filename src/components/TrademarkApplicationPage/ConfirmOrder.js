@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
 
 export default function PaymentForm({ navigation, info, setInfo }) {
     const classes = useStyles();

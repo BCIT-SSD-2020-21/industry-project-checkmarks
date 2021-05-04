@@ -2,17 +2,13 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
-import { Box, IconButton, Button } from '@material-ui/core';
-import Fade from '@material-ui/core/Fade';
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import { Box, Button } from '@material-ui/core';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
 import bannerImageDark from '../assets/images/bg_application-nicolas-hoizey.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
-import UserDashboard from '../components/UserDashboard';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
-import Login from '../components/LandingPage/Login';
 import About from '../components/LandingPage/About';
 import Pricing from '../components/LandingPage/Pricing';
 import Footer from '../components/LandingPage/Footer';
@@ -88,12 +84,8 @@ const useStyles = makeStyles(() => ({
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        // maxWidth: '100%',
     },
     actions: {
-        // border: '1px solid black',
-        // animation: '$shiftUp-actions 1s',
-        // backgroundColor: 'red',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
