@@ -48,15 +48,11 @@ const progressStyles = makeStyles((theme) => ({
 }));
 
 export default function Progress({ step, steps, inputValidationValue }) {
-    // const progressValue = Math.round(
-    //     ((step.num - 1) * 100) / (steps.length - 1)
-    // );
-    let progressCompletedValue = 0;
+    let progressCompletedValue = 0; // Max value: 3100
     for (const prop in inputValidationValue) {
-        // console.log(`obj.${prop} = ${obj[prop]}`);
         progressCompletedValue += inputValidationValue[prop];
     }
-    console.log('progressCompletedValue: ', progressCompletedValue);
+
     const progressValue = Math.round((progressCompletedValue * 100) / 3100);
 
     const classes = progressStyles();
@@ -66,19 +62,10 @@ export default function Progress({ step, steps, inputValidationValue }) {
                 <Box
                     className={classes.progress}
                     style={{
-                        // animation: '$progressStep 1s',
+                        borderRadius:
+                            progressValue > 96 ? '25px' : '25px 0 0 25px',
                         transition: 'width 1s ease-in-out',
                         width: `${progressValue}%`,
-
-                        // '@keyframes progressStep': {
-                        //     from: {
-                        //         width: `${
-                        //             progressValue -
-                        //             Math.round(100 / steps.length)
-                        //         }%`,
-                        //     },
-                        //     to: { width: `${progressValue}%` },
-                        // },
                     }}
                 ></Box>
                 <Typography
