@@ -311,10 +311,9 @@ export default function MenuAppBar({
                             color="secondary"
                             component="a"
                             target="blank"
-                            href="https://checkmarks.ca/">
+                            href="https://golbey.com/contact/">
                             Ask a Lawyer
                         </Button>
-                      
                         <Menu
                             PaperProps={{
                                 style: {
