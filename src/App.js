@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Switch as ClickSwitch } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Landing from './layouts/Landing';
@@ -34,10 +34,6 @@ export default function App() {
                         </Route>
                     </Switch>
                 </Router>
-                <ClickSwitch
-                    checked={darkMode}
-                    onChange={() => setDarkMode(!darkMode)}
-                />
             </Paper>
         </ThemeProvider>
     );
