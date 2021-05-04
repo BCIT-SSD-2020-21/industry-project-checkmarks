@@ -7,7 +7,7 @@ const AskALawyer = () => {
 
     return (
         <div className={classes.lawyerText}>
-            <span className={classes.text}>Ask a lawyer</span>
+            <span className={classes.text}>Ask a Lawyer</span>
             <HelpIcon />
         </div>
     );
