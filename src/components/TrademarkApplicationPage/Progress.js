@@ -47,10 +47,17 @@ const progressStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Progress({ step, steps }) {
-    const progressValue = Math.round(
-        ((step.num - 1) * 100) / (steps.length - 1)
-    );
+export default function Progress({ step, steps, inputValidationValue }) {
+    // const progressValue = Math.round(
+    //     ((step.num - 1) * 100) / (steps.length - 1)
+    // );
+    let progressCompletedValue = 0;
+    for (const prop in inputValidationValue) {
+        // console.log(`obj.${prop} = ${obj[prop]}`);
+        progressCompletedValue += inputValidationValue[prop];
+    }
+    console.log('progressCompletedValue: ', progressCompletedValue);
+    const progressValue = Math.round((progressCompletedValue * 100) / 3100);
 
     const classes = progressStyles();
     return (
