@@ -155,6 +155,12 @@ export default function IndividualForm({
             </FormControl>
             <div className={classes.field}>
                 <Button
+                    onClick={() =>
+                        setInfo({
+                            ...info,
+                            idDocumentUploaded: true,
+                        })
+                    }
                     type="submit"
                     variant="contained"
                     className={classes.uploadButton}
@@ -306,21 +312,30 @@ export default function IndividualForm({
                     determined upon submission to the Canadian Intellectual
                     Property Office.
                 </Alert>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={info.agreedTermsOfService}
-                            onChange={() =>
-                                setInfo({
-                                    ...info,
-                                    agreedTermsOfService: !info.agreedTermsOfService,
-                                })
-                            }
-                            name="AgreeTermsOfService"
+                <FormControl fullWidth={true} className={classes.field}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={info.agreedTermsOfService}
+                                onChange={() =>
+                                    setInfo({
+                                        ...info,
+                                        agreedTermsOfService: !info.agreedTermsOfService,
+                                    })
+                                }
+                                name="AgreeTermsOfService"
+                            />
+                        }
+                        label="I understand."
+                    />
+                    {inputValidationValue?.agreedTermsOfService ? (
+                        <CheckCircleOutlinedIcon
+                            className={classes.checkmark}
                         />
-                    }
-                    label="I understand."
-                />
+                    ) : (
+                        <ErrorOutlineIcon className={classes.checkmark} />
+                    )}
+                </FormControl>
             </Box>
             <div className={classes.nextButtonContainer}>
                 <Button
