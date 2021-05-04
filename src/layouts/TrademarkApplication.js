@@ -46,18 +46,34 @@ const TrademarkApplication = () => {
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
-        amount: 150000,
+        amount: 0,
 
         //International Information
-        filedInOtherCountry: false,
+        filedInOtherCountry: null,
         countryOfFiling: '',
         fillingDate: '',
         fillingNumber: '',
+
+        // Info Confirmed
+        infoConfirmed: false,
+
+        // Payment Information
+        paymentCardholderName: '',
+        paymentCreditCardNumber: '',
+        paymentCardExpiryDate: '',
+        paymentCardCVV: '',
+        billingAddressSameAsUser: false,
+        billingAddressStreet: '',
+        billingAddressCity: '',
+        billingAddressProvince: '',
+        billingAddressPostalCode: '',
+        billingAddressCountry: '',
+        paymentConfirmaed: false,
     });
 
     //
     const [inputValidationValue, setInputValidationValue] = useState({
-        //Application Informarion
+        //Application Informarion - 1100
         individualOrOrganizationName: 0,
         firstName: 0,
         lastName: 0,
@@ -70,30 +86,28 @@ const TrademarkApplication = () => {
         userCountry: 0,
         agreedTermsOfService: 0,
 
-        //Trademark Type
+        //Trademark Type - 400
         trademarkTypeFormCompleted: 0,
-        // isText: false,
-        // isLogo: false,
-        // isOther: false,
-        // OtherTypes: [],
 
-        // characterText: '',
-        // fileName: '',
-        // trademarkName: '',
-
-        // Goods and Services
-        // classesSelected: [],
-        // termsSelected: [],
+        // Goods and Services - 600
         amountNotZero: 0,
 
-        //International Information
+        //International Information - 300
         internationalFilingInfo: 0,
+
+        //Info Confirmed - 200
+        infoConfirmed: 0,
+
+        // Payment Information - 500
+        paymentCardInfo: 0,
+        billingAddress: 0,
+        paymentConfirmed: 0,
     });
 
     const validateForm = (info) => {
         // const namesRegex = /^[a-zA-Z]+$/; // from Original Project
         const namesRegex = /[^a-z]/i; // case insensitive
-        const streetAddressRegex = /^[a-z0-9.-]+$/i;
+        const streetAddressRegex = /^[a-z][a-z0-9_ .-]*?/i;
         const emailRegex = /^\S+@\S+\.\S+$/; // from Original Project
         const postalCodeRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/; // from Original Project
 
@@ -102,7 +116,10 @@ const TrademarkApplication = () => {
         if (info.individualOrOrganization === 'Individual') {
             newInputValidationValue.individualOrOrganizationName = 100;
         } else if (info.individualOrOrganization === 'Organization') {
-            if (info.individualOrOrganization) {
+            if (
+                info.organizationName &&
+                !namesRegex.test(info.organizationName)
+            ) {
                 newInputValidationValue.individualOrOrganizationName = 100;
             } else {
                 newInputValidationValue.individualOrOrganizationName = 0;
@@ -133,31 +150,34 @@ const TrademarkApplication = () => {
             newInputValidationValue.idDocumentUploaded = 0;
         }
         // Street Address
-        if (streetAddressRegex.test(info.userStreetAddress)) {
+        if (
+            info.userStreetAddress &&
+            !streetAddressRegex.test(info.userStreetAddress)
+        ) {
             newInputValidationValue.userStreetAddress = 100;
         } else {
             newInputValidationValue.userStreetAddress = 0;
         }
         // City
-        if (namesRegex.test(info.userCity)) {
+        if (info.userCity && !namesRegex.test(info.userCity)) {
             newInputValidationValue.userCity = 100;
         } else {
             newInputValidationValue.userCity = 0;
         }
         // Province
-        if (namesRegex.test(info.userProvince)) {
+        if (info.userProvince && !namesRegex.test(info.userProvince)) {
             newInputValidationValue.userProvince = 100;
         } else {
             newInputValidationValue.userProvince = 0;
         }
         // Postal Code
-        if (info.userPostalCode) {
+        if (postalCodeRegex.test(info.userPostalCode)) {
             newInputValidationValue.userPostalCode = 100;
         } else {
             newInputValidationValue.userPostalCode = 0;
         }
         // Country
-        if (namesRegex.test(info.userCountry)) {
+        if (info.userCountry && !namesRegex.test(info.userCountry)) {
             newInputValidationValue.userCountry = 100;
         } else {
             newInputValidationValue.userCountry = 0;
@@ -170,34 +190,67 @@ const TrademarkApplication = () => {
         }
         // Trademark Types Completed
         if (
-            (info.isText && info.characterText) ||
-            (info.isLogo && info.fileName) ||
-            (info.isOther && info.OtherTypes.length > 0)
+            (info.isText || info.isLogo || info.isOther) &&
+            (info.isText ? info.trademarkName : true) &&
+            (info.isLogo ? info.fileName : true) &&
+            (info.isOther ? info.OtherTypes.length > 0 : true)
         ) {
-            newInputValidationValue.trademarkTypeFormCompleted = 100;
+            newInputValidationValue.trademarkTypeFormCompleted = 400;
         } else {
             newInputValidationValue.trademarkTypeFormCompleted = 0;
         }
         // Total Amount > 0 (At least one class was selected)
         if (info.amount > 0) {
-            newInputValidationValue.amountNotZero = 100;
+            newInputValidationValue.amountNotZero = 600;
         } else {
             newInputValidationValue.amountNotZero = 0;
         }
         // Not Filed in Other Countr OR If Filed, Fields completed
         if (
-            !info.filedInOtherCountry ||
-            (info.filedInOtherCountry &&
+            info.filedInOtherCountry === 'No' ||
+            (info.filedInOtherCountry === 'Yes' &&
                 info.countryOfFiling &&
                 info.fillingDate &&
                 info.fillingNumber)
         ) {
-            newInputValidationValue.internationalFilingInfo = 100;
+            newInputValidationValue.internationalFilingInfo = 300;
         } else {
             newInputValidationValue.internationalFilingInfo = 0;
         }
-        // Payment Information Provided
-
+        // Order Confirmed
+        if (info.infoConfirmed) {
+            newInputValidationValue.infoConfirmed = 200;
+        } else {
+            newInputValidationValue.infoConfirmed = 0;
+        }
+        // Payment Information Provided        // Payment Information
+        if (
+            info.paymentCardholderName &&
+            !namesRegex.test(info.paymentCardholderName) &&
+            info.paymentCreditCardNumber.length === 16 &&
+            info.paymentCardExpiryDate &&
+            info.paymentCardCVV.length === 3
+        ) {
+            newInputValidationValue.paymentCardInfo = 200;
+        } else {
+            newInputValidationValue.paymentCardInfo = 0;
+        }
+        if (
+            info.billingAddressStreet &&
+            !streetAddressRegex.test(info.billingAddressStreet) &&
+            info.billingAddressCity &&
+            info.billingAddressPostalCode &&
+            info.billingAddressCountry
+        ) {
+            newInputValidationValue.billingAddress = 200;
+        } else {
+            newInputValidationValue.billingAddress = 0;
+        }
+        if (info.paymentConfirmaed) {
+            newInputValidationValue.paymentConfirmaed = 100;
+        } else {
+            newInputValidationValue.paymentConfirmaed = 0;
+        }
         setInputValidationValue(newInputValidationValue);
     };
 
@@ -223,13 +276,18 @@ const TrademarkApplication = () => {
         steps,
         initialStep: 0,
     });
-
+    console.log('info: ', info);
     return (
         <Paper className={classes.root}>
             {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div> */}
-            <Progress step={step} steps={steps} info={info} />
+            <Progress
+                step={step}
+                steps={steps}
+                info={info}
+                inputValidationValue={inputValidationValue}
+            />
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
@@ -281,6 +339,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    inputValidationValue={inputValidationValue}
                                     setPristine={setPristine}
                                 />
                             );
