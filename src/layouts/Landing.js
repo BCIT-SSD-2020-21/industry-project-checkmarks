@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
+import bannerImageDark from '../assets/images/bg_application-nicolas-hoizey.jpg';
 import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import UserDashboard from '../components/UserDashboard';
@@ -18,76 +19,42 @@ import Footer from '../components/LandingPage/Footer';
 
 // export const LandingContext = React.createContext();
 
-export default function Landing() {
+export default function Landing(darkMode, setDarkMode) {
     const classes = useStyles();
     const history = useHistory();
 
-    const [authenticated, setAuthenticated] = useState(false);
-    const [loggingIn, setLoggingIn] = useState(false);
-    const [searching, setSearching] = useState(true);
+    const [searching, setSearching] = useState(false);
 
+    console.log('darkMode: ', darkMode.darkMode);
     return (
         <Box className={classes.root}>
             <MenuAppBar
-                authenticated={authenticated}
-                loggingIn={loggingIn}
-                setLoggingIn={setLoggingIn}
                 setSearching={setSearching}
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
             />
-            {/* <Fade in={true} timeout={6000}> */}
-            <Box className={classes.section}>
-                {/* <Fade in={true} exit={true} timeout={1000}> */}
-                {authenticated ? <UserDashboard /> : <HeaderBanner />}
-                {/* </Fade> */}
+            <Box
+                className={classes.section}
+                style={{
+                    backgroundImage: `url(${
+                        darkMode.darkMode ? bannerImageDark : bannerImage
+                    })`,
+                }}
+            >
+                <HeaderBanner searching={searching} />
 
                 <Box className={classes.actions}>
                     <Box className={classes.search}>
-                        {searching ? (
-                            <TrademarkSearch />
-                        ) : (
-                            <IconButton
-                                className={classes.buttonSearch}
-                                onClick={() => {
-                                    setSearching(!searching);
-                                    setLoggingIn(false);
-                                }}
-                            >
-                                <SearchTwoToneIcon />
-                            </IconButton>
-                        )}
+                        {/* {infoDisplayToggle ? ( // idea */}
+                        <TrademarkSearch
+                            searching={searching}
+                            setSearching={setSearching}
+                        />
                     </Box>
-                    {/* {loggingIn ? (
-                            <Login />
-                        ) : (
-                            <Box className={classes.buttons}>
-                                <Button
-                                    className={classes.buttonRegister}
-                                    onClick={() => {
-                                        setSearching(false);
-                                        setLoggingIn(false);
-                                        history.push('/register');
-                                    }}
-                                    boxShadow={2}
-                                >
-                                    Register
-                                </Button>
-                                <Button
-                                    className={classes.buttonLogin}
-                                    onClick={() => {
-                                        setSearching(false);
-                                        setLoggingIn(!loggingIn);
-                                    }}
-                                    boxShadow={2}
-                                >
-                                    Login
-                                </Button>
-                            </Box>
-                        )} */}
                     <Button
                         className={classes.buttonStart}
                         onClick={() => {
                             setSearching(false);
-                            setLoggingIn(false);
                             history.push('/application');
                         }}
                     >
@@ -96,7 +63,6 @@ export default function Landing() {
                     </Button>
                 </Box>
             </Box>
-            {/* </Fade> */}
             <About />
             <Pricing />
             <Footer />
@@ -118,7 +84,7 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         height: window.innerHeight,
         width: window.innerWidth,
-        backgroundImage: `url(${bannerImage})`,
+        // backgroundImage: `url(${bannerImage})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -127,10 +93,13 @@ const useStyles = makeStyles(() => ({
     actions: {
         // border: '1px solid black',
         // animation: '$shiftUp-actions 1s',
+        // backgroundColor: 'red',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        height: (window.innerHeight * 2) / 3,
+        height: (window.innerHeight * 3) / 4,
+        ['@media (min-width:768px)']: { height: (window.innerHeight * 2) / 3 },
+        ['@media (min-width:1280px)']: { height: (window.innerHeight * 2) / 3 },
         width: '90%',
     },
     search: {
@@ -162,44 +131,15 @@ const useStyles = makeStyles(() => ({
         borderRadius: '25px',
         color: checkmarksTheme.buttonTextPrimary,
         fontWeight: 'bold',
-        margin: 'auto',
+        margin: '10% auto 15% auto',
+        ['@media (min-width:768px)']: { margin: '10% auto 15%  auto' },
+        ['@media (min-width:1280px)']: { margin: '10% auto 12% auto' },
         opacity: 0.7,
         padding: '7px 0',
         minWidth: '300px',
         width: '50%',
         maxWidth: '320px',
     },
-    // buttonLogin: {
-    //     backgroundColor: checkmarksTheme.buttonSecondary,
-    //     '&:hover': {
-    //         color: checkmarksTheme.buttonPrimary,
-    //         background: checkmarksTheme.hoverLight,
-    //     },
-    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-    //     borderRadius: '25px',
-    //     color: checkmarksTheme.buttonTextSecondary,
-    //     fontWeight: 'bold',
-    //     opacity: 0.7,
-    //     padding: '5px 0',
-    //     width: '40%',
-    //     maxWidth: '120px',
-    // },
-    // buttonRegister: {
-    //     backgroundColor: checkmarksTheme.buttonPrimary,
-    //     '&:hover': {
-    //         color: checkmarksTheme.buttonPrimary,
-    //         background: checkmarksTheme.hoverSoft,
-    //     },
-    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-    //     borderRadius: '25px',
-    //     color: checkmarksTheme.buttonTextPrimary,
-    //     fontWeight: 'bold',
-    //     marginRight: '35px',
-    //     opacity: 0.7,
-    //     padding: '5px 0',
-    //     width: '55%',
-    //     maxWidth: '200px',
-    // },
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,
         '&:hover': {

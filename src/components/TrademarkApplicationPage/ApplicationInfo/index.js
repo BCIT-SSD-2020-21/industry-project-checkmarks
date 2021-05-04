@@ -3,7 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Card } from '@material-ui/core';
 import ApplicationForm from './ApplicationForm';
 
-export default function ApplicationInfo({ navigation, info, setInfo }) {
+export default function ApplicationInfo({
+    navigation,
+    info,
+    setInfo,
+    setDirty,
+}) {
     const classes = useStyles();
 
     return (
@@ -25,6 +30,7 @@ export default function ApplicationInfo({ navigation, info, setInfo }) {
                     info={info}
                     setInfo={setInfo}
                     navigation={navigation}
+                    setDirty={setDirty}
                 />
             </div>
         </Card>

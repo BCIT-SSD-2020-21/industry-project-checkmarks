@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo2 from '../assets/images/CheckmarksLogo2.png';
+import bannerImage from '../assets/images/bg_application-nicolas-hoizey.jpg';
 import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
@@ -11,6 +12,7 @@ import GoodsAndServices from '../components/TrademarkApplicationPage/GoodsAndSer
 import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';
 import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
+import PageLeavePrompt from '../utils/PageLeavePrompt';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -50,6 +52,7 @@ const TrademarkApplication = () => {
         fillingDate: '',
         fillingNumber: '',
     });
+    const [Prompt, setDirty, setPristine] = PageLeavePrompt();
 
     //Give each step an id
     const steps = [
@@ -83,6 +86,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    setDirty={setDirty}
                                 />
                             );
                         case 'Trademark-Type':
@@ -123,6 +127,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    setPristine={setPristine}
                                 />
                             );
                         case 'Success':
@@ -130,6 +135,7 @@ const TrademarkApplication = () => {
                     }
                 })()}
             </div>
+            {Prompt}
         </Paper>
     );
 };
@@ -138,6 +144,10 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        // backgroundImage: `url(${bannerImage})`,
+        // backgroundPosition: 'center',
+        // backgroundSize: 'cover',
+        // backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'flex-start',
