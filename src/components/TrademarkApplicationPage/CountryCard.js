@@ -12,6 +12,7 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Checkmark from '../Checkmark';
 
 const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
     const classes = useStyles();
@@ -101,11 +102,9 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                         />
                     </div>
                 )}
-                {inputValidationValue?.trademarkTypeFormCompleted ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark
+                    value={inputValidationValue.trademarkTypeFormCompleted}
+                />
                 <Alert severity="info" className={classes.alert}>
                     Helper Section with brief legal information, assisting the
                     client through the process
@@ -134,6 +133,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
 };
 
 export default CountryCard;
+
 const useStyles = makeStyles((theme) => ({
     countryCard: {
         margin: '3%',
