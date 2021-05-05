@@ -1,27 +1,30 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-
-
 import React from 'react'
 
 const FileUpload = () => {
 
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleUploadImage = this.handleUploadImage.bind(this);
-        this.fileInput = React.createRef();
+    const [fileUpload, setFileUpload] = useState({
+        fileName: '',
+        uploadedFileName: '',
+        errorMessage: ''
+    })
 
-        this.state = {
-            fileName: '',
-            uploadedFileName: '',
-            errorMessage: '',
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+    //     this.handleUploadImage = this.handleUploadImage.bind(this);
+    //     this.fileInput = React.createRef();
+
+    //     this.state = {
+    //         fileName: '',
+    //         uploadedFileName: '',
+    //         errorMessage: '',
+    //     };
+    // }
 
     // use effect
+ 
     componentDidMount() {
         if (this.state.fileName) {
             this.setState({
