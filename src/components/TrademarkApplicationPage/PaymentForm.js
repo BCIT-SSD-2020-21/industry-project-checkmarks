@@ -1,28 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
-    FormControl,
     Card,
-    Typography,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
     TextField,
+    Typography,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
-export default function PaymentForm({ navigation, setPristine }) {
+export default function PaymentForm({
+    navigation,
+    info,
+    setInfo,
+    inputValidationValue,
+    setPristine,
+}) {
     const classes = useStyles();
 
-    const [creditCardInfo, setCreditCardInfo] = useState({
-        cardholderName: '',
-        creditcardNumber: '',
-        expiryDate: '',
-        CVV: '',
-        streetAddress: '',
-        city: '',
-        province: '',
-        postalCode: '',
-        country: '',
-    });
+    const handleMirrorUserAddress = () => {
+        setInfo({
+            ...info,
+            billingAddressSameAsUser: !info.billingAddressSameAsUser,
+            billingAddressStreet: info.billingAddressSameAsUser
+                ? ''
+                : info.userStreetAddress,
+            billingAddressCity: info.billingAddressSameAsUser
+                ? ''
+                : info.userCity,
+            billingAddressProvince: info.billingAddressSameAsUser
+                ? ''
+                : info.userProvince,
+            billingAddressPostalCode: info.billingAddressSameAsUser
+                ? ''
+                : info.userPostalCode,
+            billingAddressCountry: info.billingAddressSameAsUser
+                ? ''
+                : info.userCountry,
+        });
+    };
 
     return (
         <Card className={classes.card}>
@@ -39,12 +59,12 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={creditCardInfo.cardholderName}
+                    value={info.paymentCardholderName}
                     autoComplete="on"
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            cardholderName: e.target.value,
+                        setInfo({
+                            ...info,
+                            paymentCardholderName: e.target.value,
                         })
                     }
                 />
@@ -57,12 +77,12 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={creditCardInfo.creditcardNumber}
+                    value={info.paymentCreditCardNumber}
                     autoComplete="on"
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            creditcardNumber: e.target.value,
+                        setInfo({
+                            ...info,
+                            paymentCreditCardNumber: e.target.value,
                         })
                     }
                 />
@@ -75,12 +95,12 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.expiryDate}
+                    value={info.paymentCardExpiryDate}
                     autoComplete="on"
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            expiryDate: e.target.value,
+                        setInfo({
+                            ...info,
+                            paymentCardExpiryDate: e.target.value,
                         })
                     }
                 />
@@ -92,21 +112,37 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.CVV}
+                    value={info.paymentCardCVV}
                     autoComplete="on"
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            CVV: e.target.value,
+                        setInfo({
+                            ...info,
+                            paymentCardCVV: e.target.value,
                         })
                     }
                 />
             </div>
+            {inputValidationValue?.paymentCardInfo ? (
+                <CheckCircleOutlinedIcon className={classes.checkmark} />
+            ) : (
+                <ErrorOutlineIcon className={classes.checkmark} />
+            )}
+
             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
             <Typography className={classes.text} component="p">
                 Billing Addres
             </Typography>
+
             <FormControl fullWidth={true}>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={info.billingAddressSameAsUser}
+                            onChange={() => handleMirrorUserAddress()}
+                        />
+                    }
+                    label="Same as Applicant Address (from a few steps ago)"
+                />
                 <TextField
                     id="outlined-basic"
                     label="Street Address"
@@ -114,12 +150,13 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.input}
                     type="text"
-                    value={creditCardInfo.streetAddress}
+                    value={info.billingAddressStreet}
                     autoComplete="on"
+                    disabled={info.billingAddressSameAsUser}
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            streetAddress: e.target.value,
+                        setInfo({
+                            ...info,
+                            billingAddressStreet: e.target.value,
                         })
                     }
                 />
@@ -132,12 +169,13 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.city}
+                    value={info.billingAddressCity}
                     autoComplete="on"
+                    disabled={info.billingAddressSameAsUser}
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            city: e.target.value,
+                        setInfo({
+                            ...info,
+                            billingAddressCity: e.target.value,
                         })
                     }
                 />
@@ -148,12 +186,13 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.province}
+                    value={info.billingAddressProvince}
                     autoComplete="on"
+                    disabled={info.billingAddressSameAsUser}
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            province: e.target.value,
+                        setInfo({
+                            ...info,
+                            billingAddressProvince: e.target.value,
                         })
                     }
                 />
@@ -166,12 +205,13 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.postalCode}
+                    value={info.billingAddressPostalCode}
                     autoComplete="on"
+                    disabled={info.billingAddressSameAsUser}
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            postalCode: e.target.value,
+                        setInfo({
+                            ...info,
+                            billingAddressPostalCode: e.target.value,
                         })
                     }
                 />
@@ -183,15 +223,21 @@ export default function PaymentForm({ navigation, setPristine }) {
                     size="small"
                     className={classes.flexInput}
                     type="text"
-                    value={creditCardInfo.country}
+                    value={info.billingAddressCountry}
                     autoComplete="on"
+                    disabled={info.billingAddressSameAsUser}
                     onChange={(e) =>
-                        setCreditCardInfo({
-                            ...creditCardInfo,
-                            country: e.target.value,
+                        setInfo({
+                            ...info,
+                            billingAddressCountry: e.target.value,
                         })
                     }
                 />
+                {inputValidationValue?.billingAddress ? (
+                    <CheckCircleOutlinedIcon className={classes.checkmark} />
+                ) : (
+                    <ErrorOutlineIcon className={classes.checkmark} />
+                )}
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
@@ -211,6 +257,10 @@ export default function PaymentForm({ navigation, setPristine }) {
                     type="submit"
                     variant="contained"
                     onClick={() => {
+                        setInfo({
+                            ...info,
+                            paymentConfirmaed: true,
+                        });
                         navigation.next();
                         setPristine();
                     }}

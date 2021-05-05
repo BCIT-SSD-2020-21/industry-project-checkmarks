@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Logo2 from '../assets/images/CheckmarksLogo2.png';
 import bannerImage from '../assets/images/bg_application-nicolas-hoizey.jpg';
 import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
@@ -13,10 +12,12 @@ import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';
 import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 import PageLeavePrompt from '../utils/PageLeavePrompt';
+import { validateForm } from '../utils/FormValidation';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
 
+    // form information
     const [info, setInfo] = useState({
         //Application Informarion
         individualOrOrganization: '',
@@ -24,6 +25,7 @@ const TrademarkApplication = () => {
         lastName: '',
         organizationName: '',
         email: '',
+        idDocumentUploaded: false,
         userStreetAddress: '',
         userCity: '',
         userProvince: '',
@@ -44,14 +46,68 @@ const TrademarkApplication = () => {
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
-        amount: 150000,
+        amount: 0,
 
         //International Information
-        filedInOtherCountry: false,
+        filedInOtherCountry: null,
         countryOfFiling: '',
         fillingDate: '',
         fillingNumber: '',
+
+        // Info Confirmed
+        infoConfirmed: false,
+
+        // Payment Information
+        paymentCardholderName: '',
+        paymentCreditCardNumber: '',
+        paymentCardExpiryDate: '',
+        paymentCardCVV: '',
+        billingAddressSameAsUser: false,
+        billingAddressStreet: '',
+        billingAddressCity: '',
+        billingAddressProvince: '',
+        billingAddressPostalCode: '',
+        billingAddressCountry: '',
+        paymentConfirmaed: false,
     });
+
+    // form validation and progress
+    const [inputValidationValue, setInputValidationValue] = useState({
+        //Application Informarion - 1100
+        individualOrOrganizationName: 0,
+        firstName: 0,
+        lastName: 0,
+        email: 0,
+        idDocumentUploaded: 0,
+        userStreetAddress: 0,
+        userCity: 0,
+        userProvince: 0,
+        userPostalCode: 0,
+        userCountry: 0,
+        agreedTermsOfService: 0,
+
+        //Trademark Type - 400
+        trademarkTypeFormCompleted: 0,
+
+        // Goods and Services - 600
+        amountNotZero: 0,
+
+        //International Information - 300
+        internationalFilingInfo: 0,
+
+        //Info Confirmed - 200
+        infoConfirmed: 0,
+
+        // Payment Information - 500
+        paymentCardInfo: 0,
+        billingAddress: 0,
+        paymentConfirmed: 0,
+    });
+    useEffect(() => {
+        validateForm(info, inputValidationValue, setInputValidationValue);
+    }, [info]);
+
+    // custon hook, "Discard changes?" on Leave Page (defined in  utils folder)
     const [Prompt, setDirty, setPristine] = PageLeavePrompt();
 
     //Give each step an id
@@ -70,13 +126,18 @@ const TrademarkApplication = () => {
         steps,
         initialStep: 0,
     });
-
+    console.log('info: ', info);
     return (
         <Paper className={classes.root}>
             {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div> */}
-            <Progress step={step} steps={steps} />
+            <Progress
+                step={step}
+                steps={steps}
+                info={info}
+                inputValidationValue={inputValidationValue}
+            />
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
@@ -87,6 +148,7 @@ const TrademarkApplication = () => {
                                     info={info}
                                     setInfo={setInfo}
                                     setDirty={setDirty}
+                                    inputValidationValue={inputValidationValue}
                                 />
                             );
                         case 'Trademark-Type':
@@ -95,6 +157,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    inputValidationValue={inputValidationValue}
                                 />
                             );
                         case 'Goods-and-Services':
@@ -103,6 +166,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    inputValidationValue={inputValidationValue}
                                 />
                             );
                         case 'International-Information':
@@ -111,6 +175,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    inputValidationValue={inputValidationValue}
                                 />
                             );
                         case 'Confirmation':
@@ -127,6 +192,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    inputValidationValue={inputValidationValue}
                                     setPristine={setPristine}
                                 />
                             );
