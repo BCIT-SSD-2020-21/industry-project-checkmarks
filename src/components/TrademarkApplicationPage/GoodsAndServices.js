@@ -25,6 +25,7 @@ import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
+import Checkmark from '../Checkmark';
 // import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
@@ -320,13 +321,7 @@ export default function GoodsAndServices({
                 </Paper>
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
-                    {inputValidationValue?.trademarkTypeFormCompleted ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark value={inputValidationValue.amountNotZero} />
                     <CardContent>
                         <Typography variant="h6">
                             <b>Selected Terms:</b>

@@ -37,7 +37,7 @@ const TrademarkApplication = () => {
         isText: false,
         isLogo: false,
         isOther: false,
-        OtherTypes: [],
+        otherTypes: [],
 
         characterText: '',
         fileName: '',
@@ -126,7 +126,7 @@ const TrademarkApplication = () => {
         steps,
         initialStep: 0,
     });
-    console.log('info: ', info);
+
     return (
         <Paper className={classes.root}>
             {/* <div className={classes.logo}>

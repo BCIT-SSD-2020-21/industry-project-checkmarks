@@ -1,69 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import React, { useState } from 'react';
 import { checkmarksTheme } from '../../styles/Themes';
-import {
-    Button,
-    Card,
-    Fade,
-    IconButton,
-    Paper,
-    TableCell,
-    Typography,
-} from '@material-ui/core';
-import { AutoSizer, Column, Table } from 'react-virtualized';
-import { withStyles } from '@material-ui/core/styles';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Paper } from '@material-ui/core';
 import ResultDetail from './ResultDetail';
-import FilterMenu from '../FilterMenu';
 import MuiVirtualizedTable from '../VirtualizedTable';
-const styles = (theme) => ({
-    flexContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        boxSizing: 'border-box',
-        backgroundColor: checkmarksTheme.bgDrawer,
-        // padding: '5%',
-    },
-    table: {
-        // temporary right-to-left patch, waiting for
-        // https://github.com/bvaughn/react-virtualized/issues/454
-        backgroundColor: checkmarksTheme.bgTransparent,
-        // padding: '2%',
-        // opacity: 0,
-        // borderRadius: '25px',
-        '& .ReactVirtualized__Table__headerRow': {
-            flip: false,
-            paddingRight:
-                theme.direction === 'rtl' ? '0 !important' : undefined,
-        },
-        // backgroundColor: checkmarksTheme.bgDrawer,
-    },
-    tableRow: {
-        backgroundColor: checkmarksTheme.bgTransparent,
-        cursor: 'pointer',
-    },
-    tableRowHover: {
-        '&:hover': {
-            backgroundColor: theme.palette.grey[200],
-        },
-    },
-    tableCell: {
-        // backgroundColor: 'red',
-        backgroundColor: checkmarksTheme.bgPrimary,
-        // margin: 'auto',
-        display: 'flex',
-        padding: '2px',
-        justifyContent: 'center',
-        fontSize: '10px',
-        textAlign: 'center',
-        flex: 1,
-    },
-    noClick: {
-        cursor: 'initial',
-    },
-});
+// const styles = (theme) => ({
+//     flexContainer: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         boxSizing: 'border-box',
+//         backgroundColor: checkmarksTheme.bgDrawer,
+//         // padding: '5%',
+//     },
+//     table: {
+//         // temporary right-to-left patch, waiting for
+//         // https://github.com/bvaughn/react-virtualized/issues/454
+//         backgroundColor: checkmarksTheme.bgTransparent,
+//         // padding: '2%',
+//         // opacity: 0,
+//         // borderRadius: '25px',
+//         '& .ReactVirtualized__Table__headerRow': {
+//             flip: false,
+//             paddingRight:
+//                 theme.direction === 'rtl' ? '0 !important' : undefined,
+//         },
+//         // backgroundColor: checkmarksTheme.bgDrawer,
+//     },
+//     tableRow: {
+//         backgroundColor: checkmarksTheme.bgTransparent,
+//         cursor: 'pointer',
+//     },
+//     tableRowHover: {
+//         '&:hover': {
+//             backgroundColor: theme.palette.grey[200],
+//         },
+//     },
+//     tableCell: {
+//         // backgroundColor: 'red',
+//         backgroundColor: checkmarksTheme.bgPrimary,
+//         // margin: 'auto',
+//         display: 'flex',
+//         padding: '2px',
+//         justifyContent: 'center',
+//         fontSize: '10px',
+//         textAlign: 'center',
+//         flex: 1,
+//     },
+//     noClick: {
+//         cursor: 'initial',
+//     },
+// });
 
 // MuiVirtualizedTable.propTypes = {
 //     classes: PropTypes.object.isRequired,
@@ -115,9 +100,6 @@ export default function SearchResults({ data }) {
     const onFilterClick = (e) => {
         // console.log('filter clicked', e.currentTarget.value);
         setFilterSelection(e.currentTarget.value);
-    };
-    const onMenuSelection = (e) => {
-        setMenuSelection(e.currentTarget.value);
     };
 
     return (

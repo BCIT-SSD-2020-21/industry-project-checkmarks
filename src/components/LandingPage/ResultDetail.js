@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Box,
-    Button,
-    Card,
-    CardMedia,
-    Fade,
-    IconButton,
-    Paper,
-    TableCell,
-    Typography,
-} from '@material-ui/core';
+import React from 'react';
+import { Box, Button, Card, CardMedia, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
-import { AutoSizer, Column, Table } from 'react-virtualized';
 
 export default function ResultDetail({ data, setSelectedRow }) {
     const classes = detailStyles();

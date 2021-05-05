@@ -12,6 +12,7 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Checkmark from '../Checkmark';
 
 export default function PaymentForm({
     navigation,
@@ -122,11 +123,7 @@ export default function PaymentForm({
                     }
                 />
             </div>
-            {inputValidationValue?.paymentCardInfo ? (
-                <CheckCircleOutlinedIcon className={classes.checkmark} />
-            ) : (
-                <ErrorOutlineIcon className={classes.checkmark} />
-            )}
+            <Checkmark value={inputValidationValue.paymentCardInfo} />
 
             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
             <Typography className={classes.text} component="p">
@@ -233,11 +230,7 @@ export default function PaymentForm({
                         })
                     }
                 />
-                {inputValidationValue?.billingAddress ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.billingAddress} />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
