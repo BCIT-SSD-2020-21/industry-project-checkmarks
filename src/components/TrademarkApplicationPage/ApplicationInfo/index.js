@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',
-        padding: '0 5% 5% 5%',
+        padding: '0 3% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
             padding: '0 2% ',

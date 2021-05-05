@@ -16,6 +16,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { checkmarksTheme } from '../../../styles/Themes';
 import { createClioContact } from '../../../network';
 import { Info } from '@material-ui/icons';
+import Checkmark from '../../Checkmark';
 
 export default function IndividualForm({
     info,
@@ -36,8 +37,6 @@ export default function IndividualForm({
     };
 
     setDirty();
-
-    console.log(info);
 
     const handleSubmit = async (event) => {
         try {
@@ -90,13 +89,18 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    {inputValidationValue?.individualOrOrganizationName ? (
+                    <Checkmark
+                        value={
+                            inputValidationValue.individualOrOrganizationName
+                        }
+                    />
+                    {/* {inputValidationValue?.individualOrOrganizationName ? (
                         <CheckCircleOutlinedIcon
                             className={classes.checkmark}
                         />
                     ) : (
                         <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    )} */}
                 </FormControl>
             )}
 
@@ -116,11 +120,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                {inputValidationValue?.firstName ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.firstName} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -138,11 +138,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                {inputValidationValue?.lastName ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.lastName} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -160,11 +156,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                {inputValidationValue?.email ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.email} />
             </FormControl>
             <div className={classes.field}>
                 <Button
@@ -180,11 +172,7 @@ export default function IndividualForm({
                 >
                     Upload ID Document
                 </Button>
-                {inputValidationValue?.idDocumentUploaded ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.idDocumentUploaded} />
             </div>
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.field}>
@@ -203,11 +191,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                {inputValidationValue?.userStreetAddress ? (
-                    <CheckCircleOutlinedIcon className={classes.checkmark} />
-                ) : (
-                    <ErrorOutlineIcon className={classes.checkmark} />
-                )}
+                <Checkmark value={inputValidationValue.userStreetAddress} />
             </FormControl>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
@@ -227,13 +211,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    {inputValidationValue?.userCity ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark value={inputValidationValue.userCity} />
                 </FormControl>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
@@ -252,13 +230,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    {inputValidationValue?.userProvince ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark value={inputValidationValue.userProvince} />
                 </FormControl>
             </div>
             <div className={classes.flexContainer}>
@@ -279,13 +251,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    {inputValidationValue?.userPostalCode ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark value={inputValidationValue.userPostalCode} />
                 </FormControl>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
@@ -304,13 +270,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    {inputValidationValue?.userCountry ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark value={inputValidationValue.userCountry} />
                 </FormControl>
             </div>
             <Alert severity="info" className={classes.alert}>
@@ -341,13 +301,9 @@ export default function IndividualForm({
                         }
                         label="I understand."
                     />
-                    {inputValidationValue?.agreedTermsOfService ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )}
+                    <Checkmark
+                        value={inputValidationValue.agreedTermsOfService}
+                    />
                 </FormControl>
             </Box>
             <div className={classes.nextButtonContainer}>

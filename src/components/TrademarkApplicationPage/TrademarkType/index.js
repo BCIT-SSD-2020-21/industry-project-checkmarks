@@ -7,8 +7,8 @@ import DetailSelectCard from '../TrademarkType/DetailSelectCard';
 import TextSearchCard from '../TrademarkType/TrademarkTypeCard';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Checkmark from '../../Checkmark';
+
 const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
     const classes = useStyles();
     //selection of all the other trademark type
@@ -91,13 +91,9 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     </p>
                 </div>
             )}
-
-            {inputValidationValue?.trademarkTypeFormCompleted ? (
-                <CheckCircleOutlinedIcon className={classes.checkmark} />
-            ) : (
-                <ErrorOutlineIcon className={classes.checkmark} />
-            )}
-
+            <Checkmark
+                value={inputValidationValue.trademarkTypeFormCompleted}
+            />
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
                 {info.isOther &&
