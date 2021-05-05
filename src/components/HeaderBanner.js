@@ -1,16 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/images/logo_checkmarks_vp.svg';
-import {
-    Box,
-    CardMedia,
-    Icon,
-    Typography,
-    Tabs,
-    Tab,
-    Card,
-} from '@material-ui/core';
-import Fade from '@material-ui/core/Fade';
+import { Box, Icon, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 export default function HeaderBanner({ searching }) {

@@ -126,7 +126,7 @@ const TrademarkApplication = () => {
         steps,
         initialStep: 0,
     });
-    console.log('info: ', info);
+
     return (
         <Paper className={classes.root}>
             {/* <div className={classes.logo}>

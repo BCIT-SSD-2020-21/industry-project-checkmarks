@@ -1,25 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import React, { useState } from 'react';
 import { checkmarksTheme } from '../styles/Themes';
-import {
-    Box,
-    Button,
-    Card,
-    Fade,
-    IconButton,
-    Menu,
-    MenuItem,
-    Paper,
-    TableCell,
-    Typography,
-} from '@material-ui/core';
+import { Box, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { AutoSizer, Column, Table } from 'react-virtualized';
-import { withStyles } from '@material-ui/core/styles';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import ResultDetail from './LandingPage/ResultDetail';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 
