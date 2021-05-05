@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import React from 'react'
+import React from 'react';
 
 const FileUpload = () => {
-
     const [fileUpload, setFileUpload] = useState({
         fileName: '',
         uploadedFileName: '',
-        errorMessage: ''
-    })
+        errorMessage: '',
+    });
 
     // constructor(props) {
     //     super(props);
@@ -24,81 +23,85 @@ const FileUpload = () => {
     // }
 
     // use effect
- 
-    componentDidMount() {
-        if (this.state.fileName) {
-            this.setState({
-                uploadedFileName: this.props.values.values.fileName,
-            });
-        } else {
-            this.setState({
-                fileName: this.props.values.values.fileName,
-            });
-        }
-    }
+
+    // componentDidMount() {
+    //     if (this.state.fileName) {
+    //         this.setState({
+    //             uploadedFileName: this.props.values.values.fileName,
+    //         });
+    //     } else {
+    //         this.setState({
+    //             fileName: this.props.values.values.fileName,
+    //         });
+    //     }
+    // }
     // Checks the file size and sets the image url preview.
 
-    handleUploadImage(event) {
-        if (this.checkFileSize(event)) {
-            this.setState({
-                errorMessage: '',
-            });
-            this.props.oldState.file = URL.createObjectURL(
-                event.target.files[0]
-            );
-            return true;
-        }
-        return false;
-    }
+    // handleUploadImage(event) {
+    //     if (this.checkFileSize(event)) {
+    //         this.setState({
+    //             errorMessage: '',
+    //         });
+    //         this.props.oldState.file = URL.createObjectURL(
+    //             event.target.files[0]
+    //         );
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    const handleUploadImage = async (e) => {
+        e.preventDefault();
 
-    checkFileSize = (event) => {
-        let files = event.target.files[0];
-        let size = 2000000; //2Mb File Limit
-        let err = '';
-        if (files == null) {
-            return false;
-        }
-        if (files.size > size) {
-            err += files.name + ' is too large, please pick a smaller file\n';
-        }
-        if (err !== '') {
-            event.target.value = null;
-            this.setState({ errorMessage: err });
-            return false;
-        }
-        return true;
+        checkFileSize = (event) => {
+            let files = event.target.files[0];
+            let size = 2000000; //2Mb File Limit
+            let err = '';
+            if (files == null) {
+                return false;
+            }
+            if (files.size > size) {
+                err +=
+                    files.name + ' is too large, please pick a smaller file\n';
+            }
+            if (err !== '') {
+                event.target.value = null;
+                this.setState({ errorMessage: err });
+                return false;
+            }
+            return true;
+        };
     };
 
     // This handler is activated when the button is clicked. After calling handleUploadImage() it posts the image to the backend database for temporary storage.
-    async handleSubmit(event) {
-        event.preventDefault();
+    // async handleSubmit(event) {
+    //     event.preventDefault();
 
-        if (this.handleUploadImage(event)) {
-            const formData = new FormData();
+    //     if (this.handleUploadImage(event)) {
+    //         const formData = new FormData();
 
-            formData.append('FileToUpload', this.fileInput.current.files[0]);
+    //         formData.append('FileToUpload', this.fileInput.current.files[0]);
 
-            const options = {
-                method: 'POST',
-                body: formData,
-            };
+    //         const options = {
+    //             method: 'POST',
+    //             body: formData,
+    //         };
 
-            const response = await fetch(
-                this.props.values.values.checkmarksApiUrl + 'files',
-                options
-            )
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    this.props.handler('fileName', data.filename);
+    //         const response = await fetch(
+    //             this.props.values.values.checkmarksApiUrl + 'files',
+    //             options
+    //         )
+    //             .then((res) => {
+    //                 return res.json();
+    //             })
+    //             .then((data) => {
+    //                 this.props.handler('fileName', data.filename);
 
-                    this.setState({
-                        fileName: data.filename,
-                    });
-                });
-        }
-    }
+    //                 this.setState({
+    //                     fileName: data.filename,
+    //                 });
+    //             });
+    //     }
+    //}
     return (
         <div>
             <form>
@@ -137,12 +140,7 @@ const FileUpload = () => {
                     of the form.
                 </p>
             </form>
-            
         </div>
-    )
-}
-
-export default FileUpload
-
-
-    
+    );
+};
+export default FileUpload;
