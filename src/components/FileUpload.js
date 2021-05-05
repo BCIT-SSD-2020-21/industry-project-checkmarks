@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 const FileUpload = () => {
+    const classes = useStyles();
+
     const [fileName, setFileName] = useState('');
     const [uploadedFileName, setUploadedFileName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -71,16 +73,12 @@ const FileUpload = () => {
     return (
         <div>
             <form>
-                <p>
-                    Select File to Upload{' '}
-                    <span className="finePrint">
-                        (single image file under 2MB):
-                    </span>
-                </p>
+                <p>Select File to Upload </p>
                 <Button
                     variant="contained"
                     component="label"
-                    color="primary"
+                    // color="primary"
+                    className={classes.browseButton}
                     onChange={handleSubmit}
                 >
                     Choose File
@@ -95,13 +93,26 @@ const FileUpload = () => {
                 {fileName && <p>Currently using {fileName}</p>}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
                 <p>{uploadedFileName}</p>
-                <p className="finePrint">
-                    If you wish to use more than one file, or a larger one,
-                    please follow up with the confirmation email sent at the end
-                    of the form.
-                </p>
             </form>
         </div>
     );
 };
 export default FileUpload;
+const useStyles = makeStyles((theme) => ({
+    browseButton: {
+        backgroundColor: '#DF3A48',
+        color: '#FFF',
+        width: '20%',
+        height: '30px',
+        fontWeight: 'bold',
+        fontSize: '10px',
+        borderRadius: '10px',
+        border: 'none',
+        margin: 'auto',
+        [theme.breakpoints.down('xs')]: {
+            margin: '2% auto 5% auto',
+            width: '40%',
+            fontSize: '10px',
+        },
+    },
+}));

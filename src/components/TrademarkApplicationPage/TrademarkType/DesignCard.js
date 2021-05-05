@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import { Button } from '@material-ui/core';
+import FileUpload from '../../FileUpload';
 
 const LogoForm = () => {
     const classes = useStyles();
+
+    const [file, setFile] = useState('');
+
     return (
         <div className={classes.logoCard} fullwidth>
             <div>
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
-                <Button className={classes.browseButton}>Choose File</Button>
+                <h5 style={{ color: '#DF3A48' }}>Preview:</h5>
+                <img className={classes.previewImage} src={file} />
+                {/* <Button className={classes.browseButton}>Choose File</Button> */}
+                <FileUpload />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Single image file should be under 2MB
+            </Alert>
+            <Alert severity="info" className={classes.alert}>
+                If you wish to use more than one file, or a larger one, please
+                follow up with the confirmation email sent at the end of the
+                form.
             </Alert>
         </div>
     );
@@ -45,5 +57,9 @@ const useStyles = makeStyles((theme) => ({
             width: '40%',
             fontSize: '10px',
         },
+    },
+    previewImage: {
+        maxWidth: '200px',
+        height: 'auto',
     },
 }));
