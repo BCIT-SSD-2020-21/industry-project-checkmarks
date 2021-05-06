@@ -5,13 +5,13 @@ import { checkmarksTheme } from '../../styles/Themes';
 
 const progressStyles = makeStyles((theme) => ({
     root: {
+        alignItems: 'center',
+        backgroundColor: checkmarksTheme.buttonTextPrimary,
+        // border: '1px solid black',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: checkmarksTheme.buttonTextPrimary,
-        // padding: '12px',
-        border: '1px solid black',
+        // marginTop: '75px',
         padding: '12px',
         height: '34px',
         width: '100%',
@@ -24,6 +24,7 @@ const progressStyles = makeStyles((theme) => ({
         border: `1px solid ${checkmarksTheme.textLabel}`,
         height: '32px',
         position: 'relative',
+        opacity: 0.85,
         // margin: '2% auto',
         width: '80%',
     },
@@ -47,7 +48,7 @@ const progressStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Progress({ step, steps, inputValidationValue }) {
+export default function Progress({ inputValidationValue }) {
     let progressCompletedValue = 0; // Max value: 3100
     for (const prop in inputValidationValue) {
         progressCompletedValue += inputValidationValue[prop];
@@ -57,7 +58,7 @@ export default function Progress({ step, steps, inputValidationValue }) {
 
     const classes = progressStyles();
     return (
-        <Box className={classes.root} position="fixed">
+        <Box className={classes.root} position="fixed" zIndex="modal">
             <Box className={classes.container}>
                 <Box
                     className={classes.progress}
