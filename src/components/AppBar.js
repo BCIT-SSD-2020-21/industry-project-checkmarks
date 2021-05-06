@@ -158,41 +158,9 @@ export const navbarStyles = makeStyles((theme) => ({
         width: '40%',
         maxWidth: '300px',
     },
-    // buttonLogin: {
-    //     backgroundColor: checkmarksTheme.buttonSecondary,
-    //     '&:hover': {
-    //         background: checkmarksTheme.hoverLight,
-    //     },
-    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-    //     borderRadius: '5px',
-    //     color: checkmarksTheme.buttonTextSecondary,
-    //     padding: '5px 0',
-    //     width: '40%',
-    //     maxWidth: '100px',
-    // },
-    // buttonRegister: {
-    //     backgroundColor: checkmarksTheme.buttonPrimary,
-    //     '&:hover': {
-    //         background: checkmarksTheme.hoverSoft,
-    //     },
-    //     border: `0.6px solid ${checkmarksTheme.buttonTextSecondary}`,
-    //     borderRadius: '5px',
-    //     color: checkmarksTheme.buttonTextPrimary,
-    //     marginRight: '10px',
-    //     padding: '5px 0',
-    //     width: '55%',
-    //     maxWidth: '130px',
-    // },
 }));
 
-export default function MenuAppBar({
-    authenticated,
-    loggingIn,
-    setLoggingIn,
-    setSearching,
-    darkMode,
-    setDarkMode,
-}) {
+export default function MenuAppBar({ darkMode }) {
     const classes = navbarStyles();
     const theme = useTheme();
     const history = useHistory();
@@ -214,14 +182,6 @@ export default function MenuAppBar({
     };
     const handleDrawerClose = () => {
         setDrawerOpen(false);
-    };
-
-    const [switchState, setSwitchState] = useState({
-        switchCheckedA: false,
-        switchCheckedB: false,
-    });
-    const switchChange = (e) => {
-        setSwitchState({ ...switchState, [e.target.name]: e.target.checked });
     };
 
     console.log('darkMode:', darkMode);
@@ -251,151 +211,64 @@ export default function MenuAppBar({
                     <Typography className={classes.appBarTitle}>
                         Checkmarks
                     </Typography>
-                    {/* <Link className={classes.appBarNavLink} to="/feed">
-                        <AskALawyer />
-                    </Link> */}
-                    {/* <Link className={classes.appBarNavLink} to="/">
-                        Dash
-                    </Link> */}
-                    {!authenticated && !loggingIn && (
-                        <Box className={classes.buttons}>
-                            {/* <Button
-                                className={classes.buttonStart}
-                                onClick={() => {
-                                    setLoggingIn(false);
-                                    setSearching(false);
-                                    history.push('/register');
-                                }}
-                                boxShadow={2}
-                            >
-                                Start Trademark Application
-                            </Button> */}
-                            {/* <Button
-                                className={classes.buttonRegister}
-                                onClick={() => {
-                                    setLoggingIn(false);
-                                    setSearching(false);
-                                    history.push('/register');
-                                }}
-                                boxShadow={2}
-                            >
-                                Register
-                            </Button>
-                            <Button
-                                className={classes.buttonLogin}
-                                onClick={() => {
-                                    setSearching(false);
-                                    setLoggingIn(!loggingIn);
-                                }}
-                                boxShadow={2}
-                            >
-                                Login
-                            </Button> */}
-                        </Box>
-                    )}
 
-                    {/* User Button     */}
-                    <div>
-                        {/* <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            className={classes.menuButton}
-                            color="inherit"
-                        >
-                            <AccountCircleTwoToneIcon />
-                        </IconButton> */}
-                        
-                        {/* Ask a Lawyer Button     */}
-                        <Button
-                            size="large"
-                            variant="contained"
-                            color="secondary"
-                            component="a"
-                            target="blank"
-                            href="https://golbey.com/contact/">
-                            Ask a Lawyer
-                        </Button>
-                        <Menu
-                            PaperProps={{
-                                style: {
-                                    backgroundColor: checkmarksTheme.bgPrimary,
-                                    marginTop: '40px',
-                                },
-                            }}
-                            className={classes.menu}
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            {authenticated ? (
-                                <MenuItem
-                                    className={classes.menuItem}
-                                    onClick={() => {
-                                        //   userSignOut()
-                                        history.push('/');
-                                    }}
-                                >
-                                    <ExitToAppIcon
-                                        className={classes.menuItemIcon}
-                                    />
-                                    SignOut
-                                </MenuItem>
-                            ) : (
-                                <Box>
-                                    <MenuItem
-                                        className={classes.menuItem}
-                                        onClick={() => {
-                                            setLoggingIn(false);
-                                            setSearching(false);
-                                            history.push('/application');
-                                        }}
-                                    >
-                                        <PlayCircleFilledTwoToneIcon
-                                            className={classes.menuItemIcon}
-                                        />
-                                        Start Trademark Application
-                                    </MenuItem>
-                                    {/* <MenuItem
-                                        className={classes.menuItem}
-                                        // onClick={() => toUserProfile(dataUser.id)}
-                                    >
-                                        <VpnKeyIcon
-                                            className={classes.menuItemIcon}
-                                        />
-                                        Login
-                                    </MenuItem>
-                                    <MenuItem
-                                        className={classes.menuItem}
-                                        // onClick={() => toUserProfile(dataUser.id)}
-                                    >
-                                        <AccountBoxTwoToneIcon
-                                            className={classes.menuItemIcon}
-                                        />
-                                        Register
-                                    </MenuItem> */}
-                                </Box>
-                            )}
+                    {/* Ask a Lawyer Button     */}
+                    <Button
+                        size="large"
+                        variant="contained"
+                        color="secondary"
+                        component="a"
+                        target="blank"
+                        href="https://golbey.com/contact/"
+                    >
+                        Ask a Lawyer
+                    </Button>
 
-                            {/* <MenuItem className={classes.menuItem}>
-                                <SettingsIcon
-                                    className={classes.menuItemIcon}
-                                />
-                                Settings
-                            </MenuItem> */}
-                        </Menu>
-                    </div>
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        className={classes.menuButton}
+                        color="inherit"
+                    >
+                        <AccountCircleTwoToneIcon />
+                    </IconButton>
+
+                    <Menu
+                        PaperProps={{
+                            style: {
+                                backgroundColor: checkmarksTheme.bgPrimary,
+                                marginTop: '40px',
+                            },
+                        }}
+                        className={classes.menu}
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={open}
+                        onClose={handleClose}
+                    >
+                        <MenuItem
+                            className={classes.menuItem}
+                            onClick={() => {
+                                history.push('/application');
+                            }}
+                        >
+                            <PlayCircleFilledTwoToneIcon
+                                className={classes.menuItemIcon}
+                            />
+                            Start Trademark Application
+                        </MenuItem>
+                    </Menu>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -433,67 +306,24 @@ export default function MenuAppBar({
                         )}
                     </IconButton>
                 </div>
-                {/* <Divider /> */}
-                {/* <SearchBox
-                    label={'Search Connections: '}
-                    onChange={setSearchConnectionsText}
-                /> */}
-                {/* <Divider /> */}
                 <List>
-                    {/* <Typography className={classes.drawerListItemTitle}>
-                        Connections:{' '}
-                    </Typography> */}
-                    {/* {searchConnectionsText
-                        ? searchResultUsers?.map((user, index) => (
-                              <ListItem key={index}>
-                                  <IconButton
-                                      //   onClick={() =>
-                                      //       removeUser(
-                                      //           user.id,
-                                      //           user.connectionUserIds
-                                      //       )
-                                      //   }
-                                      className={classes.drawerRemoveButton}
-                                  >
-                                      <HighlightOffTwoToneIcon />
-                                  </IconButton>
-                                  <ListItemText
-                                      className={classes.drawerListItemText}
-                                      primary={user.username}
-                                  />
-                                  <IconButton
-                                      //   onClick={() => toUserProfile(user.id)}
-                                      className={classes.drawerListItemText}
-                                  >
-                                      <AccountCircleTwoToneIcon />
-                                  </IconButton>
-                              </ListItem>
-                          ))
-                        : userConnections?.map((user, index) => (
-                              <ListItem key={index}>
-                                  <IconButton
-                                      //   onClick={() =>
-                                      //       removeUser(
-                                      //           user.id,
-                                      //           user.connectionUserIds
-                                      //       )
-                                      //   }
-                                      className={classes.drawerRemoveButton}
-                                  >
-                                      <HighlightOffTwoToneIcon />
-                                  </IconButton>
-                                  <ListItemText
-                                      className={classes.drawerListItemText}
-                                      primary={user.username}
-                                  />
-                                  <IconButton
-                                      //   onClick={() => toUserProfile(user.id)}
-                                      className={classes.drawerListItemText}
-                                  >
-                                      <AccountCircleTwoToneIcon />
-                                  </IconButton>
-                              </ListItem>
-                          ))} */}
+                    <ListItem>
+                        <IconButton className={classes.drawerRemoveButton}>
+                            <PlayCircleFilledTwoToneIcon />
+                        </IconButton>
+                        <ListItemText
+                            className={classes.drawerListItemText}
+                            primary={'Start Trademark Application'}
+                        />
+                        <IconButton
+                            // onClick={() => {
+                            //     history.push('/application');
+                            // }}
+                            className={classes.drawerListItemText}
+                        >
+                            <PlayCircleFilledTwoToneIcon />
+                        </IconButton>
+                    </ListItem>
                 </List>
                 <Divider />
             </Drawer>
