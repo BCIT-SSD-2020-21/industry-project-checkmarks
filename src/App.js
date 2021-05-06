@@ -23,13 +23,10 @@ export default function App() {
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <Paper style={{ width: window.innerWidth }}>
                 <Router>
-                    <MenuAppBar darkMode={darkMode} />
+                    <MenuAppBar darkMode={darkMode} setDarkMode={setDarkMode} />
                     <Switch>
                         <Route exact path="/">
-                            <Landing
-                                darkMode={darkMode}
-                                setDarkMode={setDarkMode}
-                            />
+                            <Landing darkMode={darkMode} />
                         </Route>
                         <Route path="/application">
                             <TrademarkApplication />

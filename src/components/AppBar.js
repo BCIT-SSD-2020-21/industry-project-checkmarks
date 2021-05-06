@@ -160,7 +160,7 @@ export const navbarStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuAppBar({ darkMode }) {
+export default function MenuAppBar({ darkMode, setDarkMode }) {
     const classes = navbarStyles();
     const theme = useTheme();
     const history = useHistory();
@@ -214,7 +214,14 @@ export default function MenuAppBar({ darkMode }) {
                         </Typography>
                     </Link>
 
-                    <Box>
+                    <Box
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
                         {/* Ask a Lawyer Button     */}
                         <IconButton
                             className={classes.menuButton}
@@ -227,7 +234,6 @@ export default function MenuAppBar({ darkMode }) {
                         >
                             <Box
                                 style={{
-                                    justifySelf: 'flex-end',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     alignItems: 'center',
@@ -298,10 +304,8 @@ export default function MenuAppBar({ darkMode }) {
             >
                 <div className={classes.drawerHeader}>
                     <Switch
-                        checked={darkMode.darkMode}
-                        onChange={() =>
-                            darkMode.setDarkMode(!darkMode.darkMode)
-                        }
+                        checked={darkMode}
+                        onChange={() => setDarkMode(!darkMode)}
                         name="switchCheckedA"
                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                     />
