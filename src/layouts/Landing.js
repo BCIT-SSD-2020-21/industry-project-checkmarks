@@ -6,29 +6,20 @@ import { Box, Button } from '@material-ui/core';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg_landing-chris-brignola.jpg';
 import bannerImageDark from '../assets/images/bg_application-nicolas-hoizey.jpg';
-import MenuAppBar from '../components/AppBar';
 import HeaderBanner from '../components/HeaderBanner';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import About from '../components/LandingPage/About';
 import Pricing from '../components/LandingPage/Pricing';
 import Footer from '../components/LandingPage/Footer';
 
-// export const LandingContext = React.createContext();
-
-export default function Landing(darkMode, setDarkMode) {
+export default function Landing(darkMode) {
     const classes = useStyles();
     const history = useHistory();
 
     const [searching, setSearching] = useState(false);
 
-    console.log('darkMode: ', darkMode.darkMode);
     return (
         <Box className={classes.root}>
-            <MenuAppBar
-                setSearching={setSearching}
-                darkMode={darkMode}
-                setDarkMode={setDarkMode}
-            />
             <Box
                 className={classes.section}
                 style={{
@@ -41,7 +32,6 @@ export default function Landing(darkMode, setDarkMode) {
 
                 <Box className={classes.actions}>
                     <Box className={classes.search}>
-                        {/* {infoDisplayToggle ? ( // idea */}
                         <TrademarkSearch
                             searching={searching}
                             setSearching={setSearching}

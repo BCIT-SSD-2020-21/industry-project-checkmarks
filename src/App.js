@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Paper } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import MenuAppBar from './components/AppBar';
 import Landing from './layouts/Landing';
 import TrademarkApplication from './layouts/TrademarkApplication';
 
@@ -21,6 +22,7 @@ export default function App() {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <Paper style={{ width: window.innerWidth }}>
+                <MenuAppBar darkMode={darkMode} />
                 <Router>
                     <Switch>
                         <Route exact path="/">
