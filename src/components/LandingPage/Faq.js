@@ -33,6 +33,19 @@ export default function Faq() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Typography>
         </Container>  
+        <div>
+            <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                    <Typography>What is a trademark?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. 
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+        </div>
     </React.Fragment>
   );
 }
