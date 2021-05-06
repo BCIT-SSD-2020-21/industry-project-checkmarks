@@ -42,19 +42,42 @@ export default function TrademarkSearch({ searching, setSearching }) {
     // Loading Indicator
     const { current: instance } = useRef({});
     const [loading, setLoading] = useState(false);
+    const [numberOfRepeatSearches, setNumberOfRepeatSearches] = useState(0);
     useEffect(() => {
         if (instance.delayTimer) {
             clearTimeout(instance.delayTimer);
         }
-        if (searchTerm !== '' && searchResults?.length === 0) {
+        if (
+            searchTerm !== '' &&
+            searchResults?.length === 0 &&
+            numberOfRepeatSearches < 2
+        ) {
             setLoading(true);
             instance.delayTimer = setTimeout(() => {
+                (async () => {
+                    const result = await searchTrademarks(searchTerm);
+                    if (result.length > 0) {
+                        setSearchResults(result);
+                        setNumberOfRepeatSearches(0);
+                        setLoading(false);
+                    } else {
+                        setNumberOfRepeatSearches(numberOfRepeatSearches + 1);
+                    }
+                })();
                 setLoading(false); // after 3 seconds, stop Loading Indicator
             }, 3000);
+        } else if (searchTerm === '') {
+            setLoading(false);
+            setNumberOfRepeatSearches(0);
         } else {
             setLoading(false);
+            // setNumberOfRepeatSearches(0);
         }
-    }, [searchTerm, searchResults]);
+    }, [searchTerm, searchResults, numberOfRepeatSearches]);
+
+    console.log('numberOfRepeatSearches: ', numberOfRepeatSearches);
+
+    useEffect(() => {}, [searchResults]);
 
     return (
         <Box className={classes.containerTMSearch}>
