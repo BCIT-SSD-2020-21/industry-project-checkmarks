@@ -260,7 +260,7 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                     <Menu
                         PaperProps={{
                             style: {
-                                backgroundColor: checkmarksTheme.bgPrimary,
+                                backgroundColor: checkmarksTheme.bgDrawer,
                                 marginTop: '40px',
                             },
                         }}

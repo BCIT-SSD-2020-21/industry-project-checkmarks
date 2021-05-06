@@ -6,7 +6,7 @@ import { checkmarksTheme } from '../../styles/Themes';
 const progressStyles = makeStyles((theme) => ({
     root: {
         alignItems: 'center',
-        backgroundColor: checkmarksTheme.buttonTextPrimary,
+        // backgroundColor: checkmarksTheme.buttonTextPrimary,
         // border: '1px solid black',
         display: 'flex',
         flexDirection: 'row',
@@ -19,7 +19,7 @@ const progressStyles = makeStyles((theme) => ({
         // ['@media (min-height:812px)']: { padding: '7px' },
     },
     container: {
-        backgroundColor: checkmarksTheme.inputBackground,
+        backgroundColor: checkmarksTheme.bgDrawer,
         borderRadius: '25px',
         border: `1px solid ${checkmarksTheme.textLabel}`,
         height: '32px',
