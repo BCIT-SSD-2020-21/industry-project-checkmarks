@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
     AppBar,
     Box,
-    Button,
     CssBaseline,
     Drawer,
     Divider,
@@ -24,6 +23,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PlayCircleFilledTwoToneIcon from '@material-ui/icons/PlayCircleFilledTwoTone';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 // import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import WbSunnyTwoToneIcon from '@material-ui/icons/WbSunnyTwoTone';
@@ -208,32 +208,48 @@ export default function MenuAppBar({ darkMode }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className={classes.appBarTitle}>
-                        Checkmarks
-                    </Typography>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <Typography className={classes.appBarTitle}>
+                            Checkmarks
+                        </Typography>
+                    </Link>
 
-                    {/* Ask a Lawyer Button     */}
-                    <Button
-                        size="large"
-                        variant="contained"
-                        color="secondary"
-                        component="a"
-                        target="blank"
-                        href="https://golbey.com/contact/"
-                    >
-                        Ask a Lawyer
-                    </Button>
+                    <Box>
+                        {/* Ask a Lawyer Button     */}
+                        <IconButton
+                            className={classes.menuButton}
+                            size="large"
+                            // variant="contained"
+                            // color="secondary"
+                            component="a"
+                            target="blank"
+                            href="https://golbey.com/contact/"
+                        >
+                            <Box
+                                style={{
+                                    justifySelf: 'flex-end',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <HelpOutlineIcon fontSize={'default'} />
+                                <Typography>Ask a Lawyer</Typography>
+                            </Box>
+                        </IconButton>
 
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleMenu}
-                        className={classes.menuButton}
-                        color="inherit"
-                    >
-                        <AccountCircleTwoToneIcon />
-                    </IconButton>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            className={classes.menuButton}
+                            color="inherit"
+                        >
+                            <AccountCircleTwoToneIcon fontSize={'large'} />
+                        </IconButton>
+                    </Box>
 
                     <Menu
                         PaperProps={{

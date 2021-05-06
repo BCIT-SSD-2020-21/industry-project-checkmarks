@@ -22,8 +22,8 @@ export default function App() {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <Paper style={{ width: window.innerWidth }}>
-                <MenuAppBar darkMode={darkMode} />
                 <Router>
+                    <MenuAppBar darkMode={darkMode} />
                     <Switch>
                         <Route exact path="/">
                             <Landing
