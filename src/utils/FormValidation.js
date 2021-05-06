@@ -14,7 +14,7 @@ export const validateForm = (
     if (info.individualOrOrganization === 'Individual') {
         newInputValidationValue.individualOrOrganizationName = 100;
     } else if (info.individualOrOrganization === 'Organization') {
-        if (info.organizationName && !namesRegex.test(info.organizationName)) {
+        if (info.organizationName) {
             newInputValidationValue.individualOrOrganizationName = 100;
         } else {
             newInputValidationValue.individualOrOrganizationName = 0;

@@ -103,7 +103,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                     </div>
                 )}
                 <Checkmark
-                    value={inputValidationValue.trademarkTypeFormCompleted}
+                    value={inputValidationValue.internationalFilingInfo}
                 />
                 <Alert severity="info" className={classes.alert}>
                     Helper Section with brief legal information, assisting the
