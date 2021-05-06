@@ -3,6 +3,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
+
+const useStyles = makeStyles((theme) => ({
+    '@global': {
+      ul: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
+    },
+    heroContent: {
+      padding: theme.spacing(8, 0, 6),
+    },
+  }));
    
 export default function Faq() {
   const classes = useStyles();
@@ -22,4 +35,3 @@ export default function Faq() {
     </React.Fragment>
   );
 }
-
