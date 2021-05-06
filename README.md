@@ -98,6 +98,98 @@ REACT_APP_CIPO_BASE_URL=https://cipo-gsm-ised-isde-apicast-production.api.canada
 
 </br>
 
+## Integrations
+
+# Clio
+
+[Full Clio Documentation](https://app.clio.com/api/v4/documentation#operation/Contact#create)
+Clio is a CRM for Law Firms and Professionals.
+The Checkmarks back-end is connected to the Clip API to create <b>Contacts</b> and <b>Matters</b> based on the Trademark Applicant's input data.
+
+The integration is achieved as follows:
+
+### 1. OAuth Workflow:
+
+-   Request authorization code from Clio by inputting the following Url into the browser:
+
+```
+https://app.clio.com/oauth/authorize?response_type=code&client_id={app_key}&redirect_uri={site_to_be_authorized_by_clio}
+```
+
+-   The above link should redirect to the 'redirect_uri', with the following string appended to the Url:
+
+```
+https://checkmarks.ca/?code={authorization_code}
+```
+
+-   In Postman:
+
+```
+POST https://app.clio.com/oauth/token?client_id={app_key}&client_secret={app_secret}&grant_type=authorization_code&code={authorization_code}&redirect_uri={redirect_uri}
+```
+
+The response will include:
+
+```
+access_token (used as bearer token for requests to Clio)
+refresh_token
+token_type (bearer)
+expires_in (30 days)
+```
+
+### 2. Endpoints used:
+
+-   Create Contact:
+
+```
+POST https://app.clio.com/api/v4/contacts.json
+Authorization: Bearer {access_token}
+Body:  // (required only - see Clio docs for details)
+{
+    "data": {
+        "first_name": "Johnny",
+        "last_name": "Bravo",
+        "type": "Person"
+    }
+}
+Result:
+{
+    "data": {
+        "id": {contact_id},
+        "name": "Johnny Bravo",
+        "initials": "JB",
+        "type": "Person",
+        "etag": "\"57527d0a60938ea56a68f6d0d2c36334\""
+    }
+}
+```
+
+-   Create Matter:
+
+```
+POST https://app.clio.com/api/v4/matters.json
+Authorization: Bearer {access_token}
+Body:  // (required only - see Clio docs for details)
+{
+  "data": {
+        "description": "do.. you know, the thing",
+        "client": {
+            "id": {contact_id}
+        }
+  }
+}
+Result:
+{
+    "data": {
+        "id": {matter_id},
+        "display_number": "00002-Smith",
+        "etag": "\"4d507aeb60938f116a68f6d0d2c36334\""
+}
+}
+
+# Law Pay
+
 ## Resources/References
 
 </br>
+```
