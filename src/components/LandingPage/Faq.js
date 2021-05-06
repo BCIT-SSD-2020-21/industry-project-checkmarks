@@ -1,4 +1,8 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+
    
 export default function Faq() {
   const classes = useStyles();
@@ -18,3 +22,4 @@ export default function Faq() {
     </React.Fragment>
   );
 }
+
