@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -47,6 +47,14 @@ export default function PaymentForm({
                 : info.userCountry,
         });
     };
+    ///////////////////////testing send email function////////////////////////
+    // const submitApplication = async () => {
+    //     try {
+    //         await createEmail(info);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     const submitApplication = async () => {
         setSubmitting(true);

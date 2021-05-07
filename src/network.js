@@ -77,28 +77,17 @@ export const createEmail = async (info, matterId) => {
         classesArray.push(element.termClass);
     });
 
-    //create classesSelected  array
-    // info.classesSelected.forEach((element) => {
-    //     classesArray.push(element.number);
-    // });
-
     //create trademarkType array
     var trademarkType = [];
     if (info.isText === true) {
         trademarkType.push('Standard Characters');
     }
     if (info.isLogo === true) {
-        trademarkType.push('Logos or Design');
+        trademarkType.push('Design/Logo');
     }
     if (info.isOther === true) {
         trademarkType.push('Others');
     }
-
-    // const createdContact = await this.createClioContact();
-
-    // if (!createdContact) {
-    //     return false;
-    // }
 
     var fnResponse = false;
 
@@ -132,11 +121,11 @@ export const createEmail = async (info, matterId) => {
                 },
 
                 trademarkInfo: {
+                    // fileName: '123.PNG',
                     fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,
                     // nice classes
-                    // classes: classesArray,
                     classes: classesArray,
                     terms: termsArray,
                 },

@@ -86,7 +86,7 @@ export const validateForm = (
     // Trademark Types Completed
     if (
         (info.isText || info.isLogo || info.isOther) &&
-        (info.isText ? info.trademarkName : true) &&
+        (info.isText ? info.characterText : true) &&
         (info.isLogo ? info.fileName : true) &&
         (info.isOther ? info.OtherTypes.length > 0 : true)
     ) {
