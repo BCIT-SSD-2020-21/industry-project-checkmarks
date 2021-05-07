@@ -73,6 +73,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Faq() {
   const classes = useStyles();
 
+  const [expanded, setExpanded] = useState('panel1');
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+  
   return (
     <React.Fragment>
       <CssBaseline />
