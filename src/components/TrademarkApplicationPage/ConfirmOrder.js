@@ -230,9 +230,9 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     type="submit"
                     variant="contained"
                     onClick={() => {
-                        // navigation.next();
-                        // setInfo({ ...info, infoConfirmed: true });
-                        handleSubmit();
+                        navigation.next();
+                        setInfo({ ...info, infoConfirmed: true });
+                        // handleSubmit();
                     }}
                 >
                     Confirm
