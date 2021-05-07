@@ -63,6 +63,12 @@ const useStyles = makeStyles((theme) => ({
     },
     expanded: {},
   })(MuiAccordionSummary);
+
+  const AccordionDetails = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+  }))(MuiAccordionDetails);
   
 export default function Faq() {
   const classes = useStyles();
