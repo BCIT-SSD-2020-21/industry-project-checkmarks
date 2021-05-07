@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '100%',
+      width: '70%',
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -90,10 +90,8 @@ export default function Faq() {
           <Typography variant="h5" align="center" color="textSecondary" component="p">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Typography>
-        </Container>  
-           
+        </Container>     
         <Container> 
-        {/* <div> */}
             {/* /// PANEL 1 //// */}
             <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
@@ -133,7 +131,7 @@ export default function Faq() {
             {/* /// PANEL 4 //// */}
             <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
-                    <Typography>Why should I care about search and review services?</Typography>
+                    <Typography>How do trademark lawyers or IP agents help?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -142,7 +140,6 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-        {/* </div> */}
         </Container> 
     </React.Fragment>
   );
