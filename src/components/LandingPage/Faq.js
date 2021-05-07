@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   const AccordionSummary = withStyles({
     root: {
-      backgroundColor: 'rgba(0, 0, 0, .03)',
+      backgroundColor: 'rgba(255, 0, 0, 0.8)',
       borderBottom: '1px solid rgba(0, 0, 0, .125)',
       marginBottom: -1,
       minHeight: 56,
