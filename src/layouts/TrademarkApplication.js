@@ -12,6 +12,7 @@ import { useStep } from 'react-hooks-helper';
 import Success from '../components/TrademarkApplicationPage/Success';
 import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 import PageLeavePrompt from '../utils/PageLeavePrompt';
+import Footer from '../components/LandingPage/Footer';
 import { validateForm } from '../utils/FormValidation';
 
 const TrademarkApplication = () => {
@@ -202,6 +203,7 @@ const TrademarkApplication = () => {
                 })()}
             </div>
             {Prompt}
+            <Footer />
         </Paper>
     );
 };
