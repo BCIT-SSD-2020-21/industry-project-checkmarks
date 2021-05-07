@@ -57,7 +57,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
             {/* ======================================== */}
             <FormControlLabel
                 control={<Checkbox checked={info.isLogo} />}
-                label="Logos or Design"
+                label="Design/Logo"
                 onChange={(e) =>
                     setInfo({
                         ...info,

@@ -41,7 +41,7 @@ const TrademarkApplication = () => {
 
         characterText: '',
         fileName: '',
-        trademarkName: '',
+        // trademarkName: '',
 
         // Goods and Services
         classesSelected: [],

@@ -91,7 +91,7 @@ export const createEmail = async (info) => {
         trademarkType.push('Standard Characters');
     }
     if (info.isLogo === true) {
-        trademarkType.push('Logos or Design');
+        trademarkType.push('Design/Logo');
     }
     if (info.isOther === true) {
         trademarkType.push('Others');
@@ -135,7 +135,8 @@ export const createEmail = async (info) => {
                 },
 
                 trademarkInfo: {
-                    fileName: info.fileName,
+                    fileName: '123.PNG',
+                    // fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,
                     // nice classes
