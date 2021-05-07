@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   const AccordionSummary = withStyles({
     root: {
-      backgroundColor: 'rgba(255, 0, 0, 0.8)',
+      backgroundColor: 'rgba(165, 26, 36, 0.80)',
       borderBottom: '1px solid rgba(0, 0, 0, .125)',
       marginBottom: -1,
       minHeight: 56,
@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
   const AccordionDetails = withStyles((theme) => ({
     root: {
+      backgroundColor: 'rgba(255, 0, 0, .25)',
       padding: theme.spacing(2),
     },
   }))(MuiAccordionDetails);
@@ -92,7 +93,7 @@ export default function Faq() {
           </Typography>
         </Container>     
         <Container> 
-            {/* /// PANEL 1 //// */}
+            {/*  /// PANEL 1 ////  */}
             <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                     <Typography>What is a trademark?</Typography>
@@ -104,7 +105,7 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            {/* /// PANEL 2 //// */}
+            {/*  /// PANEL 2 ////  */}
             <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                     <Typography>What is the difference between a trade name and a trademark?</Typography>
@@ -116,7 +117,7 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            {/* /// PANEL 3 //// */}
+            {/*  /// PANEL 3 ////  */}
             <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
                     <Typography>Why should I care about search and review services?</Typography>
@@ -128,7 +129,7 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            {/* /// PANEL 4 //// */}
+            {/*  /// PANEL 4 ////  */}
             <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
                     <Typography>How do trademark lawyers or IP agents help?</Typography>
