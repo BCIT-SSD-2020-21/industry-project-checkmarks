@@ -130,6 +130,18 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            {/* /// PANEL 4 //// */}
+            <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+                    <Typography>Why should I care about search and review services?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. 
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
         {/* </div> */}
         </Container> 
     </React.Fragment>
