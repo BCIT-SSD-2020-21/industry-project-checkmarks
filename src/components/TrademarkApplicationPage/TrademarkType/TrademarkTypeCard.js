@@ -18,12 +18,12 @@ const TrademarkTypeCard = ({ info, setInfo }) => {
                     variant="outlined"
                     size="small"
                     type="text"
-                    value={info.trademarkName}
+                    value={info.characterText}
                     autoComplete="on"
                     onChange={(e) =>
                         setInfo({
                             ...info,
-                            trademarkName: e.target.value,
+                            characterText: e.target.value,
                         })
                     }
                 />
