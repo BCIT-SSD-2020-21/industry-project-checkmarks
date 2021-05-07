@@ -178,11 +178,11 @@ export default function GoodsAndServices({
                 // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
-                    console.log(
-                        'niceClass: ',
-                        term.niceClass,
-                        niceClass.number
-                    );
+                    // console.log(
+                    //     'niceClass: ',
+                    //     term.niceClass,
+                    //     niceClass.number
+                    // );
                     if (niceClass.number === term.termClass) {
                         termClassExists = true;
                     }

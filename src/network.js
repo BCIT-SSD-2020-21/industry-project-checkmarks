@@ -76,9 +76,14 @@ export const createEmail = async (info) => {
     });
 
     //create classesSelected  array
-    info.classesSelected.forEach((element) => {
-        classesArray.push(element.number);
+    info.termsSelected.forEach((element) => {
+        classesArray.push(element.termClass);
     });
+
+    //create classesSelected  array
+    // info.classesSelected.forEach((element) => {
+    //     classesArray.push(element.number);
+    // });
 
     //create trademarkType array
     var trademarkType = [];
@@ -142,7 +147,7 @@ export const createEmail = async (info) => {
                 prevTrademarkInfo: {
                     filedInOtherCountry: info.filedInOtherCountry,
                     countryOfFiling: info.countryOfFiling,
-                    filingDate: info.filingDate,
+                    filingDate: info.fillingDate,
                     applicationNum: info.fillingNumber,
                 },
             },
