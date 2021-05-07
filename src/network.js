@@ -77,7 +77,7 @@ export const createEmail = async (info) => {
 
     //create classesSelected  array
     info.classesSelected.forEach((element) => {
-        classesArray.push(element.name);
+        classesArray.push(element.number);
     });
 
     //create trademarkType array
@@ -135,7 +135,7 @@ export const createEmail = async (info) => {
                     characterText: info.characterText,
                     // nice classes
                     // classes: classesArray,
-                    classes: ['10'],
+                    classes: classesArray,
                     terms: termsArray,
                 },
 
