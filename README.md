@@ -113,19 +113,19 @@ The integration is achieved as follows:
 -   Request authorization code from Clio by inputting the following Url into the browser:
 
 ```
-https://app.clio.com/oauth/authorize?response_type=code&client_id={app_key}&redirect_uri={site_to_be_authorized_by_clio}
+https://app.clio.com/oauth/authorize?response_type=code&client_id={app_key}&redirect_uri={your_site_url}/
 ```
 
 -   The above link should redirect to the 'redirect_uri', with the following string appended to the Url:
 
 ```
-https://checkmarks.ca/?code={authorization_code}
+{your_site_url}/?code={authorization_code}
 ```
 
 -   In Postman:
 
 ```
-POST https://app.clio.com/oauth/token?client_id={app_key}&client_secret={app_secret}&grant_type=authorization_code&code={authorization_code}&redirect_uri={redirect_uri}
+POST https://app.clio.com/oauth/token?client_id={app_key}&client_secret={app_secret}&grant_type=authorization_code&code={authorization_code}&redirect_uri={your_site_url}
 ```
 
 The response will include:
