@@ -78,7 +78,7 @@ export default function Faq() {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -97,6 +97,17 @@ export default function Faq() {
             <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                     <Typography>What is a trademark?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. 
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                    <Typography>What is the difference between a trade name and a trademark?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
