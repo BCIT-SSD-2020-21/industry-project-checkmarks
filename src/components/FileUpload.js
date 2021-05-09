@@ -67,7 +67,7 @@ const FileUpload = ({ setHandle, setInfo, info }) => {
                     setHandle('fileName', data.filename);
                     setInfo({
                         ...info,
-                        LogoFileName: data.filename,
+                        fileName: data.filename,
                         file: URL.createObjectURL(event.target.files[0]),
                     });
                 });
@@ -93,9 +93,7 @@ const FileUpload = ({ setHandle, setInfo, info }) => {
                         style={{ display: 'none' }}
                     />
                 </Button>
-                {info.LogoFileName && (
-                    <p>Currently using {info.LogoFileName}</p>
-                )}
+                {info.fileName && <p>Currently using {info.fileName}</p>}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
             </form>
         </div>

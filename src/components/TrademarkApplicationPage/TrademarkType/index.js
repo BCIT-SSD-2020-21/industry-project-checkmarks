@@ -27,6 +27,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
 
     return (
         <Card className={classes.outerCard}>
+            {console.log(info)}
             <h1 className={classes.title}>Trademark Type</h1>
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
@@ -48,6 +49,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     setInfo({
                         ...info,
                         isText: !info.isText,
+                        characterText: '',
                     })
                 }
             />
@@ -62,6 +64,8 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     setInfo({
                         ...info,
                         isLogo: !info.isLogo,
+                        fileName: '',
+                        file: '',
                     })
                 }
             />
