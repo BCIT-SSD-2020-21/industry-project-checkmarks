@@ -121,7 +121,6 @@ export const createEmail = async (info, matterId) => {
                 },
 
                 trademarkInfo: {
-                    // fileName: '123.PNG',
                     fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,

@@ -47,43 +47,45 @@ export default function PaymentForm({
                 : info.userCountry,
         });
     };
-    ///////////////////////testing send email function////////////////////////
-    // const submitApplication = async () => {
-    //     try {
-    //         await createEmail(info);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
+    ///////////////////////testing send email function (cox there is bug with create clio acc)////////////////////////
     const submitApplication = async () => {
-        setSubmitting(true);
-        let responseSendPayment = await sendPayment(info);
-        if (responseSendPayment) {
-            let matterId = await createClioContact(info);
-            console.log('matterId: ', matterId);
-            if (matterId) {
-                let responseCreateEmail = await createEmail(info, matterId);
-                // let responseCreateEmail = true;
-                if (responseCreateEmail) {
-                    setInfo({
-                        ...info,
-                        paymentConfirmaed: true,
-                    });
-                    setPristine();
-                    navigation.next();
-                } else {
-                    console.log('createEmail() unsuccsessful');
-                }
-            } else {
-                console.log('createClioContact() unsuccsessful');
-            }
-        } else {
-            console.log('sendPayment() unsuccessful');
+        try {
+            await createEmail(info);
+        } catch (error) {
+            console.log(error);
         }
-
-        setSubmitting(false);
     };
+
+    //////////////////////////////Create clio account and send email/////////////////////////////////////////////
+
+    // const submitApplication = async () => {
+    //     setSubmitting(true);
+    //     let responseSendPayment = await sendPayment(info);
+    //     if (responseSendPayment) {
+    //         let matterId = await createClioContact(info);
+    //         console.log('matterId: ', matterId);
+    //         if (matterId) {
+    //             let responseCreateEmail = await createEmail(info, matterId);
+    //             // let responseCreateEmail = true;
+    //             if (responseCreateEmail) {
+    //                 setInfo({
+    //                     ...info,
+    //                     paymentConfirmaed: true,
+    //                 });
+    //                 setPristine();
+    //                 navigation.next();
+    //             } else {
+    //                 console.log('createEmail() unsuccsessful');
+    //             }
+    //         } else {
+    //             console.log('createClioContact() unsuccsessful');
+    //         }
+    //     } else {
+    //         console.log('sendPayment() unsuccessful');
+    //     }
+
+    //     setSubmitting(false);
+    // };
 
     return (
         <Card className={classes.card}>

@@ -35,6 +35,9 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                         setInfo({
                             ...info,
                             filedInOtherCountry: e.target.value,
+                            countryOfFiling: '',
+                            fillingDate: '',
+                            fillingNumber: '',
                         })
                     }
                 >

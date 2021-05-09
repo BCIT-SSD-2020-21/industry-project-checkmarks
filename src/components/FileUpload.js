@@ -1,30 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FileUpload = () => {
+const FileUpload = ({ setHandle, setInfo, info }) => {
     const classes = useStyles();
 
-    const [fileName, setFileName] = useState('');
-    const [uploadedFileName, setUploadedFileName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const fileInput = useRef(null);
 
-    useEffect(() => {
-        if (fileName) {
-            setUploadedFileName(fileName);
-        } else {
-            setFileName(fileName);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (info.uploadedFileName) {
+    //         setUploadedFileName(info.uploadedFileName);
+    //     } else {
+    //         setInfo({
+    //             ...info,
+    //             LogoFileName: info.uploadedFileName,
+    //         });
+    //         // setFileName(fileName);
+    //     }
+    // }, []);
 
     // Checks the file size and sets the image url preview.
     const handleUploadImage = (event) => {
         if (checkFileSize(event)) {
-            setErrorMessage(errorMessage);
-            // this.props.oldState.file = URL.createObjectURL(
-            //     event.target.files[0]
-            // );
+            setErrorMessage('');
             return true;
         }
         return false;
@@ -58,15 +57,19 @@ const FileUpload = () => {
                 body: formData,
             };
             const response = await fetch(
-                'https://localhost:5001/api/files',
+                'https://localhost:44397/api/files',
                 options
             )
                 .then((res) => {
                     return res.json();
                 })
                 .then((data) => {
-                    // this.props.handler('fileName', data.filename);
-                    setFileName(data.fileName);
+                    setHandle('fileName', data.filename);
+                    setInfo({
+                        ...info,
+                        fileName: data.filename,
+                        file: URL.createObjectURL(event.target.files[0]),
+                    });
                 });
         }
     };
@@ -90,9 +93,8 @@ const FileUpload = () => {
                         style={{ display: 'none' }}
                     />
                 </Button>
-                {fileName && <p>Currently using {fileName}</p>}
+                {info.fileName && <p>Currently using {info.fileName}</p>}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-                <p>{uploadedFileName}</p>
             </form>
         </div>
     );

@@ -39,9 +39,10 @@ const TrademarkApplication = () => {
         isLogo: false,
         isOther: false,
         otherTypes: [],
-
         characterText: '',
         fileName: '',
+        file: '',
+
         // trademarkName: '',
 
         // Goods and Services
