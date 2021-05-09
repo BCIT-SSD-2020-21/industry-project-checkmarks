@@ -29,7 +29,6 @@ export default function IndividualForm({
 
     //handle seclection of individual or organization
     const handleSelection = (e) => {
-        console.log(e.target.value);
         setInfo({
             ...info,
             individualOrOrganization: e.target.value,

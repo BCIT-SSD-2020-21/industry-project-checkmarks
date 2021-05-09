@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -13,6 +13,7 @@ import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
+import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
     navigation,
@@ -22,6 +23,8 @@ export default function PaymentForm({
     setPristine,
 }) {
     const classes = useStyles();
+
+    const [submitting, setSubmitting] = useState(false);
 
     const handleMirrorUserAddress = () => {
         setInfo({
@@ -43,6 +46,43 @@ export default function PaymentForm({
                 ? ''
                 : info.userCountry,
         });
+    };
+    ///////////////////////testing send email function////////////////////////
+    // const submitApplication = async () => {
+    //     try {
+    //         await createEmail(info);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    const submitApplication = async () => {
+        setSubmitting(true);
+        let responseSendPayment = await sendPayment(info);
+        if (responseSendPayment) {
+            let matterId = await createClioContact(info);
+            console.log('matterId: ', matterId);
+            if (matterId) {
+                let responseCreateEmail = await createEmail(info, matterId);
+                // let responseCreateEmail = true;
+                if (responseCreateEmail) {
+                    setInfo({
+                        ...info,
+                        paymentConfirmaed: true,
+                    });
+                    setPristine();
+                    navigation.next();
+                } else {
+                    console.log('createEmail() unsuccsessful');
+                }
+            } else {
+                console.log('createClioContact() unsuccsessful');
+            }
+        } else {
+            console.log('sendPayment() unsuccessful');
+        }
+
+        setSubmitting(false);
     };
 
     return (
@@ -250,12 +290,7 @@ export default function PaymentForm({
                     type="submit"
                     variant="contained"
                     onClick={() => {
-                        setInfo({
-                            ...info,
-                            paymentConfirmaed: true,
-                        });
-                        navigation.next();
-                        setPristine();
+                        submitApplication(true);
                     }}
                 >
                     Confirm Payment

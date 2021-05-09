@@ -113,19 +113,19 @@ The integration is achieved as follows:
 -   Request authorization code from Clio by inputting the following Url into the browser:
 
 ```
-https://app.clio.com/oauth/authorize?response_type=code&client_id={app_key}&redirect_uri={site_to_be_authorized_by_clio}
+https://app.clio.com/oauth/authorize?response_type=code&client_id={app_key}&redirect_uri={your_site_url}/
 ```
 
 -   The above link should redirect to the 'redirect_uri', with the following string appended to the Url:
 
 ```
-https://checkmarks.ca/?code={authorization_code}
+{your_site_url}/?code={authorization_code}
 ```
 
 -   In Postman:
 
 ```
-POST https://app.clio.com/oauth/token?client_id={app_key}&client_secret={app_secret}&grant_type=authorization_code&code={authorization_code}&redirect_uri={redirect_uri}
+POST https://app.clio.com/oauth/token?client_id={app_key}&client_secret={app_secret}&grant_type=authorization_code&code={authorization_code}&redirect_uri={your_site_url}
 ```
 
 The response will include:
@@ -152,6 +152,16 @@ Body:  // (required only - see Clio docs for details)
         "type": "Person"
     }
 }
+Result:
+{
+    "data": {
+        "id": {contact_id},
+        "name": "Johnny Bravo",
+        "initials": "JB",
+        "type": "Person",
+        "etag": "\"57527d0a60938ea56a68f6d0d2c36334\""
+    }
+}
 ```
 
 -   Create Matter:
@@ -164,14 +174,22 @@ Body:  // (required only - see Clio docs for details)
   "data": {
         "description": "do.. you know, the thing",
         "client": {
-            "id": {client_id}   (id of an existing contact)
+            "id": {contact_id}
         }
   }
 }
-```
+Result:
+{
+    "data": {
+        "id": {matter_id},
+        "display_number": "00002-Smith",
+        "etag": "\"4d507aeb60938f116a68f6d0d2c36334\""
+}
+}
 
 # Law Pay
 
 ## Resources/References
 
 </br>
+```

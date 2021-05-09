@@ -1,5 +1,5 @@
 export const createClioContact = async (info) => {
-    var fnResponse = false;
+    var fnResponse = null;
 
     await fetch('https://localhost:44397/api/Clio', {
         method: 'POST',
@@ -44,17 +44,14 @@ export const createClioContact = async (info) => {
         .then((res) => {
             console.log(info);
             if (res.status != 200) {
-                fnResponse = false;
+                fnResponse = null;
             }
             // console.log(res.json());
             return res.json();
         })
         .then((data) => {
-            // console.log(data);
-            // var matterIdd = data.data.display_number;
-            // this.setState({
-            //   matterId: matterIdd
-            // });
+            console.log(data);
+            fnResponse = data.data.display_number;
             // fnResponse = true;
         })
         .catch((err) => {
@@ -64,7 +61,7 @@ export const createClioContact = async (info) => {
     return fnResponse;
 };
 
-export const createEmail = async (info) => {
+export const createEmail = async (info, matterId) => {
     var termsArray = [];
     var classesArray = [];
     var trademarkType;
@@ -80,11 +77,6 @@ export const createEmail = async (info) => {
         classesArray.push(element.termClass);
     });
 
-    //create classesSelected  array
-    // info.classesSelected.forEach((element) => {
-    //     classesArray.push(element.number);
-    // });
-
     //create trademarkType array
     var trademarkType = [];
     if (info.isText === true) {
@@ -96,12 +88,6 @@ export const createEmail = async (info) => {
     if (info.isOther === true) {
         trademarkType.push('Others');
     }
-
-    // const createdContact = await this.createClioContact();
-
-    // if (!createdContact) {
-    //     return false;
-    // }
 
     var fnResponse = false;
 
@@ -123,7 +109,7 @@ export const createEmail = async (info) => {
                     // phoneNumber: info.phone,
                     phoneNumber: '604895555',
                     fax: '604895555',
-                    matterId: '010',
+                    matterId: matterId,
                 },
 
                 addressInfo: {
@@ -135,12 +121,10 @@ export const createEmail = async (info) => {
                 },
 
                 trademarkInfo: {
-                    fileName: '123.PNG',
-                    // fileName: info.fileName,
+                    fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,
                     // nice classes
-                    // classes: classesArray,
                     classes: classesArray,
                     terms: termsArray,
                 },
@@ -155,6 +139,7 @@ export const createEmail = async (info) => {
         }),
     })
         .then((res) => {
+            console.log(res);
             if (res.status == 200) {
                 fnResponse = true;
             } else if (res.status >= 400) {
@@ -168,4 +153,57 @@ export const createEmail = async (info) => {
     return fnResponse;
 
     // end of email function
+};
+
+export const sendPayment = async (info) => {
+    console.log('sendPayment called');
+    return true;
+    // this.setState({
+    //   disableButton: true,
+    //   buttonText: 'Submitting...'
+    // })
+    // await fetch('https://localhost:44397/api/Payment', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         amount: String(info.amount),
+    //         // "method": String(this.props.values.id),
+    //         account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
+    //     }),
+    // })
+    //     .then(async (res) => {
+    //         if (res.status == 200) {
+    // const createdEmail = await createEmail();
+
+    // if (createdEmail) {
+    //   this.props.nextStep();
+    // } else {
+    //   this.setState({
+    //     dialogOpen: true,
+    //     disableButton: false
+    //   });
+    // }
+    //     alert('payment successful');
+    // } else {
+    //     alert(
+    //         "The payment did not go through. Please revise your payment information or go to the 'About Us' link to get in touch."
+    //     );
+    // this.setState({
+    //   disableButton: false,
+    //   buttonText: 'Confirm and Check Out'
+    // });
+    //     }
+    // })
+    // .catch((err) => {
+    //     alert(
+    //         "The form could not be submitted because of a technical issue. Please try again, or go to the 'About Us' link to get in touch.  " +
+    //             err
+    //     );
+    //   this.setState({
+    //     disableButton: false,
+    //     buttonText: 'Confirm and Check Out'
+    //   });
+    // });
 };
