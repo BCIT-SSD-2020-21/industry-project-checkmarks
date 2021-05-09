@@ -157,7 +157,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
-            <div className={classes.field}>
+            {/* <div className={classes.field}>
                 <Button
                     onClick={() =>
                         setInfo({
@@ -172,7 +172,7 @@ export default function IndividualForm({
                     Upload ID Document
                 </Button>
                 <Checkmark value={inputValidationValue.idDocumentUploaded} />
-            </div>
+            </div> */}
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
