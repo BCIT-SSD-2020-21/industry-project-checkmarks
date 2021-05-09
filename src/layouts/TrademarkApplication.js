@@ -74,7 +74,7 @@ const TrademarkApplication = () => {
 
     // form validation and progress
     const [inputValidationValue, setInputValidationValue] = useState({
-        //Application Informarion - 1100
+        //Application Informarion - 1100 - step 1 end
         individualOrOrganizationName: 0,
         firstName: 0,
         lastName: 0,
@@ -87,19 +87,19 @@ const TrademarkApplication = () => {
         userCountry: 0,
         agreedTermsOfService: 0,
 
-        //Trademark Type - 400
+        //Trademark Type - 400 - step 2 end
         trademarkTypeFormCompleted: 0,
 
-        // Goods and Services - 600
+        // Goods and Services - 600 - step 3 end
         amountNotZero: 0,
 
-        //International Information - 300
+        //International Information - 300 - step 4 end
         internationalFilingInfo: 0,
 
-        //Info Confirmed - 200
+        //Info Confirmed - 200 - step 5 end
         infoConfirmed: 0,
 
-        // Payment Information - 500
+        // Payment Information - 500 - step 6 end
         paymentCardInfo: 0,
         billingAddress: 0,
         paymentConfirmed: 0,
@@ -108,18 +108,23 @@ const TrademarkApplication = () => {
         validateForm(info, inputValidationValue, setInputValidationValue);
     }, [info]);
 
+    const [currentStep, setCurrentStep] = useState(1);
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentStep]);
+
     // custon hook, "Discard changes?" on Leave Page (defined in  utils folder)
     const [Prompt, setDirty, setPristine] = PageLeavePrompt();
 
     //Give each step an id
     const steps = [
-        { id: 'Application-Information', num: 1 },
-        { id: 'Trademark-Type', num: 2 },
-        { id: 'Goods-and-Services', num: 3 },
-        { id: 'International-Information', num: 4 },
-        { id: 'Confirmation', num: 5 },
-        { id: 'Payment', num: 6 },
-        { id: 'Success', num: 7 },
+        { id: 'Application-Information', num: 1, progressValueStart: 0 },
+        { id: 'Trademark-Type', num: 2, progressValueStart: 1100 },
+        { id: 'Goods-and-Services', num: 3, progressValueStart: 1500 },
+        { id: 'International-Information', num: 4, progressValueStart: 2100 },
+        { id: 'Confirmation', num: 5, progressValueStart: 2400 },
+        { id: 'Payment', num: 6, progressValueStart: 2600 },
+        { id: 'Success', num: 7, progressValueStart: 3100 },
     ];
 
     //use useStep from hook-helper to navigate the steps
@@ -127,6 +132,8 @@ const TrademarkApplication = () => {
         steps,
         initialStep: 0,
     });
+
+    console.log('currentStep: ', currentStep);
 
     return (
         <Paper className={classes.root}>
@@ -139,6 +146,7 @@ const TrademarkApplication = () => {
                 info={info}
                 inputValidationValue={inputValidationValue}
             />
+
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
@@ -148,6 +156,8 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     setDirty={setDirty}
                                     inputValidationValue={inputValidationValue}
                                 />
@@ -158,6 +168,8 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     inputValidationValue={inputValidationValue}
                                 />
                             );
@@ -167,6 +179,8 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     inputValidationValue={inputValidationValue}
                                 />
                             );
@@ -176,6 +190,8 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     inputValidationValue={inputValidationValue}
                                 />
                             );
@@ -185,6 +201,8 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                 />
                             );
                         case 'Payment':
@@ -193,12 +211,20 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     inputValidationValue={inputValidationValue}
                                     setPristine={setPristine}
                                 />
                             );
                         case 'Success':
-                            return <Success navigation={navigation} />;
+                            return (
+                                <Success
+                                    navigation={navigation}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                />
+                            );
                     }
                 })()}
             </div>
