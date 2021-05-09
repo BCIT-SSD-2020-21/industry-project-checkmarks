@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FileUpload = ({ setOldState }) => {
+const FileUpload = ({ setOldState, setHandle }) => {
     const classes = useStyles();
 
     const [fileName, setFileName] = useState('');
@@ -21,7 +21,7 @@ const FileUpload = ({ setOldState }) => {
     // Checks the file size and sets the image url preview.
     const handleUploadImage = (event) => {
         if (checkFileSize(event)) {
-            setErrorMessage(errorMessage);
+            setErrorMessage('');
             setOldState({ file: URL.createObjectURL(event.target.files[0]) });
             return true;
         }
@@ -49,11 +49,8 @@ const FileUpload = ({ setOldState }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (handleUploadImage(event)) {
-            console.log('save image');
-
             const formData = new FormData();
             formData.append('FileToUpload', fileInput.current.files[0]);
-            console.log(formData);
             const options = {
                 method: 'POST',
                 body: formData,
@@ -66,8 +63,8 @@ const FileUpload = ({ setOldState }) => {
                     return res.json();
                 })
                 .then((data) => {
-                    // this.props.handler('fileName', data.filename);
-                    setFileName(data.fileName);
+                    setHandle('fileName', data.filename);
+                    setFileName(data.filename);
                 });
         }
     };
@@ -93,7 +90,6 @@ const FileUpload = ({ setOldState }) => {
                 </Button>
                 {fileName && <p>Currently using {fileName}</p>}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-                <p>{uploadedFileName}</p>
             </form>
         </div>
     );

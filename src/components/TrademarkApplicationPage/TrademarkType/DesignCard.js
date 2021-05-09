@@ -12,6 +12,8 @@ const LogoForm = () => {
         file: null,
     });
 
+    const [handle, setHandle] = useState('');
+
     return (
         <div className={classes.logoCard} fullwidth>
             <div>
@@ -19,7 +21,7 @@ const LogoForm = () => {
                 <h5 style={{ color: '#DF3A48' }}>Preview:</h5>
                 <img className={classes.previewImage} src={oldState.file} />
                 {/* <Button className={classes.browseButton}>Choose File</Button> */}
-                <FileUpload setOldState={setOldState} />
+                <FileUpload setOldState={setOldState} setHandle={setHandle} />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Single image file should be under 2MB
