@@ -37,15 +37,6 @@ export default function IndividualForm({
 
     setDirty();
 
-    const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            await createClioContact(info);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <div>
             {/* checkbox for indicidual or organization */}
@@ -309,7 +300,6 @@ export default function IndividualForm({
                 <Button
                     className={classes.nextButton}
                     onClick={(event) => {
-                        handleSubmit(event);
                         navigation.next();
                     }}
                     // onClick={() => navigation.next()}
