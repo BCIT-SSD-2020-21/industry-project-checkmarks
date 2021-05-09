@@ -14,8 +14,24 @@ import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
 
-const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
+const CountryCard = ({
+    navigation,
+    info,
+    setInfo,
+    currentStep,
+    setCurrentStep,
+    inputValidationValue,
+}) => {
     const classes = useStyles();
+
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
 
     return (
         <Card className={classes.countryCard}>
@@ -115,7 +131,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -123,7 +139,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => nextStep()}
                 >
                     Continue
                 </Button>

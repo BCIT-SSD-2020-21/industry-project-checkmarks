@@ -3,12 +3,13 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Success() {
+export default function Success({ currentStep, setCurrentStep }) {
     const history = useHistory();
     const classes = useStyles();
 
     //handle back button
-    const handleSubmit = () => {
+    const toLanding = () => {
+        setCurrentStep(1);
         history.push('/');
     };
 
@@ -26,7 +27,7 @@ export default function Success() {
             <Button
                 variant="contained"
                 className={classes.button}
-                onClick={handleSubmit}
+                onClick={() => toLanding()}
             >
                 Return to Home page
             </Button>

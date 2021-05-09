@@ -21,6 +21,8 @@ import Checkmark from '../../Checkmark';
 export default function IndividualForm({
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     navigation,
     setDirty,
     inputValidationValue,
@@ -33,6 +35,11 @@ export default function IndividualForm({
             ...info,
             individualOrOrganization: e.target.value,
         });
+    };
+
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
     };
 
     setDirty();
@@ -299,10 +306,7 @@ export default function IndividualForm({
             <div className={classes.nextButtonContainer}>
                 <Button
                     className={classes.nextButton}
-                    onClick={(event) => {
-                        navigation.next();
-                    }}
-                    // onClick={() => navigation.next()}
+                    onClick={() => nextStep()}
                     // disabled={true}
                 >
                     Next Step

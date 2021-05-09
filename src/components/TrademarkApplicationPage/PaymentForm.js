@@ -19,6 +19,8 @@ export default function PaymentForm({
     navigation,
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     inputValidationValue,
     setPristine,
 }) {
@@ -47,14 +49,6 @@ export default function PaymentForm({
                 : info.userCountry,
         });
     };
-    ///////////////////////testing send email function////////////////////////
-    // const submitApplication = async () => {
-    //     try {
-    //         await createEmail(info);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
 
     const submitApplication = async () => {
         setSubmitting(true);
@@ -83,6 +77,16 @@ export default function PaymentForm({
         }
 
         setSubmitting(false);
+    };
+
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+        submitApplication();
     };
 
     return (
@@ -281,7 +285,7 @@ export default function PaymentForm({
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -289,9 +293,7 @@ export default function PaymentForm({
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => {
-                        submitApplication(true);
-                    }}
+                    onClick={() => nextStep()}
                 >
                     Confirm Payment
                 </Button>

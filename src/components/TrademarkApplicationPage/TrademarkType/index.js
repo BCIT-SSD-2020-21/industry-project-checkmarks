@@ -9,7 +9,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkmark from '../../Checkmark';
 
-const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
+const TrademarkForm = ({
+    navigation,
+    info,
+    currentStep,
+    setCurrentStep,
+    setInfo,
+    inputValidationValue,
+}) => {
     const classes = useStyles();
     //selection of all the other trademark type
     const otherTypesSelection = [
@@ -24,6 +31,15 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
         'Scent',
         'Texture',
     ];
+
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
 
     return (
         <Card className={classes.outerCard}>
@@ -116,7 +132,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -124,7 +140,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => nextStep()}
                 >
                     Continue
                 </Button>

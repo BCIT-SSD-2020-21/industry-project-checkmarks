@@ -4,20 +4,24 @@ import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { createEmail } from '../../network';
 
-export default function PaymentForm({ navigation, info, setInfo }) {
+export default function PaymentForm({
+    navigation,
+    info,
+    setInfo,
+    currentStep,
+    setCurrentStep,
+}) {
     const classes = useStyles();
 
-    const handleSubmit = async (event) => {
-        try {
-            await createEmail(info);
-        } catch (error) {
-            console.log(error);
-        }
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
     };
-
-    // console.log('info: ', info);
-    // console.log('info: ', info.classesSelected);
-    // console.log('info: ', info.classesSelected.length);
+    const nextStep = () => {
+        setInfo({ ...info, infoConfirmed: true });
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
 
     return (
         <Card className={classes.card}>
@@ -221,7 +225,7 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -229,11 +233,7 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => {
-                        navigation.next();
-                        setInfo({ ...info, infoConfirmed: true });
-                        // handleSubmit();
-                    }}
+                    onClick={() => nextStep()}
                 >
                     Confirm
                 </Button>

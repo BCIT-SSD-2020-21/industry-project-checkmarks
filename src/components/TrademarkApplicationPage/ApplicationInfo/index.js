@@ -7,6 +7,8 @@ export default function ApplicationInfo({
     navigation,
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     setDirty,
     inputValidationValue,
 }) {
@@ -30,6 +32,8 @@ export default function ApplicationInfo({
                 <ApplicationForm
                     info={info}
                     setInfo={setInfo}
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
                     navigation={navigation}
                     setDirty={setDirty}
                     inputValidationValue={inputValidationValue}

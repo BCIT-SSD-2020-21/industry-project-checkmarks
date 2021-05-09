@@ -34,12 +34,15 @@ export default function GoodsAndServices({
     navigation,
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     inputValidationValue,
 }) {
     const classes = useStyles();
 
     // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
+
     const [searchError, setSearchError] = useState('');
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
@@ -53,9 +56,6 @@ export default function GoodsAndServices({
         setSelectedClasses(info.classesSelected);
     }, []);
 
-    // DATA Active/Displayed
-    const [termTableData, setTermTableData] = useState([]); // used to render on Table
-
     // SELECTION HANDLING
     const [termBeingToggledNumber, setTermBeingToggledNumber] = useState(null);
     useEffect(() => {
@@ -68,13 +68,60 @@ export default function GoodsAndServices({
     const [totalAmount, setTotalAmount] = useState(0);
 
     // GET TERMS AFTER TEXT INPUT
+    const [termSearchResults, setTermSearchResults] = useState([]);
     useEffect(() => {
         if (searchTerm.length > 2) {
             (async () => {
-                await getSearchTerms(searchTerm);
+                const result = await searchTerms(searchTerm);
+                console.log('result: ', result);
+                setTermSearchResults(result.terms);
             })();
         }
     }, [searchTerm]);
+
+    console.log('termSearchResults: ', termSearchResults);
+    // console.log('searchTerm: ', searchTerm);
+    // GET TERM DATA (on Search)
+    const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
+    useEffect(() => {
+        renderTerms();
+    }, [termSearchResults, selectedTerms]);
+    const renderTerms = () => {
+        const termData = []; // formatted to fit table
+        termSearchResults.forEach((resultItem) => {
+            let termSelected = false;
+            info.termsSelected.forEach((term) => {
+                if (term.id === resultItem.id) {
+                    termSelected = true;
+                }
+            });
+            let termTableDataFormat = {
+                ...resultItem,
+                selected: termSelected,
+                selectionCheckbox: (
+                    <TermSelector
+                        number={resultItem.id}
+                        selected={termSelected}
+                        handler={setTermBeingToggledNumber}
+                    />
+                ),
+                id: resultItem.id,
+                termName: resultItem.termName,
+                termClass: resultItem.termClass,
+                classShortName: resultItem.classShortName,
+            };
+            termData.push(termTableDataFormat);
+        });
+        setTermTableData(termData);
+    };
+    const removeTerm = (term) => {
+        // const newSelectedTerms = selectedTerms;
+        let newSelectedTerms = selectedTerms.filter(
+            (item) => item.id !== term.id
+        );
+        console.log(newSelectedTerms);
+        setSelectedTerms(newSelectedTerms);
+    };
 
     // COSMETIC statevar (indicator)
     const { current: instance } = useRef({});
@@ -101,11 +148,9 @@ export default function GoodsAndServices({
 
     // Functions
     const toggleTermSelectionStatus = (termNumber) => {
-        console.log('toggleTermSelectionStatus');
         let termIndex = termTableData.findIndex(
             (term) => term.id == termNumber
-            // console.log(termNumber == term.id)
-        ); // term.id === termNumber);
+        );
         if (termIndex === -1) {
             console.log('Term not found'); // handle error
         } else {
@@ -141,78 +186,7 @@ export default function GoodsAndServices({
             }
         }
     };
-    // console.log('searchTerm: ', searchTerm);
-    // GET TERM DATA (on Search)
-    const getSearchTerms = async () => {
-        // GET request to API - simulated with fake data: sampleTermSearch
-        const termData = []; // formatted to fit table
-        const resultTerms = await searchTerms(searchTerm);
-        console.log('resultTerms: ', resultTerms);
-        resultTerms.terms.forEach((resultItem) => {
-            let termSelected = false;
-            info.termsSelected.forEach((term) => {
-                if (term.id === resultItem.id) {
-                    termSelected = true;
-                }
-            });
-            let termTableDataFormat = {
-                ...resultItem,
-                selected: termSelected,
-                selectionCheckbox: (
-                    <TermSelector
-                        number={resultItem.id}
-                        selected={termSelected}
-                        handler={setTermBeingToggledNumber}
-                    />
-                ),
-                id: resultItem.id,
-                termName: resultItem.termName,
-                termClass: resultItem.termClass,
-                classShortName: resultItem.classShortName,
-            };
-            termData.push(termTableDataFormat);
-        });
-        setTermTableData(termData);
 
-        // sampleTermSearch.result.forEach((result) => {
-        // format to fit table
-        // result.resultsReturned.map((item) => {
-        // determine if Term is Selected (if term exists in info.termsSelected)
-        //         let termSelected = false;
-        //         info.termsSelected.forEach((term) => {
-        //             if (term.termNumber === item.termNumber) {
-        //                 termSelected = true;
-        //             }
-        //         });
-        //         let termTableDataFormat = {
-        //             ...item,
-        //             selected: termSelected,
-        //             selectionCheckbox: (
-        //                 <TermSelector
-        //                     number={item.termNumber}
-        //                     selected={termSelected}
-        //                     handler={setTermBeingToggledNumber}
-        //                 />
-        //             ),
-        //             id: item.termNumber,
-        //             termName: item.termName,
-        //             termClass: item.niceClasses[0].number,
-        //             classShortName: item.niceClasses[0].descriptions[0].name,
-        //         };
-        //         termData.push(termTableDataFormat);
-        //     });
-        //     setTermTableData(termData);
-        // });
-    };
-    console.log('termTableData: ', termTableData);
-
-    const removeTerm = (term) => {
-        // const newSelectedTerms = selectedTerms;
-        let newSelectedTerms = selectedTerms.filter(
-            (item) => item.id !== term.id
-        );
-        setSelectedTerms(newSelectedTerms);
-    };
     // filter selectedTerms, get list of selected classes (no duplicates)
     useEffect(() => {
         const classesSelected = [];
@@ -221,13 +195,11 @@ export default function GoodsAndServices({
                 // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
-                    console.log('niceClass: ', term.termClass, niceClass);
                     if (niceClass.id === term.termClass) {
                         termClassExists = true;
                     }
                 });
                 if (!termClassExists) {
-                    // classesSelected.push(term.niceClasses[0]);
                     classesSelected.push({
                         id: term.termClass,
                         description: term.classShortName,
@@ -246,8 +218,6 @@ export default function GoodsAndServices({
             }
         }
     }, [selectedTerms]);
-    console.log('selectedTerms: ', selectedTerms);
-    console.log('classesSelected: ', selectedClasses);
 
     // UPDATE PARENT Statevar 'info'
     useEffect(() => {
@@ -266,7 +236,17 @@ export default function GoodsAndServices({
         }
     }, [totalAmount]);
 
-    console.log('info.termsSelected: ', info.termsSelected);
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
+
+    console.log('selectedClasses: ', selectedClasses);
+    console.log('selectedTerms: ', selectedTerms);
     // console.log('termTableData[0]: ', termTableData[0]);
     // console.log('info.termsSelected: ', info.termsSelected);
     return (
@@ -436,7 +416,7 @@ export default function GoodsAndServices({
                         type="submit"
                         variant="contained"
                         className={classes.backButton}
-                        onClick={() => navigation.previous()}
+                        onClick={() => previousStep()}
                     >
                         Back
                     </Button>
@@ -444,7 +424,7 @@ export default function GoodsAndServices({
                         className={classes.continueButton}
                         type="submit"
                         variant="contained"
-                        onClick={() => navigation.next()}
+                        onClick={() => nextStep()}
                     >
                         Continue
                     </Button>
@@ -470,14 +450,14 @@ export default function GoodsAndServices({
                     <Button
                         color="secondary"
                         variant="contained"
-                        // onClick={this.handleClose}
+                        onClick={() => previousStep()}
                     >
                         Back
                     </Button>
                     <Button
                         color="primary"
                         variant="contained"
-                        // onClick={this.continue}
+                        onClick={() => nextStep()}
                         autoFocus
                     >
                         Continue
