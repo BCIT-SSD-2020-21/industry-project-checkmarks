@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FileUpload = ({ setOldState, setHandle }) => {
+const FileUpload = ({ setOldState, setHandle, setInfo, info }) => {
     const classes = useStyles();
 
     const [fileName, setFileName] = useState('');
@@ -10,13 +10,17 @@ const FileUpload = ({ setOldState, setHandle }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const fileInput = useRef(null);
 
-    useEffect(() => {
-        if (fileName) {
-            setUploadedFileName(fileName);
-        } else {
-            setFileName(fileName);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (info.uploadedFileName) {
+    //         setUploadedFileName(info.uploadedFileName);
+    //     } else {
+    //         setInfo({
+    //             ...info,
+    //             LogoFileName: info.uploadedFileName,
+    //         });
+    //         // setFileName(fileName);
+    //     }
+    // }, []);
 
     // Checks the file size and sets the image url preview.
     const handleUploadImage = (event) => {
@@ -64,7 +68,11 @@ const FileUpload = ({ setOldState, setHandle }) => {
                 })
                 .then((data) => {
                     setHandle('fileName', data.filename);
-                    setFileName(data.filename);
+                    // setFileName(data.filename);
+                    setInfo({
+                        ...info,
+                        LogoFileName: data.filename,
+                    });
                 });
         }
     };
@@ -88,7 +96,9 @@ const FileUpload = ({ setOldState, setHandle }) => {
                         style={{ display: 'none' }}
                     />
                 </Button>
-                {fileName && <p>Currently using {fileName}</p>}
+                {info.LogoFileName && (
+                    <p>Currently using {info.LogoFileName}</p>
+                )}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
             </form>
         </div>
