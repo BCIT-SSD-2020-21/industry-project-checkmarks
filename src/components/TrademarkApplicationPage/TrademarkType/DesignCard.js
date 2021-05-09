@@ -6,24 +6,16 @@ import FileUpload from '../../FileUpload';
 
 const LogoForm = ({ info, setInfo }) => {
     const classes = useStyles();
-
-    const [oldState, setOldState] = useState({
-        optionList: [],
-        file: null,
-    });
-
     const [handle, setHandle] = useState('');
 
     return (
         <div className={classes.logoCard} fullwidth>
-            {console.log(handle)}
             <div>
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
                 <h5 style={{ color: '#DF3A48' }}>Preview:</h5>
-                <img className={classes.previewImage} src={oldState.file} />
+                <img className={classes.previewImage} src={info.file} />
                 {/* <Button className={classes.browseButton}>Choose File</Button> */}
                 <FileUpload
-                    setOldState={setOldState}
                     setHandle={setHandle}
                     info={info}
                     setInfo={setInfo}

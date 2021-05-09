@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FileUpload = ({ setOldState, setHandle, setInfo, info }) => {
+const FileUpload = ({ setHandle, setInfo, info }) => {
     const classes = useStyles();
 
-    const [fileName, setFileName] = useState('');
-    const [uploadedFileName, setUploadedFileName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const fileInput = useRef(null);
 
@@ -26,7 +24,6 @@ const FileUpload = ({ setOldState, setHandle, setInfo, info }) => {
     const handleUploadImage = (event) => {
         if (checkFileSize(event)) {
             setErrorMessage('');
-            setOldState({ file: URL.createObjectURL(event.target.files[0]) });
             return true;
         }
         return false;
@@ -68,10 +65,10 @@ const FileUpload = ({ setOldState, setHandle, setInfo, info }) => {
                 })
                 .then((data) => {
                     setHandle('fileName', data.filename);
-                    // setFileName(data.filename);
                     setInfo({
                         ...info,
                         LogoFileName: data.filename,
+                        file: URL.createObjectURL(event.target.files[0]),
                     });
                 });
         }

@@ -39,7 +39,7 @@ const TrademarkApplication = () => {
         isOther: false,
         otherTypes: [],
         LogoFileName: '',
-        file: null,
+        file: '',
 
         characterText: '',
         fileName: '',
