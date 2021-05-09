@@ -51,24 +51,24 @@ const FileUpload = ({ setOldState }) => {
         if (handleUploadImage(event)) {
             console.log('save image');
 
-            // const formData = new FormData();
-            // formData.append('FileToUpload', fileInput.current.files[0]);
-            // console.log(formData);
-            // const options = {
-            //     method: 'POST',
-            //     body: formData,
-            // };
-            // const response = await fetch(
-            //     'https://localhost:44397/api/files',
-            //     options
-            // )
-            //     .then((res) => {
-            //         return res.json();
-            //     })
-            //     .then((data) => {
-            //         // this.props.handler('fileName', data.filename);
-            //         setFileName(data.fileName);
-            //     });
+            const formData = new FormData();
+            formData.append('FileToUpload', fileInput.current.files[0]);
+            console.log(formData);
+            const options = {
+                method: 'POST',
+                body: formData,
+            };
+            const response = await fetch(
+                'https://localhost:44397/api/files',
+                options
+            )
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    // this.props.handler('fileName', data.filename);
+                    setFileName(data.fileName);
+                });
         }
     };
     return (
