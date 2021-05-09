@@ -20,7 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchResults from './LandingPage/SearchResults';
 import { searchTrademarks } from '../services/checkmarks';
 
-export default function SearchField({ loading, searchTrademark }) {
+export default function SearchField({ loading, setInputTo }) {
     const classes = searchBoxStyles();
     const history = useHistory();
 
@@ -32,7 +32,7 @@ export default function SearchField({ loading, searchTrademark }) {
             <Input
                 className={classes.input}
                 // onClick={(e) => console.log(e.target)}
-                onChange={(e) => searchTrademark(e.target.value)}
+                onChange={(e) => setInputTo(e.target.value)}
                 id="searchBox"
                 placeholder={'Check if your Trademark exists...'}
                 style={{ position: 'relative' }}
