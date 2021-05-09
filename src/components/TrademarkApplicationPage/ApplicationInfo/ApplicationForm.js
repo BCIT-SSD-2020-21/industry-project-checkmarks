@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box,
@@ -17,6 +17,7 @@ import { checkmarksTheme } from '../../../styles/Themes';
 import { createClioContact } from '../../../network';
 import { Info } from '@material-ui/icons';
 import Checkmark from '../../Checkmark';
+import IdUpload from '../../IdUpload';
 
 export default function IndividualForm({
     info,
@@ -26,6 +27,7 @@ export default function IndividualForm({
     inputValidationValue,
 }) {
     const classes = useStyles();
+    const [handle, setHandle] = useState('');
 
     //handle seclection of individual or organization
     const handleSelection = (e) => {
@@ -157,6 +159,13 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
+
+            {/* ============================ */}
+            {/* ======== Upload ID ========= */}
+            {/* ============================ */}
+
+            <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
+
             {/* <div className={classes.field}>
                 <Button
                     onClick={() =>
@@ -367,20 +376,7 @@ const useStyles = makeStyles((theme) => ({
         //     margin: '2%',
         // },
     },
-    uploadButtonContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '3%',
-    },
-    uploadButton: {
-        backgroundColor: '#df3a48',
-        color: '#FFF',
-        width: '85%',
-        height: '40px',
-        borderRadius: '10px',
-        fontSize: '12px',
-    },
+
     nextButtonContainer: {
         display: 'flex',
         alignItems: 'center',
