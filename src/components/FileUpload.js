@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const FileUpload = () => {
+const FileUpload = ({ setOldState }) => {
     const classes = useStyles();
 
     const [fileName, setFileName] = useState('');
@@ -22,9 +22,7 @@ const FileUpload = () => {
     const handleUploadImage = (event) => {
         if (checkFileSize(event)) {
             setErrorMessage(errorMessage);
-            // this.props.oldState.file = URL.createObjectURL(
-            //     event.target.files[0]
-            // );
+            setOldState({ file: URL.createObjectURL(event.target.files[0]) });
             return true;
         }
         return false;
@@ -51,23 +49,26 @@ const FileUpload = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (handleUploadImage(event)) {
-            const formData = new FormData();
-            formData.append('FileToUpload', fileInput.current.files[0]);
-            const options = {
-                method: 'POST',
-                body: formData,
-            };
-            const response = await fetch(
-                'https://localhost:5001/api/files',
-                options
-            )
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    // this.props.handler('fileName', data.filename);
-                    setFileName(data.fileName);
-                });
+            console.log('save image');
+
+            // const formData = new FormData();
+            // formData.append('FileToUpload', fileInput.current.files[0]);
+            // console.log(formData);
+            // const options = {
+            //     method: 'POST',
+            //     body: formData,
+            // };
+            // const response = await fetch(
+            //     'https://localhost:44397/api/files',
+            //     options
+            // )
+            //     .then((res) => {
+            //         return res.json();
+            //     })
+            //     .then((data) => {
+            //         // this.props.handler('fileName', data.filename);
+            //         setFileName(data.fileName);
+            //     });
         }
     };
     return (
