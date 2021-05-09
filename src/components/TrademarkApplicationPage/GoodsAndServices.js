@@ -26,6 +26,7 @@ import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
+import { searchTerms, getAllClasses } from '../../services/checkmarks';
 // import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
@@ -66,6 +67,15 @@ export default function GoodsAndServices({
 
     const [totalAmount, setTotalAmount] = useState(0);
 
+    // GET TERMS AFTER TEXT INPUT
+    useEffect(() => {
+        if (searchTerm.length > 2) {
+            (async () => {
+                await getSearchTerms(searchTerm);
+            })();
+        }
+    }, [searchTerm]);
+
     // COSMETIC statevar (indicator)
     const { current: instance } = useRef({});
     const [loading, setLoading] = useState(false);
@@ -91,9 +101,11 @@ export default function GoodsAndServices({
 
     // Functions
     const toggleTermSelectionStatus = (termNumber) => {
+        console.log('toggleTermSelectionStatus');
         let termIndex = termTableData.findIndex(
-            (term) => term.termNumber === termNumber
-        );
+            (term) => term.id == termNumber
+            // console.log(termNumber == term.id)
+        ); // term.id === termNumber);
         if (termIndex === -1) {
             console.log('Term not found'); // handle error
         } else {
@@ -129,44 +141,75 @@ export default function GoodsAndServices({
             }
         }
     };
+    // console.log('searchTerm: ', searchTerm);
     // GET TERM DATA (on Search)
     const getSearchTerms = async () => {
         // GET request to API - simulated with fake data: sampleTermSearch
         const termData = []; // formatted to fit table
-        sampleTermSearch.result.forEach((result) => {
-            // format to fit table
-            result.resultsReturned.map((item) => {
-                // determine if Term is Selected (if term exists in info.termsSelected)
-                let termSelected = false;
-                info.termsSelected.forEach((term) => {
-                    if (term.termNumber === item.termNumber) {
-                        termSelected = true;
-                    }
-                });
-                let termTableDataFormat = {
-                    ...item,
-                    selected: termSelected,
-                    selectionCheckbox: (
-                        <TermSelector
-                            number={item.termNumber}
-                            selected={termSelected}
-                            handler={setTermBeingToggledNumber}
-                        />
-                    ),
-                    id: item.termNumber,
-                    termName: item.termName,
-                    termClass: item.niceClasses[0].number,
-                    classShortName: item.niceClasses[0].descriptions[0].name,
-                };
-                termData.push(termTableDataFormat);
+        const resultTerms = await searchTerms(searchTerm);
+        console.log('resultTerms: ', resultTerms);
+        resultTerms.terms.forEach((resultItem) => {
+            let termSelected = false;
+            info.termsSelected.forEach((term) => {
+                if (term.id === resultItem.id) {
+                    termSelected = true;
+                }
             });
-            setTermTableData(termData);
+            let termTableDataFormat = {
+                ...resultItem,
+                selected: termSelected,
+                selectionCheckbox: (
+                    <TermSelector
+                        number={resultItem.id}
+                        selected={termSelected}
+                        handler={setTermBeingToggledNumber}
+                    />
+                ),
+                id: resultItem.id,
+                termName: resultItem.termName,
+                termClass: resultItem.termClass,
+                classShortName: resultItem.classShortName,
+            };
+            termData.push(termTableDataFormat);
         });
+        setTermTableData(termData);
+
+        // sampleTermSearch.result.forEach((result) => {
+        // format to fit table
+        // result.resultsReturned.map((item) => {
+        // determine if Term is Selected (if term exists in info.termsSelected)
+        //         let termSelected = false;
+        //         info.termsSelected.forEach((term) => {
+        //             if (term.termNumber === item.termNumber) {
+        //                 termSelected = true;
+        //             }
+        //         });
+        //         let termTableDataFormat = {
+        //             ...item,
+        //             selected: termSelected,
+        //             selectionCheckbox: (
+        //                 <TermSelector
+        //                     number={item.termNumber}
+        //                     selected={termSelected}
+        //                     handler={setTermBeingToggledNumber}
+        //                 />
+        //             ),
+        //             id: item.termNumber,
+        //             termName: item.termName,
+        //             termClass: item.niceClasses[0].number,
+        //             classShortName: item.niceClasses[0].descriptions[0].name,
+        //         };
+        //         termData.push(termTableDataFormat);
+        //     });
+        //     setTermTableData(termData);
+        // });
     };
+    console.log('termTableData: ', termTableData);
+
     const removeTerm = (term) => {
         // const newSelectedTerms = selectedTerms;
         let newSelectedTerms = selectedTerms.filter(
-            (item) => item.termNumber !== term.termNumber
+            (item) => item.id !== term.id
         );
         setSelectedTerms(newSelectedTerms);
     };
@@ -178,17 +221,17 @@ export default function GoodsAndServices({
                 // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
-                    // console.log(
-                    //     'niceClass: ',
-                    //     term.niceClass,
-                    //     niceClass.number
-                    // );
-                    if (niceClass.number === term.termClass) {
+                    console.log('niceClass: ', term.termClass, niceClass);
+                    if (niceClass.id === term.termClass) {
                         termClassExists = true;
                     }
                 });
                 if (!termClassExists) {
-                    classesSelected.push(term.niceClasses[0]);
+                    // classesSelected.push(term.niceClasses[0]);
+                    classesSelected.push({
+                        id: term.termClass,
+                        description: term.classShortName,
+                    });
                 }
                 termClassExists = false;
             });
@@ -203,6 +246,8 @@ export default function GoodsAndServices({
             }
         }
     }, [selectedTerms]);
+    console.log('selectedTerms: ', selectedTerms);
+    console.log('classesSelected: ', selectedClasses);
 
     // UPDATE PARENT Statevar 'info'
     useEffect(() => {
@@ -221,6 +266,7 @@ export default function GoodsAndServices({
         }
     }, [totalAmount]);
 
+    console.log('info.termsSelected: ', info.termsSelected);
     // console.log('termTableData[0]: ', termTableData[0]);
     // console.log('info.termsSelected: ', info.termsSelected);
     return (
@@ -250,31 +296,7 @@ export default function GoodsAndServices({
 
                 {/* ///////////////////////////search trademark terms/////////////////////////// */}
                 <h3>Search for your Trademark Terms</h3>
-                <SearchField
-                    loading={loading}
-                    searchTrademark={getSearchTerms}
-                />
-                {/* <div className={classes.searchTermsContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        placeholder="Enter a general term for your good/service "
-                        label="Search"
-                        fullWidth
-                        variant="outlined"
-                        error={searchError != ''}
-                        helperText={searchError}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        // onChange={handleTextFieldChange}
-                    />
-                    <Button
-                        variant="contained"
-                        className={classes.searchTermsButton}
-                        onClick={getSearchTerms}
-                    >
-                        Search
-                    </Button>
-                </div> */}
+                <SearchField loading={loading} setInputTo={setSearchTerm} />
 
                 <Paper
                     className={classes.results}
@@ -333,10 +355,9 @@ export default function GoodsAndServices({
                                     <div key={index}>
                                         <h4>
                                             {'Class: ' +
-                                                niceClass?.name +
+                                                niceClass?.id +
                                                 ' - ' +
-                                                niceClass?.descriptions[0]
-                                                    .shortname}
+                                                niceClass?.description}
                                         </h4>
                                         <ListItem
                                             className={classes.classTermList}
@@ -347,7 +368,7 @@ export default function GoodsAndServices({
                                                 .map((term, index) => {
                                                     if (
                                                         term.termClass ===
-                                                        niceClass.number
+                                                        niceClass.id
                                                     ) {
                                                         return (
                                                             <div
@@ -365,10 +386,11 @@ export default function GoodsAndServices({
                                                                     //     classes.selectedTermListItem
                                                                     // }
                                                                     primary={
-                                                                        'Term:'
+                                                                        term.termName
                                                                     }
                                                                     secondary={
-                                                                        term.termName
+                                                                        'id: ' +
+                                                                        term.id
                                                                     }
                                                                 />
                                                                 <IconButton
