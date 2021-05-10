@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Checkmark from './Checkmark';
 
 const IdUpload = ({ setHandle, setInfo, info }) => {
     const classes = useStyles();
@@ -55,7 +56,6 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     return res.json();
                 })
                 .then((data) => {
-                    console.log('data>>>>>' + data);
                     setHandle('fileName', data.filename);
                     setInfo({
                         ...info,
@@ -68,33 +68,34 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
 
     return (
         <div className={classes.field}>
-            <form>
-                <Button
-                    // onClick={() =>
-                    //     setInfo({
-                    //         ...info,
-                    //         idDocumentUploaded: true,
-                    //     })
-                    // }
-                    variant="contained"
-                    component="label"
-                    className={classes.uploadButton}
-                    onChange={handleIdSubmit}
-                >
-                    Upload ID Document
-                    <input
-                        encType="multipart/form-data"
-                        accept="image/* "
-                        type="file"
-                        ref={fileInput}
-                        style={{ display: 'none' }}
-                    />
-                </Button>
-                {/* <Checkmark value={inputValidationValue.idDocumentUploaded} /> */}
-                {info.idName && <p>Currently using {info.idName}</p>}
-                {console.log(info)}
-                {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-            </form>
+            {info.idName && (
+                <p>
+                    <strong>Image file name: </strong> {info.idName}
+                </p>
+            )}
+            <Button
+                // onClick={() =>
+                //     setInfo({
+                //         ...info,
+                //         idDocumentUploaded: true,
+                //     })
+                // }
+                variant="contained"
+                component="label"
+                className={classes.uploadButton}
+                onChange={handleIdSubmit}
+            >
+                Upload ID Document
+                <input
+                    encType="multipart/form-data"
+                    accept="image/* "
+                    type="file"
+                    ref={fileInput}
+                    style={{ display: 'none' }}
+                />
+            </Button>
+            {/* <Checkmark value={inputValidationValue.idDocumentUploaded} /> */}
+            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         </div>
     );
 };
@@ -103,7 +104,7 @@ export default IdUpload;
 const useStyles = makeStyles((theme) => ({
     field: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
