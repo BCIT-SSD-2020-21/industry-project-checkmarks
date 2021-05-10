@@ -17,7 +17,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
             return false;
         }
         if (files.size > size) {
-            err += files.name + ' is too large, please pick a smaller file\n';
+            err += 'File is too large, please pick a smaller file\n';
         }
         if (err !== '') {
             event.target.value = null;
@@ -95,7 +95,9 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                 />
             </Button>
             {/* <Checkmark value={inputValidationValue.idDocumentUploaded} /> */}
-            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+            {errorMessage && (
+                <p className={classes.errorMessage}>{errorMessage}</p>
+            )}
         </div>
     );
 };
@@ -121,5 +123,8 @@ const useStyles = makeStyles((theme) => ({
         height: '40px',
         borderRadius: '10px',
         fontSize: '12px',
+    },
+    errorMessage: {
+        color: '#df3a48',
     },
 }));

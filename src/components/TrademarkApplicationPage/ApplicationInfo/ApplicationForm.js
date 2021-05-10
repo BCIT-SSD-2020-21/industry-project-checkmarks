@@ -159,6 +159,9 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
+            <Alert severity="info" className={classes.alert}>
+                Single image file should be under 2MB
+            </Alert>
 
             {/* ============================ */}
             {/* ======== Upload ID ========= */}
