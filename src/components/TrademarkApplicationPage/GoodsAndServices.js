@@ -32,11 +32,13 @@ import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({
     navigation,
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -247,6 +249,8 @@ export default function GoodsAndServices({
 
     console.log('selectedClasses: ', selectedClasses);
     console.log('selectedTerms: ', selectedTerms);
+    console.log('step: ', step);
+    console.log('prog val:', progressValue);
     // console.log('termTableData[0]: ', termTableData[0]);
     // console.log('info.termsSelected: ', info.termsSelected);
     return (
@@ -323,7 +327,7 @@ export default function GoodsAndServices({
                 </Paper>
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
-                    <Checkmark value={inputValidationValue.amountNotZero} />
+                    <Checkmark value={validationProgress.amountNotZero} />
                     <CardContent>
                         <Typography variant="h6">
                             <b>Selected Terms:</b>
@@ -425,6 +429,7 @@ export default function GoodsAndServices({
                         type="submit"
                         variant="contained"
                         onClick={() => nextStep()}
+                        disabled={progressValue < step.progressValueEnd}
                     >
                         Continue
                     </Button>
@@ -458,6 +463,7 @@ export default function GoodsAndServices({
                         color="primary"
                         variant="contained"
                         onClick={() => nextStep()}
+                        disabled={progressValue < step.progressValueEnd}
                         autoFocus
                     >
                         Continue
