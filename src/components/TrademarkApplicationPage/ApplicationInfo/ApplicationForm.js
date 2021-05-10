@@ -35,36 +35,32 @@ export default function IndividualForm({
         });
     };
 
-    const [nextSectionUnlocked, setNextSectionUnlocked] = useState(false);
-    useEffect(() => {
-        if (
-            // Validation - if all true, unlock next
-            validationProgress.individualOrOrganizationName > 0 &&
-            validationProgress.firstName > 0 &&
-            validationProgress.lastName > 0 &&
-            validationProgress.email > 0 &&
-            validationProgress.agreedTermsOfService > 0
-        ) {
-            setNextSectionUnlocked(true);
-        } else {
-            setNextSectionUnlocked(false);
-        }
-    }, [nextSectionUnlocked]);
+    // const [nextSectionUnlocked, setNextSectionUnlocked] = useState(false);
+    // useEffect(() => {
+    //     if (
+    //         // Validation - if all true, unlock next
+    //         validationProgress.individualOrOrganizationName > 0 &&
+    //         validationProgress.firstName > 0 &&
+    //         validationProgress.lastName > 0 &&
+    //         validationProgress.email > 0 &&
+    //         validationProgress.agreedTermsOfService > 0
+    //     ) {
+    //         setNextSectionUnlocked(true);
+    //     } else {
+    //         setNextSectionUnlocked(false);
+    //     }
+    // }, [nextSectionUnlocked]);
 
-    console.log('inputValidationValue: ', validationProgress);
+    // console.log('inputValidationValue: ', validationProgress);
 
     const nextStep = () => {
-        if (nextSectionUnlocked) {
-            setCurrentStep(currentStep + 1); // assign currentStep to next step
-            navigation.next();
-        }
+        // if (nextSectionUnlocked) {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+        // }
     };
 
     setDirty();
-
-    console.log(nextSectionUnlocked);
-    console.log('step1: ', step);
-    console.log('progressValue: ', progressValue);
 
     return (
         <div>
