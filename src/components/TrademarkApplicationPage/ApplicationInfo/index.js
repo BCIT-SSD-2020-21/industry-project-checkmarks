@@ -5,12 +5,14 @@ import ApplicationForm from './ApplicationForm';
 
 export default function ApplicationInfo({
     navigation,
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
     setDirty,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -30,13 +32,15 @@ export default function ApplicationInfo({
             </Typography>
             <div className={classes.formContainer}>
                 <ApplicationForm
+                    step={step}
                     info={info}
                     setInfo={setInfo}
                     currentStep={currentStep}
                     setCurrentStep={setCurrentStep}
                     navigation={navigation}
                     setDirty={setDirty}
-                    inputValidationValue={inputValidationValue}
+                    progressValue={progressValue}
+                    validationProgress={validationProgress}
                 />
             </div>
         </Card>

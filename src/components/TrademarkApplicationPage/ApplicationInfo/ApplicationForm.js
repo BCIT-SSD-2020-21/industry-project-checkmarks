@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box,
@@ -11,21 +11,19 @@ import {
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { checkmarksTheme } from '../../../styles/Themes';
-import { createClioContact } from '../../../network';
-import { Info } from '@material-ui/icons';
 import Checkmark from '../../Checkmark';
 
 export default function IndividualForm({
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
     navigation,
     setDirty,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -37,12 +35,36 @@ export default function IndividualForm({
         });
     };
 
+    const [nextSectionUnlocked, setNextSectionUnlocked] = useState(false);
+    useEffect(() => {
+        if (
+            // Validation - if all true, unlock next
+            validationProgress.individualOrOrganizationName > 0 &&
+            validationProgress.firstName > 0 &&
+            validationProgress.lastName > 0 &&
+            validationProgress.email > 0 &&
+            validationProgress.agreedTermsOfService > 0
+        ) {
+            setNextSectionUnlocked(true);
+        } else {
+            setNextSectionUnlocked(false);
+        }
+    }, [nextSectionUnlocked]);
+
+    console.log('inputValidationValue: ', validationProgress);
+
     const nextStep = () => {
-        setCurrentStep(currentStep + 1); // assign currentStep to next step
-        navigation.next();
+        if (nextSectionUnlocked) {
+            setCurrentStep(currentStep + 1); // assign currentStep to next step
+            navigation.next();
+        }
     };
 
     setDirty();
+
+    console.log(nextSectionUnlocked);
+    console.log('step1: ', step);
+    console.log('progressValue: ', progressValue);
 
     return (
         <div>
@@ -87,9 +109,7 @@ export default function IndividualForm({
                         }
                     />
                     <Checkmark
-                        value={
-                            inputValidationValue.individualOrOrganizationName
-                        }
+                        value={validationProgress.individualOrOrganizationName}
                     />
                     {/* {inputValidationValue?.individualOrOrganizationName ? (
                         <CheckCircleOutlinedIcon
@@ -117,7 +137,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.firstName} />
+                <Checkmark value={validationProgress.firstName} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -135,7 +155,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.lastName} />
+                <Checkmark value={validationProgress.lastName} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -153,7 +173,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.email} />
+                <Checkmark value={validationProgress.email} />
             </FormControl>
             <div className={classes.field}>
                 <Button
@@ -169,7 +189,7 @@ export default function IndividualForm({
                 >
                     Upload ID Document
                 </Button>
-                <Checkmark value={inputValidationValue.idDocumentUploaded} />
+                <Checkmark value={validationProgress.idDocumentUploaded} />
             </div>
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.field}>
@@ -188,7 +208,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.userStreetAddress} />
+                <Checkmark value={validationProgress.userStreetAddress} />
             </FormControl>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
@@ -208,7 +228,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userCity} />
+                    <Checkmark value={validationProgress.userCity} />
                 </FormControl>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
@@ -227,7 +247,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userProvince} />
+                    <Checkmark value={validationProgress.userProvince} />
                 </FormControl>
             </div>
             <div className={classes.flexContainer}>
@@ -248,7 +268,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userPostalCode} />
+                    <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
@@ -267,7 +287,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userCountry} />
+                    <Checkmark value={validationProgress.userCountry} />
                 </FormControl>
             </div>
             <Alert severity="info" className={classes.alert}>
@@ -299,7 +319,7 @@ export default function IndividualForm({
                         label="I understand."
                     />
                     <Checkmark
-                        value={inputValidationValue.agreedTermsOfService}
+                        value={validationProgress.agreedTermsOfService}
                     />
                 </FormControl>
             </Box>
@@ -307,7 +327,7 @@ export default function IndividualForm({
                 <Button
                     className={classes.nextButton}
                     onClick={() => nextStep()}
-                    // disabled={true}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Next Step
                 </Button>
