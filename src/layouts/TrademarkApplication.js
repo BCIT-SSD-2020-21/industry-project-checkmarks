@@ -158,9 +158,9 @@ const TrademarkApplication = () => {
             id: 'Payment',
             num: 6,
             progressValueStart: 2600,
-            progressValueEnd: 3100,
+            progressValueEnd: 3000,
         },
-        { id: 'Success', num: 7, progressValueStart: 3100 },
+        { id: 'Success', num: 7, progressValueStart: 3000 },
     ];
 
     //use useStep from hook-helper to navigate the steps

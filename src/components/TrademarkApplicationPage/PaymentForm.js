@@ -17,12 +17,13 @@ import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
     navigation,
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
-    inputValidationValue,
-    setPristine,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -64,7 +65,6 @@ export default function PaymentForm({
                         ...info,
                         paymentConfirmaed: true,
                     });
-                    setPristine();
                     navigation.next();
                 } else {
                     console.log('createEmail() unsuccsessful');
@@ -167,7 +167,7 @@ export default function PaymentForm({
                     }
                 />
             </div>
-            <Checkmark value={inputValidationValue.paymentCardInfo} />
+            <Checkmark value={validationProgress.paymentCardInfo} />
 
             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
             <Typography className={classes.text} component="p">
@@ -274,7 +274,7 @@ export default function PaymentForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.billingAddress} />
+                <Checkmark value={validationProgress.billingAddress} />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
@@ -294,6 +294,7 @@ export default function PaymentForm({
                     type="submit"
                     variant="contained"
                     onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Confirm Payment
                 </Button>
