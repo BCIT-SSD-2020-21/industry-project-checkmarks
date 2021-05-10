@@ -16,11 +16,13 @@ import Checkmark from '../Checkmark';
 
 const CountryCard = ({
     navigation,
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) => {
     const classes = useStyles();
 
@@ -118,9 +120,7 @@ const CountryCard = ({
                         />
                     </div>
                 )}
-                <Checkmark
-                    value={inputValidationValue.internationalFilingInfo}
-                />
+                <Checkmark value={validationProgress.internationalFilingInfo} />
                 <Alert severity="info" className={classes.alert}>
                     Helper Section with brief legal information, assisting the
                     client through the process
@@ -140,6 +140,7 @@ const CountryCard = ({
                     type="submit"
                     variant="contained"
                     onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Continue
                 </Button>
