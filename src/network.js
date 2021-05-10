@@ -103,6 +103,7 @@ export const createEmail = async (info, matterId) => {
                 type: info.individualOrOrganization,
                 organizationName: info.organizationName,
                 amountPaid: (info.amount / 100) * 100,
+                idFileName: info.idName,
 
                 contactInfo: {
                     emailAddress: info.email,

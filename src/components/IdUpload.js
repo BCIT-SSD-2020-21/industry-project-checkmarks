@@ -55,10 +55,11 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     return res.json();
                 })
                 .then((data) => {
+                    console.log('data>>>>>' + data);
                     setHandle('fileName', data.filename);
                     setInfo({
                         ...info,
-                        fileName: data.filename,
+                        idName: data.filename,
                         file: URL.createObjectURL(event.target.files[0]),
                     });
                 });
@@ -76,6 +77,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     //     })
                     // }
                     variant="contained"
+                    component="label"
                     className={classes.uploadButton}
                     onChange={handleIdSubmit}
                 >
@@ -89,7 +91,8 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     />
                 </Button>
                 {/* <Checkmark value={inputValidationValue.idDocumentUploaded} /> */}
-                {/* {info.fileName && <p>Currently using {info.fileName}</p>} */}
+                {info.idName && <p>Currently using {info.idName}</p>}
+                {console.log(info)}
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
             </form>
         </div>
