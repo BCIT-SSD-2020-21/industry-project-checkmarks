@@ -27,7 +27,7 @@ export default function IndividualForm({
 }) {
     const classes = useStyles();
 
-    //handle seclection of individual or organization
+    //handle selection of individual or organization
     const handleSelection = (e) => {
         setInfo({
             ...info,
@@ -48,7 +48,7 @@ export default function IndividualForm({
 
     return (
         <div>
-            {/* checkbox for indicidual or organization */}
+            {/* checkbox for individual or organization */}
             <div className={classes.selectionContainer}>
                 <RadioGroup
                     row
@@ -138,6 +138,25 @@ export default function IndividualForm({
                     }
                 />
                 <Checkmark value={inputValidationValue.lastName} />
+            </FormControl>
+            {/* /// Phone /// */}
+            <FormControl fullWidth={true} className={classes.field}>
+                <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    placeholder="Phone"
+                    type="text"
+                    value={info.phone}
+                    autoComplete="on"
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            phone: e.target.value,
+                        })
+                    }
+                />
+                <Checkmark value={inputValidationValue.phone} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
