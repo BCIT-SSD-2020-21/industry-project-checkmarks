@@ -5,13 +5,17 @@ import {
     Button,
     Checkbox,
     FormControl,
-    TextField,
-    RadioGroup,
     FormControlLabel,
+    InputLabel,
+    MenuItem,
+    RadioGroup,
+    Select,
+    TextField,
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { checkmarksTheme } from '../../../styles/Themes';
+import { canadaProvinces, unitedStates } from '../../../utils/FormValidation';
 import Checkmark from '../../Checkmark';
 
 export default function IndividualForm({
@@ -34,24 +38,6 @@ export default function IndividualForm({
             individualOrOrganization: e.target.value,
         });
     };
-
-    // const [nextSectionUnlocked, setNextSectionUnlocked] = useState(false);
-    // useEffect(() => {
-    //     if (
-    //         // Validation - if all true, unlock next
-    //         validationProgress.individualOrOrganizationName > 0 &&
-    //         validationProgress.firstName > 0 &&
-    //         validationProgress.lastName > 0 &&
-    //         validationProgress.email > 0 &&
-    //         validationProgress.agreedTermsOfService > 0
-    //     ) {
-    //         setNextSectionUnlocked(true);
-    //     } else {
-    //         setNextSectionUnlocked(false);
-    //     }
-    // }, [nextSectionUnlocked]);
-
-    // console.log('inputValidationValue: ', validationProgress);
 
     const nextStep = () => {
         // if (nextSectionUnlocked) {
@@ -188,6 +174,81 @@ export default function IndividualForm({
                 <Checkmark value={validationProgress.idDocumentUploaded} />
             </div>
             {/* /////////////////////////// address /////////////////////// */}
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <InputLabel
+                    className={classes.inputLabel}
+                    id="demo-simple-select-helper-label"
+                >
+                    Country
+                </InputLabel>
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="outlined-basic"
+                    label="Country"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    autoComplete="off"
+                    value={info.userCountry}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            userCountry: e.target.value,
+                        })
+                    }
+                >
+                    <MenuItem value={'Canada'}>Canada</MenuItem>
+                    <MenuItem value={'USA'}>USA</MenuItem>
+                </Select>
+                <Checkmark value={validationProgress.userCountry} />
+            </FormControl>
+
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <InputLabel
+                    className={classes.inputLabel}
+                    id="demo-simple-select-helper-label"
+                >
+                    {info.userCountry === 'Canada' ? 'Province' : 'State'}
+                </InputLabel>
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="outlined-basic"
+                    label="Province"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    autoComplete="on"
+                    disabled={!info.userCountry}
+                    value={info.userProvince}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            userProvince: e.target.value,
+                        })
+                    }
+                >
+                    {info.userCountry === 'Canada' &&
+                        canadaProvinces.map((province, index) => {
+                            return (
+                                <MenuItem key={index} value={province.name}>
+                                    {province.name}
+                                </MenuItem>
+                            );
+                        })}
+                    {info.userCountry === 'USA' &&
+                        unitedStates.map((state, index) => {
+                            return (
+                                <MenuItem key={index} value={state.name}>
+                                    {state.name}
+                                </MenuItem>
+                            );
+                        })}
+                </Select>
+                <Checkmark value={validationProgress.userProvince} />
+            </FormControl>
+
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
@@ -226,31 +287,16 @@ export default function IndividualForm({
                     />
                     <Checkmark value={validationProgress.userCity} />
                 </FormControl>
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Province"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        autoComplete="on"
-                        value={info.userProvince}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                userProvince: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={validationProgress.userProvince} />
-                </FormControl>
             </div>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
                         id="outlined-basic"
-                        label="Postal Code"
+                        label={
+                            info.userCountry === 'Canada'
+                                ? 'Postal Code'
+                                : 'Zip Code'
+                        }
                         variant="outlined"
                         size="small"
                         className={classes.flexInput}
@@ -265,25 +311,6 @@ export default function IndividualForm({
                         }
                     />
                     <Checkmark value={validationProgress.userPostalCode} />
-                </FormControl>
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Country"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        autoComplete="on"
-                        value={info.userCountry}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                userCountry: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={validationProgress.userCountry} />
                 </FormControl>
             </div>
             <Alert severity="info" className={classes.alert}>
@@ -353,6 +380,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    fieldDropDown: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     input: {
         // position: 'relative',
         width: '100%',
@@ -361,6 +394,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             margin: '2% auto',
         },
+    },
+    inputLabel: {
+        marginLeft: '3%',
     },
     checkmark: {
         // position: 'absolute',
