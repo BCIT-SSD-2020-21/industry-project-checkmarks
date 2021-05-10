@@ -39,15 +39,6 @@ export default function IndividualForm({
 
     setDirty();
 
-    const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            await createClioContact(info);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <div>
             {/* checkbox for indicidual or organization */}
@@ -95,13 +86,6 @@ export default function IndividualForm({
                             inputValidationValue.individualOrOrganizationName
                         }
                     />
-                    {/* {inputValidationValue?.individualOrOrganizationName ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )} */}
                 </FormControl>
             )}
 
@@ -169,22 +153,6 @@ export default function IndividualForm({
 
             <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
 
-            {/* <div className={classes.field}>
-                <Button
-                    onClick={() =>
-                        setInfo({
-                            ...info,
-                            idDocumentUploaded: true,
-                        })
-                    }
-                    type="submit"
-                    variant="contained"
-                    className={classes.uploadButton}
-                >
-                    Upload ID Document
-                </Button>
-                <Checkmark value={inputValidationValue.idDocumentUploaded} />
-            </div> */}
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -321,7 +289,6 @@ export default function IndividualForm({
                 <Button
                     className={classes.nextButton}
                     onClick={(event) => {
-                        handleSubmit(event);
                         navigation.next();
                     }}
                     // onClick={() => navigation.next()}

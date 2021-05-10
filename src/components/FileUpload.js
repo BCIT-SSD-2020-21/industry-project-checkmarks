@@ -8,18 +8,6 @@ const FileUpload = ({ setHandle, setInfo, info }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const fileInput = useRef(null);
 
-    // useEffect(() => {
-    //     if (info.uploadedFileName) {
-    //         setUploadedFileName(info.uploadedFileName);
-    //     } else {
-    //         setInfo({
-    //             ...info,
-    //             LogoFileName: info.uploadedFileName,
-    //         });
-    //         // setFileName(fileName);
-    //     }
-    // }, []);
-
     // Checks the file size and sets the image url preview.
     const handleUploadImage = (event) => {
         if (checkFileSize(event)) {
