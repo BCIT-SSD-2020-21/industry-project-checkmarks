@@ -125,6 +125,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.lastName} />
             </FormControl>
+
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
@@ -143,6 +144,44 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
+
+            <FormControl fullWidth={true} className={classes.field}>
+                <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    placeholder="Phone number"
+                    type="text"
+                    value={info.phone}
+                    autoComplete="on"
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            phone: e.target.value,
+                        })
+                    }
+                />
+                <Checkmark value={inputValidationValue.phone} />
+            </FormControl>
+            <FormControl fullWidth={true} className={classes.field}>
+                <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    placeholder="Fax Number"
+                    type="text"
+                    value={info.fax}
+                    autoComplete="on"
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            fax: e.target.value,
+                        })
+                    }
+                />
+                <Checkmark value={inputValidationValue.fax} />
+            </FormControl>
+
             <Alert severity="info" className={classes.idAlert}>
                 Single image file should be under 2MB
             </Alert>
