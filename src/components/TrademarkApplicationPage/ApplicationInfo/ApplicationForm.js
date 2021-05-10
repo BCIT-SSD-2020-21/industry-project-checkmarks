@@ -159,7 +159,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
-            <Alert severity="info" className={classes.alert}>
+            <Alert severity="info" className={classes.idAlert}>
                 Single image file should be under 2MB
             </Alert>
 
@@ -403,6 +403,17 @@ const useStyles = makeStyles((theme) => ({
     alert: {
         color: '#2a9df4',
         margin: '5% auto 5% auto',
+        fontSize: '12px',
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '5% auto 2% auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            margin: '0 auto 5% auto',
+        },
+    },
+    idAlert: {
+        color: '#2a9df4',
+        margin: '5% auto 1% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 2% auto',

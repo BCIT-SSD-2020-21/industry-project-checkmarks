@@ -110,12 +110,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    uploadButtonContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '3%',
-    },
     uploadButton: {
         backgroundColor: '#df3a48',
         color: '#FFF',
