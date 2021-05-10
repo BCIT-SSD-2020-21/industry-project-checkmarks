@@ -178,11 +178,11 @@ export default function GoodsAndServices({
                 // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
-                    console.log(
-                        'niceClass: ',
-                        term.niceClass,
-                        niceClass.number
-                    );
+                    // console.log(
+                    //     'niceClass: ',
+                    //     term.niceClass,
+                    //     niceClass.number
+                    // );
                     if (niceClass.number === term.termClass) {
                         termClassExists = true;
                     }
@@ -221,8 +221,8 @@ export default function GoodsAndServices({
         }
     }, [totalAmount]);
 
-    console.log('termTableData[0]: ', termTableData[0]);
-    console.log('info.termsSelected: ', info.termsSelected);
+    // console.log('termTableData[0]: ', termTableData[0]);
+    // console.log('info.termsSelected: ', info.termsSelected);
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>

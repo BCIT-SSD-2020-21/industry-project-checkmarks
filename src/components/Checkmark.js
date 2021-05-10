@@ -9,7 +9,7 @@ import CheckIcon from '@material-ui/icons/Check';
 export default function Checkmark({ value }) {
     const classes = useStyles();
 
-    console.log(value);
+    // console.log(value);
     return (
         <Box boxShadow={5} className={classes.container}>
             {value ? (

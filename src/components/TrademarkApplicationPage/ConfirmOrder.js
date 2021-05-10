@@ -2,13 +2,22 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import { createEmail } from '../../network';
 
 export default function PaymentForm({ navigation, info, setInfo }) {
     const classes = useStyles();
 
-    console.log('info: ', info);
-    console.log('info: ', info.classesSelected);
-    console.log('info: ', info.classesSelected.length);
+    const handleSubmit = async (event) => {
+        try {
+            await createEmail(info);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // console.log('info: ', info);
+    // console.log('info: ', info.classesSelected);
+    // console.log('info: ', info.classesSelected.length);
 
     return (
         <Card className={classes.card}>
@@ -200,22 +209,6 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                             {info.countryOfFiling}
                         </Typography>
                     </div>
-                    {/* <div className={classes.textContainer}>
-                        <Typography className={classes.subtitle} component="p">
-                            Filing Date:
-                        </Typography>
-                        <Typography className={classes.text} component="p">
-                            {info.filingDate}
-                        </Typography>
-                    </div>
-                    <div className={classes.textContainer}>
-                        <Typography className={classes.subtitle} component="p">
-                            Filing Number:
-                        </Typography>
-                        <Typography className={classes.text} component="p">
-                            {info.filingNumber}
-                        </Typography>
-                    </div> */}
                 </>
             )}
 
@@ -239,6 +232,7 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     onClick={() => {
                         navigation.next();
                         setInfo({ ...info, infoConfirmed: true });
+                        // handleSubmit();
                     }}
                 >
                     Confirm
