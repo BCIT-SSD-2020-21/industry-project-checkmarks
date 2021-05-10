@@ -13,7 +13,7 @@ import Success from '../components/TrademarkApplicationPage/Success';
 import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 import PageLeavePrompt from '../utils/PageLeavePrompt';
 import Footer from '../components/LandingPage/Footer';
-import { validateForm } from '../utils/FormValidation';
+import { sumProgressValue, validateForm } from '../utils/FormValidation';
 
 const TrademarkApplication = () => {
     const classes = useStyles();
@@ -73,7 +73,7 @@ const TrademarkApplication = () => {
     });
 
     // form validation and progress
-    const [inputValidationValue, setInputValidationValue] = useState({
+    const [validationProgress, setValidationProgress] = useState({
         //Application Informarion - 1100 - step 1 end
         individualOrOrganizationName: 0,
         firstName: 0,
@@ -105,8 +105,14 @@ const TrademarkApplication = () => {
         paymentConfirmed: 0,
     });
     useEffect(() => {
-        validateForm(info, inputValidationValue, setInputValidationValue);
+        // builds the object carrying validation values assoiated with each step
+        validateForm(info, validationProgress, setValidationProgress);
     }, [info]);
+    const [progressValue, setProgressValue] = useState(0);
+    useEffect(() => {
+        // sums the values of all props in the object carrying validation values assoiated with each step
+        setProgressValue(sumProgressValue(validationProgress));
+    }, [validationProgress]);
 
     const [currentStep, setCurrentStep] = useState(1);
     useEffect(() => {
@@ -118,12 +124,42 @@ const TrademarkApplication = () => {
 
     //Give each step an id
     const steps = [
-        { id: 'Application-Information', num: 1, progressValueStart: 0 },
-        { id: 'Trademark-Type', num: 2, progressValueStart: 1100 },
-        { id: 'Goods-and-Services', num: 3, progressValueStart: 1500 },
-        { id: 'International-Information', num: 4, progressValueStart: 2100 },
-        { id: 'Confirmation', num: 5, progressValueStart: 2400 },
-        { id: 'Payment', num: 6, progressValueStart: 2600 },
+        {
+            id: 'Application-Information',
+            num: 1,
+            progressValueStart: 0,
+            progressValueEnd: 1100,
+        },
+        {
+            id: 'Trademark-Type',
+            num: 2,
+            progressValueStart: 1100,
+            progressValueEnd: 1500,
+        },
+        {
+            id: 'Goods-and-Services',
+            num: 3,
+            progressValueStart: 1500,
+            progressValueEnd: 2100,
+        },
+        {
+            id: 'International-Information',
+            num: 4,
+            progressValueStart: 2100,
+            progressValueEnd: 2400,
+        },
+        {
+            id: 'Confirmation',
+            num: 5,
+            progressValueStart: 2400,
+            progressValueEnd: 2600,
+        },
+        {
+            id: 'Payment',
+            num: 6,
+            progressValueStart: 2600,
+            progressValueEnd: 3100,
+        },
         { id: 'Success', num: 7, progressValueStart: 3100 },
     ];
 
@@ -133,7 +169,8 @@ const TrademarkApplication = () => {
         initialStep: 0,
     });
 
-    console.log('currentStep: ', currentStep);
+    console.log('step: ', step);
+    console.log('progressValue: ', progressValue);
 
     return (
         <Paper className={classes.root}>
@@ -144,7 +181,8 @@ const TrademarkApplication = () => {
                 step={step}
                 steps={steps}
                 info={info}
-                inputValidationValue={inputValidationValue}
+                progressValue={progressValue}
+                validationProgress={validationProgress}
             />
 
             <div className={classes.container}>
@@ -154,67 +192,79 @@ const TrademarkApplication = () => {
                             return (
                                 <ApplicationInfo
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
                                     setDirty={setDirty}
-                                    inputValidationValue={inputValidationValue}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Trademark-Type':
                             return (
                                 <TrademarkForm
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    inputValidationValue={inputValidationValue}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Goods-and-Services':
                             return (
                                 <GoodsAndServices
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    inputValidationValue={inputValidationValue}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'International-Information':
                             return (
                                 <CountryCard
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    inputValidationValue={inputValidationValue}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Confirmation':
                             return (
                                 <ConfirmOrder
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Payment':
                             return (
                                 <PaymentForm
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    inputValidationValue={inputValidationValue}
-                                    setPristine={setPristine}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Success':
@@ -223,6 +273,7 @@ const TrademarkApplication = () => {
                                     navigation={navigation}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
+                                    setPristine={setPristine}
                                 />
                             );
                     }

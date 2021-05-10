@@ -1,3 +1,11 @@
+export const sumProgressValue = (obj) => {
+    let progressCompletedValue = 0; // Max value: 3100
+    for (const prop in obj) {
+        progressCompletedValue += obj[prop];
+    }
+    return progressCompletedValue;
+};
+
 export const validateForm = (
     info,
     inputValidationValue,
