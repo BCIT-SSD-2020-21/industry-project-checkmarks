@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box,
@@ -17,6 +17,7 @@ import { checkmarksTheme } from '../../../styles/Themes';
 import { createClioContact } from '../../../network';
 import { Info } from '@material-ui/icons';
 import Checkmark from '../../Checkmark';
+import IdUpload from '../../IdUpload';
 
 export default function IndividualForm({
     info,
@@ -26,6 +27,7 @@ export default function IndividualForm({
     inputValidationValue,
 }) {
     const classes = useStyles();
+    const [handle, setHandle] = useState('');
 
     //handle seclection of individual or organization
     const handleSelection = (e) => {
@@ -157,7 +159,17 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.email} />
             </FormControl>
-            <div className={classes.field}>
+            <Alert severity="info" className={classes.idAlert}>
+                Single image file should be under 2MB
+            </Alert>
+
+            {/* ============================ */}
+            {/* ======== Upload ID ========= */}
+            {/* ============================ */}
+
+            <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
+
+            {/* <div className={classes.field}>
                 <Button
                     onClick={() =>
                         setInfo({
@@ -172,7 +184,7 @@ export default function IndividualForm({
                     Upload ID Document
                 </Button>
                 <Checkmark value={inputValidationValue.idDocumentUploaded} />
-            </div>
+            </div> */}
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -367,20 +379,7 @@ const useStyles = makeStyles((theme) => ({
         //     margin: '2%',
         // },
     },
-    uploadButtonContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '3%',
-    },
-    uploadButton: {
-        backgroundColor: '#df3a48',
-        color: '#FFF',
-        width: '85%',
-        height: '40px',
-        borderRadius: '10px',
-        fontSize: '12px',
-    },
+
     nextButtonContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -404,6 +403,17 @@ const useStyles = makeStyles((theme) => ({
     alert: {
         color: '#2a9df4',
         margin: '5% auto 5% auto',
+        fontSize: '12px',
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '5% auto 2% auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            margin: '0 auto 5% auto',
+        },
+    },
+    idAlert: {
+        color: '#2a9df4',
+        margin: '5% auto 1% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 2% auto',

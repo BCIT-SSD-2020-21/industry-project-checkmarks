@@ -20,7 +20,7 @@ const TrademarkApplication = () => {
 
     // form information
     const [info, setInfo] = useState({
-        //Application Informarion
+        //Application Information
         individualOrOrganization: '',
         firstName: '',
         lastName: '',
@@ -33,6 +33,7 @@ const TrademarkApplication = () => {
         userPostalCode: '',
         userCountry: '',
         agreedTermsOfService: false,
+        idName: '',
 
         //Trademark Type
         isText: false,
