@@ -117,6 +117,24 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     {info.email}
                 </Typography>
             </div>
+            {/* ////////////////////////////////////// Phone ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Phone
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    {info.phone}
+                </Typography>
+            </div>
+            {/* ////////////////////////////////////// Fax ////////////////////////////////////////////*/}
+            <div className={classes.textContainer}>
+                <Typography className={classes.subtitle} component="p">
+                    Fax
+                </Typography>
+                <Typography className={classes.text} component="p">
+                    {info.fax}
+                </Typography>
+            </div>
             {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
