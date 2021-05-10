@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../../styles/Themes';
 import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from '../TrademarkType/DesignCard';
@@ -45,7 +46,7 @@ const TrademarkForm = ({
 
     return (
         <Card className={classes.outerCard}>
-            <h1 className={classes.title}>Trademark Type</h1>
+            {/* <h1 className={classes.title}>Trademark Type</h1> */}
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
                     Please{' '}
@@ -152,6 +153,8 @@ const TrademarkForm = ({
 export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         display: 'flex',
         padding: '0 5% 5% 5%',

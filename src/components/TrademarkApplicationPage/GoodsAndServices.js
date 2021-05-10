@@ -308,7 +308,7 @@ export default function GoodsAndServices({
                                         columns={[
                                             {
                                                 width:
-                                                    (window.innerWidth * 1) /
+                                                    (window.innerWidth * 2) /
                                                     10,
                                                 label: [
                                                     'Selected',
@@ -320,7 +320,7 @@ export default function GoodsAndServices({
                                             },
                                             {
                                                 width:
-                                                    (window.innerWidth * 4) /
+                                                    (window.innerWidth * 3) /
                                                     10,
                                                 label: [
                                                     'Term Name',
@@ -516,7 +516,8 @@ export default function GoodsAndServices({
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        // backgroundColor: 'blue',
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
         margin: '3%',

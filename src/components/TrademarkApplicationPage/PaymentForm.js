@@ -12,6 +12,7 @@ import {
     TextField,
     Typography,
 } from '@material-ui/core';
+import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -355,6 +356,8 @@ export default function PaymentForm({
 }
 const useStyles = makeStyles((theme) => ({
     card: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',

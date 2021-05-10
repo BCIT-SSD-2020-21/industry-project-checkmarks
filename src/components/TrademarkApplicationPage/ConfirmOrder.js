@@ -1,15 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
+import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import { createEmail } from '../../network';
 
 export default function PaymentForm({
     navigation,
+    step,
     info,
     setInfo,
     currentStep,
     setCurrentStep,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -243,6 +247,8 @@ export default function PaymentForm({
 }
 const useStyles = makeStyles((theme) => ({
     card: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',
@@ -263,7 +269,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     subtitle: {
-        color: '#808080',
+        // color: '#808080',
+        color: 'black',
         fontSize: '12px',
         margin: '2%',
         width: '40%',

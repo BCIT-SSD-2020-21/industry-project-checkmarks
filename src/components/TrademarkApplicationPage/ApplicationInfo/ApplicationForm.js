@@ -40,10 +40,8 @@ export default function IndividualForm({
     };
 
     const nextStep = () => {
-        // if (nextSectionUnlocked) {
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
-        // }
     };
 
     setDirty();
@@ -465,6 +463,5 @@ const useStyles = makeStyles((theme) => ({
     },
     alertRed: {
         color: checkmarksTheme.buttonTextSecondary,
-        // backgroundColor: checkmarksTheme.bgSecondary,
     },
 }));
