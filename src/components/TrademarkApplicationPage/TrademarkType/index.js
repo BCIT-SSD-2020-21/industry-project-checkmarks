@@ -11,11 +11,13 @@ import Checkmark from '../../Checkmark';
 
 const TrademarkForm = ({
     navigation,
+    step,
     info,
     currentStep,
     setCurrentStep,
     setInfo,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) => {
     const classes = useStyles();
     //selection of all the other trademark type
@@ -107,9 +109,7 @@ const TrademarkForm = ({
                     </p>
                 </div>
             )}
-            <Checkmark
-                value={inputValidationValue.trademarkTypeFormCompleted}
-            />
+            <Checkmark value={validationProgress.trademarkTypeFormCompleted} />
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
                 {info.isOther &&
@@ -141,6 +141,7 @@ const TrademarkForm = ({
                     type="submit"
                     variant="contained"
                     onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Continue
                 </Button>
