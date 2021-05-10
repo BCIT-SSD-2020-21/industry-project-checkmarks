@@ -74,12 +74,6 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                 </p>
             )}
             <Button
-                // onClick={() =>
-                //     setInfo({
-                //         ...info,
-                //         idDocumentUploaded: true,
-                //     })
-                // }
                 variant="contained"
                 component="label"
                 className={classes.uploadButton}
@@ -94,7 +88,6 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     style={{ display: 'none' }}
                 />
             </Button>
-            {/* <Checkmark value={inputValidationValue.idDocumentUploaded} /> */}
             {errorMessage && (
                 <p className={classes.errorMessage}>{errorMessage}</p>
             )}

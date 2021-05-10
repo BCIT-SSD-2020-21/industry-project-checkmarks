@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
-import { Button } from '@material-ui/core';
 import FileUpload from '../../FileUpload';
 
 const LogoForm = ({ info, setInfo }) => {
@@ -14,7 +13,6 @@ const LogoForm = ({ info, setInfo }) => {
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
                 <h5 style={{ color: '#DF3A48' }}>Preview:</h5>
                 <img className={classes.previewImage} src={info.file} />
-                {/* <Button className={classes.browseButton}>Choose File</Button> */}
                 <FileUpload
                     setHandle={setHandle}
                     info={info}
