@@ -139,25 +139,47 @@ export default function IndividualForm({
                 />
                 <Checkmark value={inputValidationValue.lastName} />
             </FormControl>
-            {/* /// Phone /// */}
-            <FormControl fullWidth={true} className={classes.field}>
-                <TextField
-                    className={classes.input}
-                    variant="outlined"
-                    size="small"
-                    placeholder="Phone"
-                    type="text"
-                    value={info.phone}
-                    autoComplete="on"
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            phone: e.target.value,
-                        })
-                    }
-                />
-                <Checkmark value={inputValidationValue.phone} />
-            </FormControl>
+            
+            <div className={classes.flexContainer}>
+                {/* /// Phone /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Phone"
+                        type="text"
+                        value={info.phone}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                phone: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={inputValidationValue.phone} />
+                </FormControl>
+                {/* /// Fax /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Fax"
+                        type="text"
+                        value={info.fax}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                fax: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={inputValidationValue.fax} />
+                </FormControl>
+            </div>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
