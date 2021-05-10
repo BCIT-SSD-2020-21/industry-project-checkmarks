@@ -282,49 +282,89 @@ export default function GoodsAndServices({
                 <h3>Search for your Trademark Terms</h3>
                 <SearchField loading={loading} setInputTo={setSearchTerm} />
 
-                <Paper
-                    className={classes.results}
-                    style={{
-                        backgroundColor: checkmarksTheme.bgTransparent,
-                        height: '500px', // (window.innerHeight * 4) / 5,
-                        width: '100%',
-                    }}
-                >
-                    <MuiVirtualizedTable
-                        // style={{ height: 400, width: '100%' }}
-                        rowCount={termTableData.length} // row or data
-                        rowGetter={({ index }) => termTableData[index]} // row or data
-                        onRowClick={(e) => setSelectedRow(e.index)}
-                        onFilterClick={onFilterClick}
-                        columns={[
-                            {
-                                width: (window.innerWidth * 1) / 10,
-                                label: ['Selected', '', onFilterClick, []],
-                                dataKey: 'selectionCheckbox',
-                            },
-                            {
-                                width: (window.innerWidth * 4) / 10,
-                                label: ['Term Name', '', onFilterClick, []],
-                                dataKey: 'termName',
-                            },
-                            {
-                                width: (window.innerWidth * 1) / 10,
-                                label: ['NICE Class', '', onFilterClick, []],
-                                dataKey: 'termClass',
-                            },
-                            {
-                                width: (window.innerWidth * 4) / 10,
-                                label: [
-                                    'NICE Class Name',
-                                    '',
-                                    onFilterClick,
-                                    [],
-                                ],
-                                dataKey: 'classShortName',
-                            },
-                        ]}
-                    />
-                </Paper>
+                {(searchTerm.length > 2 || termTableData.length > 0) &&
+                    !loading && (
+                        <>
+                            {termTableData.length > 0 ? (
+                                <Paper
+                                    className={classes.results}
+                                    style={{
+                                        backgroundColor:
+                                            checkmarksTheme.bgTransparent,
+                                        height: '500px', // (window.innerHeight * 4) / 5,
+                                        width: '100%',
+                                    }}
+                                >
+                                    <MuiVirtualizedTable
+                                        // style={{ height: 400, width: '100%' }}
+                                        rowCount={termTableData.length} // row or data
+                                        rowGetter={({ index }) =>
+                                            termTableData[index]
+                                        } // row or data
+                                        onRowClick={(e) =>
+                                            setSelectedRow(e.index)
+                                        }
+                                        onFilterClick={onFilterClick}
+                                        columns={[
+                                            {
+                                                width:
+                                                    (window.innerWidth * 1) /
+                                                    10,
+                                                label: [
+                                                    'Selected',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'selectionCheckbox',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 4) /
+                                                    10,
+                                                label: [
+                                                    'Term Name',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'termName',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 1) /
+                                                    10,
+                                                label: [
+                                                    'NICE Class',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'termClass',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 4) /
+                                                    10,
+                                                label: [
+                                                    'NICE Class Name',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'classShortName',
+                                            },
+                                        ]}
+                                    />
+                                </Paper>
+                            ) : (
+                                <Paper>
+                                    <Typography>No results</Typography>
+                                </Paper>
+                            )}
+                        </>
+                    )}
+
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
                     <Checkmark value={validationProgress.amountNotZero} />
