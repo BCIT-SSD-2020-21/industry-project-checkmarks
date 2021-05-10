@@ -85,10 +85,13 @@ export const validateForm = (
     setInputValidationValue
 ) => {
     // const namesRegex = /^[a-zA-Z]+$/; // from Original Project
-    const namesRegex = /[^a-z]/i; // case insensitive
-    const streetAddressRegex = /^[a-z][a-z0-9_ .-]*?/i;
+    const numbersRegex = /^[0-9]*$/;
+    const personNameRegex = /[^a-z '.-]/i; // case insensitive
+    const locationNamsRegex = /[^a-z0-9 '.-]/i; // case insensitive
+    const streetAddressRegex = /[^a-z0-9 '#.-]*?/i;
     const emailRegex = /^\S+@\S+\.\S+$/; // from Original Project
     const postalCodeRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/; // from Original Project
+    const zipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
     const newInputValidationValue = {};
     // Individual OR Organization NAME
@@ -102,13 +105,13 @@ export const validateForm = (
         }
     }
     // FirstName
-    if (info.firstName && !namesRegex.test(info.firstName)) {
+    if (info.firstName && !personNameRegex.test(info.firstName)) {
         newInputValidationValue.firstName = 100;
     } else {
         newInputValidationValue.firstName = 0;
     }
     // LastName
-    if (info.lastName && !namesRegex.test(info.lastName)) {
+    if (info.lastName && !personNameRegex.test(info.lastName)) {
         newInputValidationValue.lastName = 100;
     } else {
         newInputValidationValue.lastName = 0;
@@ -126,34 +129,35 @@ export const validateForm = (
         newInputValidationValue.idDocumentUploaded = 0;
     }
     // Street Address
-    if (
-        info.userStreetAddress &&
-        !streetAddressRegex.test(info.userStreetAddress)
-    ) {
+    if (info.userStreetAddress.length > 2) {
         newInputValidationValue.userStreetAddress = 100;
     } else {
         newInputValidationValue.userStreetAddress = 0;
     }
     // City
-    if (info.userCity && !namesRegex.test(info.userCity)) {
+    if (info.userCity.length > 2 && !locationNamsRegex.test(info.userCity)) {
         newInputValidationValue.userCity = 100;
     } else {
         newInputValidationValue.userCity = 0;
     }
     // Province
-    if (info.userProvince && !namesRegex.test(info.userProvince)) {
+    if (info.userProvince && !locationNamsRegex.test(info.userProvince)) {
         newInputValidationValue.userProvince = 100;
     } else {
         newInputValidationValue.userProvince = 0;
     }
     // Postal Code
-    if (postalCodeRegex.test(info.userPostalCode)) {
+    if (
+        (info.userCountry === 'Canada' &&
+            postalCodeRegex.test(info.userPostalCode)) ||
+        (info.userCountry === 'USA' && zipCodeRegex.test(info.userPostalCode))
+    ) {
         newInputValidationValue.userPostalCode = 100;
     } else {
         newInputValidationValue.userPostalCode = 0;
     }
     // Country
-    if (info.userCountry && !namesRegex.test(info.userCountry)) {
+    if (info.userCountry && !locationNamsRegex.test(info.userCountry)) {
         newInputValidationValue.userCountry = 100;
     } else {
         newInputValidationValue.userCountry = 0;
@@ -202,20 +206,28 @@ export const validateForm = (
     // Payment Information Provided        // Payment Information
     if (
         info.paymentCardholderName &&
-        !namesRegex.test(info.paymentCardholderName) &&
-        info.paymentCreditCardNumber.length === 16 &&
-        info.paymentCardExpiryDate &&
-        info.paymentCardCVV.length === 3
+        !personNameRegex.test(info.paymentCardholderName) &&
+        numbersRegex.test(info.paymentCreditCardNumber) &&
+        info.paymentCreditCardNumber.length >= 13 &&
+        info.paymentCreditCardNumber.length <= 19 &&
+        info.paymentCardExpiryDate.length === 4 &&
+        numbersRegex.test(info.paymentCardExpiryDate) &&
+        info.paymentCardCVV.length >= 3 &&
+        info.paymentCardCVV.length <= 4 &&
+        numbersRegex.test(info.paymentCardCVV)
     ) {
         newInputValidationValue.paymentCardInfo = 200;
     } else {
         newInputValidationValue.paymentCardInfo = 0;
     }
     if (
-        info.billingAddressStreet &&
-        !streetAddressRegex.test(info.billingAddressStreet) &&
-        info.billingAddressCity &&
-        info.billingAddressPostalCode &&
+        info.billingAddressStreet.length > 2 &&
+        info.billingAddressCity.length > 2 &&
+        !locationNamsRegex.test(info.billingAddressCity) &&
+        ((info.billingAddressCountry === 'Canada' &&
+            postalCodeRegex.test(info.billingAddressPostalCode)) ||
+            (info.billingAddressCountry === 'USA' &&
+                zipCodeRegex.test(info.billingAddressPostalCode))) &&
         info.billingAddressCountry
     ) {
         newInputValidationValue.billingAddress = 200;
