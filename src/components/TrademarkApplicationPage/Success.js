@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Success({ currentStep, setCurrentStep }) {
+export default function Success({ currentStep, setCurrentStep, setPristine }) {
     const history = useHistory();
     const classes = useStyles();
 
@@ -13,6 +13,7 @@ export default function Success({ currentStep, setCurrentStep }) {
         history.push('/');
     };
 
+    setPristine();
     return (
         <div className={classes.root}>
             <h1 className={classes.text}>
