@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Paper } from '@material-ui/core';
+import { Box, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import bannerImage from '../assets/images/bg_application-nicolas-hoizey.jpg';
+import bannerImage from '../assets/images/bg-application-yann-allegre.jpg';
+// import bannerImageDark from '../assets/images/bg-dark-application-ricardo-gomez-angel.jpg';
+import bannerImageDark from '../assets/images/bg-dark-application2-asoggetti.jpg';
 import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
@@ -15,7 +17,7 @@ import PageLeavePrompt from '../utils/PageLeavePrompt';
 import Footer from '../components/LandingPage/Footer';
 import { sumProgressValue, validateForm } from '../utils/FormValidation';
 
-const TrademarkApplication = () => {
+const TrademarkApplication = (darkMode) => {
     const classes = useStyles();
 
     // form information
@@ -125,13 +127,13 @@ const TrademarkApplication = () => {
     //Give each step an id
     const steps = [
         {
-            id: 'Application-Information',
+            id: 'Applicant',
             num: 1,
             progressValueStart: 0,
             progressValueEnd: 1100,
         },
         {
-            id: 'Trademark-Type',
+            id: 'Trademark',
             num: 2,
             progressValueStart: 1100,
             progressValueEnd: 1500,
@@ -143,7 +145,7 @@ const TrademarkApplication = () => {
             progressValueEnd: 2100,
         },
         {
-            id: 'International-Information',
+            id: 'International',
             num: 4,
             progressValueStart: 2100,
             progressValueEnd: 2400,
@@ -169,11 +171,15 @@ const TrademarkApplication = () => {
         initialStep: 0,
     });
 
-    console.log('step: ', step);
-    console.log('progressValue: ', progressValue);
-
     return (
-        <Paper className={classes.root}>
+        <Paper
+            className={classes.root}
+            style={{
+                backgroundImage: `url(${
+                    darkMode.darkMode ? bannerImageDark : bannerImage
+                })`,
+            }}
+        >
             {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div> */}
@@ -184,11 +190,14 @@ const TrademarkApplication = () => {
                 progressValue={progressValue}
                 validationProgress={validationProgress}
             />
+            <Box className={classes.hero}>
+                <Typography className={classes.title}>{step.id}</Typography>
+            </Box>
 
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
-                        case 'Application-Information':
+                        case 'Applicant':
                             return (
                                 <ApplicationInfo
                                     navigation={navigation}
@@ -202,7 +211,7 @@ const TrademarkApplication = () => {
                                     validationProgress={validationProgress}
                                 />
                             );
-                        case 'Trademark-Type':
+                        case 'Trademark':
                             return (
                                 <TrademarkForm
                                     navigation={navigation}
@@ -228,7 +237,7 @@ const TrademarkApplication = () => {
                                     validationProgress={validationProgress}
                                 />
                             );
-                        case 'International-Information':
+                        case 'International':
                             return (
                                 <CountryCard
                                     navigation={navigation}
@@ -290,9 +299,9 @@ export default TrademarkApplication;
 const useStyles = makeStyles((theme) => ({
     root: {
         // backgroundImage: `url(${bannerImage})`,
-        // backgroundPosition: 'center',
-        // backgroundSize: 'cover',
-        // backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'auto 100%',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'flex-start',
@@ -307,15 +316,19 @@ const useStyles = makeStyles((theme) => ({
         // justifyContent: 'center',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: '60px',
+        // marginTop: '60px',
         minHeight: window.innerHeight,
         width: window.innerWidth,
     },
-    title: {
+    hero: {
+        backgroundImage: '',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '2%',
+        height: '100px',
+    },
+    title: {
+        alignSelf: 'flex-end',
+        fontSize: '32px',
+        color: '#df3a48',
     },
 
     text: {
