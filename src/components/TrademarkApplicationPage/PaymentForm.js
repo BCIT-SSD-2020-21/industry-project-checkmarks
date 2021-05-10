@@ -6,6 +6,9 @@ import {
     Checkbox,
     FormControl,
     FormControlLabel,
+    InputLabel,
+    MenuItem,
+    Select,
     TextField,
     Typography,
 } from '@material-ui/core';
@@ -13,6 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
+import { canadaProvinces, unitedStates } from '../../utils/FormValidation';
 import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
@@ -184,6 +188,83 @@ export default function PaymentForm({
                     }
                     label="Same as Applicant Address (from a few steps ago)"
                 />
+
+                <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                    <InputLabel
+                        className={classes.inputLabel}
+                        id="demo-simple-select-helper-label"
+                    >
+                        Country
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="off"
+                        value={info.billingAddressCountry}
+                        disabled={info.billingAddressSameAsUser}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                billingAddressCountry: e.target.value,
+                            })
+                        }
+                    >
+                        <MenuItem value={'Canada'}>Canada</MenuItem>
+                        <MenuItem value={'USA'}>USA</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                    <InputLabel
+                        className={classes.inputLabel}
+                        id="demo-simple-select-helper-label"
+                    >
+                        {info.billingAddressCountry === 'Canada'
+                            ? 'Province'
+                            : 'State'}
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="off"
+                        value={info.billingAddressProvince}
+                        disabled={info.billingAddressSameAsUser}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                billingAddressProvince: e.target.value,
+                            })
+                        }
+                    >
+                        {info.billingAddressCountry === 'Canada' &&
+                            canadaProvinces.map((province, index) => {
+                                return (
+                                    <MenuItem key={index} value={province.name}>
+                                        {province.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        {info.billingAddressCountry === 'USA' &&
+                            unitedStates.map((state, index) => {
+                                return (
+                                    <MenuItem key={index} value={state.name}>
+                                        {state.name}
+                                    </MenuItem>
+                                );
+                            })}
+                    </Select>
+                </FormControl>
+
                 <TextField
                     id="outlined-basic"
                     label="Street Address"
@@ -220,28 +301,15 @@ export default function PaymentForm({
                         })
                     }
                 />
-                <TextField
-                    id="outlined-basic"
-                    label="Province"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    value={info.billingAddressProvince}
-                    autoComplete="on"
-                    disabled={info.billingAddressSameAsUser}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            billingAddressProvince: e.target.value,
-                        })
-                    }
-                />
             </div>
             <div className={classes.flexContainer}>
                 <TextField
                     id="outlined-basic"
-                    label="Postal Code"
+                    label={
+                        info.billingAddressCountry === 'Canada'
+                            ? 'Postal Code'
+                            : 'Zip Code'
+                    }
                     variant="outlined"
                     size="small"
                     className={classes.flexInput}
@@ -257,23 +325,6 @@ export default function PaymentForm({
                     }
                 />
 
-                <TextField
-                    id="outlined-basic"
-                    label="Country"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    value={info.billingAddressCountry}
-                    autoComplete="on"
-                    disabled={info.billingAddressSameAsUser}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            billingAddressCountry: e.target.value,
-                        })
-                    }
-                />
                 <Checkmark value={validationProgress.billingAddress} />
             </div>
             <Alert severity="info" className={classes.alert}>
