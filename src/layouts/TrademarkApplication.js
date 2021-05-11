@@ -61,6 +61,7 @@ const TrademarkApplication = () => {
         infoConfirmed: false,
 
         // Payment Information
+        id: '',
         paymentCardholderName: '',
         paymentCreditCardNumber: '',
         paymentCardExpiryDate: '',
