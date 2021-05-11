@@ -132,7 +132,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
-            
+
             <div className={classes.flexContainer}>
                 {/* /// Phone /// */}
                 <FormControl fullWidth={true} className={classes.field}>
@@ -151,7 +151,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.phone} />
+                    <Checkmark value={validationProgress.phone} />
                 </FormControl>
                 {/* /// Fax /// */}
                 <FormControl fullWidth={true} className={classes.field}>
@@ -170,7 +170,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.fax} />
+                    <Checkmark value={validationProgress.fax} />
                 </FormControl>
             </div>
             <FormControl fullWidth={true} className={classes.field}>
