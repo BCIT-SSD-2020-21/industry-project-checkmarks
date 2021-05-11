@@ -26,12 +26,8 @@ export default function SearchField({ loading, setInputTo }) {
 
     return (
         <FormControl className={classes.form}>
-            {/* <InputLabel className={classes.label}>
-                        {'Search for a Trademark...'}
-                    </InputLabel> */}
             <Input
                 className={classes.input}
-                // onClick={(e) => console.log(e.target)}
                 onChange={(e) => setInputTo(e.target.value)}
                 id="searchBox"
                 placeholder={'Check if your Trademark exists...'}

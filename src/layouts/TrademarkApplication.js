@@ -63,7 +63,7 @@ const TrademarkApplication = (darkMode) => {
         infoConfirmed: false,
 
         // Payment Information
-        id: '',
+        paymentToken: '',
         paymentCardholderName: '',
         paymentCreditCardNumber: '',
         paymentCardExpiryDate: '',
@@ -94,10 +94,10 @@ const TrademarkApplication = (darkMode) => {
         userCountry: 0,
         agreedTermsOfService: 0,
 
-        //Trademark Type - 400 - step 2 end
+        //Trademark Type - 500 - step 2 end
         trademarkTypeFormCompleted: 0,
 
-        // Goods and Services - 600 - step 3 end
+        // Goods and Services - 500 - step 3 end
         amountNotZero: 0,
 
         //International Information - 300 - step 4 end
@@ -130,27 +130,27 @@ const TrademarkApplication = (darkMode) => {
     //Give each step an id
     const steps = [
         {
-            id: 'Applicant',
+            id: 'Trademark',
             num: 1,
             progressValueStart: 0,
-            progressValueEnd: 1100,
-        },
-        {
-            id: 'Trademark',
-            num: 2,
-            progressValueStart: 1100,
-            progressValueEnd: 1600,
+            progressValueEnd: 500,
         },
         {
             id: 'Goods-and-Services',
-            num: 3,
-            progressValueStart: 1600,
-            progressValueEnd: 2100,
+            num: 2,
+            progressValueStart: 500,
+            progressValueEnd: 1000,
         },
         {
             id: 'International',
+            num: 3,
+            progressValueStart: 1000,
+            progressValueEnd: 1300,
+        },
+        {
+            id: 'Applicant',
             num: 4,
-            progressValueStart: 2100,
+            progressValueStart: 1300,
             progressValueEnd: 2400,
         },
         {
@@ -200,20 +200,6 @@ const TrademarkApplication = (darkMode) => {
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
-                        case 'Applicant':
-                            return (
-                                <ApplicationInfo
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    setDirty={setDirty}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
                         case 'Trademark':
                             return (
                                 <TrademarkForm
@@ -249,6 +235,20 @@ const TrademarkApplication = (darkMode) => {
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
+                                />
+                            );
+                        case 'Applicant':
+                            return (
+                                <ApplicationInfo
+                                    navigation={navigation}
+                                    step={step}
+                                    info={info}
+                                    setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    setDirty={setDirty}
                                     progressValue={progressValue}
                                     validationProgress={validationProgress}
                                 />

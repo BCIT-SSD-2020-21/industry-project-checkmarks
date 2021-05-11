@@ -1,7 +1,10 @@
+require('dotenv').config();
+const BASE = process.env.REACT_APP_BASE_URL + 'api/';
+
 export const createClioContact = async (info) => {
     var fnResponse = null;
 
-    await fetch('https://localhost:44397/api/Clio', {
+    await fetch(`${BASE}Clio`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -20,11 +23,11 @@ export const createClioContact = async (info) => {
                 phone_numbers: [
                     {
                         name: 'Other',
-                        number: '999999',
+                        number: info.phone,
                     },
                     {
                         name: 'Fax',
-                        number: '123456489',
+                        number: info.fax,
                     },
                 ],
                 addresses: [
@@ -42,15 +45,12 @@ export const createClioContact = async (info) => {
         }),
     })
         .then((res) => {
-            console.log(info);
             if (res.status != 200) {
                 fnResponse = null;
             }
-            // console.log(res.json());
             return res.json();
         })
         .then((data) => {
-            console.log(data);
             fnResponse = data.data.display_number;
             // fnResponse = true;
         })
@@ -91,7 +91,7 @@ export const createEmail = async (info, matterId) => {
 
     var fnResponse = false;
 
-    await fetch('https://localhost:44397/api/Email', {
+    await fetch(`${BASE}Email`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ export const sendPayment = async (info, paymentToken) => {
     //   disableButton: true,
     //   buttonText: 'Submitting...'
     // })
-    // await fetch('https://localhost:44397/api/Payment', {
+    // await fetch(`${BASE}Payment`, {
     //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json',
