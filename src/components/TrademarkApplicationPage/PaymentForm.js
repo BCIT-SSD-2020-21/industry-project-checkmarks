@@ -60,8 +60,10 @@ export default function PaymentForm({
                 type: 'credit_card_number',
                 placeholder: 'credit card number',
                 css: {
+                    'background-color': 'white',
                     'font-family': 'serif',
                     'font-size': '22px',
+                    padding: '4px',
                     color: 'black',
                     ':invalid': {
                         color: '#FF0000',
@@ -78,12 +80,13 @@ export default function PaymentForm({
             selector: '#cvv_field_id',
             input: {
                 type: 'cvv',
-                placeholder: 'cvv number',
+                placeholder: 'CVV',
                 css: {
-                    backgroundcolor: 'white',
+                    'background-color': 'white',
+                    'border-radius': '10px',
                     'font-family': 'serif',
                     'font-size': '22px',
-                    'border-radius': '10px',
+                    padding: '4px',
                     ':focus': { color: 'blue' },
                     ':invalid': {
                         color: '#FF0000',
