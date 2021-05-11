@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Paper } from '@material-ui/core';
+import { Box, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import bannerImage from '../assets/images/bg_application-nicolas-hoizey.jpg';
+import bannerImage from '../assets/images/bg-application-yann-allegre.jpg';
+// import bannerImageDark from '../assets/images/bg-dark-application-ricardo-gomez-angel.jpg';
+import bannerImageDark from '../assets/images/bg-dark-application2-asoggetti.jpg';
 import Progress from '../components/TrademarkApplicationPage/Progress';
 import CountryCard from '../components/TrademarkApplicationPage/CountryCard';
 import ConfirmOrder from '../components/TrademarkApplicationPage/ConfirmOrder';
@@ -13,9 +15,9 @@ import Success from '../components/TrademarkApplicationPage/Success';
 import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationInfo/index';
 import PageLeavePrompt from '../utils/PageLeavePrompt';
 import Footer from '../components/LandingPage/Footer';
-import { validateForm } from '../utils/FormValidation';
+import { sumProgressValue, validateForm } from '../utils/FormValidation';
 
-const TrademarkApplication = () => {
+const TrademarkApplication = (darkMode) => {
     const classes = useStyles();
 
     // form information
@@ -75,8 +77,8 @@ const TrademarkApplication = () => {
     });
 
     // form validation and progress
-    const [inputValidationValue, setInputValidationValue] = useState({
-        //Application Informarion - 1100
+    const [validationProgress, setValidationProgress] = useState({
+        //Application Informarion - 1100 - step 1 end
         individualOrOrganizationName: 0,
         firstName: 0,
         lastName: 0,
@@ -89,39 +91,80 @@ const TrademarkApplication = () => {
         userCountry: 0,
         agreedTermsOfService: 0,
 
-        //Trademark Type - 400
+        //Trademark Type - 400 - step 2 end
         trademarkTypeFormCompleted: 0,
 
-        // Goods and Services - 600
+        // Goods and Services - 600 - step 3 end
         amountNotZero: 0,
 
-        //International Information - 300
+        //International Information - 300 - step 4 end
         internationalFilingInfo: 0,
 
-        //Info Confirmed - 200
+        //Info Confirmed - 200 - step 5 end
         infoConfirmed: 0,
 
-        // Payment Information - 500
+        // Payment Information - 500 - step 6 end
         paymentCardInfo: 0,
         billingAddress: 0,
         paymentConfirmed: 0,
     });
     useEffect(() => {
-        validateForm(info, inputValidationValue, setInputValidationValue);
+        // builds the object carrying validation values assoiated with each step
+        validateForm(info, validationProgress, setValidationProgress);
     }, [info]);
+    const [progressValue, setProgressValue] = useState(0);
+    useEffect(() => {
+        // sums the values of all props in the object carrying validation values assoiated with each step
+        setProgressValue(sumProgressValue(validationProgress));
+    }, [validationProgress]);
+
+    const [currentStep, setCurrentStep] = useState(1);
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentStep]);
 
     // custon hook, "Discard changes?" on Leave Page (defined in  utils folder)
     const [Prompt, setDirty, setPristine] = PageLeavePrompt();
 
     //Give each step an id
     const steps = [
-        { id: 'Application-Information', num: 1 },
-        { id: 'Trademark-Type', num: 2 },
-        { id: 'Goods-and-Services', num: 3 },
-        { id: 'International-Information', num: 4 },
-        { id: 'Confirmation', num: 5 },
-        { id: 'Payment', num: 6 },
-        { id: 'Success', num: 7 },
+        {
+            id: 'Applicant',
+            num: 1,
+            progressValueStart: 0,
+            progressValueEnd: 1100,
+        },
+        {
+            id: 'Trademark',
+            num: 2,
+            progressValueStart: 1100,
+            progressValueEnd: 1500,
+        },
+        {
+            id: 'Goods-and-Services',
+            num: 3,
+            progressValueStart: 1500,
+            progressValueEnd: 2100,
+        },
+        {
+            id: 'International',
+            num: 4,
+            progressValueStart: 2100,
+            progressValueEnd: 2400,
+        },
+        {
+            id: 'Confirmation',
+            num: 5,
+            progressValueStart: 2400,
+            progressValueEnd: 2600,
+        },
+        {
+            id: 'Payment',
+            num: 6,
+            progressValueStart: 2600,
+            progressValueEnd: 3000,
+        },
+        { id: 'Success', num: 7, progressValueStart: 3000 },
     ];
 
     //use useStep from hook-helper to navigate the steps
@@ -131,7 +174,14 @@ const TrademarkApplication = () => {
     });
 
     return (
-        <Paper className={classes.root}>
+        <Paper
+            className={classes.root}
+            style={{
+                backgroundImage: `url(${
+                    darkMode.darkMode ? bannerImageDark : bannerImage
+                })`,
+            }}
+        >
             {/* <div className={classes.logo}>
                 <img src={Logo2} alt="Logo" />
             </div> */}
@@ -139,68 +189,104 @@ const TrademarkApplication = () => {
                 step={step}
                 steps={steps}
                 info={info}
-                inputValidationValue={inputValidationValue}
+                progressValue={progressValue}
+                validationProgress={validationProgress}
             />
+            <Box className={classes.hero}>
+                <Typography className={classes.title}>{step.id}</Typography>
+            </Box>
+
             <div className={classes.container}>
                 {(() => {
                     switch (step.id) {
-                        case 'Application-Information':
+                        case 'Applicant':
                             return (
                                 <ApplicationInfo
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
                                     setDirty={setDirty}
-                                    inputValidationValue={inputValidationValue}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
-                        case 'Trademark-Type':
+                        case 'Trademark':
                             return (
                                 <TrademarkForm
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
-                                    inputValidationValue={inputValidationValue}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Goods-and-Services':
                             return (
                                 <GoodsAndServices
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
-                                    inputValidationValue={inputValidationValue}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
-                        case 'International-Information':
+                        case 'International':
                             return (
                                 <CountryCard
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
-                                    inputValidationValue={inputValidationValue}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Confirmation':
                             return (
                                 <ConfirmOrder
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Payment':
                             return (
                                 <PaymentForm
                                     navigation={navigation}
+                                    step={step}
                                     info={info}
                                     setInfo={setInfo}
-                                    inputValidationValue={inputValidationValue}
-                                    setPristine={setPristine}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    progressValue={progressValue}
+                                    validationProgress={validationProgress}
                                 />
                             );
                         case 'Success':
-                            return <Success navigation={navigation} />;
+                            return (
+                                <Success
+                                    navigation={navigation}
+                                    currentStep={currentStep}
+                                    setCurrentStep={setCurrentStep}
+                                    setPristine={setPristine}
+                                />
+                            );
                     }
                 })()}
             </div>
@@ -215,9 +301,9 @@ export default TrademarkApplication;
 const useStyles = makeStyles((theme) => ({
     root: {
         // backgroundImage: `url(${bannerImage})`,
-        // backgroundPosition: 'center',
-        // backgroundSize: 'cover',
-        // backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'auto 100%',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'flex-start',
@@ -232,15 +318,19 @@ const useStyles = makeStyles((theme) => ({
         // justifyContent: 'center',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: '60px',
+        // marginTop: '60px',
         minHeight: window.innerHeight,
         width: window.innerWidth,
     },
-    title: {
+    hero: {
+        backgroundImage: '',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '2%',
+        height: '100px',
+    },
+    title: {
+        alignSelf: 'flex-end',
+        fontSize: '32px',
+        color: '#df3a48',
     },
 
     text: {

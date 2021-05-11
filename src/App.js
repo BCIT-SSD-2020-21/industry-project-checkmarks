@@ -29,7 +29,7 @@ export default function App() {
                             <Landing darkMode={darkMode} />
                         </Route>
                         <Route path="/application">
-                            <TrademarkApplication />
+                            <TrademarkApplication darkMode={darkMode} />
                         </Route>
                     </Switch>
                 </Router>

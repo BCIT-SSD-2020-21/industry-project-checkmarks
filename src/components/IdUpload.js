@@ -60,6 +60,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     setInfo({
                         ...info,
                         idName: data.filename,
+                        idDocumentUploaded: true,
                         file: URL.createObjectURL(event.target.files[0]),
                     });
                 });

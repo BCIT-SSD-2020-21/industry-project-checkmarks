@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Card } from '@material-ui/core';
+import { checkmarksTheme } from '../../../styles/Themes';
 import ApplicationForm from './ApplicationForm';
 
 export default function ApplicationInfo({
     navigation,
+    step,
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     setDirty,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
     return (
         <Card className={classes.card}>
-            <h1 className={classes.title}> Application Information</h1>
+            <Typography className={classes.heading}>
+                {' '}
+                First, some information about you.{' '}
+            </Typography>
             <Typography>
                 Are you registering as an{' '}
                 <span style={{ color: '#DF3A48' }}>
@@ -28,11 +36,15 @@ export default function ApplicationInfo({
             </Typography>
             <div className={classes.formContainer}>
                 <ApplicationForm
+                    step={step}
                     info={info}
                     setInfo={setInfo}
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
                     navigation={navigation}
                     setDirty={setDirty}
-                    inputValidationValue={inputValidationValue}
+                    progressValue={progressValue}
+                    validationProgress={validationProgress}
                 />
             </div>
         </Card>
@@ -40,10 +52,12 @@ export default function ApplicationInfo({
 }
 const useStyles = makeStyles((theme) => ({
     card: {
-        margin: '3%',
-        width: '70%',
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         border: '1px solid #696969',
         padding: '0 3% 5% 5%',
+        margin: '3%',
+        width: '80%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
             padding: '0 2% ',
@@ -55,13 +69,9 @@ const useStyles = makeStyles((theme) => ({
     formContainer: {
         marginTop: '5%',
     },
-    title: {
-        color: '#df3a48',
+    heading: {
+        fontSize: '24px',
+        color: checkmarksTheme.textPrimaryDark,
         marginBottom: '5%',
-    },
-    question: {
-        marginTop: '5%',
-        fontSize: '15px',
-        textAlign: 'center',
     },
 }));

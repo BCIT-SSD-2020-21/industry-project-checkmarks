@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../../styles/Themes';
 import { Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from '../TrademarkType/DesignCard';
@@ -9,7 +10,16 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkmark from '../../Checkmark';
 
-const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
+const TrademarkForm = ({
+    navigation,
+    step,
+    info,
+    currentStep,
+    setCurrentStep,
+    setInfo,
+    progressValue,
+    validationProgress,
+}) => {
     const classes = useStyles();
     //selection of all the other trademark type
     const otherTypesSelection = [
@@ -25,9 +35,18 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
         'Texture',
     ];
 
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
+
     return (
         <Card className={classes.outerCard}>
-            <h1 className={classes.title}>Trademark Type</h1>
+            {/* <h1 className={classes.title}>Trademark Type</h1> */}
             <div className={classes.outerText}>
                 <Typography className={classes.trademarkMessage}>
                     Please{' '}
@@ -94,9 +113,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     </p>
                 </div>
             )}
-            <Checkmark
-                value={inputValidationValue.trademarkTypeFormCompleted}
-            />
+            <Checkmark value={validationProgress.trademarkTypeFormCompleted} />
             <div className={classes.detailSelectCardContainer}>
                 {/* map other Types Selection */}
                 {info.isOther &&
@@ -119,7 +136,7 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -127,7 +144,8 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Continue
                 </Button>
@@ -138,6 +156,8 @@ const TrademarkForm = ({ navigation, info, setInfo, inputValidationValue }) => {
 export default TrademarkForm;
 const useStyles = makeStyles((theme) => ({
     outerCard: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         display: 'flex',
         padding: '0 5% 5% 5%',

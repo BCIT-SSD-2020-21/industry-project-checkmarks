@@ -1,23 +1,31 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
+import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import { createEmail } from '../../network';
 
-export default function PaymentForm({ navigation, info, setInfo }) {
+export default function PaymentForm({
+    navigation,
+    step,
+    info,
+    setInfo,
+    currentStep,
+    setCurrentStep,
+    progressValue,
+    validationProgress,
+}) {
     const classes = useStyles();
 
-    const handleSubmit = async (event) => {
-        try {
-            await createEmail(info);
-        } catch (error) {
-            console.log(error);
-        }
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
     };
-
-    // console.log('info: ', info);
-    // console.log('info: ', info.classesSelected);
-    // console.log('info: ', info.classesSelected.length);
+    const nextStep = () => {
+        setInfo({ ...info, infoConfirmed: true });
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
 
     return (
         <Card className={classes.card}>
@@ -221,7 +229,7 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -229,11 +237,7 @@ export default function PaymentForm({ navigation, info, setInfo }) {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => {
-                        navigation.next();
-                        setInfo({ ...info, infoConfirmed: true });
-                        // handleSubmit();
-                    }}
+                    onClick={() => nextStep()}
                 >
                     Confirm
                 </Button>
@@ -243,6 +247,8 @@ export default function PaymentForm({ navigation, info, setInfo }) {
 }
 const useStyles = makeStyles((theme) => ({
     card: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',
@@ -263,7 +269,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     subtitle: {
-        color: '#808080',
+        // color: '#808080',
+        color: 'black',
         fontSize: '12px',
         margin: '2%',
         width: '40%',
