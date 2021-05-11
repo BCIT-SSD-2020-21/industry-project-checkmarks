@@ -49,7 +49,7 @@ const progressStyles = makeStyles((theme) => ({
 }));
 
 export default function Progress({ progressValue, inputValidationValue }) {
-    const progressPercentage = Math.round((progressValue * 100) / 3100);
+    const progressPercentage = Math.round((progressValue * 100) / 2900);
 
     const classes = progressStyles();
     return (
@@ -68,7 +68,7 @@ export default function Progress({ progressValue, inputValidationValue }) {
                     className={classes.value}
                     style={{
                         color: `${
-                            progressPercentage > 55
+                            progressPercentage > 54
                                 ? checkmarksTheme.buttonTextPrimary
                                 : checkmarksTheme.buttonTextSecondary
                         }`,

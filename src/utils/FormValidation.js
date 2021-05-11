@@ -79,11 +79,7 @@ export const unitedStates = [
     { name: 'Wyoming', abbreviation: 'WY' },
 ];
 
-export const validateForm = (
-    info,
-    inputValidationValue,
-    setInputValidationValue
-) => {
+export const validateForm = (info, setValidationProgress) => {
     // const namesRegex = /^[a-zA-Z]+$/; // from Original Project
     const numbersRegex = /^[0-9]*$/;
     const personNameRegex = /[^a-z '.-]/i; // case insensitive
@@ -175,13 +171,13 @@ export const validateForm = (
         (info.isLogo ? info.fileName : true) &&
         (info.isOther ? info.OtherTypes.length > 0 : true)
     ) {
-        newInputValidationValue.trademarkTypeFormCompleted = 400;
+        newInputValidationValue.trademarkTypeFormCompleted = 500;
     } else {
         newInputValidationValue.trademarkTypeFormCompleted = 0;
     }
     // Total Amount > 0 (At least one class was selected)
     if (info.amount > 0) {
-        newInputValidationValue.amountNotZero = 600;
+        newInputValidationValue.amountNotZero = 500;
     } else {
         newInputValidationValue.amountNotZero = 0;
     }
@@ -204,40 +200,41 @@ export const validateForm = (
         newInputValidationValue.infoConfirmed = 0;
     }
     // Payment Information Provided        // Payment Information
-    if (
-        info.paymentCardholderName &&
-        !personNameRegex.test(info.paymentCardholderName) &&
-        numbersRegex.test(info.paymentCreditCardNumber) &&
-        info.paymentCreditCardNumber.length >= 13 &&
-        info.paymentCreditCardNumber.length <= 19 &&
-        info.paymentCardExpiryDate.length === 4 &&
-        numbersRegex.test(info.paymentCardExpiryDate) &&
-        info.paymentCardCVV.length >= 3 &&
-        info.paymentCardCVV.length <= 4 &&
-        numbersRegex.test(info.paymentCardCVV)
-    ) {
-        newInputValidationValue.paymentCardInfo = 200;
-    } else {
-        newInputValidationValue.paymentCardInfo = 0;
-    }
-    if (
-        info.billingAddressStreet.length > 2 &&
-        info.billingAddressCity.length > 2 &&
-        !locationNamsRegex.test(info.billingAddressCity) &&
-        ((info.billingAddressCountry === 'Canada' &&
-            postalCodeRegex.test(info.billingAddressPostalCode)) ||
-            (info.billingAddressCountry === 'USA' &&
-                zipCodeRegex.test(info.billingAddressPostalCode))) &&
-        info.billingAddressCountry
-    ) {
-        newInputValidationValue.billingAddress = 200;
-    } else {
-        newInputValidationValue.billingAddress = 0;
-    }
+
+    // if (
+    //     info.paymentCardholderName &&
+    //     !personNameRegex.test(info.paymentCardholderName) &&
+    //     numbersRegex.test(info.paymentCreditCardNumber) &&
+    //     info.paymentCreditCardNumber.length >= 13 &&
+    //     info.paymentCreditCardNumber.length <= 19 &&
+    //     info.paymentCardExpiryDate.length === 4 &&
+    //     numbersRegex.test(info.paymentCardExpiryDate) &&
+    //     info.paymentCardCVV.length >= 3 &&
+    //     info.paymentCardCVV.length <= 4 &&
+    //     numbersRegex.test(info.paymentCardCVV)
+    // ) {
+    //     newInputValidationValue.paymentCardInfo = 200;
+    // } else {
+    //     newInputValidationValue.paymentCardInfo = 0;
+    // }
+    // if (
+    //     info.billingAddressStreet.length > 2 &&
+    //     info.billingAddressCity.length > 2 &&
+    //     !locationNamsRegex.test(info.billingAddressCity) &&
+    //     ((info.billingAddressCountry === 'Canada' &&
+    //         postalCodeRegex.test(info.billingAddressPostalCode)) ||
+    //         (info.billingAddressCountry === 'USA' &&
+    //             zipCodeRegex.test(info.billingAddressPostalCode))) &&
+    //     info.billingAddressCountry
+    // ) {
+    //     newInputValidationValue.billingAddress = 200;
+    // } else {
+    //     newInputValidationValue.billingAddress = 0;
+    // }
     if (info.paymentConfirmaed) {
-        newInputValidationValue.paymentConfirmaed = 100;
+        newInputValidationValue.paymentConfirmaed = 300;
     } else {
         newInputValidationValue.paymentConfirmaed = 0;
     }
-    setInputValidationValue(newInputValidationValue);
+    setValidationProgress(newInputValidationValue);
 };

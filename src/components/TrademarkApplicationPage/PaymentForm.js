@@ -176,7 +176,28 @@ export default function PaymentForm({
                     exp_month: expMonthElement.value,
                     address1: addressElement.value,
                 })
+                .then((result) =>
+                    console.log('result, getPaymentToken: ', result)
+                )
                 .then(() => {
+                    // --> Call function, with paymentToken parameter; looks like this:
+                    // {
+                    // address1: "123 van"
+                    // cvv: "****"
+                    // exp_month: 2
+                    // exp_year: 22
+                    // form_data:
+                    // address1: "123 van"
+                    // exp_month: "02"
+                    // exp_year: "22"
+                    // postal_code: "v3e3g2"
+                    // __proto__: Object
+                    // id: "MRCdh_KsRpuAGj2DCqED5w" <------
+                    // number: "************1111"
+                    // postal_code: "V3E3G2"
+                    // type: "card"
+                    // submitApplication(result);
+                    // }
                     submitApplication();
                 })
                 .catch(function (err) {
@@ -185,30 +206,9 @@ export default function PaymentForm({
         };
     }, []);
 
-    const handleMirrorUserAddress = () => {
-        setInfo({
-            ...info,
-            billingAddressSameAsUser: !info.billingAddressSameAsUser,
-            billingAddressStreet: info.billingAddressSameAsUser
-                ? ''
-                : info.userStreetAddress,
-            billingAddressCity: info.billingAddressSameAsUser
-                ? ''
-                : info.userCity,
-            billingAddressProvince: info.billingAddressSameAsUser
-                ? ''
-                : info.userProvince,
-            billingAddressPostalCode: info.billingAddressSameAsUser
-                ? ''
-                : info.userPostalCode,
-            billingAddressCountry: info.billingAddressSameAsUser
-                ? ''
-                : info.userCountry,
-        });
-    };
-
     //////////////////////////////Create clio account and send email/////////////////////////////////////////////
 
+    // Pass paymentToken
     const submitApplication = async () => {
         setSubmitting(true);
         let responseSendPayment = await sendPayment(info);
@@ -223,7 +223,7 @@ export default function PaymentForm({
                         ...info,
                         paymentConfirmaed: true,
                     });
-                    navigation.next();
+                    nextStep();
                 } else {
                     console.log('createEmail() unsuccsessful');
                 }
