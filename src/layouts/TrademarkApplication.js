@@ -107,8 +107,6 @@ const TrademarkApplication = (darkMode) => {
         infoConfirmed: 0,
 
         // Payment Information - 300 - step 6 end
-        // paymentCardInfo: 0,
-        // billingAddress: 0,
         paymentConfirmed: 0,
     });
     useEffect(() => {
@@ -313,7 +311,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginTop: '75px',
         minHeight: window.innerHeight,
-        width: window.innerWidth,
     },
     container: {
         display: 'flex',
@@ -323,7 +320,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         // marginTop: '60px',
         minHeight: window.innerHeight,
-        width: window.innerWidth,
     },
     hero: {
         backgroundImage: '',
