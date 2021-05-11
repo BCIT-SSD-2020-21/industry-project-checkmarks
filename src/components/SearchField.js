@@ -30,7 +30,9 @@ export default function SearchField({ loading, setInputTo }) {
                 className={classes.input}
                 onChange={(e) => setInputTo(e.target.value)}
                 id="searchBox"
-                placeholder={'Check if your Trademark exists...'}
+                placeholder={
+                    'Search for goods and services to add to your application'
+                }
                 style={{ position: 'relative' }}
                 disableUnderline={true}
                 startAdornment={
