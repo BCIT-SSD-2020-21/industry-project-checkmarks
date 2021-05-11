@@ -107,9 +107,8 @@ export const createEmail = async (info, matterId) => {
 
                 contactInfo: {
                     emailAddress: info.email,
-                    // phoneNumber: info.phone,
-                    phoneNumber: '604895555',
-                    fax: '604895555',
+                    phoneNumber: info.phone,
+                    fax: info.fax,
                     matterId: matterId,
                 },
 

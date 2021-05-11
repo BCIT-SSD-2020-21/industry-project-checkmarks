@@ -132,47 +132,6 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
-            
-            <div className={classes.flexContainer}>
-                {/* /// Phone /// */}
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        className={classes.input}
-                        variant="outlined"
-                        size="small"
-                        placeholder="Phone"
-                        type="text"
-                        value={info.phone}
-                        autoComplete="on"
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                phone: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={inputValidationValue.phone} />
-                </FormControl>
-                {/* /// Fax /// */}
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        className={classes.input}
-                        variant="outlined"
-                        size="small"
-                        placeholder="Fax"
-                        type="text"
-                        value={info.fax}
-                        autoComplete="on"
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                fax: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={inputValidationValue.fax} />
-                </FormControl>
-            </div>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
@@ -191,22 +150,44 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.email} />
             </FormControl>
-            {/* <div className={classes.field}>
-                <Button
-                    onClick={() =>
+
+            <FormControl fullWidth={true} className={classes.field}>
+                <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    placeholder="Phone number"
+                    type="text"
+                    value={info.phone}
+                    autoComplete="on"
+                    onChange={(e) =>
                         setInfo({
                             ...info,
-                            idDocumentUploaded: true,
+                            phone: e.target.value,
                         })
                     }
-                    type="submit"
-                    variant="contained"
-                    className={classes.uploadButton}
-                >
-                    Upload ID Document
-                </Button>
-                <Checkmark value={validationProgress.idDocumentUploaded} />
-            </div> */}
+                />
+                <Checkmark value={validationProgress.phone} />
+            </FormControl>
+            <FormControl fullWidth={true} className={classes.field}>
+                <TextField
+                    className={classes.input}
+                    variant="outlined"
+                    size="small"
+                    placeholder="Fax Number"
+                    type="text"
+                    value={info.fax}
+                    autoComplete="on"
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            fax: e.target.value,
+                        })
+                    }
+                />
+                <Checkmark value={validationProgress.fax} />
+            </FormControl>
+
             <Alert severity="info" className={classes.idAlert}>
                 Single image file should be under 2MB
             </Alert>

@@ -122,6 +122,18 @@ export const validateForm = (
     } else {
         newInputValidationValue.email = 0;
     }
+    //phone
+    if (numbersRegex.test(info.phone) && info.phone.length >= 10) {
+        newInputValidationValue.phone = 1;
+    } else {
+        newInputValidationValue.phone = 0;
+    }
+    // Fax
+    if (numbersRegex.test(info.fax) && info.fax.length >= 10) {
+        newInputValidationValue.fax = 1;
+    } else {
+        newInputValidationValue.fax = 0;
+    }
     // Id Document Upload
     if (info.idDocumentUploaded) {
         newInputValidationValue.idDocumentUploaded = 100;
