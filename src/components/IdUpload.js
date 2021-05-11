@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Checkmark from './Checkmark';
 
 const IdUpload = ({ setHandle, setInfo, info }) => {
     const classes = useStyles();
@@ -17,7 +16,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
             return false;
         }
         if (files.size > size) {
-            err += 'File is too large, please pick a smaller file\n';
+            err += 'File should be less than 2Mb, please pick a smaller file\n';
         }
         if (err !== '') {
             event.target.value = null;
@@ -74,6 +73,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     <strong>Image file name: </strong> {info.idName}
                 </p>
             )}
+
             <Button
                 variant="contained"
                 component="label"
@@ -89,6 +89,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                     style={{ display: 'none' }}
                 />
             </Button>
+
             {errorMessage && (
                 <p className={classes.errorMessage}>{errorMessage}</p>
             )}
@@ -107,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     uploadButton: {
         backgroundColor: '#df3a48',
         color: '#FFF',
-        width: '85%',
+        // width: '85%',
         height: '40px',
         borderRadius: '10px',
         fontSize: '12px',
