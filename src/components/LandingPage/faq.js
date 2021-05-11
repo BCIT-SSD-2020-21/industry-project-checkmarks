@@ -100,23 +100,22 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    A word, phrase, or logo that is used by you to distinguish your products or services from the products or services of others. 
-                    
-                    Trademarks are often classified in terms of word marks, phrases (for example, a slogan), or design marks (for example, a logo). 
-                    
-                    However, there are other ways to classify trademarks. For example, for certain legal purposes, such as assessing the level of protection between two similar competing marks, they could be classified in terms of weak versus strong marks. An example of a strong mark would be a unique coined word. On the other hand, weak marks are often generic or descriptive words. 
+                    A word, phrase, or logo that is used by you to distinguish your products or services from the products or services of others.<br />
+                    Trademarks are often classified in terms of word marks, phrases (for example, a slogan), or design marks (for example, a logo).<br />
+                    However, there are other ways to classify trademarks. For example, for certain legal purposes, such as assessing the level of protection between two similar competing marks, they could be classified in terms of weak versus strong marks. An example of a strong mark would be a unique coined word. On the other hand, weak marks are often generic or descriptive words.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
             {/*  /// PANEL 2 ////  */}
             <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>What is the difference between a trade name and a trademark?</Typography>
+                    <Typography>Should you Register your Trademark?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. 
+                    If you value your brand, we think you should protect it. Registration is the best way to protect your mark’s value in Canada.<br />
+                    Registration is prima facie evidence of ownership. In the event of a dispute, the registered owner is presumed to have ownership and the onus of proof shifts. Registration makes it easier to protect your brand through legal proceedings.<br />
+                    Any word, phrase, or image can potentially be protected by registering it as a trademark. 
                     </Typography>
                 </AccordionDetails>
             </Accordion>
