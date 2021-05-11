@@ -301,24 +301,21 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // backgroundImage: `url(${bannerImage})`,
         backgroundPosition: 'center',
-        backgroundSize: 'auto 100%',
+        backgroundSize: 'cover', //'100% auto',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: '75px',
+        width: '100%',
         minHeight: window.innerHeight,
     },
     container: {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        // marginTop: '60px',
         minHeight: window.innerHeight,
     },
     hero: {

@@ -371,7 +371,6 @@ export default function GoodsAndServices({
 
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
-                    <Checkmark value={validationProgress.amountNotZero} />
                     <CardContent>
                         <Typography variant="h6">
                             <b>Selected Terms:</b>
@@ -454,6 +453,9 @@ export default function GoodsAndServices({
                         </Typography>
                     </CardContent>
                 </Card>
+
+                <Checkmark value={validationProgress.amountNotZero} />
+
                 <Alert severity="info" className={classes.alert}>
                     Helper section with brief legal information, assisting the
                     client through the process.
@@ -521,12 +523,12 @@ export default function GoodsAndServices({
 const useStyles = makeStyles((theme) => ({
     card: {
         backgroundColor: checkmarksTheme.transparentCard,
+        border: '1px solid #696969',
         borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
         margin: '3%',
         width: '95%',
-        border: '1px solid #696969',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
@@ -537,11 +539,12 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     formContainer: {
-        border: '1px solid black',
+        border: '1px solid #696969',
+        borderRadius: '10px',
         display: 'flex',
-        padding: '5px',
         flexDirection: 'column',
         margin: '3%',
+        padding: '25px',
     },
     title: {
         color: '#df3a48',
@@ -561,6 +564,7 @@ const useStyles = makeStyles((theme) => ({
     },
     selectedTerms: {
         margin: '3% 0',
+        padding: '15px',
     },
     classTermList: {
         display: 'flex',
