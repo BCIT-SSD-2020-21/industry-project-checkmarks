@@ -33,7 +33,7 @@ export default function IndividualForm({
     const classes = useStyles();
     const [handle, setHandle] = useState('');
 
-    //handle seclection of individual or organization
+    //handle selection of individual or organization
     const handleSelection = (e) => {
         setInfo({
             ...info,
@@ -50,7 +50,7 @@ export default function IndividualForm({
 
     return (
         <div>
-            {/* checkbox for indicidual or organization */}
+            {/* checkbox for individual or organization */}
             <div className={classes.selectionContainer}>
                 <RadioGroup
                     row
@@ -132,6 +132,47 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
+            
+            <div className={classes.flexContainer}>
+                {/* /// Phone /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Phone"
+                        type="text"
+                        value={info.phone}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                phone: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={inputValidationValue.phone} />
+                </FormControl>
+                {/* /// Fax /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Fax"
+                        type="text"
+                        value={info.fax}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                fax: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={inputValidationValue.fax} />
+                </FormControl>
+            </div>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
