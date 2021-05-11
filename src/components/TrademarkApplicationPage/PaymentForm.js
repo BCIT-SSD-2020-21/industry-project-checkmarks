@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -38,7 +38,8 @@ export default function PaymentForm({
     const yRef = useRef(null);
     const mRef = useRef(null);
 
-    const [cccError, setCcError] = useState('');
+    // Error statevar
+    const [ccError, setCcError] = useState('');
     const [cvvError, setCcvError] = useState('');
     const [monthError, setMonthError] = useState('');
     const [yearError, setYearError] = useState('');
@@ -47,9 +48,7 @@ export default function PaymentForm({
 
     const [submitting, setSubmitting] = useState(false);
 
-    useEffect(() => {
-        let currentComponent;
-
+    useLayoutEffect(() => {
         const form = formRef.current;
 
         var ccErrorMessage = 'Credit Card field is required';
@@ -84,6 +83,7 @@ export default function PaymentForm({
                     backgroundcolor: 'white',
                     'font-family': 'serif',
                     'font-size': '22px',
+                    'border-radius': '10px',
                     ':focus': { color: 'blue' },
                     ':invalid': {
                         color: '#FF0000',
@@ -101,6 +101,7 @@ export default function PaymentForm({
                 css: {
                     'font-family': 'serif',
                     'font-size': '22px',
+                    'border-radius': '10px',
                     color: '#0BEEF0',
                     ':invalid': { background: 'antiquewhite' },
                     ':valid': { color: 'blanchedalmond' },
@@ -109,24 +110,26 @@ export default function PaymentForm({
             fields: [cc_hosted_field, cvv_hosted_field],
         };
 
-        // const hostedFieldsCallBack = function (state) {
-        //     if (state.fields[0].error != '') {
-        //         ccErrorMessage = state.fields[0].error;
-        //     } else {
-        //         ccErrorMessage = '';
-        //     }
+        const hostedFieldsCallBack = function (state) {
+            console.log('state: ', state);
+            if (state.fields[0].error != '') {
+                ccErrorMessage = state.fields[0].error;
+            } else {
+                ccErrorMessage = '';
+            }
 
-        //     if (state.fields[1].error != '') {
-        //         cvvErrorMessage = state.fields[1].error;
-        //     } else {
-        //         cvvErrorMessage = '';
-        //     }
-        // };
+            if (state.fields[1].error != '') {
+                cvvErrorMessage = state.fields[1].error;
+            } else {
+                cvvErrorMessage = '';
+            }
+        };
 
-        // const hostedFields = window.AffiniPay.HostedFields.initializeFields(
-        //     hostedFieldsConfiguration,
-        //     hostedFieldsCallBack
-        // );
+        const hostedFields = window.AffiniPay.HostedFields.initializeFields(
+            hostedFieldsConfiguration,
+            hostedFieldsCallBack
+        );
+        console.log('hostedFields: ', hostedFields);
 
         form.onsubmit = function (event) {
             event.preventDefault();
@@ -139,68 +142,43 @@ export default function PaymentForm({
             );
             const cvvValidation = document.getElementById('cvvValidation');
 
-            ////////////////////////////////////Validation///////////////////////////////////////////////
-            // creditCardValidation.innerText = currentComponent.state.ccError;
-            // cvvValidation.innerText = currentComponent.state.cvvError;
+            creditCardValidation.innerText = ccError;
+            cvvValidation.innerText = cvvError;
 
-            // currentComponent.setState({
-            //     monthError: '',
-            //     yearError: '',
-            //     postalCodeError: '',
-            //     addressError: '',
-            //     ccError: '',
-            //     cvvError: '',
-            // });
+            if (expMonthElement.value.length == 0) {
+                setMonthError('Expiry Month field is required');
+            }
 
-            // if (expMonthElement.value.length == 0) {
-            //     currentComponent.setState({
-            //         monthError: 'Expiry Month field is required',
-            //     });
-            // }
+            if (expYearElement.value.length == 0) {
+                setYearError('Expiry Year field is required');
+            }
 
-            // if (expYearElement.value.length == 0) {
-            //     currentComponent.setState({
-            //         yearError: 'Expiry Year field is required',
-            //     });
-            // }
+            if (ccErrorMessage || cvvErrorMessage) {
+                setCcError(ccErrorMessage);
+                setCcvError(cvvErrorMessage);
+            }
 
-            // if (ccErrorMessage || cvvErrorMessage) {
-            //     currentComponent.setState({
-            //         ccError: ccErrorMessage,
-            //         cvvError: cvvErrorMessage,
-            //     });
-            // }
+            if (postalCodeElement.value.length == 0) {
+                setPostalCodeError('Postal Code field is required');
+            }
 
-            // if (postalCodeElement.value.length == 0) {
-            //     currentComponent.setState({
-            //         postalCodeError: 'Postal Code field is required',
-            //     });
-            // }
-
-            // if (addressElement.value.length == 0) {
-            //     currentComponent.setState({
-            //         addressError: 'Billing Street Address is required',
-            //     });
-            //     return;
-            // }
-
-            // hostedFields
-            //     .getPaymentToken({
-            //         postal_code: postalCodeElement.value,
-            //         exp_year: expYearElement.value,
-            //         exp_month: expMonthElement.value,
-            //         address1: addressElement.value,
-            //     })
-            //     .then(function (paymentResult) {
-            //         currentComponent.props.handler(
-            //             'id',
-            //             String(paymentResult.id)
-            //         );
-            //         currentComponent.props.nextStep();
-            //     })
-            //     .catch(function (err) {
-            //         console.log(err);
-            //     });
+            if (addressElement.value.length == 0) {
+                setAddressError('Billing Street Address is required');
+                return;
+            }
+            hostedFields
+                .getPaymentToken({
+                    postal_code: postalCodeElement.value,
+                    exp_year: expYearElement.value,
+                    exp_month: expMonthElement.value,
+                    address1: addressElement.value,
+                })
+                .then(() => {
+                    submitApplication();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         };
     }, []);
 
@@ -268,269 +246,144 @@ export default function PaymentForm({
 
     return (
         <Card className={classes.card}>
-            <div>
-                <script
-                    src="https://cdn.affinipay.com/hostedfields/1.1.1/fieldGen_1.1.1.js"
-                    async
-                ></script>
-                <h1 className={classes.title}> Place a Trust Payment</h1>
-                {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
-                <Typography className={classes.text} component="p">
-                    Credit Card
-                </Typography>
-                <form ref={formRef}>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            // id="outlined-basic"
-                            label="Cardholder Name"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            // value={info.paymentCardholderName}
-                            autoComplete="on"
-                            // onChange={(e) =>
-                            //     setInfo({
-                            //         ...info,
-                            //         paymentCardholderName: e.target.value,
-                            //     })
-                            // }
-                        />
-                    </FormControl>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Credit Card Number"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            // value={info.paymentCreditCardNumber}
-                            autoComplete="on"
-                            // onChange={(e) =>
-                            //     setInfo({
-                            //         ...info,
-                            //         paymentCreditCardNumber: e.target.value,
-                            //     })
-                            // }
-                        />
-                    </FormControl>
-                    <div className={classes.flexContainer}>
-                        <TextField
-                            id="exp_month"
-                            label="Expiry Month"
-                            variant="outlined"
-                            size="small"
-                            className={classes.flexInput}
-                            type="text"
-                            // value={info.paymentCardExpiryDate}
-                            autoComplete="on"
-                            ref={mRef}
-                        />
+            <script
+                src="https://cdn.affinipay.com/hostedfields/1.1.1/fieldGen_1.1.1.js"
+                async
+            ></script>
+            <h1>Place a Trust Payment</h1>
+            <style type="text/css">
+                {`
+                            form {
+                                width: 500px;
+                                margin: 0 auto;
+                            }
+                            form input, form iframe {
+                                width: 100%;
+                                margin: 5px;
+                            }
+                        
+                            form iframe {
+                                border: none;
+                                height: 30px;
+                            } 
+                        `}
+            </style>
+            <form id="form" ref={formRef} className={classes.container}>
+                <div className={classes.flexInput}>
+                    <label
+                        className={classes.label}
+                        htmlFor="credit_card_field_id"
+                    >
+                        Credit Card
+                    </label>
+                    <div id="ccValidation" style={{ color: 'red' }}>
+                        {ccError}
+                    </div>
+                    <div
+                        className={classes.input}
+                        id="credit_card_field_id"
+                    ></div>
+                </div>
+
+                <div className={classes.expiryDateBox}>
+                    <div className={classes.flexInput}>
+                        <label className={classes.label} htmlFor="exp_month">
+                            Expiry Month
+                        </label>
                         <div id="monthValidation" style={{ color: 'red' }}>
                             {monthError}
                         </div>
-
-                        <TextField
-                            id="exp_year"
-                            label="Expiry Year"
-                            variant="outlined"
-                            size="small"
-                            className={classes.flexInput}
+                        <input
+                            className={classes.input}
+                            id="exp_month"
                             type="text"
-                            // value={info.paymentCardCVV}
-                            autoComplete="on"
-                            ref={yRef}
+                            name="exp_month"
+                            ref={mRef}
                         />
+                    </div>
+
+                    <div className={classes.flexInput}>
+                        <label
+                            className={classes.label}
+                            className={classes.label}
+                            htmlFor="exp_year"
+                        >
+                            Expiry Year
+                        </label>
                         <div id="yearValidation" style={{ color: 'red' }}>
                             {yearError}
                         </div>
+                        <input
+                            className={classes.input}
+                            id="exp_year"
+                            type="text"
+                            name="exp_year"
+                            ref={yRef}
+                        />
                     </div>
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="cvv_field_id"
-                            label="CVV"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            // value={info.paymentCreditCardNumber}
-                            autoComplete="on"
-                            // onChange={(e) =>
-                            //     setInfo({
-                            //         ...info,
-                            //         paymentCreditCardNumber: e.target.value,
-                            //     })
-                            // }
-                        />
-                        <div id="cvvValidation" style={{ color: 'red' }}>
-                            {cvvError}
-                        </div>
-                    </FormControl>
-                    <Checkmark value={inputValidationValue.paymentCardInfo} />
+                </div>
 
-                    {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
-                    <Typography className={classes.text} component="p">
-                        Billing Addres
-                    </Typography>
+                <div className={classes.flexInput}>
+                    <label className={classes.label} htmlFor="cvv_field_id">
+                        CVV
+                    </label>
+                    <div id="cvvValidation" style={{ color: 'red' }}>
+                        {cvvError}
+                    </div>
+                    <div className={classes.input} id="cvv_field_id"></div>
+                </div>
 
-                    <FormControl fullWidth={true}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={info.billingAddressSameAsUser}
-                                    onChange={() => handleMirrorUserAddress()}
-                                />
-                            }
-                            label="Same as Applicant Address (from a few steps ago)"
-                        />
-                        <TextField
-                            id="address1"
-                            label="Billing Address"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            // value={info.billingAddressStreet}
-                            autoComplete="on"
-                            disabled={info.billingAddressSameAsUser}
-                            ref={addressRef}
-                            // onChange={(e) =>
-                            //     setInfo({
-                            //         ...info,
-                            //         billingAddressStreet: e.target.value,
-                            //     })
-                            // }
-                        />
-                        <div id="addressValidation" style={{ color: 'red' }}>
-                            {addressError}
-                        </div>
-                    </FormControl>
-
-                    <FormControl fullWidth={true}>
-                        <TextField
-                            id="postal_code"
-                            label="Postal Code"
-                            variant="outlined"
-                            size="small"
-                            className={classes.input}
-                            type="text"
-                            // value={info.billingAddressStreet}
-                            autoComplete="on"
-                            disabled={info.billingAddressSameAsUser}
-                            ref={psRef}
-                            // onChange={(e) =>
-                            //     setInfo({
-                            //         ...info,
-                            //         billingAddressStreet: e.target.value,
-                            //     })
-                            // }
-                        />
-                        <div id="psValidation" style={{ color: 'red' }}>
-                            {postalCodeError}
-                        </div>
-                    </FormControl>
-
-                    {/* <div className={classes.flexContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="City"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
+                <div className={classes.flexInput}>
+                    <label className={classes.label} htmlFor="address1">
+                        Billing Street Address
+                    </label>
+                    <div id="addressValidation" style={{ color: 'red' }}>
+                        {addressError}
+                    </div>
+                    <input
+                        className={classes.input}
+                        id="address1"
                         type="text"
-                        value={info.billingAddressCity}
-                        autoComplete="on"
-                        disabled={info.billingAddressSameAsUser}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                billingAddressCity: e.target.value,
-                            })
-                        }
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Province"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={info.billingAddressProvince}
-                        autoComplete="on"
-                        disabled={info.billingAddressSameAsUser}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                billingAddressProvince: e.target.value,
-                            })
-                        }
+                        name="address1"
+                        ref={addressRef}
                     />
                 </div>
-                <div className={classes.flexContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Postal Code"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={info.billingAddressPostalCode}
-                        autoComplete="on"
-                        disabled={info.billingAddressSameAsUser}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                billingAddressPostalCode: e.target.value,
-                            })
-                        }
-                    />
 
-                    <TextField
-                        id="outlined-basic"
-                        label="Country"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        value={info.billingAddressCountry}
-                        autoComplete="on"
-                        disabled={info.billingAddressSameAsUser}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                billingAddressCountry: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={inputValidationValue.billingAddress} />
-                </div> */}
-                    <Alert severity="info" className={classes.alert}>
-                        Helper section with brief legal information, assisting
-                        the client through the process.
-                    </Alert>
-                    <div className={classes.buttonContainer}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            className={classes.backButton}
-                            onClick={() => navigation.previous()}
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            className={classes.continueButton}
-                            type="submit"
-                            variant="contained"
-                            onClick={() => {
-                                submitApplication(true);
-                            }}
-                        >
-                            Confirm Payment
-                        </Button>
+                <div className={classes.flexInput}>
+                    <label className={classes.label} htmlFor="postal_code">
+                        Postal Code
+                    </label>
+                    <div id="psValidation" style={{ color: 'red' }}>
+                        {postalCodeError}
                     </div>
-                </form>
-            </div>
+                    <input
+                        className={classes.input}
+                        id="postal_code"
+                        type="text"
+                        name="postal_code"
+                        ref={psRef}
+                    />
+                </div>
+
+                <div className={classes.buttonContainer}>
+                    <Button
+                        className={classes.backButton}
+                        variant="contained"
+                        onClick={() => previousStep()}
+                    >
+                        Back
+                    </Button>
+                    {/* Disable the Continue button if the id has not been set. */}
+                    <Button
+                        className={classes.continueButton}
+                        variant="contained"
+                        type="submit"
+                        value="Submit"
+                    >
+                        Confirm Payment
+                    </Button>
+                </div>
+            </form>
         </Card>
     );
 }
@@ -550,6 +403,15 @@ const useStyles = makeStyles((theme) => ({
             padding: '0 5% 4% 5%',
         },
     },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        overflowY: 'hidden',
+        overflowX: 'hidden',
+        height: '100%',
+        // width: 'auto',
+    },
     title: {
         color: '#df3a48',
         marginBottom: '5%',
@@ -564,8 +426,12 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: '1%',
         },
     },
+    label: {
+        fontSize: '18px',
+    },
     input: {
         width: '80%',
+        padding: '5px',
         margin: '3% auto',
         borderRadius: '10px',
         [theme.breakpoints.up('sm')]: {
@@ -573,13 +439,16 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     flexInput: {
-        width: '80%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
         margin: '3%',
         borderRadius: '10px',
-        [theme.breakpoints.up('sm')]: {
-            width: '38%',
-            margin: '2%',
-        },
+        // [theme.breakpoints.up('sm')]: {
+        //     width: '38%',
+        //     margin: '2%',
+        // },
     },
     flexContainer: {
         display: 'flex',
@@ -590,6 +459,11 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'row',
             width: '100%',
         },
+    },
+    expiryDateBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     buttonContainer: {
         display: 'flex',
@@ -639,294 +513,268 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// This page c-ontains modified code from the following sources:
-// https://developers.affinipay.com/collect/create-payment-form-hosted-fields.html
-// https://cdn.affinipay.com/hostedfields/1.1.1/advancedExample.html
+// <Card className={classes.card}>
+//     <div>
+//         <script
+//             src="https://cdn.affinipay.com/hostedfields/1.1.1/fieldGen_1.1.1.js"
+//             async
+//         ></script>
+//         <h1 className={classes.title}> Place a Trust Payment</h1>
+//         {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
+//         <Typography className={classes.text} component="p">
+//             Credit Card
+//         </Typography>
+//         <form ref={formRef}>
+//             <FormControl fullWidth={true}>
+//                 <TextField
+//                     // id="outlined-basic"
+//                     label="Cardholder Name"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.input}
+//                     type="text"
+//                     // value={info.paymentCardholderName}
+//                     autoComplete="on"
+//                     // onChange={(e) =>
+//                     //     setInfo({
+//                     //         ...info,
+//                     //         paymentCardholderName: e.target.value,
+//                     //     })
+//                     // }
+//                 />
+//             </FormControl>
+//             <FormControl fullWidth={true}>
+//                 <TextField
+//                     id="outlined-basic"
+//                     label="Credit Card Number"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.input}
+//                     type="text"
+//                     // value={info.paymentCreditCardNumber}
+//                     autoComplete="on"
+//                     // onChange={(e) =>
+//                     //     setInfo({
+//                     //         ...info,
+//                     //         paymentCreditCardNumber: e.target.value,
+//                     //     })
+//                     // }
+//                 />
+//             </FormControl>
+//             <div className={classes.flexContainer}>
+//                 <TextField
+//                     id="exp_month"
+//                     label="Expiry Month"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.flexInput}
+//                     type="text"
+//                     // value={info.paymentCardExpiryDate}
+//                     autoComplete="on"
+//                     ref={mRef}
+//                 />
+//                 <div id="monthValidation" style={{ color: 'red' }}>
+//                     {monthError}
+//                 </div>
 
-// import React, { Component } from 'react';
-// import Button from '@material-ui/core/Button';
-// import Background from '../images/back_pattern.png'
+//                 <TextField
+//                     id="exp_year"
+//                     label="Expiry Year"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.flexInput}
+//                     type="text"
+//                     // value={info.paymentCardCVV}
+//                     autoComplete="on"
+//                     ref={yRef}
+//                 />
+//                 <div id="yearValidation" style={{ color: 'red' }}>
+//                     {yearError}
+//                 </div>
+//             </div>
+//             <FormControl fullWidth={true}>
+//                 <TextField
+//                     id="cvv_field_id"
+//                     label="CVV"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.input}
+//                     type="text"
+//                     // value={info.paymentCreditCardNumber}
+//                     autoComplete="on"
+//                     // onChange={(e) =>
+//                     //     setInfo({
+//                     //         ...info,
+//                     //         paymentCreditCardNumber: e.target.value,
+//                     //     })
+//                     // }
+//                 />
+//                 <div id="cvvValidation" style={{ color: 'red' }}>
+//                     {cvvError}
+//                 </div>
+//             </FormControl>
+//             <Checkmark value={validationProgress.paymentCardInfo} />
 
-// var sectionStyle = {
-//     overflowY: "hidden",
-//     overflowX: "hidden",
-//     height: "100%",
-//     width: "auto",
-//     backgroundImage: `url(${Background})`,
-// };
+//             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
+//             <Typography className={classes.text} component="p">
+//                 Billing Addres
+//             </Typography>
 
-// export class PaymentForm extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.formRef = React.createRef();
-//         this.psRef = React.createRef();
-//         this.addressRef = React.createRef();
-//         this.nameRef= React.createRef();
-//         this.yRef = React.createRef();
-//         this.mRef = React.createRef();
+//             <FormControl fullWidth={true}>
+//                 <FormControlLabel
+//                     control={
+//                         <Checkbox
+//                             checked={info.billingAddressSameAsUser}
+//                             onChange={() => handleMirrorUserAddress()}
+//                         />
+//                     }
+//                     label="Same as Applicant Address (from a few steps ago)"
+//                 />
+//                 <TextField
+//                     id="address1"
+//                     label="Billing Address"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.input}
+//                     type="text"
+//                     // value={info.billingAddressStreet}
+//                     autoComplete="on"
+//                     disabled={info.billingAddressSameAsUser}
+//                     ref={addressRef}
+//                     // onChange={(e) =>
+//                     //     setInfo({
+//                     //         ...info,
+//                     //         billingAddressStreet: e.target.value,
+//                     //     })
+//                     // }
+//                 />
+//                 <div id="addressValidation" style={{ color: 'red' }}>
+//                     {addressError}
+//                 </div>
+//             </FormControl>
 
-//         this.state = {
-//             ccError: "",
-//             cvvError: "",
-//             monthError: "",
-//             yearError: "",
-//             postalCodeError: "",
-//             addressError: ""
-//         };
-//     }
+//             <FormControl fullWidth={true}>
+//                 <TextField
+//                     id="postal_code"
+//                     label="Postal Code"
+//                     variant="outlined"
+//                     size="small"
+//                     className={classes.input}
+//                     type="text"
+//                     // value={info.billingAddressStreet}
+//                     autoComplete="on"
+//                     disabled={info.billingAddressSameAsUser}
+//                     ref={psRef}
+//                     // onChange={(e) =>
+//                     //     setInfo({
+//                     //         ...info,
+//                     //         billingAddressStreet: e.target.value,
+//                     //     })
+//                     // }
+//                 />
+//                 <div id="psValidation" style={{ color: 'red' }}>
+//                     {postalCodeError}
+//                 </div>
+//             </FormControl>
 
-//     continue = e => {
-//         e.preventDefault();
-//         this.props.nextStep();
-//     };
-
-//     back = e => {
-//         e.preventDefault();
-//         this.props.prevStep();
-//     };
-
-//     componentDidMount() {
-
-//         let currentComponent = this;
-
-//         const form = this.formRef.current;
-
-//         var ccErrorMessage = "Credit Card field is required";
-//         var cvvErrorMessage = "CVV field is required";
-
-//         const cc_hosted_field = {
-//             selector: '#credit_card_field_id',
-//             input: {
-//                 type: 'credit_card_number',
-//                 placeholder: 'credit card number',
-//                 css: {
-//                     'font-family': 'serif',
-//                     'font-size': '22px',
-//                     'color': 'black',
-//                     ':invalid': {
-//                         'color': '#FF0000',
-//                         'border': '2px solid red'
-//                     },
-//                     ':valid': { color: '#0000FF' },
-//                     '::placeholder': { color: 'brown' },
-//                     'border': '1px solid #A8A8A8'
+//             {/* <div className={classes.flexContainer}>
+//             <TextField
+//                 id="outlined-basic"
+//                 label="City"
+//                 variant="outlined"
+//                 size="small"
+//                 className={classes.flexInput}
+//                 type="text"
+//                 value={info.billingAddressCity}
+//                 autoComplete="on"
+//                 disabled={info.billingAddressSameAsUser}
+//                 onChange={(e) =>
+//                     setInfo({
+//                         ...info,
+//                         billingAddressCity: e.target.value,
+//                     })
 //                 }
-//             }
-//         }
-
-//         const cvv_hosted_field = {
-//             selector: '#cvv_field_id',
-//             input: {
-//                 type: 'cvv',
-//                 placeholder: 'cvv number',
-//                 css: {
-//                     backgroundcolor: 'white',
-//                     'font-family': 'serif',
-//                     'font-size': '22px',
-//                     ':focus': { color: 'blue' },
-//                     ':invalid': {
-//                         'color': '#FF0000',
-//                         'border': '2px solid red'
-//                     },
-//                     ':valid': { color: 'green' },
-//                     'border': '1px solid #A8A8A8'
+//             />
+//             <TextField
+//                 id="outlined-basic"
+//                 label="Province"
+//                 variant="outlined"
+//                 size="small"
+//                 className={classes.flexInput}
+//                 type="text"
+//                 value={info.billingAddressProvince}
+//                 autoComplete="on"
+//                 disabled={info.billingAddressSameAsUser}
+//                 onChange={(e) =>
+//                     setInfo({
+//                         ...info,
+//                         billingAddressProvince: e.target.value,
+//                     })
 //                 }
-//             }
-//         }
-
-//         const hostedFieldsConfiguration = {
-//             publicKey: 'm_4Pmy9PJ0T76ip_9W-o6UUA',
-//             input: {
-//                 css: {
-//                     'font-family': 'serif',
-//                     'font-size': '22px',
-//                     'color': '#0BEEF0',
-//                     ':invalid': { background: 'antiquewhite' },
-//                     ':valid': { color: 'blanchedalmond' }
+//             />
+//         </div>
+//         <div className={classes.flexContainer}>
+//             <TextField
+//                 id="outlined-basic"
+//                 label="Postal Code"
+//                 variant="outlined"
+//                 size="small"
+//                 className={classes.flexInput}
+//                 type="text"
+//                 value={info.billingAddressPostalCode}
+//                 autoComplete="on"
+//                 disabled={info.billingAddressSameAsUser}
+//                 onChange={(e) =>
+//                     setInfo({
+//                         ...info,
+//                         billingAddressPostalCode: e.target.value,
+//                     })
 //                 }
-//             },
-//             fields: [
-//                 cc_hosted_field,
-//                 cvv_hosted_field,
-//             ]
-//         }
+//             />
 
-//         const hostedFieldsCallBack = function (state) {
-//             if (state.fields[0].error != "") {
-//                 ccErrorMessage = state.fields[0].error;
-//             } else {
-//                 ccErrorMessage = "";
-//             }
-
-//             if (state.fields[1].error != "") {
-//                 cvvErrorMessage = state.fields[1].error;
-//             } else {
-//                 cvvErrorMessage = "";
-//             }
-//         }
-
-//         const hostedFields = window.AffiniPay.HostedFields.initializeFields(hostedFieldsConfiguration, hostedFieldsCallBack)
-
-//         form.onsubmit = function (event) {
-//             event.preventDefault()
-//             const postalCodeElement = document.getElementById('postal_code')
-//             const expYearElement = document.getElementById('exp_year')
-//             const expMonthElement = document.getElementById('exp_month')
-//             const addressElement = document.getElementById('address1')
-//             const nameElement = document.getElementById('cardholder_name')
-//             const creditCardValidation = document.getElementById('ccValidation')
-//             const cvvValidation = document.getElementById('cvvValidation')
-
-//             creditCardValidation.innerText = currentComponent.state.ccError;
-//             cvvValidation.innerText = currentComponent.state.cvvError;
-
-//             currentComponent.setState({
-//                 nameError:"",
-//                 monthError: "",
-//                 yearError: "",
-//                 postalCodeError: "",
-//                 addressError: "",
-//                 ccError: "",
-//                 cvvError: "",
-//             })
-
-//             if (nameElement.value.length == 0) {
-//                 currentComponent.setState({
-//                     nameError: "Cardholder Name is required",
-//                 })
-//             }
-
-//             if (expMonthElement.value.length == 0) {
-//                 currentComponent.setState({
-//                     monthError: "Expiry Month field is required",
-//                 })
-//             }
-
-//             if (expYearElement.value.length == 0) {
-//                 currentComponent.setState({
-//                     yearError: "Expiry Year field is required"
-//                 })
-//             }
-
-//             if (ccErrorMessage || cvvErrorMessage) {
-//                 currentComponent.setState({
-//                     ccError: ccErrorMessage,
-//                     cvvError: cvvErrorMessage,
-//                 })
-//             }
-
-//             if (postalCodeElement.value.length == 0) {
-//                 currentComponent.setState({
-//                     postalCodeError: "Postal Code field is required"
-//                 })
-//             }
-
-//             if (addressElement.value.length == 0) {
-//                 currentComponent.setState({
-//                     addressError: "Billing Street Address is required"
-//                 })
-//                 return;
-//             }
-//             hostedFields.getPaymentToken({ "postal_code": postalCodeElement.value, "exp_year": expYearElement.value, "exp_month": expMonthElement.value , "address1": addressElement.value, "name": nameElement.value, "email": currentComponent.props.values.email})
-//                 .then(function (paymentResult) {
-//                     currentComponent.props.handler('id', String(paymentResult.id));
-//                     currentComponent.props.nextStep();
-//                 }).catch(function (err) {
-//                     console.log(err)
-//                 })
-//         }
-//     }
-
-//     render() {
-
-//         return (
-//             <React.Fragment>
-//                 <section style={sectionStyle}>
-//                     <div className="applicationFormTitle">
-//                         <h1>Place a Trust Payment</h1>
-//                     </div>
-//                     <div className="formLayout">
-//                         <div>
-//                             <script src="https://cdn.affinipay.com/hostedfields/1.1.1/fieldGen_1.1.1.js" async></script>
-
-//                             <style type="text/css">
-//                                 {`
-//                             form {
-//                                 width: 500px;
-//                                 margin: 0 auto;
-//                             }
-//                             form input, form iframe {
-//                                 width: 100%;
-//                                 margin: 5px;
-//                             }
-
-//                             form iframe {
-//                                 border: none;
-//                                 height: 30px;
-//                             }
-//                         `}
-//                             </style>
-//                             <form id="form" ref={this.formRef}>
-//                                 <h1>Payment Details</h1>
-
-//                                 <div>
-//                                     <label htmlFor="cardholder_name">Cardholder Name</label>
-//                                     <div id="nameValidation" style={{ color: "red" }}>{this.state.nameError}</div>
-//                                     <input id="cardholder_name" type="text" name="cardholder_name" ref={this.nameRef} />
-
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="credit_card_field_id">Credit Card</label>
-//                                     <div id="ccValidation" style={{ color: "red" }}>{this.state.ccError}</div>
-//                                     <div id="credit_card_field_id"></div>
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="exp_month">Expiry Month</label>
-//                                     <div id="monthValidation" style={{ color: "red" }}>{this.state.monthError}</div>
-//                                     <input id="exp_month" type="text" name="exp_month" ref={this.mRef} />
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="exp_year">Expiry Year</label>
-//                                     <div id="yearValidation" style={{ color: "red" }}>{this.state.yearError}</div>
-//                                     <input id="exp_year" type="text" name="exp_year" ref={this.yRef} />
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="cvv_field_id">CVV</label>
-//                                     <div id="cvvValidation" style={{ color: "red" }}>{this.state.cvvError}</div>
-//                                     <div id="cvv_field_id"></div>
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="address1">Billing Street Address</label>
-//                                     <div id="addressValidation" style={{ color: "red" }}>{this.state.addressError}</div>
-//                                     <input id="address1" type="text" name="address1" ref={this.addressRef} />
-//                                 </div>
-
-//                                 <div>
-//                                     <label htmlFor="postal_code">Postal Code</label>
-//                                     <div id="psValidation" style={{ color: "red" }}>{this.state.postalCodeError}</div>
-//                                     <input id="postal_code" type="text" name="postal_code" ref={this.psRef} />
-//                                 </div>
-
-//                                 <br />
-//                                 <Button style={{ margin: "4px" }} color="secondary" variant="contained" onClick={this.back}>Back</Button>
-//                                 {/* Disable the Continue button if the id has not been set. */}
-//                                 <Button style={{ margin: "4px" }} color="primary" variant="contained" type="submit" value="Submit" >
-//                                     Continue to Confirm Trademark Details
-//                                 </Button>
-//                                 {/* To test the data */}
-//                                 {/* <Button color="primary" variant="contained" type="submit" value="Submit" >Continue</Button> */}
-//                             </form>
-//                         </div>
-//                     </div>
-//                 </section>
-//             </React.Fragment>
-//         );
-//     }
-
-// }
-// export default PaymentForm;
+//             <TextField
+//                 id="outlined-basic"
+//                 label="Country"
+//                 variant="outlined"
+//                 size="small"
+//                 className={classes.flexInput}
+//                 type="text"
+//                 value={info.billingAddressCountry}
+//                 autoComplete="on"
+//                 disabled={info.billingAddressSameAsUser}
+//                 onChange={(e) =>
+//                     setInfo({
+//                         ...info,
+//                         billingAddressCountry: e.target.value,
+//                     })
+//                 }
+//             />
+//             <Checkmark value={validationProgress.billingAddress} />
+//         </div> */}
+//             <Alert severity="info" className={classes.alert}>
+//                 Helper section with brief legal information, assisting
+//                 the client through the process.
+//             </Alert>
+//             <div className={classes.buttonContainer}>
+//                 <Button
+//                     type="submit"
+//                     variant="contained"
+//                     className={classes.backButton}
+//                     onClick={() => navigation.previous()}
+//                 >
+//                     Back
+//                 </Button>
+//                 <Button
+//                     className={classes.continueButton}
+//                     type="submit"
+//                     variant="contained"
+//                     onClick={() => {
+//                         submitApplication(true);
+//                     }}
+//                 >
+//                     Confirm Payment
+//                 </Button>
+//             </div>
+//         </form>
+//     </div>
+// </Card>
