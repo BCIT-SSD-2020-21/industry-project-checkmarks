@@ -184,7 +184,6 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
         setDrawerOpen(false);
     };
 
-    console.log('darkMode:', darkMode);
     return (
         <div>
             <CssBaseline />

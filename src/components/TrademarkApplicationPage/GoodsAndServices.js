@@ -194,7 +194,6 @@ export default function GoodsAndServices({
         const classesSelected = [];
         if (selectedTerms.length > 0) {
             selectedTerms.forEach((term) => {
-                // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
                     if (niceClass.id === term.termClass) {
@@ -209,8 +208,11 @@ export default function GoodsAndServices({
                 }
                 termClassExists = false;
             });
-
             setSelectedClasses(classesSelected);
+
+            // console.log('class selected', classesSelected);
+
+            // setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
                     (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
@@ -247,12 +249,14 @@ export default function GoodsAndServices({
         navigation.next();
     };
 
-    console.log('selectedClasses: ', selectedClasses);
-    console.log('selectedTerms: ', selectedTerms);
-    console.log('step: ', step);
-    console.log('prog val:', progressValue);
+    // console.log('selectedClasses: ', selectedClasses);
+    // console.log('selectedTerms: ', selectedTerms);
+    // console.log('step: ', step);
+    // console.log('prog val:', progressValue);
     // console.log('termTableData[0]: ', termTableData[0]);
     // console.log('info.termsSelected: ', info.termsSelected);
+    console.log('info', info);
+
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Goods and Services</h1>

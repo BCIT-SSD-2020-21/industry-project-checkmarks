@@ -180,7 +180,7 @@ export default function PaymentForm({
                                 >
                                     {niceClass.number +
                                         ' - ' +
-                                        niceClass.descriptions[0].name}
+                                        niceClass.descriptions}
                                 </Typography>
                             );
                         })}
