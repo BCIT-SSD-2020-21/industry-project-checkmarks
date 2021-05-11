@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
-import { Button } from '@material-ui/core';
 import FileUpload from '../../FileUpload';
 
-const LogoForm = () => {
+const LogoForm = ({ info, setInfo }) => {
     const classes = useStyles();
-
-    const [file, setFile] = useState('');
+    const [handle, setHandle] = useState('');
 
     return (
         <div className={classes.logoCard} fullwidth>
             <div>
                 <p style={{ color: '#DF3A48' }}>Select a file to upload</p>
                 <h5 style={{ color: '#DF3A48' }}>Preview:</h5>
-                <img className={classes.previewImage} src={file} />
-                {/* <Button className={classes.browseButton}>Choose File</Button> */}
-                <FileUpload />
+                <img className={classes.previewImage} src={info.file} />
+                <FileUpload
+                    setHandle={setHandle}
+                    info={info}
+                    setInfo={setInfo}
+                />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Single image file should be under 2MB

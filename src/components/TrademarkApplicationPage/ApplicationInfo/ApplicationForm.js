@@ -17,6 +17,7 @@ import Alert from '@material-ui/lab/Alert';
 import { checkmarksTheme } from '../../../styles/Themes';
 import { canadaProvinces, unitedStates } from '../../../utils/FormValidation';
 import Checkmark from '../../Checkmark';
+import IdUpload from '../../IdUpload';
 
 export default function IndividualForm({
     step,
@@ -30,6 +31,7 @@ export default function IndividualForm({
     validationProgress,
 }) {
     const classes = useStyles();
+    const [handle, setHandle] = useState('');
 
     //handle seclection of individual or organization
     const handleSelection = (e) => {
@@ -91,13 +93,6 @@ export default function IndividualForm({
                     <Checkmark
                         value={validationProgress.individualOrOrganizationName}
                     />
-                    {/* {inputValidationValue?.individualOrOrganizationName ? (
-                        <CheckCircleOutlinedIcon
-                            className={classes.checkmark}
-                        />
-                    ) : (
-                        <ErrorOutlineIcon className={classes.checkmark} />
-                    )} */}
                 </FormControl>
             )}
 
@@ -155,7 +150,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.email} />
             </FormControl>
-            <div className={classes.field}>
+            {/* <div className={classes.field}>
                 <Button
                     onClick={() =>
                         setInfo({
@@ -170,7 +165,18 @@ export default function IndividualForm({
                     Upload ID Document
                 </Button>
                 <Checkmark value={validationProgress.idDocumentUploaded} />
-            </div>
+            </div> */}
+            <Alert severity="info" className={classes.idAlert}>
+                Single image file should be under 2MB
+            </Alert>
+
+            {/* ============================ */}
+            {/* ======== Upload ID ========= */}
+            {/* ============================ */}
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
+                <Checkmark value={validationProgress.idDocumentUploaded} />
+            </FormControl>
             {/* /////////////////////////// address /////////////////////// */}
             <FormControl fullWidth={true} className={classes.fieldDropDown}>
                 <InputLabel
@@ -411,20 +417,7 @@ const useStyles = makeStyles((theme) => ({
         //     margin: '2%',
         // },
     },
-    uploadButtonContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '3%',
-    },
-    uploadButton: {
-        backgroundColor: '#df3a48',
-        color: '#FFF',
-        width: '85%',
-        height: '40px',
-        borderRadius: '10px',
-        fontSize: '12px',
-    },
+
     nextButtonContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -448,6 +441,17 @@ const useStyles = makeStyles((theme) => ({
     alert: {
         color: '#2a9df4',
         margin: '5% auto 5% auto',
+        fontSize: '12px',
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '5% auto 2% auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            margin: '0 auto 5% auto',
+        },
+    },
+    idAlert: {
+        color: '#2a9df4',
+        margin: '5% auto 1% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 2% auto',

@@ -56,6 +56,8 @@ export default function PaymentForm({
         });
     };
 
+    //////////////////////////////Create clio account and send email/////////////////////////////////////////////
+
     const submitApplication = async () => {
         setSubmitting(true);
         let responseSendPayment = await sendPayment(info);

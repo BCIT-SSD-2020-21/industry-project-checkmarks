@@ -67,6 +67,7 @@ const TrademarkForm = ({
                     setInfo({
                         ...info,
                         isText: !info.isText,
+                        characterText: '',
                     })
                 }
             />
@@ -76,11 +77,13 @@ const TrademarkForm = ({
             {/* ======================================== */}
             <FormControlLabel
                 control={<Checkbox checked={info.isLogo} />}
-                label="Logos or Design"
+                label="Design/Logo"
                 onChange={(e) =>
                     setInfo({
                         ...info,
                         isLogo: !info.isLogo,
+                        fileName: '',
+                        file: '',
                     })
                 }
             />

@@ -54,6 +54,9 @@ const CountryCard = ({
                         setInfo({
                             ...info,
                             filedInOtherCountry: e.target.value,
+                            countryOfFiling: '',
+                            fillingDate: '',
+                            fillingNumber: '',
                         })
                     }
                 >
