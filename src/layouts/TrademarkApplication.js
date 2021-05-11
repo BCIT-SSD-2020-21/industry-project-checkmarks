@@ -174,6 +174,7 @@ const TrademarkApplication = (darkMode) => {
         initialStep: 0,
     });
 
+    console.log('info: ', info);
     return (
         <Paper
             className={classes.root}
@@ -211,6 +212,7 @@ const TrademarkApplication = (darkMode) => {
                                     setCurrentStep={setCurrentStep}
                                     progressValue={progressValue}
                                     validationProgress={validationProgress}
+                                    setDirty={setDirty}
                                 />
                             );
                         case 'Goods-and-Services':
@@ -248,7 +250,6 @@ const TrademarkApplication = (darkMode) => {
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    setDirty={setDirty}
                                     progressValue={progressValue}
                                     validationProgress={validationProgress}
                                 />

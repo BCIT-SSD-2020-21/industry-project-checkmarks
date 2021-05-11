@@ -26,7 +26,6 @@ export default function IndividualForm({
     currentStep,
     setCurrentStep,
     navigation,
-    setDirty,
     progressValue,
     validationProgress,
 }) {
@@ -45,8 +44,10 @@ export default function IndividualForm({
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
-
-    setDirty();
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
 
     return (
         <div>
@@ -378,7 +379,13 @@ export default function IndividualForm({
                     />
                 </FormControl>
             </Box>
-            <div className={classes.nextButtonContainer}>
+            <div className={classes.buttonContainer}>
+                <Button
+                    className={classes.backButton}
+                    onClick={() => previousStep()}
+                >
+                    Back
+                </Button>
                 <Button
                     className={classes.nextButton}
                     onClick={() => nextStep()}
@@ -446,20 +453,36 @@ const useStyles = makeStyles((theme) => ({
         // },
     },
 
-    nextButtonContainer: {
+    buttonContainer: {
         display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        marginTop: '5%',
     },
     nextButton: {
         backgroundColor: '#DF3A48',
         color: '#FFF',
-        width: '20%',
-        height: '30px',
+        width: '35%',
+        height: '35px',
         fontWeight: 'bold',
         fontSize: '10px',
         borderRadius: '10px',
-        margin: '0 auto 5% auto',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '8px',
+            margin: ' 4% auto 2% auto',
+            // width: '30%',
+        },
+    },
+    backButton: {
+        color: '#df3a48',
+        backgroundColor: '#FFF',
+        border: '1px solid #df3a48',
+        width: '35%',
+        height: '35px',
+        fontWeight: 'bold',
+        fontSize: '10px',
+        borderRadius: '10px',
         [theme.breakpoints.down('sm')]: {
             fontSize: '8px',
             margin: ' 4% auto 2% auto',
