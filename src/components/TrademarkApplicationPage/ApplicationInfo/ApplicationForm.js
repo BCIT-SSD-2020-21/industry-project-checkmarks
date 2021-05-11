@@ -132,6 +132,7 @@ export default function IndividualForm({
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
+
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
@@ -151,42 +152,47 @@ export default function IndividualForm({
                 <Checkmark value={validationProgress.email} />
             </FormControl>
 
-            <FormControl fullWidth={true} className={classes.field}>
-                <TextField
-                    className={classes.input}
-                    variant="outlined"
-                    size="small"
-                    placeholder="Phone number"
-                    type="text"
-                    value={info.phone}
-                    autoComplete="on"
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            phone: e.target.value,
-                        })
-                    }
-                />
-                <Checkmark value={validationProgress.phone} />
-            </FormControl>
-            <FormControl fullWidth={true} className={classes.field}>
-                <TextField
-                    className={classes.input}
-                    variant="outlined"
-                    size="small"
-                    placeholder="Fax Number"
-                    type="text"
-                    value={info.fax}
-                    autoComplete="on"
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            fax: e.target.value,
-                        })
-                    }
-                />
-                <Checkmark value={validationProgress.fax} />
-            </FormControl>
+            <div className={classes.flexContainer}>
+                {/* /// Phone /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Phone number"
+                        type="text"
+                        value={info.phone}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                phone: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={validationProgress.phone} />
+                </FormControl>
+
+                {/* /// Fax /// */}
+                <FormControl fullWidth={true} className={classes.field}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Fax number"
+                        type="text"
+                        value={info.fax}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                fax: e.target.value,
+                            })
+                        }
+                    />
+                    <Checkmark value={validationProgress.fax} />
+                </FormControl>
+            </div>
 
             <Alert severity="info" className={classes.idAlert}>
                 Single image file should be under 2MB

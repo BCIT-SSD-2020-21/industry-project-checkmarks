@@ -155,9 +155,10 @@ export const createEmail = async (info, matterId) => {
     // end of email function
 };
 
-export const sendPayment = async (info) => {
+export const sendPayment = async (info, paymentToken) => {
     console.log('sendPayment called');
     return true;
+
     // this.setState({
     //   disableButton: true,
     //   buttonText: 'Submitting...'
@@ -169,14 +170,16 @@ export const sendPayment = async (info) => {
     //     },
     //     body: JSON.stringify({
     //         amount: String(info.amount),
-    //         // "method": String(this.props.values.id),
+    //         "method": String(paymentToken.id),
     //         account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
     //     }),
     // })
     //     .then(async (res) => {
     //         if (res.status == 200) {
-    // const createdEmail = await createEmail();
+    //
+    // // // //  const createdEmail = await createEmail();
 
+    // --!!!-- BELOW NOT NEEDED, EXCEPT FOR FAIL ALERTS (Implement that in PaymentForm SubmitApplication() function, .catch )
     // if (createdEmail) {
     //   this.props.nextStep();
     // } else {

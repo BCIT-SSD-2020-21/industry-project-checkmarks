@@ -63,16 +63,19 @@ const TrademarkApplication = (darkMode) => {
         infoConfirmed: false,
 
         // Payment Information
+        id: '',
         paymentCardholderName: '',
         paymentCreditCardNumber: '',
         paymentCardExpiryDate: '',
         paymentCardCVV: '',
         billingAddressSameAsUser: false,
-        billingAddressStreet: '',
-        billingAddressCity: '',
-        billingAddressProvince: '',
-        billingAddressPostalCode: '',
-        billingAddressCountry: '',
+        billingStreetAddress: '',
+        billingPostalCode: '',
+        // billingAddressStreet: '',
+        // billingAddressCity: '',
+        // billingAddressProvince: '',
+        // billingAddressPostalCode: '',
+        // billingAddressCountry: '',
         paymentConfirmaed: false,
     });
 
@@ -103,14 +106,14 @@ const TrademarkApplication = (darkMode) => {
         //Info Confirmed - 200 - step 5 end
         infoConfirmed: 0,
 
-        // Payment Information - 500 - step 6 end
-        paymentCardInfo: 0,
-        billingAddress: 0,
+        // Payment Information - 300 - step 6 end
+        // paymentCardInfo: 0,
+        // billingAddress: 0,
         paymentConfirmed: 0,
     });
     useEffect(() => {
         // builds the object carrying validation values assoiated with each step
-        validateForm(info, validationProgress, setValidationProgress);
+        validateForm(info, setValidationProgress);
     }, [info]);
     const [progressValue, setProgressValue] = useState(0);
     useEffect(() => {
@@ -138,12 +141,12 @@ const TrademarkApplication = (darkMode) => {
             id: 'Trademark',
             num: 2,
             progressValueStart: 1100,
-            progressValueEnd: 1500,
+            progressValueEnd: 1600,
         },
         {
             id: 'Goods-and-Services',
             num: 3,
-            progressValueStart: 1500,
+            progressValueStart: 1600,
             progressValueEnd: 2100,
         },
         {
@@ -162,9 +165,9 @@ const TrademarkApplication = (darkMode) => {
             id: 'Payment',
             num: 6,
             progressValueStart: 2600,
-            progressValueEnd: 3000,
+            progressValueEnd: 2900,
         },
-        { id: 'Success', num: 7, progressValueStart: 3000 },
+        { id: 'Success', num: 7, progressValueStart: 2900 },
     ];
 
     //use useStep from hook-helper to navigate the steps
