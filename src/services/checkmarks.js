@@ -1,5 +1,6 @@
 require('dotenv').config();
 const BASE = process.env.REACT_APP_BASE_URL + 'api/';
+const BASE_URL_LOCAL = process.env.REACT_APP_BASE_URL_LOCAL + 'api/';
 const BASE_URL = BASE + 'trademark/';
 
 const tmTypeDescription = (tmTypeArray) => {
@@ -46,12 +47,29 @@ export const formatSearchResults = (data) => {
     return formattedData;
 };
 
-export const searchTrademarks = async (term, password) => {
-    const url = `${BASE_URL}/${term}/${
+export const searchTrademarks = async (text, password) => {
+    const url = `${BASE_URL}/${text}/${
         password ? '?password=' + password : ''
     }`;
     const response = await fetch(url)
         .then((response) => response.json())
         .catch((error) => console.log('Error: ', error));
     return formatSearchResults(response?.data);
+};
+
+export const searchTerms = async (text) => {
+    const url = `${BASE_URL_LOCAL}cipo/GetTermDataByString/${text}`;
+    console.log('url: ', url);
+    const response = await fetch(url)
+        .then((response) => response.json())
+        .catch((error) => console.log('Error: ', error));
+    return response;
+};
+
+export const getAllClasses = async () => {
+    const url = `${BASE_URL_LOCAL}cipo/GetAllClasses`;
+    const response = await fetch(url)
+        .then((response) => response.json())
+        .catch((error) => console.log('Error: ', error));
+    return response;
 };

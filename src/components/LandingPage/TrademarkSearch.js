@@ -88,10 +88,7 @@ export default function TrademarkSearch({ searching, setSearching }) {
                     searchTerm.length > 0 && classes.searchBoxShifted
                 }`}
             >
-                <SearchField
-                    loading={loading}
-                    searchTrademark={searchTrademark}
-                />
+                <SearchField loading={loading} setInputTo={searchTrademark} />
                 <IconButton
                     style={{
                         display: searching ? 'block' : 'none',

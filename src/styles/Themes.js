@@ -40,6 +40,10 @@ export const checkmarksTheme = {
     inputBackground: colors.lighterGrayOpq,
     inputPlaceholder: colors.lightGray,
 
+    transparentCard: colors.lighterGrayOpq,
+
+    textPrimary: colors.mediumRed,
+    textPrimaryDark: colors.darkRed,
     textActive: colors.activeBlue,
 
     borderPrimary: colors.mediumRed,

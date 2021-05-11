@@ -48,13 +48,8 @@ const progressStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Progress({ inputValidationValue }) {
-    let progressCompletedValue = 0; // Max value: 3100
-    for (const prop in inputValidationValue) {
-        progressCompletedValue += inputValidationValue[prop];
-    }
-
-    const progressValue = Math.round((progressCompletedValue * 100) / 3100);
+export default function Progress({ progressValue, inputValidationValue }) {
+    const progressPercentage = Math.round((progressValue * 100) / 3100);
 
     const classes = progressStyles();
     return (
@@ -64,23 +59,23 @@ export default function Progress({ inputValidationValue }) {
                     className={classes.progress}
                     style={{
                         borderRadius:
-                            progressValue > 96 ? '25px' : '25px 0 0 25px',
+                            progressPercentage > 96 ? '25px' : '25px 0 0 25px',
                         transition: 'width 1s ease-in-out',
-                        width: `${progressValue}%`,
+                        width: `${progressPercentage}%`,
                     }}
                 ></Box>
                 <Typography
                     className={classes.value}
                     style={{
                         color: `${
-                            progressValue > 55
+                            progressPercentage > 55
                                 ? checkmarksTheme.buttonTextPrimary
                                 : checkmarksTheme.buttonTextSecondary
                         }`,
                         transition: 'color 1s ease-in-out',
                     }}
                 >
-                    {progressValue + '%'}
+                    {progressPercentage + '%'}
                 </Typography>
             </Box>
         </Box>

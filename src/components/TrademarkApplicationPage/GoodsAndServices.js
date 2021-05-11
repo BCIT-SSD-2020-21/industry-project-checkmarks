@@ -26,19 +26,25 @@ import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
+import { searchTerms, getAllClasses } from '../../services/checkmarks';
 // import { searchTerms } from '../../services/cipo';
 import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({
     navigation,
+    step,
     info,
     setInfo,
-    inputValidationValue,
+    currentStep,
+    setCurrentStep,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
     // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
+
     const [searchError, setSearchError] = useState('');
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
@@ -52,9 +58,6 @@ export default function GoodsAndServices({
         setSelectedClasses(info.classesSelected);
     }, []);
 
-    // DATA Active/Displayed
-    const [termTableData, setTermTableData] = useState([]); // used to render on Table
-
     // SELECTION HANDLING
     const [termBeingToggledNumber, setTermBeingToggledNumber] = useState(null);
     useEffect(() => {
@@ -65,6 +68,62 @@ export default function GoodsAndServices({
     }, [termBeingToggledNumber]);
 
     const [totalAmount, setTotalAmount] = useState(0);
+
+    // GET TERMS AFTER TEXT INPUT
+    const [termSearchResults, setTermSearchResults] = useState([]);
+    useEffect(() => {
+        if (searchTerm.length > 2) {
+            (async () => {
+                const result = await searchTerms(searchTerm);
+                console.log('result: ', result);
+                setTermSearchResults(result.terms);
+            })();
+        }
+    }, [searchTerm]);
+
+    console.log('termSearchResults: ', termSearchResults);
+    // console.log('searchTerm: ', searchTerm);
+    // GET TERM DATA (on Search)
+    const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
+    useEffect(() => {
+        renderTerms();
+    }, [termSearchResults, selectedTerms]);
+    const renderTerms = () => {
+        const termData = []; // formatted to fit table
+        termSearchResults.forEach((resultItem) => {
+            let termSelected = false;
+            info.termsSelected.forEach((term) => {
+                if (term.id === resultItem.id) {
+                    termSelected = true;
+                }
+            });
+            let termTableDataFormat = {
+                ...resultItem,
+                selected: termSelected,
+                selectionCheckbox: (
+                    <TermSelector
+                        number={resultItem.id}
+                        selected={termSelected}
+                        handler={setTermBeingToggledNumber}
+                    />
+                ),
+                id: resultItem.id,
+                termName: resultItem.termName,
+                termClass: resultItem.termClass,
+                classShortName: resultItem.classShortName,
+            };
+            termData.push(termTableDataFormat);
+        });
+        setTermTableData(termData);
+    };
+    const removeTerm = (term) => {
+        // const newSelectedTerms = selectedTerms;
+        let newSelectedTerms = selectedTerms.filter(
+            (item) => item.id !== term.id
+        );
+        console.log(newSelectedTerms);
+        setSelectedTerms(newSelectedTerms);
+    };
 
     // COSMETIC statevar (indicator)
     const { current: instance } = useRef({});
@@ -92,7 +151,7 @@ export default function GoodsAndServices({
     // Functions
     const toggleTermSelectionStatus = (termNumber) => {
         let termIndex = termTableData.findIndex(
-            (term) => term.termNumber === termNumber
+            (term) => term.id == termNumber
         );
         if (termIndex === -1) {
             console.log('Term not found'); // handle error
@@ -129,47 +188,7 @@ export default function GoodsAndServices({
             }
         }
     };
-    // GET TERM DATA (on Search)
-    const getSearchTerms = async () => {
-        // GET request to API - simulated with fake data: sampleTermSearch
-        const termData = []; // formatted to fit table
-        sampleTermSearch.result.forEach((result) => {
-            // format to fit table
-            result.resultsReturned.map((item) => {
-                // determine if Term is Selected (if term exists in info.termsSelected)
-                let termSelected = false;
-                info.termsSelected.forEach((term) => {
-                    if (term.termNumber === item.termNumber) {
-                        termSelected = true;
-                    }
-                });
-                let termTableDataFormat = {
-                    ...item,
-                    selected: termSelected,
-                    selectionCheckbox: (
-                        <TermSelector
-                            number={item.termNumber}
-                            selected={termSelected}
-                            handler={setTermBeingToggledNumber}
-                        />
-                    ),
-                    id: item.termNumber,
-                    termName: item.termName,
-                    termClass: item.niceClasses[0].number,
-                    classShortName: item.niceClasses[0].descriptions[0].name,
-                };
-                termData.push(termTableDataFormat);
-            });
-            setTermTableData(termData);
-        });
-    };
-    const removeTerm = (term) => {
-        // const newSelectedTerms = selectedTerms;
-        let newSelectedTerms = selectedTerms.filter(
-            (item) => item.termNumber !== term.termNumber
-        );
-        setSelectedTerms(newSelectedTerms);
-    };
+
     // filter selectedTerms, get list of selected classes (no duplicates)
     useEffect(() => {
         const classesSelected = [];
@@ -178,17 +197,15 @@ export default function GoodsAndServices({
                 // console.log("term: ", term)
                 let termClassExists = false;
                 classesSelected.forEach((niceClass) => {
-                    // console.log(
-                    //     'niceClass: ',
-                    //     term.niceClass,
-                    //     niceClass.number
-                    // );
-                    if (niceClass.number === term.termClass) {
+                    if (niceClass.id === term.termClass) {
                         termClassExists = true;
                     }
                 });
                 if (!termClassExists) {
-                    classesSelected.push(term.niceClasses[0]);
+                    classesSelected.push({
+                        id: term.termClass,
+                        description: term.classShortName,
+                    });
                 }
                 termClassExists = false;
             });
@@ -221,6 +238,19 @@ export default function GoodsAndServices({
         }
     }, [totalAmount]);
 
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
+
+    console.log('selectedClasses: ', selectedClasses);
+    console.log('selectedTerms: ', selectedTerms);
+    console.log('step: ', step);
+    console.log('prog val:', progressValue);
     // console.log('termTableData[0]: ', termTableData[0]);
     // console.log('info.termsSelected: ', info.termsSelected);
     return (
@@ -250,78 +280,94 @@ export default function GoodsAndServices({
 
                 {/* ///////////////////////////search trademark terms/////////////////////////// */}
                 <h3>Search for your Trademark Terms</h3>
-                <SearchField
-                    loading={loading}
-                    searchTrademark={getSearchTerms}
-                />
-                {/* <div className={classes.searchTermsContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        placeholder="Enter a general term for your good/service "
-                        label="Search"
-                        fullWidth
-                        variant="outlined"
-                        error={searchError != ''}
-                        helperText={searchError}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        // onChange={handleTextFieldChange}
-                    />
-                    <Button
-                        variant="contained"
-                        className={classes.searchTermsButton}
-                        onClick={getSearchTerms}
-                    >
-                        Search
-                    </Button>
-                </div> */}
+                <SearchField loading={loading} setInputTo={setSearchTerm} />
 
-                <Paper
-                    className={classes.results}
-                    style={{
-                        backgroundColor: checkmarksTheme.bgTransparent,
-                        height: '500px', // (window.innerHeight * 4) / 5,
-                        width: '100%',
-                    }}
-                >
-                    <MuiVirtualizedTable
-                        // style={{ height: 400, width: '100%' }}
-                        rowCount={termTableData.length} // row or data
-                        rowGetter={({ index }) => termTableData[index]} // row or data
-                        onRowClick={(e) => setSelectedRow(e.index)}
-                        onFilterClick={onFilterClick}
-                        columns={[
-                            {
-                                width: (window.innerWidth * 1) / 10,
-                                label: ['Selected', '', onFilterClick, []],
-                                dataKey: 'selectionCheckbox',
-                            },
-                            {
-                                width: (window.innerWidth * 4) / 10,
-                                label: ['Term Name', '', onFilterClick, []],
-                                dataKey: 'termName',
-                            },
-                            {
-                                width: (window.innerWidth * 1) / 10,
-                                label: ['NICE Class', '', onFilterClick, []],
-                                dataKey: 'termClass',
-                            },
-                            {
-                                width: (window.innerWidth * 4) / 10,
-                                label: [
-                                    'NICE Class Name',
-                                    '',
-                                    onFilterClick,
-                                    [],
-                                ],
-                                dataKey: 'classShortName',
-                            },
-                        ]}
-                    />
-                </Paper>
+                {(searchTerm.length > 2 || termTableData.length > 0) &&
+                    !loading && (
+                        <>
+                            {termTableData.length > 0 ? (
+                                <Paper
+                                    className={classes.results}
+                                    style={{
+                                        backgroundColor:
+                                            checkmarksTheme.bgTransparent,
+                                        height: '500px', // (window.innerHeight * 4) / 5,
+                                        width: '100%',
+                                    }}
+                                >
+                                    <MuiVirtualizedTable
+                                        // style={{ height: 400, width: '100%' }}
+                                        rowCount={termTableData.length} // row or data
+                                        rowGetter={({ index }) =>
+                                            termTableData[index]
+                                        } // row or data
+                                        onRowClick={(e) =>
+                                            setSelectedRow(e.index)
+                                        }
+                                        onFilterClick={onFilterClick}
+                                        columns={[
+                                            {
+                                                width:
+                                                    (window.innerWidth * 2) /
+                                                    10,
+                                                label: [
+                                                    'Selected',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'selectionCheckbox',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 3) /
+                                                    10,
+                                                label: [
+                                                    'Term Name',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'termName',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 1) /
+                                                    10,
+                                                label: [
+                                                    'NICE Class',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'termClass',
+                                            },
+                                            {
+                                                width:
+                                                    (window.innerWidth * 4) /
+                                                    10,
+                                                label: [
+                                                    'NICE Class Name',
+                                                    '',
+                                                    onFilterClick,
+                                                    [],
+                                                ],
+                                                dataKey: 'classShortName',
+                                            },
+                                        ]}
+                                    />
+                                </Paper>
+                            ) : (
+                                <Paper>
+                                    <Typography>No results</Typography>
+                                </Paper>
+                            )}
+                        </>
+                    )}
+
                 {/* ///////////////////////////selected terms section /////////////////////////// */}
                 <Card className={classes.selectedTerms}>
-                    <Checkmark value={inputValidationValue.amountNotZero} />
+                    <Checkmark value={validationProgress.amountNotZero} />
                     <CardContent>
                         <Typography variant="h6">
                             <b>Selected Terms:</b>
@@ -333,10 +379,9 @@ export default function GoodsAndServices({
                                     <div key={index}>
                                         <h4>
                                             {'Class: ' +
-                                                niceClass?.name +
+                                                niceClass?.id +
                                                 ' - ' +
-                                                niceClass?.descriptions[0]
-                                                    .shortname}
+                                                niceClass?.description}
                                         </h4>
                                         <ListItem
                                             className={classes.classTermList}
@@ -347,7 +392,7 @@ export default function GoodsAndServices({
                                                 .map((term, index) => {
                                                     if (
                                                         term.termClass ===
-                                                        niceClass.number
+                                                        niceClass.id
                                                     ) {
                                                         return (
                                                             <div
@@ -365,10 +410,11 @@ export default function GoodsAndServices({
                                                                     //     classes.selectedTermListItem
                                                                     // }
                                                                     primary={
-                                                                        'Term:'
+                                                                        term.termName
                                                                     }
                                                                     secondary={
-                                                                        term.termName
+                                                                        'id: ' +
+                                                                        term.id
                                                                     }
                                                                 />
                                                                 <IconButton
@@ -414,7 +460,7 @@ export default function GoodsAndServices({
                         type="submit"
                         variant="contained"
                         className={classes.backButton}
-                        onClick={() => navigation.previous()}
+                        onClick={() => previousStep()}
                     >
                         Back
                     </Button>
@@ -422,7 +468,8 @@ export default function GoodsAndServices({
                         className={classes.continueButton}
                         type="submit"
                         variant="contained"
-                        onClick={() => navigation.next()}
+                        onClick={() => nextStep()}
+                        disabled={progressValue < step.progressValueEnd}
                     >
                         Continue
                     </Button>
@@ -448,14 +495,15 @@ export default function GoodsAndServices({
                     <Button
                         color="secondary"
                         variant="contained"
-                        // onClick={this.handleClose}
+                        onClick={() => previousStep()}
                     >
                         Back
                     </Button>
                     <Button
                         color="primary"
                         variant="contained"
-                        // onClick={this.continue}
+                        onClick={() => nextStep()}
+                        disabled={progressValue < step.progressValueEnd}
                         autoFocus
                     >
                         Continue
@@ -468,7 +516,8 @@ export default function GoodsAndServices({
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        // backgroundColor: 'blue',
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
         margin: '3%',

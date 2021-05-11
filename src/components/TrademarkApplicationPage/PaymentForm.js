@@ -6,21 +6,29 @@ import {
     Checkbox,
     FormControl,
     FormControlLabel,
+    InputLabel,
+    MenuItem,
+    Select,
     TextField,
     Typography,
 } from '@material-ui/core';
+import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
+import { canadaProvinces, unitedStates } from '../../utils/FormValidation';
 import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
     navigation,
+    step,
     info,
     setInfo,
-    inputValidationValue,
-    setPristine,
+    currentStep,
+    setCurrentStep,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
 
@@ -64,7 +72,6 @@ export default function PaymentForm({
                         ...info,
                         paymentConfirmaed: true,
                     });
-                    setPristine();
                     navigation.next();
                 } else {
                     console.log('createEmail() unsuccsessful');
@@ -77,6 +84,16 @@ export default function PaymentForm({
         }
 
         setSubmitting(false);
+    };
+
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+        submitApplication();
     };
 
     return (
@@ -157,7 +174,7 @@ export default function PaymentForm({
                     }
                 />
             </div>
-            <Checkmark value={inputValidationValue.paymentCardInfo} />
+            <Checkmark value={validationProgress.paymentCardInfo} />
 
             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
             <Typography className={classes.text} component="p">
@@ -174,6 +191,83 @@ export default function PaymentForm({
                     }
                     label="Same as Applicant Address (from a few steps ago)"
                 />
+
+                <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                    <InputLabel
+                        className={classes.inputLabel}
+                        id="demo-simple-select-helper-label"
+                    >
+                        Country
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="off"
+                        value={info.billingAddressCountry}
+                        disabled={info.billingAddressSameAsUser}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                billingAddressCountry: e.target.value,
+                            })
+                        }
+                    >
+                        <MenuItem value={'Canada'}>Canada</MenuItem>
+                        <MenuItem value={'USA'}>USA</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                    <InputLabel
+                        className={classes.inputLabel}
+                        id="demo-simple-select-helper-label"
+                    >
+                        {info.billingAddressCountry === 'Canada'
+                            ? 'Province'
+                            : 'State'}
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="outlined-basic"
+                        label="Country"
+                        variant="outlined"
+                        size="small"
+                        className={classes.flexInput}
+                        type="text"
+                        autoComplete="off"
+                        value={info.billingAddressProvince}
+                        disabled={info.billingAddressSameAsUser}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                billingAddressProvince: e.target.value,
+                            })
+                        }
+                    >
+                        {info.billingAddressCountry === 'Canada' &&
+                            canadaProvinces.map((province, index) => {
+                                return (
+                                    <MenuItem key={index} value={province.name}>
+                                        {province.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        {info.billingAddressCountry === 'USA' &&
+                            unitedStates.map((state, index) => {
+                                return (
+                                    <MenuItem key={index} value={state.name}>
+                                        {state.name}
+                                    </MenuItem>
+                                );
+                            })}
+                    </Select>
+                </FormControl>
+
                 <TextField
                     id="outlined-basic"
                     label="Street Address"
@@ -210,28 +304,15 @@ export default function PaymentForm({
                         })
                     }
                 />
-                <TextField
-                    id="outlined-basic"
-                    label="Province"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    value={info.billingAddressProvince}
-                    autoComplete="on"
-                    disabled={info.billingAddressSameAsUser}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            billingAddressProvince: e.target.value,
-                        })
-                    }
-                />
             </div>
             <div className={classes.flexContainer}>
                 <TextField
                     id="outlined-basic"
-                    label="Postal Code"
+                    label={
+                        info.billingAddressCountry === 'Canada'
+                            ? 'Postal Code'
+                            : 'Zip Code'
+                    }
                     variant="outlined"
                     size="small"
                     className={classes.flexInput}
@@ -247,24 +328,7 @@ export default function PaymentForm({
                     }
                 />
 
-                <TextField
-                    id="outlined-basic"
-                    label="Country"
-                    variant="outlined"
-                    size="small"
-                    className={classes.flexInput}
-                    type="text"
-                    value={info.billingAddressCountry}
-                    autoComplete="on"
-                    disabled={info.billingAddressSameAsUser}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            billingAddressCountry: e.target.value,
-                        })
-                    }
-                />
-                <Checkmark value={inputValidationValue.billingAddress} />
+                <Checkmark value={validationProgress.billingAddress} />
             </div>
             <Alert severity="info" className={classes.alert}>
                 Helper section with brief legal information, assisting the
@@ -275,7 +339,7 @@ export default function PaymentForm({
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -283,9 +347,8 @@ export default function PaymentForm({
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => {
-                        submitApplication(true);
-                    }}
+                    onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Confirm Payment
                 </Button>
@@ -295,6 +358,8 @@ export default function PaymentForm({
 }
 const useStyles = makeStyles((theme) => ({
     card: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',

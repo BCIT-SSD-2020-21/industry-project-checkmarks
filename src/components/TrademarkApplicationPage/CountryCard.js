@@ -9,13 +9,32 @@ import {
     Button,
     Typography,
 } from '@material-ui/core';
+import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
 
-const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
+const CountryCard = ({
+    navigation,
+    step,
+    info,
+    setInfo,
+    currentStep,
+    setCurrentStep,
+    progressValue,
+    validationProgress,
+}) => {
     const classes = useStyles();
+
+    const previousStep = () => {
+        setCurrentStep(currentStep - 1); // assign currentStep to next step
+        navigation.previous();
+    };
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
+    };
 
     return (
         <Card className={classes.countryCard}>
@@ -105,9 +124,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                         />
                     </div>
                 )}
-                <Checkmark
-                    value={inputValidationValue.internationalFilingInfo}
-                />
+                <Checkmark value={validationProgress.internationalFilingInfo} />
                 <Alert severity="info" className={classes.alert}>
                     Helper Section with brief legal information, assisting the
                     client through the process
@@ -118,7 +135,7 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => navigation.previous()}
+                    onClick={() => previousStep()}
                 >
                     Back
                 </Button>
@@ -126,7 +143,8 @@ const CountryCard = ({ navigation, info, setInfo, inputValidationValue }) => {
                     className={classes.continueButton}
                     type="submit"
                     variant="contained"
-                    onClick={() => navigation.next()}
+                    onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Continue
                 </Button>
@@ -139,6 +157,8 @@ export default CountryCard;
 
 const useStyles = makeStyles((theme) => ({
     countryCard: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        borderRadius: '15px',
         margin: '3%',
         width: '70%',
         border: '1px solid #696969',

@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box,
     Button,
     Checkbox,
     FormControl,
-    TextField,
-    RadioGroup,
     FormControlLabel,
+    InputLabel,
+    MenuItem,
+    RadioGroup,
+    Select,
+    TextField,
     Radio,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { checkmarksTheme } from '../../../styles/Themes';
-import { createClioContact } from '../../../network';
-import { Info } from '@material-ui/icons';
+import { canadaProvinces, unitedStates } from '../../../utils/FormValidation';
 import Checkmark from '../../Checkmark';
 import IdUpload from '../../IdUpload';
 
 export default function IndividualForm({
+    step,
     info,
     setInfo,
+    currentStep,
+    setCurrentStep,
     navigation,
     setDirty,
-    inputValidationValue,
+    progressValue,
+    validationProgress,
 }) {
     const classes = useStyles();
     const [handle, setHandle] = useState('');
@@ -35,6 +39,11 @@ export default function IndividualForm({
             ...info,
             individualOrOrganization: e.target.value,
         });
+    };
+
+    const nextStep = () => {
+        setCurrentStep(currentStep + 1); // assign currentStep to next step
+        navigation.next();
     };
 
     setDirty();
@@ -82,9 +91,7 @@ export default function IndividualForm({
                         }
                     />
                     <Checkmark
-                        value={
-                            inputValidationValue.individualOrOrganizationName
-                        }
+                        value={validationProgress.individualOrOrganizationName}
                     />
                 </FormControl>
             )}
@@ -105,7 +112,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.firstName} />
+                <Checkmark value={validationProgress.firstName} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -123,7 +130,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.lastName} />
+                <Checkmark value={validationProgress.lastName} />
             </FormControl>
 
             <FormControl fullWidth={true} className={classes.field}>
@@ -142,7 +149,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.email} />
+                <Checkmark value={validationProgress.email} />
             </FormControl>
 
             <FormControl fullWidth={true} className={classes.field}>
@@ -161,7 +168,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.phone} />
+                <Checkmark value={validationProgress.phone} />
             </FormControl>
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
@@ -179,7 +186,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.fax} />
+                <Checkmark value={validationProgress.fax} />
             </FormControl>
 
             <Alert severity="info" className={classes.idAlert}>
@@ -189,10 +196,86 @@ export default function IndividualForm({
             {/* ============================ */}
             {/* ======== Upload ID ========= */}
             {/* ============================ */}
-
-            <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
-
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
+                <Checkmark value={validationProgress.idDocumentUploaded} />
+            </FormControl>
             {/* /////////////////////////// address /////////////////////// */}
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <InputLabel
+                    className={classes.inputLabel}
+                    id="demo-simple-select-helper-label"
+                >
+                    Country
+                </InputLabel>
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="outlined-basic"
+                    label="Country"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    autoComplete="off"
+                    value={info.userCountry}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            userCountry: e.target.value,
+                        })
+                    }
+                >
+                    <MenuItem value={'Canada'}>Canada</MenuItem>
+                    <MenuItem value={'USA'}>USA</MenuItem>
+                </Select>
+                <Checkmark value={validationProgress.userCountry} />
+            </FormControl>
+
+            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+                <InputLabel
+                    className={classes.inputLabel}
+                    id="demo-simple-select-helper-label"
+                >
+                    {info.userCountry === 'Canada' ? 'Province' : 'State'}
+                </InputLabel>
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="outlined-basic"
+                    label="Province"
+                    variant="outlined"
+                    size="small"
+                    className={classes.flexInput}
+                    type="text"
+                    autoComplete="on"
+                    disabled={!info.userCountry}
+                    value={info.userProvince}
+                    onChange={(e) =>
+                        setInfo({
+                            ...info,
+                            userProvince: e.target.value,
+                        })
+                    }
+                >
+                    {info.userCountry === 'Canada' &&
+                        canadaProvinces.map((province, index) => {
+                            return (
+                                <MenuItem key={index} value={province.name}>
+                                    {province.name}
+                                </MenuItem>
+                            );
+                        })}
+                    {info.userCountry === 'USA' &&
+                        unitedStates.map((state, index) => {
+                            return (
+                                <MenuItem key={index} value={state.name}>
+                                    {state.name}
+                                </MenuItem>
+                            );
+                        })}
+                </Select>
+                <Checkmark value={validationProgress.userProvince} />
+            </FormControl>
+
             <FormControl fullWidth={true} className={classes.field}>
                 <TextField
                     className={classes.input}
@@ -209,7 +292,7 @@ export default function IndividualForm({
                         })
                     }
                 />
-                <Checkmark value={inputValidationValue.userStreetAddress} />
+                <Checkmark value={validationProgress.userStreetAddress} />
             </FormControl>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
@@ -229,33 +312,18 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userCity} />
-                </FormControl>
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Province"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        autoComplete="on"
-                        value={info.userProvince}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                userProvince: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={inputValidationValue.userProvince} />
+                    <Checkmark value={validationProgress.userCity} />
                 </FormControl>
             </div>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
                         id="outlined-basic"
-                        label="Postal Code"
+                        label={
+                            info.userCountry === 'Canada'
+                                ? 'Postal Code'
+                                : 'Zip Code'
+                        }
                         variant="outlined"
                         size="small"
                         className={classes.flexInput}
@@ -269,26 +337,7 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={inputValidationValue.userPostalCode} />
-                </FormControl>
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Country"
-                        variant="outlined"
-                        size="small"
-                        className={classes.flexInput}
-                        type="text"
-                        autoComplete="on"
-                        value={info.userCountry}
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                userCountry: e.target.value,
-                            })
-                        }
-                    />
-                    <Checkmark value={inputValidationValue.userCountry} />
+                    <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
             </div>
             <Alert severity="info" className={classes.alert}>
@@ -320,18 +369,15 @@ export default function IndividualForm({
                         label="I understand."
                     />
                     <Checkmark
-                        value={inputValidationValue.agreedTermsOfService}
+                        value={validationProgress.agreedTermsOfService}
                     />
                 </FormControl>
             </Box>
             <div className={classes.nextButtonContainer}>
                 <Button
                     className={classes.nextButton}
-                    onClick={(event) => {
-                        navigation.next();
-                    }}
-                    // onClick={() => navigation.next()}
-                    // disabled={true}
+                    onClick={() => nextStep()}
+                    disabled={progressValue < step.progressValueEnd}
                 >
                     Next Step
                 </Button>
@@ -361,6 +407,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    fieldDropDown: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     input: {
         // position: 'relative',
         width: '100%',
@@ -369,6 +421,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             margin: '2% auto',
         },
+    },
+    inputLabel: {
+        marginLeft: '3%',
     },
     checkmark: {
         // position: 'absolute',
@@ -435,6 +490,5 @@ const useStyles = makeStyles((theme) => ({
     },
     alertRed: {
         color: checkmarksTheme.buttonTextSecondary,
-        // backgroundColor: checkmarksTheme.bgSecondary,
     },
 }));
