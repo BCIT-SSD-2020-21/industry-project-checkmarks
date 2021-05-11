@@ -25,7 +25,9 @@ const FileUpload = ({ setHandle, setInfo, info }) => {
             return false;
         }
         if (files.size > size) {
-            err += files.name + ' is too large, please pick a smaller file\n';
+            err +=
+                files.name +
+                ' File should be less than 2Mb, please pick a smaller file\n';
         }
         if (err !== '') {
             event.target.value = null;
