@@ -63,7 +63,7 @@ const TrademarkApplication = (darkMode) => {
         infoConfirmed: false,
 
         // Payment Information
-        id: '',
+        paymentToken: '',
         paymentCardholderName: '',
         paymentCreditCardNumber: '',
         paymentCardExpiryDate: '',

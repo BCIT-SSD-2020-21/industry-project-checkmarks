@@ -36,6 +36,8 @@ const CountryCard = ({
         navigation.next();
     };
 
+    console.log(info);
+
     return (
         <Card className={classes.countryCard}>
             <h1 className={classes.title}> International Information</h1>

@@ -90,8 +90,7 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 -   `add the following variables: `
 
 ```
-REACT_APP_BASE_URL=https://checkmarkswebapi.azurewebsites.net/
-REACT_APP_CIPO_BASE_URL=https://cipo-gsm-ised-isde-apicast-production.api.canada.ca/v1/
+REACT_APP_BASE_URL=https://checkmarkswebapirev.azurewebsites.net/
 ```
 
 </details>
