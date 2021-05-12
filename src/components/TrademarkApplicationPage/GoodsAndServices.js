@@ -153,20 +153,31 @@ export default function GoodsAndServices({
     const { current: classSearchInstance } = useRef({});
     const [loadingClassSearch, setLoadingClassSearch] = useState(false);
     useEffect(() => {
+        // setTermTableData([]);
         if (classSearchInstance.delayTimer) {
             clearTimeout(classSearchInstance.delayTimer);
+        }
+        if (searchClassFilterText === '') {
+            setLoadingClassSearch(true);
+            classSearchInstance.delayTimer = setTimeout(() => {
+                setLoadingClassSearch(false);
+                setTermTableData([]); // after 0.2 seconds, stop Loading Indicator and apply filter
+                renderTerms();
+            }, 200);
         }
         if (searchClassFilterText !== '') {
             setLoadingClassSearch(true);
             classSearchInstance.delayTimer = setTimeout(() => {
-                setLoadingClassSearch(false); // after 1 seconds, stop Loading Indicator and apply filter
+                setLoadingClassSearch(false); // after 0.6 seconds, stop Loading Indicator and apply filter
+                setTermTableData([]);
                 renderTerms();
-            }, 1000);
+            }, 600);
         } else {
             renderTerms();
             setLoadingClassSearch(false);
         }
     }, [searchClassFilterText]);
+    console.log('searchClassFilterText: ', searchClassFilterText);
 
     const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
     const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
@@ -307,7 +318,7 @@ export default function GoodsAndServices({
                     }
                     setInputTo={setSearchTerm}
                 />
-                {termSearchResults.length > 0 && (
+                {searchTerm.length > 2 && termSearchResults.length > 0 && (
                     <Box className={classes.niceClassFilterText}>
                         <Typography>
                             Each term is associated with a NICE Class
@@ -322,7 +333,7 @@ export default function GoodsAndServices({
                     </Box>
                 )}
 
-                {(searchTerm.length > 2 || termTableData.length > 0) &&
+                {(searchTerm.length > 2 || termSearchResults.length > 0) &&
                     !loading && (
                         <>
                             {termTableData.length > 0 ? (
