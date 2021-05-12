@@ -6,17 +6,12 @@ import { checkmarksTheme } from '../../styles/Themes';
 const progressStyles = makeStyles((theme) => ({
     root: {
         alignItems: 'center',
-        // backgroundColor: checkmarksTheme.buttonTextPrimary,
-        // border: '1px solid black',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        // marginTop: '75px',
         padding: '12px',
         height: '34px',
         width: '100%',
-        // ['@media (min-height:735px)']: { padding: '12px' },
-        // ['@media (min-height:812px)']: { padding: '7px' },
     },
     container: {
         backgroundColor: checkmarksTheme.bgDrawer,
@@ -25,12 +20,10 @@ const progressStyles = makeStyles((theme) => ({
         height: '32px',
         position: 'relative',
         opacity: 0.85,
-        // margin: '2% auto',
         width: '80%',
     },
     progress: {
         backgroundColor: checkmarksTheme.buttonPrimary,
-        // border: `0.5px solid ${checkmarksTheme.textLabel}`,
         borderRadius: '25px 0 0 25px',
         height: '100%',
     },
@@ -43,12 +36,11 @@ const progressStyles = makeStyles((theme) => ({
         top: '0%',
         left: '50%',
         marginTop: '3px',
-        // transform: 'translate(-50%, 0)',
         zIndex: 1,
     },
 }));
 
-export default function Progress({ progressValue, inputValidationValue }) {
+export default function Progress({ progressValue }) {
     const progressPercentage = Math.round((progressValue * 100) / 2900);
 
     const classes = progressStyles();

@@ -46,8 +46,6 @@ const TrademarkApplication = (darkMode) => {
         fileName: '',
         file: '',
 
-        // trademarkName: '',
-
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
@@ -71,11 +69,6 @@ const TrademarkApplication = (darkMode) => {
         billingAddressSameAsUser: false,
         billingStreetAddress: '',
         billingPostalCode: '',
-        // billingAddressStreet: '',
-        // billingAddressCity: '',
-        // billingAddressProvince: '',
-        // billingAddressPostalCode: '',
-        // billingAddressCountry: '',
         paymentConfirmaed: false,
     });
 
@@ -107,8 +100,6 @@ const TrademarkApplication = (darkMode) => {
         infoConfirmed: 0,
 
         // Payment Information - 300 - step 6 end
-        // paymentCardInfo: 0,
-        // billingAddress: 0,
         paymentConfirmed: 0,
     });
     useEffect(() => {
@@ -185,9 +176,6 @@ const TrademarkApplication = (darkMode) => {
                 })`,
             }}
         >
-            {/* <div className={classes.logo}>
-                <img src={Logo2} alt="Logo" />
-            </div> */}
             <Progress
                 step={step}
                 steps={steps}
@@ -213,6 +201,7 @@ const TrademarkApplication = (darkMode) => {
                                     setCurrentStep={setCurrentStep}
                                     progressValue={progressValue}
                                     validationProgress={validationProgress}
+                                    setDirty={setDirty}
                                 />
                             );
                         case 'Goods-and-Services':
@@ -250,7 +239,6 @@ const TrademarkApplication = (darkMode) => {
                                     setInfo={setInfo}
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
-                                    setDirty={setDirty}
                                     progressValue={progressValue}
                                     validationProgress={validationProgress}
                                 />
@@ -303,27 +291,22 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // backgroundImage: `url(${bannerImage})`,
         backgroundPosition: 'center',
-        backgroundSize: 'auto 100%',
+        backgroundSize: 'cover', //'100% auto',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: '75px',
+        width: '100%',
         minHeight: window.innerHeight,
-        width: window.innerWidth,
     },
     container: {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        // marginTop: '60px',
         minHeight: window.innerHeight,
-        width: window.innerWidth,
     },
     hero: {
         backgroundImage: '',
