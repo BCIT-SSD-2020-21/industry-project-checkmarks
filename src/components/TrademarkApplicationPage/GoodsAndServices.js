@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
+    Box,
     CardContent,
     Dialog,
     DialogActions,
@@ -39,7 +40,7 @@ export default function GoodsAndServices({
 
     // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
-    const [searchClassFilter, setSearchClassFilter] = useState(''); // user to filter results by class name
+    const [searchClassFilterTerm, setSearchClassFilterTerm] = useState(''); // user to filter results by class name
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
     // INITIALIZE From 'info' Statevar
     const [selectedTerms, setSelectedTerms] = useState(info.termsSelected); // rendered on Selected Terms summary
@@ -82,32 +83,42 @@ export default function GoodsAndServices({
     const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
     useEffect(() => {
         renderTerms();
-    }, [termSearchResults, selectedTerms]);
+    }, [termSearchResults, selectedTerms, searchClassFilterTerm]);
     const renderTerms = () => {
         const termData = []; // formatted to fit table
         termSearchResults.forEach((resultItem) => {
             let termSelected = false;
-            selectedTerms.forEach((term) => {
-                if (term.id === resultItem.id) {
-                    termSelected = true;
-                }
-            });
-            let termTableDataFormat = {
-                ...resultItem,
-                selected: termSelected,
-                selectionCheckbox: (
-                    <TermSelector
-                        number={resultItem.id}
-                        selected={termSelected}
-                        handler={setTermBeingToggledNumber}
-                    />
-                ),
-                id: resultItem.id,
-                termName: resultItem.termName,
-                termClass: resultItem.termClass,
-                classShortName: resultItem.classShortName,
-            };
-            termData.push(termTableDataFormat);
+            // check against secondary filter (if term's class does NOT contain substring, then continue)
+            if (
+                searchClassFilterTerm === '' ||
+                resultItem.classShortName
+                    .toLowerCase()
+                    .includes(searchClassFilterTerm.toLowerCase())
+            ) {
+                // Check if tern is Selected, to determine if TermSelector should be Checked
+                selectedTerms.forEach((term) => {
+                    if (term.id === resultItem.id) {
+                        termSelected = true;
+                    }
+                });
+                // Build Table Data format (adding selected bool, and TermSelector component)
+                let termTableDataFormat = {
+                    ...resultItem,
+                    selected: termSelected,
+                    selectionCheckbox: (
+                        <TermSelector
+                            number={resultItem.id}
+                            selected={termSelected}
+                            handler={setTermBeingToggledNumber}
+                        />
+                    ),
+                    id: resultItem.id,
+                    termName: resultItem.termName,
+                    termClass: resultItem.termClass,
+                    classShortName: resultItem.classShortName,
+                };
+                termData.push(termTableDataFormat);
+            }
         });
         setTermTableData(termData);
     };
@@ -123,7 +134,7 @@ export default function GoodsAndServices({
 
     // }
 
-    // COSMETIC statevar (indicator)
+    // COSMETIC Loading indicator for Term Search
     const { current: instance } = useRef({});
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -139,6 +150,22 @@ export default function GoodsAndServices({
             setLoading(false);
         }
     }, [searchTerm, termTableData]);
+    // COSMETIC Loading indicator for Class Filter Search
+    const { current: classSearchInstance } = useRef({});
+    const [loadingClassSearch, setLoadingClassSearch] = useState(false);
+    useEffect(() => {
+        if (classSearchInstance.delayTimer) {
+            clearTimeout(classSearchInstance.delayTimer);
+        }
+        if (searchClassFilterTerm !== '') {
+            setLoadingClassSearch(true);
+            classSearchInstance.delayTimer = setTimeout(() => {
+                setLoadingClassSearch(false); // after 3 seconds, stop Loading Indicator
+            }, 2000);
+        } else {
+            setLoadingClassSearch(false);
+        }
+    }, [searchClassFilterTerm]);
 
     const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
     const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
@@ -272,7 +299,27 @@ export default function GoodsAndServices({
 
                 {/* ///////////////////////////search trademark terms/////////////////////////// */}
                 <h3>Search for your Trademark Terms</h3>
-                <SearchField loading={loading} setInputTo={setSearchTerm} />
+                <SearchField
+                    loading={loading}
+                    placeholder={
+                        'Search for Terms to associate with your Trademark... '
+                    }
+                    setInputTo={setSearchTerm}
+                />
+                {termSearchResults.length > 0 && (
+                    <Box className={classes.niceClassFilterTerm}>
+                        <Typography>
+                            Each term is associated with a NICE Class
+                        </Typography>
+                        <SearchField
+                            loading={loadingClassSearch}
+                            placeholder={
+                                'Narrow results by filtering NICE Classes '
+                            }
+                            setInputTo={setSearchClassFilterTerm}
+                        />
+                    </Box>
+                )}
 
                 {(searchTerm.length > 2 || termTableData.length > 0) &&
                     !loading && (
