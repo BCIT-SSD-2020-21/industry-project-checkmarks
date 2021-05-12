@@ -402,7 +402,8 @@ export default function IndividualForm({
                             />
                         }
                     />
-                    {/* Terms and Agreement Modal  */} I agree with the
+                    {/* Terms and Agreement Modal  */}{' '}
+                    <strong className={classes.terms}>I agree with the</strong>
                     <TermsAndAgreementsModal open={open} setOpen={setOpen} />
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
@@ -549,5 +550,8 @@ const useStyles = makeStyles((theme) => ({
     },
     alertRed: {
         color: checkmarksTheme.buttonTextSecondary,
+    },
+    terms: {
+        color: checkmarksTheme.textValue2,
     },
 }));
