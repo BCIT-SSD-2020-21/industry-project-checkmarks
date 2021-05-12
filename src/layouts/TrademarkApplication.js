@@ -46,8 +46,6 @@ const TrademarkApplication = (darkMode) => {
         fileName: '',
         file: '',
 
-        // trademarkName: '',
-
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
@@ -71,11 +69,6 @@ const TrademarkApplication = (darkMode) => {
         billingAddressSameAsUser: false,
         billingStreetAddress: '',
         billingPostalCode: '',
-        // billingAddressStreet: '',
-        // billingAddressCity: '',
-        // billingAddressProvince: '',
-        // billingAddressPostalCode: '',
-        // billingAddressCountry: '',
         paymentConfirmaed: false,
     });
 
@@ -174,7 +167,6 @@ const TrademarkApplication = (darkMode) => {
         initialStep: 0,
     });
 
-    console.log('info: ', info);
     return (
         <Paper
             className={classes.root}
@@ -184,9 +176,6 @@ const TrademarkApplication = (darkMode) => {
                 })`,
             }}
         >
-            {/* <div className={classes.logo}>
-                <img src={Logo2} alt="Logo" />
-            </div> */}
             <Progress
                 step={step}
                 steps={steps}

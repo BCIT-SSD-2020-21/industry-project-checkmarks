@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
-import { createEmail } from '../../network';
 
 export default function PaymentForm({
     navigation,
