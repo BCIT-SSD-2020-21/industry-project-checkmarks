@@ -86,15 +86,34 @@ export default function About() {
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" align="center" component="h2">
-                  Trademarks + IP
+                  Business Law
                   </Typography>
                   <Typography>
-                  {'Your most important assets – your mark, logo, and slogan help identify your products or services.'}
-                  {'They create loyalty by differentiating you from others.'}
+                  {'Strategic advice + legal insights. Business set-up. Contracts, deals,  transactions'}
+                {'Whether you’re just starting out or an established business, we’re on your team.'}
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Tech + Software
+                  </Typography>
+                  <Typography>
+                  {'Licensing agreements, SaaS, Ownership of IP, Growth.  '}
+                {'We have high level focus on what’s unique about your tech company.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          
 
 
           </Grid>
