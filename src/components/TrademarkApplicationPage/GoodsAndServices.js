@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
     CardContent,
-    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
@@ -19,16 +18,12 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
 import { searchTerms, getAllClasses } from '../../services/checkmarks';
-// import { searchTerms } from '../../services/cipo';
-import sampleTermSearch from '../../services/sampleTermSearch.json';
 
 export default function GoodsAndServices({
     navigation,
@@ -44,19 +39,14 @@ export default function GoodsAndServices({
 
     // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
-
-    const [searchError, setSearchError] = useState('');
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
 
     // INITIALIZE From 'info' Statevar
-    const [selectedTerms, setSelectedTerms] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedTerms(info.termsSelected);
-    }, []);
-    const [selectedClasses, setSelectedClasses] = useState([]); // rendered on Selected Terms summary
-    useEffect(() => {
-        setSelectedClasses(info.classesSelected);
-    }, []);
+    const [selectedTerms, setSelectedTerms] = useState(info.termsSelected); // rendered on Selected Terms summary
+    const [selectedClasses, setSelectedClasses] = useState(
+        info.classesSelected
+    );
+    const [totalAmount, setTotalAmount] = useState(0);
 
     // SELECTION HANDLING
     const [termBeingToggledNumber, setTermBeingToggledNumber] = useState(null);
@@ -67,22 +57,27 @@ export default function GoodsAndServices({
         setTermBeingToggledNumber(null);
     }, [termBeingToggledNumber]);
 
-    const [totalAmount, setTotalAmount] = useState(0);
-
     // GET TERMS AFTER TEXT INPUT
     const [termSearchResults, setTermSearchResults] = useState([]);
+    const { current: searchInstance } = useRef({});
     useEffect(() => {
+        setTermTableData([]);
+        if (searchInstance.delayTimer) {
+            clearTimeout(searchInstance.delayTimer);
+        }
         if (searchTerm.length > 2) {
-            (async () => {
-                const result = await searchTerms(searchTerm);
-                console.log('result: ', result);
-                setTermSearchResults(result.terms);
-            })();
+            if (searchTerm !== '') {
+                searchInstance.delayTimer = setTimeout(() => {
+                    (async () => {
+                        console.log('after 2 sec');
+                        const result = await searchTerms(searchTerm);
+                        setTermSearchResults(result.terms);
+                    })();
+                }, 750);
+            }
         }
     }, [searchTerm]);
 
-    console.log('termSearchResults: ', termSearchResults);
-    // console.log('searchTerm: ', searchTerm);
     // GET TERM DATA (on Search)
     const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
     useEffect(() => {
@@ -121,7 +116,6 @@ export default function GoodsAndServices({
         let newSelectedTerms = selectedTerms.filter(
             (item) => item.id !== term.id
         );
-        console.log(newSelectedTerms);
         setSelectedTerms(newSelectedTerms);
     };
 
@@ -209,10 +203,6 @@ export default function GoodsAndServices({
                 termClassExists = false;
             });
             setSelectedClasses(classesSelected);
-
-            // console.log('class selected', classesSelected);
-
-            // setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
                     (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
@@ -221,6 +211,9 @@ export default function GoodsAndServices({
                 setTotalAmount(0);
             }
         }
+        if (selectedTerms?.length > 0) {
+            setInfo({ ...info, termsSelected: selectedTerms });
+        }
     }, [selectedTerms]);
 
     // UPDATE PARENT Statevar 'info'
@@ -228,17 +221,10 @@ export default function GoodsAndServices({
         if (selectedClasses?.length > 0) {
             setInfo({ ...info, classesSelected: selectedClasses });
         }
-    }, [selectedClasses]);
-    useEffect(() => {
-        if (selectedTerms?.length > 0) {
-            setInfo({ ...info, termsSelected: selectedTerms });
-        }
-    }, [selectedTerms]);
-    useEffect(() => {
         if (selectedTerms?.length > 0) {
             setInfo({ ...info, amount: totalAmount });
         }
-    }, [totalAmount]);
+    }, [selectedClasses]);
 
     const previousStep = () => {
         setCurrentStep(currentStep - 1); // assign currentStep to next step
@@ -248,14 +234,6 @@ export default function GoodsAndServices({
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
-
-    // console.log('selectedClasses: ', selectedClasses);
-    // console.log('selectedTerms: ', selectedTerms);
-    // console.log('step: ', step);
-    // console.log('prog val:', progressValue);
-    // console.log('termTableData[0]: ', termTableData[0]);
-    // console.log('info.termsSelected: ', info.termsSelected);
-    console.log('info', info);
 
     return (
         <Card className={classes.card}>
