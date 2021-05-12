@@ -356,8 +356,29 @@ export default function IndividualForm({
                     prior to submission, however approval and registration
                     determined upon submission to the Canadian Intellectual
                     Property Office.
+                    <FormControl className={classes.field}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={info.agreedTermsOfService}
+                                    onChange={() =>
+                                        setInfo({
+                                            ...info,
+                                            agreedTermsOfService: !info.agreedTermsOfService,
+                                        })
+                                    }
+                                    name="AgreeTermsOfService"
+                                />
+                            }
+                            label="I understand."
+                        />
+                        <Checkmark
+                            value={validationProgress.agreedTermsOfService}
+                        />
+                    </FormControl>
                 </Alert>
-                <FormControl fullWidth={true} className={classes.field}>
+
+                <FormControl className={classes.field}>
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -371,8 +392,8 @@ export default function IndividualForm({
                                 name="AgreeTermsOfService"
                             />
                         }
-                        label="I understand."
-                    />
+                    />{' '}
+                    I agree with the terms and agreements
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
                     />
