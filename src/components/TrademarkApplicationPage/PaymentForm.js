@@ -1,23 +1,7 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Button,
-    Card,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
-    Typography,
-} from '@material-ui/core';
+import { Button, Card } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
-import Alert from '@material-ui/lab/Alert';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Checkmark from '../Checkmark';
-import { canadaProvinces, unitedStates } from '../../utils/FormValidation';
 import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
@@ -114,7 +98,6 @@ export default function PaymentForm({
         };
 
         const hostedFieldsCallBack = function (state) {
-            console.log('state: ', state);
             if (state.fields[0].error != '') {
                 ccErrorMessage = state.fields[0].error;
             } else {
@@ -132,7 +115,6 @@ export default function PaymentForm({
             hostedFieldsConfiguration,
             hostedFieldsCallBack
         );
-        console.log('hostedFields: ', hostedFields);
 
         form.onsubmit = function (event) {
             event.preventDefault();
