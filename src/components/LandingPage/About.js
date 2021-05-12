@@ -70,7 +70,7 @@ export default function About() {
                   <Typography gutterBottom variant="h5" align="center" component="h2">
                   Trademarks + IP
                   </Typography>
-                  <Typography>
+                  <Typography align="justify">
                   {'Your most important assets – your mark, logo, and slogan help identify your products or services.'}
                   {'They create loyalty by differentiating you from others.'}
                   </Typography>
@@ -88,9 +88,9 @@ export default function About() {
                   <Typography gutterBottom variant="h5" align="center" component="h2">
                   Business Law
                   </Typography>
-                  <Typography>
-                  {'Strategic advice + legal insights. Business set-up. Contracts, deals,  transactions'}
-                {'Whether you’re just starting out or an established business, we’re on your team.'}
+                  <Typography align="justify">
+                    {'Strategic advice + legal insights. Business set-up. Contracts, deals,  transactions'}
+                    {'Whether you’re just starting out or an established business, we’re on your team.'}
                   </Typography>
                 </CardContent>
               </Card>
@@ -106,9 +106,9 @@ export default function About() {
                   <Typography gutterBottom variant="h5" align="center" component="h2">
                   Tech + Software
                   </Typography>
-                  <Typography>
-                  {'Licensing agreements, SaaS, Ownership of IP, Growth. '}
-                {'We have high level focus on what’s unique about your tech company.'}
+                  <Typography align="justify">
+                    {'Licensing agreements, SaaS, Ownership of IP, Growth. '}
+                    {'We have high level focus on what’s unique about your tech company.'}
                   </Typography>
                 </CardContent>
               </Card>
