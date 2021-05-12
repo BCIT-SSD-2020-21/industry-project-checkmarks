@@ -25,6 +25,7 @@ import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
 import { searchTerms, getAllClasses } from '../../services/checkmarks';
+import { advancedSearch } from '../../utils/FormValidation';
 
 export default function GoodsAndServices({
     navigation,
@@ -90,9 +91,10 @@ export default function GoodsAndServices({
             // check against secondary filter (if term's class does NOT contain substring, then continue)
             if (
                 searchClassFilterText === '' ||
-                resultItem.classShortName
-                    .toLowerCase()
-                    .includes(searchClassFilterText.toLowerCase())
+                advancedSearch(searchClassFilterText, resultItem.classShortName)
+                // resultItem.classShortName
+                //     .toLowerCase()
+                //     .includes(searchClassFilterText.toLowerCase())
             ) {
                 // Check if tern is Selected, to determine if TermSelector should be Checked
                 selectedTerms.forEach((term) => {
