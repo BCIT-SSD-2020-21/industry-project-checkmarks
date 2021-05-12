@@ -112,7 +112,7 @@ const TrademarkApplication = (darkMode) => {
         setProgressValue(sumProgressValue(validationProgress));
     }, [validationProgress]);
 
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [currentStep]);

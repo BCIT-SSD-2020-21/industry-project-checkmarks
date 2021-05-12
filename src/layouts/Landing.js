@@ -9,7 +9,7 @@ import bannerImageDark from '../assets/images/bg-dark-landing-nicolas-hoizey.jpg
 import HeaderBanner from '../components/HeaderBanner';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import About from '../components/LandingPage/About';
-import Faq from '../components/LandingPage/Faq';
+// import Faq from '../components/LandingPage/Faq';
 import Pricing from '../components/LandingPage/Pricing';
 import Footer from '../components/LandingPage/Footer';
 
@@ -50,7 +50,7 @@ export default function Landing(darkMode) {
                 </Box>
             </Box>
             <About />
-            <Faq />
+            {/* <Faq /> */}
             <Pricing />
             <Footer />
         </Box>

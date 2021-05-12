@@ -213,6 +213,12 @@ export const validateForm = (info, setValidationProgress) => {
     }
     // Payment Information Provided        // Payment Information
 
+    // UBC 2 courses - Java, Java (2nd year), Matlab
+    // DC 2 courses - C#, operating systems
+    // Codecademy;
+    // old job - VBA (macros)
+    // Lighthouse Labs - Intro to Web Dev (6 weeks) , $1500
+
     // if (
     //     info.paymentCardholderName &&
     //     !personNameRegex.test(info.paymentCardholderName) &&
