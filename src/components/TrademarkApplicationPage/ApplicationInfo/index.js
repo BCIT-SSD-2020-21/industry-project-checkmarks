@@ -21,7 +21,7 @@ export default function ApplicationInfo({
         <Card className={classes.card}>
             <Typography className={classes.heading}>
                 {' '}
-                First, some information about you.{' '}
+                Some information about you.{' '}
             </Typography>
             <Typography>
                 Are you registering as an{' '}

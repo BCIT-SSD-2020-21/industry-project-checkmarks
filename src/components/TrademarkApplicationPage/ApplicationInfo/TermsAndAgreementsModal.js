@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Backdrop, Fade, Button } from '@material-ui/core';
+import { checkmarksTheme } from '../../../styles/Themes';
 
 const TermsAndAgreementsModal = ({ open, setOpen }) => {
     const classes = useStyles();
@@ -15,7 +16,9 @@ const TermsAndAgreementsModal = ({ open, setOpen }) => {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Terms and Agreements</Button>
+            <Button onClick={handleOpen} className={classes.button}>
+                <strong>Terms and Agreements</strong>
+            </Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -51,11 +54,10 @@ const TermsAndAgreementsModal = ({ open, setOpen }) => {
                             <p>
                                 Information that we collect and use about you is
                                 subject to our Privacy Policy located at
-                                https://www.checkmarx.com/privacy-policy. By
-                                accessing this Site you consent to the
-                                collection and use of information as described
-                                in our Privacy Policy, as may be amended by us
-                                from time to time.
+                                https://www.checkmarks.ca By accessing this Site
+                                you consent to the collection and use of
+                                information as described in our Privacy Policy,
+                                as may be amended by us from time to time.
                             </p>
                         </p>
                     </div>
@@ -80,5 +82,10 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-    modalContainer: {},
+    button: {
+        color: checkmarksTheme.hyperLink,
+        '&:hover': {
+            color: checkmarksTheme.textValue2,
+        },
+    },
 }));
