@@ -219,10 +219,11 @@ export default function GoodsAndServices({
     // UPDATE PARENT Statevar 'info'
     useEffect(() => {
         if (selectedClasses?.length > 0) {
-            setInfo({ ...info, classesSelected: selectedClasses });
-        }
-        if (selectedTerms?.length > 0) {
-            setInfo({ ...info, amount: totalAmount });
+            setInfo({
+                ...info,
+                classesSelected: selectedClasses,
+                amount: totalAmount,
+            });
         }
     }, [selectedClasses]);
 
@@ -487,6 +488,7 @@ export default function GoodsAndServices({
                         color="primary"
                         variant="contained"
                         onClick={() => nextStep()}
+                        // disabled={}
                         disabled={progressValue < step.progressValueEnd}
                         autoFocus
                     >
