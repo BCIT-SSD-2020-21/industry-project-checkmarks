@@ -116,8 +116,12 @@ export default function GoodsAndServices({
         let newSelectedTerms = selectedTerms.filter(
             (item) => item.id !== term.id
         );
+        setTermTableData([]);
         setSelectedTerms(newSelectedTerms);
     };
+    // const handleRemoveTerm = (term) => { // customized function when removing from Selected Terms section; above is called at checkmark remove
+
+    // }
 
     // COSMETIC statevar (indicator)
     const { current: instance } = useRef({});
