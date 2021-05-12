@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../../styles/Themes';
 import { Button, Card, Typography } from '@material-ui/core';
@@ -19,8 +20,10 @@ const TrademarkForm = ({
     setInfo,
     progressValue,
     validationProgress,
+    setDirty,
 }) => {
     const classes = useStyles();
+    const history = useHistory();
     //selection of all the other trademark type
     const otherTypesSelection = [
         'Color',
@@ -35,14 +38,12 @@ const TrademarkForm = ({
         'Texture',
     ];
 
-    const previousStep = () => {
-        setCurrentStep(currentStep - 1); // assign currentStep to next step
-        navigation.previous();
-    };
     const nextStep = () => {
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
+
+    setDirty();
 
     return (
         <Card className={classes.outerCard}>
@@ -136,7 +137,7 @@ const TrademarkForm = ({
                     type="submit"
                     variant="contained"
                     className={classes.backButton}
-                    onClick={() => previousStep()}
+                    onClick={() => history.push('/')}
                 >
                     Back
                 </Button>

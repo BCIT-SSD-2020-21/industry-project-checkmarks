@@ -3,6 +3,9 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const IdUpload = ({ setHandle, setInfo, info }) => {
+    require('dotenv').config();
+    const BASE = process.env.REACT_APP_BASE_URL + 'api/';
+
     const classes = useStyles();
     const [errorMessage, setErrorMessage] = useState('');
     const fileInput = useRef(null);
@@ -47,10 +50,7 @@ const IdUpload = ({ setHandle, setInfo, info }) => {
                 body: formData,
             };
 
-            const response = await fetch(
-                'https://localhost:44397/api/files',
-                options
-            )
+            const response = await fetch(`${BASE}files`, options)
                 .then((res) => {
                     return res.json();
                 })

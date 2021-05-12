@@ -18,7 +18,6 @@ export default function Landing(darkMode) {
     const history = useHistory();
 
     const [searching, setSearching] = useState(false);
-
     return (
         <Box className={classes.root}>
             <Box
@@ -72,7 +71,6 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         height: window.innerHeight,
         width: window.innerWidth,
-        // backgroundImage: `url(${bannerImage})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -88,14 +86,12 @@ const useStyles = makeStyles(() => ({
     },
     search: {
         alignItems: 'center',
-        // border: '1px solid black',
         display: 'flex',
         flexDirection: 'column',
         margin: '0 auto',
         width: '100%',
     },
     buttons: {
-        // animation: 'shiftUp-buttons 1s',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
