@@ -126,19 +126,22 @@ export default function Faq() {
             {/*  /// PANEL 3 ////  */}
             <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>Why should I care about search and review services?</Typography>
+                    <Typography>Why is this Important?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. 
+                         An original, distinct, unique mark helps you stand out and be remembered. A registered trademark is a tool that adds value to your brand by providing strength in its uniqueness in the marketplace. <br/>
+
+                         In some cases, the mark may become the most valuable asset the business owns.
                     </Typography>
-                </AccordionDetails>
+                </AccordionDetails>y
+                
             </Accordion>
+            
             {/*  /// PANEL 4 ////  */}
             <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
-                    <Typography>How do trademark lawyers or IP agents help?</Typography>
+                    <Typography>Why should I care about search and review services?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
