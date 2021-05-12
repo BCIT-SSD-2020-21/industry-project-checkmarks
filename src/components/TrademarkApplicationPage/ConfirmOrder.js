@@ -26,6 +26,8 @@ export default function PaymentForm({
         navigation.next();
     };
 
+    console.log('info: ', info);
+
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Confirm Your Information</h1>
@@ -177,9 +179,9 @@ export default function PaymentForm({
                                     className={classes.text}
                                     component="p"
                                 >
-                                    {niceClass.number +
+                                    {niceClass.id +
                                         ' - ' +
-                                        niceClass.descriptions}
+                                        niceClass.description}
                                 </Typography>
                             );
                         })}
@@ -204,7 +206,7 @@ export default function PaymentForm({
                                     className={classes.text}
                                     component="p"
                                 >
-                                    {term.termNumber + ' - ' + term.termName}
+                                    {term.id + ' - ' + term.termName}
                                 </Typography>
                             );
                         })}
