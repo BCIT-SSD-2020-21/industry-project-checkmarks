@@ -53,7 +53,7 @@ export default function About() {
             About Us
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */}
           </Typography>
         </Container>  
         
@@ -107,15 +107,12 @@ export default function About() {
                   Tech + Software
                   </Typography>
                   <Typography>
-                  {'Licensing agreements, SaaS, Ownership of IP, Growth.  '}
+                  {'Licensing agreements, SaaS, Ownership of IP, Growth. '}
                 {'We have high level focus on what’s unique about your tech company.'}
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
-          
-
-
           </Grid>
         </Container>
     </React.Fragment>
