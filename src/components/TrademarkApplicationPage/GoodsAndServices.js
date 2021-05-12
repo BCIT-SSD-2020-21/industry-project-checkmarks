@@ -250,7 +250,7 @@ export default function GoodsAndServices({
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
-                    (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
+                    (690 + 0 * (classesSelected.length - 1)).toFixed(2)
                 );
             } else if (classesSelected.length === 0) {
                 setTotalAmount(0);
