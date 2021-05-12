@@ -23,7 +23,7 @@ const TrademarkApplication = (darkMode) => {
     // form information
     const [info, setInfo] = useState({
         //Application Information
-        individualOrOrganization: '',
+        individualOrOrganization: 'Individual',
         firstName: '',
         lastName: '',
         organizationName: '',
