@@ -393,7 +393,7 @@ export default function IndividualForm({
                             />
                         }
                     />{' '}
-                    I agree with the terms and agreements
+                    I agree with the <Button>terms and agreements</Button>
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
                     />
