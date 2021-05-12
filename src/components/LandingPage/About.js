@@ -56,9 +56,47 @@ export default function About() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Typography>
         </Container>  
+        
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Trademarks + IP
+                  </Typography>
+                  <Typography>
+                  {'Your most important assets – your mark, logo, and slogan help identify your products or services.'}
+                  {'They create loyalty by differentiating you from others.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Trademarks + IP
+                  </Typography>
+                  <Typography>
+                  {'Your most important assets – your mark, logo, and slogan help identify your products or services.'}
+                  {'They create loyalty by differentiating you from others.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+
+
           </Grid>
         </Container>
     </React.Fragment>
