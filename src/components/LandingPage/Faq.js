@@ -89,7 +89,7 @@ export default function Faq() {
             F.A.Q
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */}
           </Typography>
         </Container>     
         <Container> 
