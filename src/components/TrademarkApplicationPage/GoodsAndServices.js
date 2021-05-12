@@ -40,7 +40,7 @@ export default function GoodsAndServices({
 
     // INPUT statevar
     const [searchTerm, setSearchTerm] = useState(''); // user's search
-    const [searchClassFilterTerm, setSearchClassFilterTerm] = useState(''); // user to filter results by class name
+    const [searchClassFilterText, setSearchClassFilterText] = useState(''); // user to filter results by class name
     const [open, setOpen] = useState(false); // dialog box showing when no terms selected
     // INITIALIZE From 'info' Statevar
     const [selectedTerms, setSelectedTerms] = useState(info.termsSelected); // rendered on Selected Terms summary
@@ -70,7 +70,6 @@ export default function GoodsAndServices({
             if (searchTerm !== '') {
                 searchInstance.delayTimer = setTimeout(() => {
                     (async () => {
-                        console.log('after 2 sec');
                         const result = await searchTerms(searchTerm);
                         setTermSearchResults(result.terms);
                     })();
@@ -83,17 +82,17 @@ export default function GoodsAndServices({
     const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
     useEffect(() => {
         renderTerms();
-    }, [termSearchResults, selectedTerms, searchClassFilterTerm]);
+    }, [termSearchResults, selectedTerms]);
     const renderTerms = () => {
         const termData = []; // formatted to fit table
         termSearchResults.forEach((resultItem) => {
             let termSelected = false;
             // check against secondary filter (if term's class does NOT contain substring, then continue)
             if (
-                searchClassFilterTerm === '' ||
+                searchClassFilterText === '' ||
                 resultItem.classShortName
                     .toLowerCase()
-                    .includes(searchClassFilterTerm.toLowerCase())
+                    .includes(searchClassFilterText.toLowerCase())
             ) {
                 // Check if tern is Selected, to determine if TermSelector should be Checked
                 selectedTerms.forEach((term) => {
@@ -157,15 +156,17 @@ export default function GoodsAndServices({
         if (classSearchInstance.delayTimer) {
             clearTimeout(classSearchInstance.delayTimer);
         }
-        if (searchClassFilterTerm !== '') {
+        if (searchClassFilterText !== '') {
             setLoadingClassSearch(true);
             classSearchInstance.delayTimer = setTimeout(() => {
-                setLoadingClassSearch(false); // after 3 seconds, stop Loading Indicator
-            }, 2000);
+                setLoadingClassSearch(false); // after 1 seconds, stop Loading Indicator and apply filter
+                renderTerms();
+            }, 1000);
         } else {
+            renderTerms();
             setLoadingClassSearch(false);
         }
-    }, [searchClassFilterTerm]);
+    }, [searchClassFilterText]);
 
     const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
     const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
@@ -307,7 +308,7 @@ export default function GoodsAndServices({
                     setInputTo={setSearchTerm}
                 />
                 {termSearchResults.length > 0 && (
-                    <Box className={classes.niceClassFilterTerm}>
+                    <Box className={classes.niceClassFilterText}>
                         <Typography>
                             Each term is associated with a NICE Class
                         </Typography>
@@ -316,7 +317,7 @@ export default function GoodsAndServices({
                             placeholder={
                                 'Narrow results by filtering NICE Classes '
                             }
-                            setInputTo={setSearchClassFilterTerm}
+                            setInputTo={setSearchClassFilterText}
                         />
                     </Box>
                 )}
