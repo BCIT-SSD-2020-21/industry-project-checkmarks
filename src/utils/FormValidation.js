@@ -1,3 +1,15 @@
+export const advancedSearch = (searchText, targetText) => {
+    var searchWords = searchText.split(' ');
+    console.log('searchWords: ', searchWords);
+    let targetTextMatches = true;
+    searchWords.forEach((word) => {
+        if (!targetText.toLowerCase().includes(word.toLowerCase())) {
+            targetTextMatches = false;
+        }
+    });
+    return targetTextMatches;
+};
+
 export const sumProgressValue = (obj) => {
     let progressCompletedValue = 0; // Max abbreviation: 3100
     for (const prop in obj) {
