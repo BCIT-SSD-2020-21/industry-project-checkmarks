@@ -135,11 +135,11 @@ export default function Faq() {
                          In some cases, the mark may become the most valuable asset the business owns.
                     </Typography>
                 </AccordionDetails>y
-                
+
             </Accordion>
             
             {/*  /// PANEL 4 ////  */}
-            <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+            {/* <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
                     <Typography>Why should I care about search and review services?</Typography>
                 </AccordionSummary>
@@ -149,7 +149,7 @@ export default function Faq() {
                         elit. 
                     </Typography>
                 </AccordionDetails>
-            </Accordion>
+            </Accordion> */}
         </Container> 
     </React.Fragment>
   );
