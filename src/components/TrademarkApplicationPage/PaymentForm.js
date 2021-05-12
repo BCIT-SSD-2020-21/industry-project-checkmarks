@@ -246,6 +246,7 @@ export default function PaymentForm({
                             form input, form iframe {
                                 width: 100%;
                                 margin: 5px;
+                   
                             }
                         
                             form iframe {
@@ -379,10 +380,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         margin: '3%',
         width: '70%',
-        border: '1px solid #696969',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
-            width: '60%',
+            width: '150%',
             padding: '0 2% ',
         },
         [theme.breakpoints.between('sm', 'md')]: {
@@ -417,9 +417,14 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         width: '80%',
-        padding: '5px',
+        backgroundColor: 'transparent',
+        border: `1px solid ${checkmarksTheme.textLabel}`,
+        padding: '10px',
         margin: '3% auto',
-        borderRadius: '10px',
+        borderRadius: '5px',
+        '&:focus': {
+            outline: 'none',
+        },
         [theme.breakpoints.up('sm')]: {
             margin: '2% auto',
         },
