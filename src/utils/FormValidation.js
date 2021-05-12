@@ -261,10 +261,10 @@ export const validateForm = (info, setValidationProgress) => {
     // } else {
     //     newInputValidationValue.billingAddress = 0;
     // }
-    if (info.paymentConfirmaed) {
-        newInputValidationValue.paymentConfirmaed = 300;
+    if (info.paymentConfirmed) {
+        newInputValidationValue.paymentConfirmed = 300;
     } else {
-        newInputValidationValue.paymentConfirmaed = 0;
+        newInputValidationValue.paymentConfirmed = 0;
     }
     setValidationProgress(newInputValidationValue);
 };
