@@ -1,23 +1,7 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Button,
-    Card,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
-    Typography,
-} from '@material-ui/core';
+import { Button, Card } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
-import Alert from '@material-ui/lab/Alert';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Checkmark from '../Checkmark';
-import { canadaProvinces, unitedStates } from '../../utils/FormValidation';
 import { createClioContact, createEmail, sendPayment } from '../../network';
 
 export default function PaymentForm({
@@ -50,6 +34,8 @@ export default function PaymentForm({
 
     useLayoutEffect(() => {
         const form = formRef.current;
+
+        let paymentToken = '';
 
         var ccErrorMessage = 'Credit Card field is required';
         var cvvErrorMessage = 'CVV field is required';
@@ -114,7 +100,6 @@ export default function PaymentForm({
         };
 
         const hostedFieldsCallBack = function (state) {
-            console.log('state: ', state);
             if (state.fields[0].error != '') {
                 ccErrorMessage = state.fields[0].error;
             } else {
@@ -132,7 +117,6 @@ export default function PaymentForm({
             hostedFieldsConfiguration,
             hostedFieldsCallBack
         );
-        console.log('hostedFields: ', hostedFields);
 
         form.onsubmit = function (event) {
             event.preventDefault();
@@ -177,11 +161,12 @@ export default function PaymentForm({
                     address1: addressElement.value,
                 })
                 .then((result) => {
+                    paymentToken = result.id;
                     setInfo({ ...info, paymentToken: result.id });
                     console.log('result, getPaymentToken: ', result);
                 })
                 .then(() => {
-                    nextStep();
+                    nextStep(paymentToken);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -189,12 +174,13 @@ export default function PaymentForm({
         };
     }, []);
 
+    console.log('info: ', info);
     //////////////////////////////Create clio account and send email/////////////////////////////////////////////
 
     // Pass paymentToken
-    const submitApplication = async () => {
+    const submitApplication = async (paymentToken) => {
         setSubmitting(true);
-        let responseSendPayment = await sendPayment(info);
+        let responseSendPayment = await sendPayment(info, paymentToken);
         if (responseSendPayment) {
             let matterId = await createClioContact(info);
             console.log('matterId: ', matterId);
@@ -204,7 +190,7 @@ export default function PaymentForm({
                 if (responseCreateEmail) {
                     setInfo({
                         ...info,
-                        paymentConfirmaed: true,
+                        paymentConfirmed: true,
                     });
                     // nextStep();
                 } else {
@@ -224,10 +210,10 @@ export default function PaymentForm({
         setCurrentStep(currentStep - 1); // assign currentStep to next step
         navigation.previous();
     };
-    const nextStep = () => {
+    const nextStep = (paymentToken) => {
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
-        submitApplication();
+        submitApplication(paymentToken);
     };
 
     return (

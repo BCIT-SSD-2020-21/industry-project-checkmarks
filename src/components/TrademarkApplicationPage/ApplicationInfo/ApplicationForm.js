@@ -18,6 +18,7 @@ import { checkmarksTheme } from '../../../styles/Themes';
 import { canadaProvinces, unitedStates } from '../../../utils/FormValidation';
 import Checkmark from '../../Checkmark';
 import IdUpload from '../../IdUpload';
+import TermsAndAgreementsModal from './TermsAndAgreementsModal';
 
 export default function IndividualForm({
     step,
@@ -31,6 +32,9 @@ export default function IndividualForm({
 }) {
     const classes = useStyles();
     const [handle, setHandle] = useState('');
+
+    //Modal State
+    const [open, setOpen] = useState(false);
 
     //handle selection of individual or organization
     const handleSelection = (e) => {
@@ -357,8 +361,33 @@ export default function IndividualForm({
                     prior to submission, however approval and registration
                     determined upon submission to the Canadian Intellectual
                     Property Office.
+                    <FormControl className={classes.field}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={info.agreedTermsOfService}
+                                    onChange={() =>
+                                        setInfo({
+                                            ...info,
+                                            agreedTermsOfService: !info.agreedTermsOfService,
+                                        })
+                                    }
+                                    name="AgreeTermsOfService"
+                                />
+                            }
+                            label="I understand."
+                        />
+                        <Checkmark
+                            value={validationProgress.agreedTermsOfService}
+                        />
+                    </FormControl>
                 </Alert>
-                <FormControl fullWidth={true} className={classes.field}>
+
+                {/* ======================== */}
+                {/* = Terms and Agreemment = */}
+                {/* ======================== */}
+
+                <FormControl className={classes.field}>
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -372,8 +401,10 @@ export default function IndividualForm({
                                 name="AgreeTermsOfService"
                             />
                         }
-                        label="I understand."
                     />
+                    {/* Terms and Agreement Modal  */}{' '}
+                    <strong className={classes.terms}>I agree with the</strong>
+                    <TermsAndAgreementsModal open={open} setOpen={setOpen} />
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
                     />
@@ -459,6 +490,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: '5%',
+        marginBottom: '5%',
     },
     nextButton: {
         backgroundColor: '#DF3A48',
@@ -518,5 +550,8 @@ const useStyles = makeStyles((theme) => ({
     },
     alertRed: {
         color: checkmarksTheme.buttonTextSecondary,
+    },
+    terms: {
+        color: checkmarksTheme.textValue2,
     },
 }));

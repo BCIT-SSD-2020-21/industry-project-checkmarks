@@ -1,3 +1,15 @@
+export const advancedSearch = (searchText, targetText) => {
+    var searchWords = searchText.split(' ');
+    console.log('searchWords: ', searchWords);
+    let targetTextMatches = true;
+    searchWords.forEach((word) => {
+        if (!targetText.toLowerCase().includes(word.toLowerCase())) {
+            targetTextMatches = false;
+        }
+    });
+    return targetTextMatches;
+};
+
 export const sumProgressValue = (obj) => {
     let progressCompletedValue = 0; // Max abbreviation: 3100
     for (const prop in obj) {
@@ -213,6 +225,12 @@ export const validateForm = (info, setValidationProgress) => {
     }
     // Payment Information Provided        // Payment Information
 
+    // UBC 2 courses - Java, Java (2nd year), Matlab
+    // DC 2 courses - C#, operating systems
+    // Codecademy;
+    // old job - VBA (macros)
+    // Lighthouse Labs - Intro to Web Dev (6 weeks) , $1500
+
     // if (
     //     info.paymentCardholderName &&
     //     !personNameRegex.test(info.paymentCardholderName) &&
@@ -243,10 +261,10 @@ export const validateForm = (info, setValidationProgress) => {
     // } else {
     //     newInputValidationValue.billingAddress = 0;
     // }
-    if (info.paymentConfirmaed) {
-        newInputValidationValue.paymentConfirmaed = 300;
+    if (info.paymentConfirmed) {
+        newInputValidationValue.paymentConfirmed = 300;
     } else {
-        newInputValidationValue.paymentConfirmaed = 0;
+        newInputValidationValue.paymentConfirmed = 0;
     }
     setValidationProgress(newInputValidationValue);
 };

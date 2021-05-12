@@ -6,6 +6,7 @@ const colors = {
     lightBlue: '#98ABD1',
     mediumBlue: '#4D6CAD',
     darkBlue: '#384F7E',
+    blue1: '#80d1fd',
 
     activeBlue: '#12578B',
     teal: '#128B83',
@@ -33,10 +34,15 @@ export const checkmarksTheme = {
 
     textLabel: colors.darkGray, // applied to Text Label
     textValue: colors.black,
+    textValue1: colors.white,
+    textValue2: colors.mediumRed,
+
+    hyperLink: colors.blue1, //applied to links
 
     inputLabel: colors.darkRed,
     inputIcon: colors.darkRed,
     inputValue: colors.darkRed,
+    inputValue: colors.white,
     inputBackground: colors.lighterGrayOpq,
     inputPlaceholder: colors.lightGray,
 
