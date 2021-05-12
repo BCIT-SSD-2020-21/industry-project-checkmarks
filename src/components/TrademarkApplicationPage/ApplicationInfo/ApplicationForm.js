@@ -387,8 +387,6 @@ export default function IndividualForm({
                 {/* = Terms and Agreemment = */}
                 {/* ======================== */}
 
-                <TermsAndAgreementsModal />
-
                 <FormControl className={classes.field}>
                     <FormControlLabel
                         control={
@@ -404,7 +402,7 @@ export default function IndividualForm({
                             />
                         }
                     />
-                    {/* Terms and Agreement Modal  */}
+                    {/* Terms and Agreement Modal  */} I agree with the
                     <TermsAndAgreementsModal open={open} setOpen={setOpen} />
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
@@ -491,6 +489,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: '5%',
+        marginBottom: '5%',
     },
     nextButton: {
         backgroundColor: '#DF3A48',
