@@ -87,7 +87,7 @@ export default function GoodsAndServices({
         const termData = []; // formatted to fit table
         termSearchResults.forEach((resultItem) => {
             let termSelected = false;
-            info.termsSelected.forEach((term) => {
+            selectedTerms.forEach((term) => {
                 if (term.id === resultItem.id) {
                     termSelected = true;
                 }
