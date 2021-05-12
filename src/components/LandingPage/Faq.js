@@ -100,8 +100,12 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. 
+                        
+                    A word, phrase, or logo that is used by you to distinguish your products or services from the products or services of others.<br/> 
+                    
+                    Trademarks are often classified in terms of word marks, phrases (for example, a slogan), or design marks (for example, a logo).<br/>
+                    
+                    However, there are other ways to classify trademarks. For example, for certain legal purposes, such as assessing the level of protection between two similar competing marks, they could be classified in terms of weak versus strong marks. An example of a strong mark would be a unique coined word. On the other hand, weak marks are often generic or descriptive words. 
                     </Typography>
                 </AccordionDetails>
             </Accordion>
