@@ -18,6 +18,7 @@ import { checkmarksTheme } from '../../../styles/Themes';
 import { canadaProvinces, unitedStates } from '../../../utils/FormValidation';
 import Checkmark from '../../Checkmark';
 import IdUpload from '../../IdUpload';
+import TermsAndAgreementsModal from './TermsAndAgreementsModal';
 
 export default function IndividualForm({
     step,
@@ -28,6 +29,8 @@ export default function IndividualForm({
     navigation,
     progressValue,
     validationProgress,
+    open,
+    setOpen,
 }) {
     const classes = useStyles();
     const [handle, setHandle] = useState('');
@@ -379,6 +382,12 @@ export default function IndividualForm({
                     </FormControl>
                 </Alert>
 
+                {/* ======================== */}
+                {/* = Terms and Agreemment = */}
+                {/* ======================== */}
+
+                <TermsAndAgreementsModal />
+
                 <FormControl className={classes.field}>
                     <FormControlLabel
                         control={
@@ -393,8 +402,10 @@ export default function IndividualForm({
                                 name="AgreeTermsOfService"
                             />
                         }
-                    />{' '}
-                    I agree with the <Button>terms and agreements</Button>
+                    />
+                    {/* Terms and Agreement Modal  */}
+                    {/* Terms and agreement button to fire modal  */}I agree
+                    with the <Button>terms and agreements</Button>
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
                     />
