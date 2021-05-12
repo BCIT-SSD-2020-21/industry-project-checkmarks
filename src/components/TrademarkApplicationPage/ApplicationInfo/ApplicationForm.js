@@ -29,11 +29,12 @@ export default function IndividualForm({
     navigation,
     progressValue,
     validationProgress,
-    open,
-    setOpen,
 }) {
     const classes = useStyles();
     const [handle, setHandle] = useState('');
+
+    //Modal State
+    const [open, setOpen] = useState(false);
 
     //handle selection of individual or organization
     const handleSelection = (e) => {
@@ -404,8 +405,7 @@ export default function IndividualForm({
                         }
                     />
                     {/* Terms and Agreement Modal  */}
-                    {/* Terms and agreement button to fire modal  */}I agree
-                    with the <Button>terms and agreements</Button>
+                    <TermsAndAgreementsModal open={open} setOpen={setOpen} />
                     <Checkmark
                         value={validationProgress.agreedTermsOfService}
                     />
