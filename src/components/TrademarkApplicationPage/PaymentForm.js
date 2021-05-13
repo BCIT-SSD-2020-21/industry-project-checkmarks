@@ -361,7 +361,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.transparentCard,
         borderRadius: '15px',
         margin: '3%',
-        width: '100%',
+        width: '70%',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '50%',
@@ -375,10 +375,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        overflowY: 'hidden',
-        overflowX: 'hidden',
-        height: '100%',
-        // width: 'auto',
+
+        width: 'auto',
     },
     title: {
         color: '#df3a48',

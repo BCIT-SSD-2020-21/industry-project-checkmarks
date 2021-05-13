@@ -569,7 +569,7 @@ const useStyles = makeStyles((theme) => ({
     },
     idAlert: {
         color: '#2a9df4',
-        margin: '10% auto 1% auto',
+        margin: '3% auto 5% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 3% auto',
