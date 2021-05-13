@@ -302,7 +302,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        marginTop: '75px',
+        marginTop: '80px',
         minHeight: window.innerHeight,
         width: '100%',
     },

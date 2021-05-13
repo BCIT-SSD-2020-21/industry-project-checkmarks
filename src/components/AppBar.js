@@ -17,15 +17,13 @@ import {
     Toolbar,
     Typography,
 } from '@material-ui/core';
-import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
-import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
+import EventIcon from '@material-ui/icons/Event';
+import GavelIcon from '@material-ui/icons/Gavel';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PlayCircleFilledTwoToneIcon from '@material-ui/icons/PlayCircleFilledTwoTone';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-// import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import WbSunnyTwoToneIcon from '@material-ui/icons/WbSunnyTwoTone';
 import NightsStayTwoToneIcon from '@material-ui/icons/NightsStayTwoTone';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,14 +37,14 @@ export const navbarStyles = makeStyles((theme) => ({
     // APPBAR
     appBarContainer: {
         flexGrow: 1,
-        backgroundColor: 'white',
+        padding: 0,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     // MENU
     menu: {
-        // backgroundColor: holisticTheme.bgDrawer,
+        backgroundColor: checkmarksTheme.bgPrimaryDark,
     },
     menuItem: {
         color: checkmarksTheme.inputIcon,
@@ -57,6 +55,9 @@ export const navbarStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         padding: '5px 20px',
         textDecoration: 'none',
+    },
+    askALawyer: {
+        fontSize: '11px',
     },
     menuItemIcon: {
         marginRight: '6px',
@@ -86,7 +87,9 @@ export const navbarStyles = makeStyles((theme) => ({
     },
     menuButton: {
         color: checkmarksTheme.buttonTextSecondary,
-        // marginRight: theme.spacing(2),
+        height: '80px',
+        padding: 0,
+        width: '80px',
     },
     hide: {
         display: 'none',
@@ -96,7 +99,7 @@ export const navbarStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
-        backgroundColor: checkmarksTheme.bgDrawer,
+        backgroundColor: checkmarksTheme.bgAppBarOpq70Dark,
         width: drawerWidth,
     },
     drawerHeader: {
@@ -179,15 +182,22 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const handleDrawerOpen = () => {
         setDrawerOpen(true);
+        // setProgressBarPosition(1)
     };
     const handleDrawerClose = () => {
         setDrawerOpen(false);
+        // setProgressBarPosition(0)
     };
 
     return (
         <div>
             <CssBaseline />
             <AppBar
+                style={{
+                    backgroundColor: darkMode
+                        ? checkmarksTheme.bgAppBarDark
+                        : checkmarksTheme.bgAppBar,
+                }}
                 position="fixed"
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: drawerOpen,
@@ -208,7 +218,14 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                         <MenuIcon />
                     </IconButton>
                     <Link to="/" style={{ textDecoration: 'none' }}>
-                        <Typography className={classes.appBarTitle}>
+                        <Typography
+                            style={{
+                                color: checkmarksTheme.inputValue,
+                                fontSize: drawerOpen ? '20px' : '24px',
+                                fontWeight: 'bold',
+                                padding: '5px',
+                            }}
+                        >
                             Checkmarks
                         </Typography>
                     </Link>
@@ -227,9 +244,13 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                             size="large"
                             // variant="contained"
                             // color="secondary"
-                            component="a"
+
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
                             target="blank"
-                            href="https://golbey.com/contact/"
+                            // component="a"
+                            // href="https://golbey.com/contact/"
                         >
                             <Box
                                 style={{
@@ -240,26 +261,20 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                                 }}
                             >
                                 <HelpOutlineIcon fontSize={'default'} />
-                                <Typography>Ask a Lawyer</Typography>
+                                <Typography className={classes.askALawyer}>
+                                    Ask a Lawyer
+                                </Typography>
                             </Box>
-                        </IconButton>
-
-                        <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            className={classes.menuButton}
-                            color="inherit"
-                        >
-                            <AccountCircleTwoToneIcon fontSize={'large'} />
                         </IconButton>
                     </Box>
 
                     <Menu
                         PaperProps={{
                             style: {
-                                backgroundColor: checkmarksTheme.bgDrawer,
+                                backgroundColor: darkMode
+                                    ? checkmarksTheme.bgOpaque90Dark
+                                    : checkmarksTheme.bgOpaque90,
+                                borderRadius: '10px',
                                 marginTop: '40px',
                             },
                         }}
@@ -280,23 +295,35 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                     >
                         <MenuItem
                             className={classes.menuItem}
-                            onClick={() => {
-                                history.push('/application');
-                            }}
+                            target="blank"
+                            component="a"
+                            href="https://calendly.com/golbey_justin/15mins?month=2021-05"
                         >
-                            <PlayCircleFilledTwoToneIcon
-                                className={classes.menuItemIcon}
-                            />
-                            Start Trademark Application
+                            <EventIcon className={classes.menuItemIcon} />
+                            Book 15 Minutes Through Calendly
+                        </MenuItem>
+                        <MenuItem
+                            className={classes.menuItem}
+                            target="blank"
+                            component="a"
+                            href="https://golbey.com/contact/"
+                        >
+                            <GavelIcon className={classes.menuItemIcon} />
+                            Contact Golbey Law
                         </MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>
             <Drawer
-                className={classes.drawer}
+                // className={classes.drawer}
                 variant="persistent"
                 anchor="left"
                 open={drawerOpen}
+                style={{
+                    backgroundColor: darkMode
+                        ? checkmarksTheme.bgAppBarOpq70Dark
+                        : checkmarksTheme.bgAppBarOpq70,
+                }}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
@@ -327,7 +354,7 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                 </div>
                 <List>
                     <ListItem>
-                        <IconButton className={classes.drawerRemoveButton}>
+                        {/* <IconButton className={classes.drawerRemoveButton}>
                             <PlayCircleFilledTwoToneIcon />
                         </IconButton>
                         <ListItemText
@@ -341,7 +368,7 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
                             className={classes.drawerListItemText}
                         >
                             <PlayCircleFilledTwoToneIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </ListItem>
                 </List>
                 <Divider />
