@@ -37,14 +37,14 @@ export const checkmarksTheme = {
     textValue: colors.black,
     textValue1: colors.white,
     textValue2: colors.mediumRed,
-    textValue3: colors.text,
+    textValue3: colors.darkRed,
 
     hyperLink: colors.blue1, //applied to links
 
     inputLabel: colors.darkRed,
     inputIcon: colors.darkRed,
     inputValue: colors.darkRed,
-    inputValue: colors.white,
+    inputValue2: colors.white,
     inputBackground: colors.lighterGrayOpq,
     inputPlaceholder: colors.lightGray,
 
