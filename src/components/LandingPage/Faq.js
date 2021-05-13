@@ -7,6 +7,7 @@ import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import { withStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../styles/Themes';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +48,7 @@ const Accordion = withStyles({
 
 const AccordionSummary = withStyles({
     root: {
-        backgroundColor: 'rgba(165, 26, 36, 0.80)',
+        backgroundColor: checkmarksTheme.bgCardHeader1,
         borderBottom: '1px solid rgba(0, 0, 0, .125)',
         marginBottom: -1,
         minHeight: 56,

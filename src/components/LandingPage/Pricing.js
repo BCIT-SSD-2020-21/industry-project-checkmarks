@@ -8,8 +8,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
+import { checkmarksTheme } from '../../styles/Themes';
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -25,11 +25,17 @@ const useStyles = makeStyles((theme) => ({
     heroContent: {
         padding: theme.spacing(8, 0, 6),
     },
+    button: {
+        backgroundColor:
+            theme.palette.type === 'dark'
+                ? checkmarksTheme.bgCardHeader
+                : checkmarksTheme.bgCardHeader1,
+    },
     cardHeader: {
         backgroundColor:
             theme.palette.type === 'dark'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[700],
+                ? checkmarksTheme.bgCardHeader
+                : checkmarksTheme.bgCardHeader1,
     },
     cardPricing: {
         display: 'flex',
@@ -41,41 +47,28 @@ const useStyles = makeStyles((theme) => ({
 
 const tiers = [
     {
-        title: 'Basic',
-        price: '10',
+        title: 'DIY Package',
+        price: '...',
         description: [
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
         ],
-        buttonText: 'Sign up for free',
-        buttonVariant: 'outlined',
-    },
-    {
-        title: 'Pro',
-        subheader: 'Most Popular',
-        price: '20',
-        description: [
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-        ],
-        buttonText: 'Get started',
+        buttonText: 'Get Started',
         buttonVariant: 'contained',
     },
     {
-        title: 'Enterprise',
-        price: '30',
+        title: 'Enterprise Package',
+        price: '...',
         description: [
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
         ],
-        buttonText: 'Contact us',
-        buttonVariant: 'outlined',
+        buttonText: 'Get Started',
+        buttonVariant: 'contained',
     },
 ];
 
@@ -100,42 +93,26 @@ export default function Pricing() {
                 >
                     Pricing
                 </Typography>
-                <Typography
+                {/* <Typography
                     variant="h5"
                     align="center"
                     color="textSecondary"
                     component="p"
                 >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </Typography>
+                </Typography> */}
             </Container>
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
                     {tiers.map((tier, index) => (
-                        // Enterprise card is full width at sm breakpoint
-                        <Grid
-                            item
-                            key={index}
-                            xs={12}
-                            sm={tier.title === 'Enterprise' ? 12 : 6}
-                            md={4}
-                        >
+                        <Grid item key={index} xs={12} sm={6} md={6}>
                             <Card>
                                 <CardHeader
                                     title={tier.title}
-                                    subheader={tier.subheader}
                                     titleTypographyProps={{ align: 'center' }}
-                                    subheaderTypographyProps={{
-                                        align: 'center',
-                                    }}
-                                    action={
-                                        tier.title === 'Pro' ? (
-                                            <StarIcon />
-                                        ) : null
-                                    }
                                     className={classes.cardHeader}
                                 />
-                                <CardContent>
+                                <CardContent className={classes.CardContent}>
                                     <div className={classes.cardPricing}>
                                         <Typography
                                             component="h2"
@@ -166,6 +143,7 @@ export default function Pricing() {
                                 </CardContent>
                                 <CardActions>
                                     <Button
+                                        className={classes.button}
                                         fullWidth
                                         variant={tier.buttonVariant}
                                         color="primary"
