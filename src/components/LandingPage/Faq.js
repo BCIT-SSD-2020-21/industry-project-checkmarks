@@ -143,17 +143,7 @@ export default function Faq() {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            If you value your brand, we think you should protect
-                            it. Registration is the best way to protect your
-                            mark’s value in Canada. 
-                            Registration is prima facie evidence of ownership.
-                            In the event of a dispute, the registered owner is
-                            presumed to have ownership and the onus of proof
-                            shifts. Registration makes it easier to protect your
-                            brand through legal proceedings.
-                            <br />
-                            Any word, phrase, or image can potentially be
-                            protected by registering it as a trademark.
+                        A trade name is the name of your business, which is sometimes the tradename is the trademark
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
