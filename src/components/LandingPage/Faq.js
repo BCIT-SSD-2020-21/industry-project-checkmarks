@@ -157,17 +157,16 @@ export default function Faq() {
                         aria-controls="panel3d-content"
                         id="panel3d-header"
                     >
-                        <Typography>Why is this Important?</Typography>
+                        <Typography>Should you register your trademark?</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            An original, distinct, unique mark helps you stand
-                            out and be remembered. A registered trademark is a
-                            tool that adds value to your brand by providing
-                            strength in its uniqueness in the marketplace.{' '}
-                            <br />
-                            In some cases, the mark may become the most valuable
-                            asset the business owns.
+                        Generally, simply making and using a trademark gives you a trademark (called a <strong>“common law trademark”</strong>). This is free but relates to real goodwill enjoyed by the trademark and so it can be hard to enforce across Canada. If you only have goodwill in Vancouver, it will very hard to enforce your common law trademark rights in Halifax.  Registering a trademark with the Canadian Intellectual Property Office <strong>(CIPO)</strong> and there are several advantages to doing so:
+                        <br/>
+                        (a)	Registration of your trademark will give you Canada-wide rights to the exclusive use of that mark in your industry regardless of whether your trademark enjoys goodwill or reputation in any particular area of Canada;<br/>
+                        (b)	Registration allows you to take easier steps to prevent others from using an identical or confusingly similar trademark in relation to a similar business;<br/>
+                        (c)	CIPO will screen future trademark registration applications thereby offering your registered trademark some additional protection;<br/>
+                        (d)	Trademark registration will deter others from adopting a trademark similar to yours; and
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
