@@ -219,7 +219,7 @@ export default function IndividualForm({
             </div>
 
             <Alert severity="info" className={classes.idAlert}>
-                Single image file should be under 2MB
+                Please upload your photo ID, file should be less than 2Mb.
             </Alert>
 
             {/* ============================ */}
