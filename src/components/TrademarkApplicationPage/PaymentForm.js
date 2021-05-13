@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
 import { createClioContact, createEmail, sendPayment } from '../../network';
+import OrderAmount from '../OrderAmount';
 
 export default function PaymentForm({
     navigation,
@@ -237,6 +238,7 @@ export default function PaymentForm({
                             } 
                         `}
             </style>
+            <OrderAmount info={info} />
             <form id="form" ref={formRef} className={classes.container}>
                 <div className={classes.inputContainer}>
                     <label
@@ -357,7 +359,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.transparentCard,
         borderRadius: '15px',
         margin: '3%',
-        width: '70%',
+        width: '86%',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '50%',
@@ -428,13 +430,13 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        marginTop: '10%',
     },
     continueButton: {
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        marginTop: '10%',
         marginLeft: '3%',
         width: '50%',
         height: '30px',
@@ -451,7 +453,6 @@ const useStyles = makeStyles((theme) => ({
         color: '#df3a48',
         backgroundColor: '#FFF',
         fontWeight: 'bold',
-        marginTop: '10%',
         width: '50%',
         height: '30px',
         fontSize: '10px',
