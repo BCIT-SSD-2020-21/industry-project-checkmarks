@@ -291,15 +291,15 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundPosition: 'center',
-        backgroundSize: 'cover', //'100% auto',
+        alignItems: 'center',
+        backgroundPosition: 'top',
+        backgroundSize: 'auto 2400px', //'100% auto',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         marginTop: '75px',
-        width: '100%',
         minHeight: window.innerHeight,
+        width: '100%',
     },
     container: {
         display: 'flex',
@@ -307,6 +307,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-start',
         alignItems: 'center',
         minHeight: window.innerHeight,
+        width: '100%',
     },
     hero: {
         backgroundImage: '',
