@@ -41,26 +41,26 @@ const useStyles = makeStyles((theme) => ({
 const tiers = [
     {
         title: 'DIY Package',
-        price: '10',
+        price: '...',
         description: [
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
         ],
-        buttonText: 'Sign up for free',
-        buttonVariant: 'outlined',
+        buttonText: 'Get Started',
+        buttonVariant: 'contained',
     },
     {
         title: 'Enterprise Package',
-        price: '20',
+        price: '...',
         description: [
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
             'Lorem ipsum dolor sit amet',
         ],
-        buttonText: 'Get started',
+        buttonText: 'Get Started',
         buttonVariant: 'contained',
     },
 ];
@@ -108,11 +108,7 @@ export default function Pricing() {
                             <Card>
                                 <CardHeader
                                     title={tier.title}
-                                    subheader={tier.subheader}
                                     titleTypographyProps={{ align: 'center' }}
-                                    subheaderTypographyProps={{
-                                        align: 'center',
-                                    }}
                                     className={classes.cardHeader}
                                 />
                                 <CardContent>
