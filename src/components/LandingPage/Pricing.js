@@ -100,13 +100,12 @@ export default function Pricing() {
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
                     {tiers.map((tier, index) => (
-                        // Enterprise card is full width at sm breakpoint
                         <Grid
                             item
                             key={index}
                             xs={12}
-                            sm={tier.title === 'Enterprise' ? 12 : 6}
-                            md={4}
+                            sm={6}
+                            md={6}
                         >
                             <Card>
                                 <CardHeader
