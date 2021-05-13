@@ -166,11 +166,11 @@ export default function Faq() {
                         (a)	Registration of your trademark will give you Canada-wide rights to the exclusive use of that mark in your industry regardless of whether your trademark enjoys goodwill or reputation in any particular area of Canada;<br/>
                         (b)	Registration allows you to take easier steps to prevent others from using an identical or confusingly similar trademark in relation to a similar business;<br/>
                         (c)	CIPO will screen future trademark registration applications thereby offering your registered trademark some additional protection;<br/>
-                        (d)	Trademark registration will deter others from adopting a trademark similar to yours; and
+                        (d)	Trademark registration will deter others from adopting a trademark similar to yours; and<br/>
+                        (e)	Trademark registration may prevent others from registering a trademark similar to yours, and then taking action against you for damages or to prevent you from using your established trademark.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-
                 {/*  /// PANEL 4 ////  */}
                 {/* <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
@@ -183,6 +183,23 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion> */}
+            {/*  /// PANEL 5 ////  */}
+            {/* <Accordion
+                    square
+                    expanded={expanded === 'panel1'}
+                    onChange={handleChange('panel1')}
+                >
+                    <AccordionSummary
+                        aria-controls="panel1d-content"
+                        id="panel1d-header"
+                    >
+                        <Typography></Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion> */}
             </Container>
         </React.Fragment>
     );
