@@ -138,6 +138,7 @@ const useStyles = makeStyles(() => ({
     footerContainer: {
         backgroundColor: checkmarksTheme.bgTertiary,
         marginTop: '10%',
+        width: '100%',
     },
     '@keyframes shiftUp-buttons': {
         from: { transform: 'translateY(20%)' },
