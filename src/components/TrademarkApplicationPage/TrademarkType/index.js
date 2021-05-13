@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../../styles/Themes';
-import { Button, Card, Typography } from '@material-ui/core';
+import { Box, Button, Card, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from '../TrademarkType/DesignCard';
 import DetailSelectCard from '../TrademarkType/DetailSelectCard';
@@ -114,24 +114,40 @@ const TrademarkForm = ({
                     </p>
                 </div>
             )}
-            <Checkmark value={validationProgress.trademarkTypeFormCompleted} />
-            <div className={classes.detailSelectCardContainer}>
-                {/* map other Types Selection */}
-                {info.isOther &&
-                    otherTypesSelection.map((otherType, index) => (
-                        <DetailSelectCard
-                            otherType={otherType}
-                            info={info}
-                            setInfo={setInfo}
-                            index={index}
-                            key={index}
-                        />
-                    ))}
-            </div>
-            <Alert severity="info" className={classes.alert}>
-                Helper Section with brief legal information, assisting the
-                client through the process
-            </Alert>
+
+            {/* <div className={classes.detailSelectCardContainer}> */}
+            {/* map other Types Selection */}
+            {info.isOther && (
+                <Box>
+                    <Box className={classes.detailSelectCardContainer}>
+                        {otherTypesSelection.map((otherType, index) => (
+                            <DetailSelectCard
+                                otherType={otherType}
+                                info={info}
+                                setInfo={setInfo}
+                                index={index}
+                                key={index}
+                            />
+                        ))}
+                    </Box>
+                    <Alert severity="info" className={classes.alert}>
+                        Looks like you're applying for a Trademark with a less
+                        common characteristic. This is perfectly fine, however
+                        discussion with a lawyer is required before submission.
+                    </Alert>
+                </Box>
+            )}
+            {/* </div> */}
+            {/* {info.otherType && (
+
+                
+                
+            )} */}
+            <Box className={classes.checkboxContainer}>
+                <Checkmark
+                    value={validationProgress.trademarkTypeFormCompleted}
+                />
+            </Box>
             <div className={classes.buttonContainer}>
                 <Button
                     type="submit"
@@ -161,12 +177,12 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         margin: '3%',
         display: 'flex',
-        padding: '0 5% 5% 5%',
+        padding: '5%',
         flexDirection: 'column',
-        width: '70%',
+        width: '76%',
         [theme.breakpoints.up('md')]: {
-            width: '60%',
-            padding: '0 2% ',
+            width: '64%',
+            padding: '3% ',
         },
         border: '1px solid #696969',
     },
@@ -185,6 +201,12 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             columns: '2 auto',
         },
+    },
+    checkboxContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: '3%',
     },
     buttonContainer: {
         display: 'flex',
@@ -229,7 +251,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 17,
     },
     alert: {
-        color: '#2a9df4',
+        backgroundColor: checkmarksTheme.transparentCard,
+        color: checkmarksTheme.textActive,
         margin: '2% 0 5% 0',
         fontSize: '12px',
         [theme.breakpoints.up('sm')]: {
