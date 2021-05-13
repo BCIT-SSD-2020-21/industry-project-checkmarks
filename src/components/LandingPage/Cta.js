@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 
 const styles = (theme) => ({
@@ -15,9 +18,13 @@ const styles = (theme) => ({
         height: 'auto',
         padding: theme.spacing(2, 5),
       },
+      link: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+      },
   });
-  
 
+  
 function CallToAction(props) {
     const { classes } = props;
 
