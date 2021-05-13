@@ -8,7 +8,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -115,11 +114,6 @@ export default function Pricing() {
                                     subheaderTypographyProps={{
                                         align: 'center',
                                     }}
-                                    action={
-                                        tier.title === 'Pro' ? (
-                                            <StarIcon />
-                                        ) : null
-                                    }
                                     className={classes.cardHeader}
                                 />
                                 <CardContent>
