@@ -65,18 +65,6 @@ const tiers = [
         buttonText: 'Get started',
         buttonVariant: 'contained',
     },
-    {
-        title: 'Enterprise',
-        price: '30',
-        description: [
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-        ],
-        buttonText: 'Contact us',
-        buttonVariant: 'outlined',
-    },
 ];
 
 export default function Pricing() {
