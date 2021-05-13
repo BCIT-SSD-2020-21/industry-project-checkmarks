@@ -361,7 +361,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.transparentCard,
         borderRadius: '15px',
         margin: '3%',
-        width: '70%',
+        width: '100%',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
             width: '50%',
