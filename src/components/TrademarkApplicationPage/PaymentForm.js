@@ -221,10 +221,7 @@ export default function PaymentForm({
             <h1>Place a Trust Payment</h1>
             <style type="text/css">
                 {`
-                            form {
-                            
-                                margin: 0 auto;
-                            }
+
                             form input, form iframe {
                                 width: 100%;
                                 margin: 5px;
