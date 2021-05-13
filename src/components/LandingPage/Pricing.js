@@ -86,14 +86,14 @@ export default function Pricing() {
                 >
                     Pricing
                 </Typography>
-                <Typography
+                {/* <Typography
                     variant="h5"
                     align="center"
                     color="textSecondary"
                     component="p"
                 >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </Typography>
+                </Typography> */}
             </Container>
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
