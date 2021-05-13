@@ -42,7 +42,7 @@ export const checkmarksTheme = {
     inputLabel: colors.darkRed,
     inputIcon: colors.darkRed,
     inputValue: colors.darkRed,
-    inputValue: colors.white,
+    inputValue2: colors.white,
     inputBackground: colors.lighterGrayOpq,
     inputPlaceholder: colors.lightGray,
 
