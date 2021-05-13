@@ -253,7 +253,7 @@ export default function PaymentForm({
                         {ccError}
                     </div>
                     <div
-                        className={classes.input}
+                        // className={classes.input}
                         id="credit_card_field_id"
                     ></div>
                 </div>
@@ -303,7 +303,7 @@ export default function PaymentForm({
                     <div id="cvvValidation" style={{ color: 'red' }}>
                         {cvvError}
                     </div>
-                    <div className={classes.input} id="cvv_field_id"></div>
+                    <div id="cvv_field_id"></div>
                 </div>
 
                 <div className={classes.flexInput}>
