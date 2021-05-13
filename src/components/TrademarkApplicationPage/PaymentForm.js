@@ -222,7 +222,7 @@ export default function PaymentForm({
             <style type="text/css">
                 {`
                             form {
-                                width: 500px;
+                            
                                 margin: 0 auto;
                             }
                             form input, form iframe {
@@ -252,7 +252,7 @@ export default function PaymentForm({
                 </div>
 
                 <div className={classes.expiryDateBox}>
-                    <div className={classes.inputContainer}>
+                    <div>
                         <label className={classes.label} htmlFor="exp_month">
                             Expiry Month
                         </label>
@@ -268,7 +268,7 @@ export default function PaymentForm({
                         />
                     </div>
 
-                    <div className={classes.inputContainer}>
+                    <div>
                         <label className={classes.label} htmlFor="exp_year">
                             Expiry Year
                         </label>
@@ -292,10 +292,7 @@ export default function PaymentForm({
                     <div id="cvvValidation" style={{ color: 'red' }}>
                         {cvvError}
                     </div>
-                    <div
-                        className={classes.hostedFieldInput}
-                        id="cvv_field_id"
-                    ></div>
+                    <div id="cvv_field_id"></div>
                 </div>
 
                 <div className={classes.inputContainer}>
@@ -394,7 +391,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         border: `1px solid ${checkmarksTheme.textLabel}`,
         padding: '8px',
-        margin: '3% auto',
+        marginLeft: '3%',
         borderRadius: '5px',
         width: '100%',
         ':invalid': {
@@ -405,19 +402,17 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.up('md')]: {
             margin: '2% auto',
-            width: '50%',
         },
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '2% auto',
-            width: '65%',
         },
     },
 
     inputContainer: {
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '100%',
+        width: '75%',
         margin: '3%',
     },
 
