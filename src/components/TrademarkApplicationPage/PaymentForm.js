@@ -164,35 +164,36 @@ export default function PaymentForm({
                     paymentToken = result.id;
                     setInfo({ ...info, paymentToken: result.id });
                     console.log('result, getPaymentToken: ', result);
+                    console.log('paymentForm, paymentToken: ', paymentToken);
+                    submitApplication(paymentToken);
                 })
-                .then(() => {
-                    nextStep(paymentToken);
-                })
+                .then(() => {})
                 .catch(function (err) {
                     console.log(err);
                 });
         };
     }, []);
 
-    console.log('info: ', info);
     //////////////////////////////Create clio account and send email/////////////////////////////////////////////
 
     // Pass paymentToken
     const submitApplication = async (paymentToken) => {
         setSubmitting(true);
         let responseSendPayment = await sendPayment(info, paymentToken);
+        console.log('responseSendPayment: ', responseSendPayment);
         if (responseSendPayment) {
             let matterId = await createClioContact(info);
             console.log('matterId: ', matterId);
             if (matterId) {
                 let responseCreateEmail = await createEmail(info, matterId);
                 // let responseCreateEmail = true;
+                console.log('responseCreateEmail: ', responseCreateEmail);
                 if (responseCreateEmail) {
                     setInfo({
                         ...info,
                         paymentConfirmed: true,
                     });
-                    // nextStep();
+                    nextStep();
                 } else {
                     console.log('createEmail() unsuccsessful');
                 }
@@ -210,10 +211,9 @@ export default function PaymentForm({
         setCurrentStep(currentStep - 1); // assign currentStep to next step
         navigation.previous();
     };
-    const nextStep = (paymentToken) => {
+    const nextStep = () => {
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
-        submitApplication(paymentToken);
     };
 
     return (
