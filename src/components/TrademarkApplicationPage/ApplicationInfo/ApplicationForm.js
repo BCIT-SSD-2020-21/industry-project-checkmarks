@@ -206,7 +206,7 @@ export default function IndividualForm({
             {/* ============================ */}
             {/* ======== Upload ID ========= */}
             {/* ============================ */}
-            <FormControl fullWidth={true} className={classes.fieldDropDown}>
+            <FormControl className={classes.fieldDropDown}>
                 <IdUpload setHandle={setHandle} info={info} setInfo={setInfo} />
                 <Checkmark value={validationProgress.idDocumentUploaded} />
             </FormControl>
@@ -534,13 +534,13 @@ const useStyles = makeStyles((theme) => ({
     },
     idAlert: {
         color: '#2a9df4',
-        margin: '5% auto 1% auto',
+        margin: '10% auto 1% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '5% auto 2% auto',
+            margin: '5% auto 3% auto',
         },
         [theme.breakpoints.up('md')]: {
-            margin: '0 auto 5% auto',
+            margin: '3% auto 2% auto',
         },
     },
     disclaimer: {
