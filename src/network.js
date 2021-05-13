@@ -52,7 +52,6 @@ export const createClioContact = async (info) => {
         })
         .then((data) => {
             fnResponse = data.data.display_number;
-            // fnResponse = true;
         })
         .catch((err) => {
             console.log(err);
@@ -124,7 +123,6 @@ export const createEmail = async (info, matterId) => {
                     fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,
-                    // nice classes
                     classes: classesArray,
                     terms: termsArray,
                 },
@@ -151,40 +149,38 @@ export const createEmail = async (info, matterId) => {
         });
 
     return fnResponse;
-
-    // end of email function
 };
 
 export const sendPayment = async (info, paymentToken) => {
     console.log('sendPayment, info: ', info);
-    // const body = {
-    //     amount: String(info.amount),
-    //     method: String(paymentToken),
-    //     account_id: 'bL4uzw6cR4mQjzmovjpCTw',
-    // };
-    // console.log('sendPayment, body: ', body);
-    // return true;
+    console.log('paymentToken: ', paymentToken);
+
+    let fnResponse = false;
+
     await fetch(`${BASE}Payment`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
+        // NOTE: Amount is in CENTS, so multiply by 100
         body: JSON.stringify({
-            amount: String(info.amount),
-            method: String(paymentToken.id),
+            // amount: info.amount * 100,
+            amount: 1,
+            method: paymentToken,
             account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
         }),
     })
         .then(async (res) => {
             if (res.status == 200) {
+                console.log('sendPayment(), res: ', res);
                 alert('payment successful');
-                return true;
+                fnResponse = true;
             } else {
-                console.log('Error sending payment.');
+                console.log('Error sending payment, res: ', res);
                 alert(
                     "The payment did not go through. Please revise your payment information or go to the 'About Us' link to get in touch."
                 );
-                return false;
+                fnResponse = false;
             }
         })
         .catch((err) => {
@@ -193,4 +189,6 @@ export const sendPayment = async (info, paymentToken) => {
                     err
             );
         });
+
+    return fnResponse;
 };
