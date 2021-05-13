@@ -146,7 +146,7 @@ export const searchBoxStyles = makeStyles(() => ({
         // margin: '5px auto',
         boxSizing: 'border-box',
         padding: '10px',
-        width: '90%',
+        width: '100%',
     },
     label: {
         color: checkmarksTheme.inputLabel,

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../../styles/Themes';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
+    const classes = useStyles();
+
     const [isSelected, setIsSelected] = useState(false);
 
     // when user go back to the page , if type is already in the OtherTypes
@@ -43,21 +47,24 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
     };
 
     return (
-        // Selection section
-        <div>
-            <FormGroup>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            onClick={selectOtherType}
-                            checked={isSelected}
-                        />
-                    }
-                    label={otherType}
-                />
-            </FormGroup>
-        </div>
+        // Selection section: OtherType Selector (one)
+        <FormGroup className={classes.itemContainer}>
+            <FormControlLabel
+                control={
+                    <Checkbox onClick={selectOtherType} checked={isSelected} />
+                }
+                label={otherType}
+            />
+        </FormGroup>
     );
 };
 
 export default DetailSelectCard;
+
+const useStyles = makeStyles((theme) => ({
+    itemContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+}));

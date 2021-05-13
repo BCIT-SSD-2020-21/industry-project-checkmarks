@@ -53,8 +53,10 @@ export default function Landing(darkMode) {
             <About />
             <Faq />
             <Pricing />
-            <Cta/>
-            <Footer />
+            <Cta />
+            <Box className={classes.footerContainer}>
+                <Footer />
+            </Box>
         </Box>
     );
 }
@@ -65,6 +67,7 @@ const useStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        width: '100%',
     },
     section: {
         display: 'flex',
@@ -131,6 +134,10 @@ const useStyles = makeStyles(() => ({
         color: checkmarksTheme.buttonTextSecondary,
         marginBottom: '2% auto',
         padding: '5px',
+    },
+    footerContainer: {
+        backgroundColor: checkmarksTheme.bgTertiary,
+        marginTop: '10%',
     },
     '@keyframes shiftUp-buttons': {
         from: { transform: 'translateY(20%)' },

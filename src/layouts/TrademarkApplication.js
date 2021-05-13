@@ -16,6 +16,7 @@ import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationI
 import PageLeavePrompt from '../utils/PageLeavePrompt';
 import Footer from '../components/LandingPage/Footer';
 import { sumProgressValue, validateForm } from '../utils/FormValidation';
+// import { checkmarksTheme } from '../styles/Themes';
 
 const TrademarkApplication = (darkMode) => {
     const classes = useStyles();
@@ -49,6 +50,7 @@ const TrademarkApplication = (darkMode) => {
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
+        basePrice: 690,
         amount: 0,
 
         //International Information
@@ -174,6 +176,7 @@ const TrademarkApplication = (darkMode) => {
                 backgroundImage: `url(${
                     darkMode.darkMode ? bannerImageDark : bannerImage
                 })`,
+                backgroundSize: 'auto 2900px',
             }}
         >
             <Progress
@@ -184,6 +187,9 @@ const TrademarkApplication = (darkMode) => {
                 validationProgress={validationProgress}
             />
             <Box className={classes.hero}>
+                {/* {console.log(
+                    document.getElementById('parentContainer').offsetHeight
+                )} */}
                 <Typography className={classes.title}>{step.id}</Typography>
             </Box>
 
@@ -291,23 +297,24 @@ export default TrademarkApplication;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundPosition: 'center',
-        backgroundSize: 'cover', //'100% auto',
+        alignItems: 'center',
+        backgroundPosition: 'top',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: '75px',
-        width: '100%',
+        marginTop: '80px',
         minHeight: window.innerHeight,
+        width: '100%',
     },
     container: {
+        // backgroundColor: checkmarksTheme.bgPrimary,
         display: 'flex',
         width: '100%',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
         minHeight: window.innerHeight,
+        width: '100%',
     },
     hero: {
         backgroundImage: '',
