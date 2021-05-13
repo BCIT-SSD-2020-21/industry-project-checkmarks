@@ -10,6 +10,7 @@ const colors = {
 
     activeBlue: '#12578B',
     teal: '#128B83',
+    text: '#751219',
 
     white: '#FFFFFF',
     whiteOpq0: '#FFFFFF00',
@@ -36,6 +37,7 @@ export const checkmarksTheme = {
     textValue: colors.black,
     textValue1: colors.white,
     textValue2: colors.mediumRed,
+    textValue3: colors.text,
 
     hyperLink: colors.blue1, //applied to links
 
@@ -54,6 +56,7 @@ export const checkmarksTheme = {
 
     borderPrimary: colors.mediumRed,
     borderSecondary: colors.darkRed,
+    borderCardSection: colors.lightGrayOpq,
 
     buttonTextPrimary: colors.white,
     buttonPrimary: colors.mediumRed,

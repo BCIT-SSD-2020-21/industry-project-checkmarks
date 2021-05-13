@@ -24,6 +24,7 @@ import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
+import OrderAmount from '../OrderAmount';
 import { searchTerms, getAllClasses } from '../../services/checkmarks';
 import { advancedSearch } from '../../utils/FormValidation';
 
@@ -251,10 +252,9 @@ export default function GoodsAndServices({
             });
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
-                // setTotalAmount(
-                //     (1500 + 100 * (classesSelected.length - 1)).toFixed(2)
-                // );
-                setTotalAmount(690);
+                setTotalAmount(
+                    (690 + 100 * (classesSelected.length - 1)).toFixed(2)
+                );
             } else if (classesSelected.length === 0) {
                 setTotalAmount(0);
             }
@@ -289,14 +289,15 @@ export default function GoodsAndServices({
 
     return (
         <Card className={classes.card}>
-            <h1 className={classes.title}>Goods and Services</h1>
             <div className={classes.formContainer}>
                 <Typography gutterBottom>
                     A Trademark is registered under one or more{' '}
                     <b>NICE class(es)</b>. <br />
                     <br />
-                    This Trademark application service base price is $1,500.00
-                    and includes 1 (one) NICE Class applied to your Trademark.{' '}
+                    {`This Trademark application service base price is $${info.basePrice.toFixed(
+                        2
+                    )}
+                    and it includes 1 (one) NICE Class applied to your Trademark. You can apply as many Terms as needed, as long as they're under the same NICE Class.`}
                     <br />
                     <br />
                     If your Trademark must be registered under additional NICE
@@ -492,20 +493,13 @@ export default function GoodsAndServices({
                     </CardContent>
                 </Card>
                 {/* ///////////////////////////total amount section /////////////////////////// */}
-                <Card>
-                    <CardContent className={classes.amount}>
-                        <Typography variant="h6">
-                            <b>Amount:</b>
-                        </Typography>
-                        <Typography variant="body1" component="p">
-                            {/* {additionalNICE} */}
-                            {`$${totalAmount.toString()}`}
-                        </Typography>
-                    </CardContent>
-                </Card>
 
-                <Checkmark value={validationProgress.amountNotZero} />
+                <OrderAmount info={info} />
 
+                <Box className={classes.checkmarkContainer}>
+                    <Checkmark value={validationProgress.amountNotZero} />
+                </Box>
+                {/* Hidden via 'display: none' below */}
                 <Alert severity="info" className={classes.alert}>
                     Helper section with brief legal information, assisting the
                     client through the process.
@@ -578,9 +572,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
-        margin: '3%',
-        width: '95%',
-        padding: '0 5% 5% 5%',
+        margin: '1%',
+        width: '93%',
+        padding: '1%',
         [theme.breakpoints.up('md')]: {
             width: '60%',
             padding: '0 2% ',
@@ -594,7 +588,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px',
         display: 'flex',
         flexDirection: 'column',
-        margin: '3%',
+        margin: '1%',
         padding: '25px',
     },
     title: {
@@ -614,8 +608,13 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     selectedTerms: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        display: 'flex',
+        flexDirection: 'column',
         margin: '3% 0',
-        padding: '15px',
+        padding: '5px',
+        maxHeight: '600px',
+        overflowY: 'scroll',
     },
     classTermList: {
         display: 'flex',
@@ -625,28 +624,55 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        padding: 0,
         width: '100%',
     },
-    amount: {
+    amountContainer: {
+        alignItems: 'center',
+        backgroundColor: checkmarksTheme.transparentCard,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        margin: '2% 0',
+    },
+    amountSection: {
+        alignItems: 'center',
+        border: `1px solid ${checkmarksTheme.borderCardSection}`,
+        display: 'flex',
+        flex: 1,
+        flexGrow: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        margin: '0',
+        padding: '4%',
+        width: '100%',
+    },
+    amountSummaryField: {
+        alignItems: 'flex-end',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: '2% 0',
+        width: '100%',
+    },
+    checkmarkContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: '5%',
     },
     buttonContainer: {
         display: 'flex',
         justifyContent: 'center',
+        marginTop: '3%',
     },
     continueButton: {
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        marginTop: '10%',
         marginLeft: '3%',
-        margin: '10% 0 0 3%',
-        width: '30%',
+        width: '45%',
         height: '30px',
-        fontSize: '10px',
+        fontSize: '16px',
         borderRadius: '10px',
         [theme.breakpoints.up('md')]: {
             margin: '5% 3% 2% 0',
@@ -659,10 +685,9 @@ const useStyles = makeStyles((theme) => ({
         color: '#df3a48',
         backgroundColor: '#FFF',
         fontWeight: 'bold',
-        marginTop: '10%',
-        width: '30%',
+        width: '45%',
         height: '30px',
-        fontSize: '10px',
+        fontSize: '16px',
         borderRadius: '10px',
         border: '1px solid #df3a48',
         [theme.breakpoints.up('md')]: {
@@ -673,7 +698,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     alert: {
-        color: '#2a9df4',
+        display: 'none',
+        backgroundColor: checkmarksTheme.transparentCard,
+        color: checkmarksTheme.textActive,
         marginTop: '10%',
         fontSize: '12px',
         [theme.breakpoints.up('sm')]: {
