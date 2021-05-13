@@ -16,9 +16,10 @@ const styles = (theme) => ({
     },
     button: {
         border: '3px solid currentColor',
-        borderRadius: 2,
+        borderRadius: 10,
         height: 'auto',
         padding: theme.spacing(2, 1),
+        buttonVariant: 'contained',
       },
       link: {
         marginTop: theme.spacing(3),
