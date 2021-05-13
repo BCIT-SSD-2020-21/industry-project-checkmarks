@@ -16,6 +16,7 @@ import ApplicationInfo from '../components/TrademarkApplicationPage/ApplicationI
 import PageLeavePrompt from '../utils/PageLeavePrompt';
 import Footer from '../components/LandingPage/Footer';
 import { sumProgressValue, validateForm } from '../utils/FormValidation';
+// import { checkmarksTheme } from '../styles/Themes';
 
 const TrademarkApplication = (darkMode) => {
     const classes = useStyles();
@@ -49,6 +50,7 @@ const TrademarkApplication = (darkMode) => {
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
+        basePrice: 690,
         amount: 0,
 
         //International Information
@@ -174,6 +176,7 @@ const TrademarkApplication = (darkMode) => {
                 backgroundImage: `url(${
                     darkMode.darkMode ? bannerImageDark : bannerImage
                 })`,
+                backgroundSize: 'auto 2900px',
             }}
         >
             <Progress
@@ -184,6 +187,9 @@ const TrademarkApplication = (darkMode) => {
                 validationProgress={validationProgress}
             />
             <Box className={classes.hero}>
+                {/* {console.log(
+                    document.getElementById('parentContainer').offsetHeight
+                )} */}
                 <Typography className={classes.title}>{step.id}</Typography>
             </Box>
 
@@ -293,7 +299,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         alignItems: 'center',
         backgroundPosition: 'top',
-        backgroundSize: 'auto 2400px', //'100% auto',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
@@ -302,6 +307,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     container: {
+        // backgroundColor: checkmarksTheme.bgPrimary,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
