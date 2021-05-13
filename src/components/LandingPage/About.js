@@ -53,29 +53,66 @@ export default function About() {
             About Us
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */}
           </Typography>
         </Container>  
+        
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book..
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Trademarks + IP
+                  </Typography>
+                  <Typography align="justify">
+                  {'Your most important assets – your mark, logo, and slogan help identify your products or services.'}
+                  {'They create loyalty by differentiating you from others.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Business Law
+                  </Typography>
+                  <Typography align="justify">
+                    {'Strategic advice + legal insights. Business set-up. Contracts, deals,  transactions'}
+                    {'Whether you’re just starting out or an established business, we’re on your team.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" align="center" component="h2">
+                  Tech + Software
+                  </Typography>
+                  <Typography align="justify">
+                    {'Licensing agreements, SaaS, Ownership of IP, Growth. '}
+                    {'We have high level focus on what’s unique about your tech company.'}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
         </Container>
     </React.Fragment>
