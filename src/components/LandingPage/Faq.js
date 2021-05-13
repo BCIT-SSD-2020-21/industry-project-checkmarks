@@ -138,7 +138,7 @@ export default function Faq() {
                         id="panel2d-header"
                     >
                         <Typography>
-                            Should you Register your Trademark?
+                        What is the difference between a trade name and a trademark?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
