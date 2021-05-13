@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         textDecoration: 'underline',
         '&:hover': {
-            color: checkmarksTheme.hyperLink,
+            color: checkmarksTheme.textValue3,
         },
     },
 }));
