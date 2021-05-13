@@ -77,6 +77,5 @@ const useStyles = makeStyles((theme) => ({
 
     individualOrganization: {
         color: checkmarksTheme.textValue3,
-        textDecoration: 'underline',
     },
 }));

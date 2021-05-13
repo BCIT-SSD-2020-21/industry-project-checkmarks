@@ -222,10 +222,7 @@ export default function PaymentForm({
             <h1>Place a Trust Payment</h1>
             <style type="text/css">
                 {`
-                            form {
-                                width: 500px;
-                                margin: 0 auto;
-                            }
+
                             form input, form iframe {
                                 width: 100%;
                                 margin: 5px;
@@ -254,7 +251,7 @@ export default function PaymentForm({
                 </div>
 
                 <div className={classes.expiryDateBox}>
-                    <div className={classes.inputContainer}>
+                    <div className={classes.flexInputContainer}>
                         <label className={classes.label} htmlFor="exp_month">
                             Expiry Month
                         </label>
@@ -270,7 +267,7 @@ export default function PaymentForm({
                         />
                     </div>
 
-                    <div className={classes.inputContainer}>
+                    <div className={classes.flexInputContainer}>
                         <label className={classes.label} htmlFor="exp_year">
                             Expiry Year
                         </label>
@@ -294,10 +291,7 @@ export default function PaymentForm({
                     <div id="cvvValidation" style={{ color: 'red' }}>
                         {cvvError}
                     </div>
-                    <div
-                        className={classes.hostedFieldInput}
-                        id="cvv_field_id"
-                    ></div>
+                    <div id="cvv_field_id"></div>
                 </div>
 
                 <div className={classes.inputContainer}>
@@ -396,7 +390,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         border: `1px solid ${checkmarksTheme.textLabel}`,
         padding: '8px',
-        margin: '3% auto',
+        marginLeft: '3%',
         borderRadius: '5px',
         width: '100%',
         ':invalid': {
@@ -407,26 +401,32 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.up('md')]: {
             margin: '2% auto',
-            width: '50%',
         },
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '2% auto',
-            width: '65%',
         },
     },
 
     inputContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        margin: '3%',
+        width: '75%',
+    },
+    flexInputContainer: {
+        width: '45%',
+
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            width: '100%',
+        },
     },
 
     expiryDateBox: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        width: '75%',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+        },
     },
     buttonContainer: {
         display: 'flex',
