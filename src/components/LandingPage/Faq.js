@@ -122,22 +122,8 @@ export default function Faq() {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            A word, phrase, or logo that is used by you to
-                            distinguish your products or services from the
-                            products or services of others.
-                            <br />
-                            Trademarks are often classified in terms of word
-                            marks, phrases (for example, a slogan), or design
-                            marks (for example, a logo).
-                            <br />
-                            However, there are other ways to classify
-                            trademarks. For example, for certain legal purposes,
-                            such as assessing the level of protection between
-                            two similar competing marks, they could be
-                            classified in terms of weak versus strong marks. An
-                            example of a strong mark would be a unique coined
-                            word. On the other hand, weak marks are often
-                            generic or descriptive words.
+                        A trademark is like a fingerprint for businesses. It is something that distinguishes your goods or services from others. <br /> 
+                        Trademarks include brands, names, slogans, logos, colours, sounds, textures, the way something is packaged, the layout of a store, etc
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -159,7 +145,7 @@ export default function Faq() {
                         <Typography>
                             If you value your brand, we think you should protect
                             it. Registration is the best way to protect your
-                            mark’s value in Canada. <br />
+                            mark’s value in Canada. 
                             Registration is prima facie evidence of ownership.
                             In the event of a dispute, the registered owner is
                             presumed to have ownership and the onus of proof
