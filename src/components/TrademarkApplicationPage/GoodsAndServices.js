@@ -428,7 +428,7 @@ export default function GoodsAndServices({
                         </Typography>
 
                         <List>
-                            {selectedClasses?.length > 0 &&
+                            {selectedClasses?.length > 0 ? (
                                 selectedClasses.map((niceClass, index) => (
                                     <div key={index}>
                                         <h4>
@@ -488,13 +488,16 @@ export default function GoodsAndServices({
                                                 })}
                                         </ListItem>
                                     </div>
-                                ))}
+                                ))
+                            ) : (
+                                <Typography>{'none'}</Typography>
+                            )}
                         </List>
                     </CardContent>
                 </Card>
                 {/* ///////////////////////////total amount section /////////////////////////// */}
 
-                <OrderAmount info={info} />
+                {info.classesSelected.length > 0 && <OrderAmount info={info} />}
 
                 <Box className={classes.checkmarkContainer}>
                     <Checkmark value={validationProgress.amountNotZero} />
@@ -572,15 +575,15 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         display: 'flex',
         flexDirection: 'column',
-        margin: '1%',
+        margin: '10px',
         width: '93%',
-        padding: '1%',
+        padding: '10px',
         [theme.breakpoints.up('md')]: {
             width: '60%',
-            padding: '0 2% ',
+            // padding: '0 2% ',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            padding: '0 5% 2% 5%',
+            // padding: '0 5% 2% 5%',
         },
     },
     formContainer: {
