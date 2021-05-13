@@ -163,7 +163,13 @@ export const navbarStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuAppBar({ darkMode, setDarkMode }) {
+export default function MenuAppBar({
+    darkMode,
+    setDarkMode,
+    drawerOpen,
+    handleDrawerOpen,
+    handleDrawerClose,
+}) {
     const classes = navbarStyles();
     const theme = useTheme();
     const history = useHistory();
@@ -176,17 +182,6 @@ export default function MenuAppBar({ darkMode, setDarkMode }) {
     };
     const handleClose = () => {
         setAnchorEl(null);
-    };
-
-    // DRAWER
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const handleDrawerOpen = () => {
-        setDrawerOpen(true);
-        // setProgressBarPosition(1)
-    };
-    const handleDrawerClose = () => {
-        setDrawerOpen(false);
-        // setProgressBarPosition(0)
     };
 
     return (

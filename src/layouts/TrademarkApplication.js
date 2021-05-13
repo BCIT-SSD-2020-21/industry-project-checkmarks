@@ -18,7 +18,7 @@ import Footer from '../components/LandingPage/Footer';
 import { sumProgressValue, validateForm } from '../utils/FormValidation';
 // import { checkmarksTheme } from '../styles/Themes';
 
-const TrademarkApplication = (darkMode) => {
+const TrademarkApplication = ({ darkMode, drawerOpen }) => {
     const classes = useStyles();
 
     // form information
@@ -179,21 +179,21 @@ const TrademarkApplication = (darkMode) => {
                 backgroundSize: 'auto 2900px',
             }}
         >
-            <Progress
-                step={step}
-                steps={steps}
-                info={info}
-                progressValue={progressValue}
-                validationProgress={validationProgress}
-            />
-            <Box className={classes.hero}>
-                {/* {console.log(
+            <div className={classes.container}>
+                <Progress
+                    step={step}
+                    steps={steps}
+                    info={info}
+                    progressValue={progressValue}
+                    validationProgress={validationProgress}
+                    drawerOpen={drawerOpen}
+                />
+                <Box className={classes.hero}>
+                    {/* {console.log(
                     document.getElementById('parentContainer').offsetHeight
                 )} */}
-                <Typography className={classes.title}>{step.id}</Typography>
-            </Box>
-
-            <div className={classes.container}>
+                    <Typography className={classes.title}>{step.id}</Typography>
+                </Box>
                 {(() => {
                     switch (step.id) {
                         case 'Trademark':
@@ -302,7 +302,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        marginTop: '80px',
+
         minHeight: window.innerHeight,
         width: '100%',
     },
@@ -313,6 +313,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        marginTop: '80px',
         minHeight: window.innerHeight,
         width: '100%',
     },
