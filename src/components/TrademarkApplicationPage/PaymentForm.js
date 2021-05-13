@@ -35,6 +35,8 @@ export default function PaymentForm({
     useLayoutEffect(() => {
         const form = formRef.current;
 
+        let paymentToken = '';
+
         var ccErrorMessage = 'Credit Card field is required';
         var cvvErrorMessage = 'CVV field is required';
 
@@ -159,12 +161,13 @@ export default function PaymentForm({
                     address1: addressElement.value,
                 })
                 .then((result) => {
+                    paymentToken = result.id;
                     setInfo({ ...info, paymentToken: result.id });
                     console.log('result, getPaymentToken: ', result);
+                    console.log('paymentForm, paymentToken: ', paymentToken);
+                    submitApplication(paymentToken);
                 })
-                .then(() => {
-                    nextStep();
-                })
+                .then(() => {})
                 .catch(function (err) {
                     console.log(err);
                 });
@@ -174,21 +177,23 @@ export default function PaymentForm({
     //////////////////////////////Create clio account and send email/////////////////////////////////////////////
 
     // Pass paymentToken
-    const submitApplication = async () => {
+    const submitApplication = async (paymentToken) => {
         setSubmitting(true);
-        let responseSendPayment = await sendPayment(info);
+        let responseSendPayment = await sendPayment(info, paymentToken);
+        console.log('responseSendPayment: ', responseSendPayment);
         if (responseSendPayment) {
             let matterId = await createClioContact(info);
             console.log('matterId: ', matterId);
             if (matterId) {
                 let responseCreateEmail = await createEmail(info, matterId);
                 // let responseCreateEmail = true;
+                console.log('responseCreateEmail: ', responseCreateEmail);
                 if (responseCreateEmail) {
                     setInfo({
                         ...info,
-                        paymentConfirmaed: true,
+                        paymentConfirmed: true,
                     });
-                    // nextStep();
+                    nextStep();
                 } else {
                     console.log('createEmail() unsuccsessful');
                 }
@@ -209,7 +214,6 @@ export default function PaymentForm({
     const nextStep = () => {
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
-        submitApplication();
     };
 
     return (

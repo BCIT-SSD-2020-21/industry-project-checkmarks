@@ -52,7 +52,6 @@ export const createClioContact = async (info) => {
         })
         .then((data) => {
             fnResponse = data.data.display_number;
-            // fnResponse = true;
         })
         .catch((err) => {
             console.log(err);
@@ -124,7 +123,6 @@ export const createEmail = async (info, matterId) => {
                     fileName: info.fileName,
                     trademarkType: trademarkType,
                     characterText: info.characterText,
-                    // nice classes
                     classes: classesArray,
                     terms: termsArray,
                 },
@@ -151,62 +149,46 @@ export const createEmail = async (info, matterId) => {
         });
 
     return fnResponse;
-
-    // end of email function
 };
 
 export const sendPayment = async (info, paymentToken) => {
-    console.log('sendPayment called');
-    return true;
+    console.log('sendPayment, info: ', info);
+    console.log('paymentToken: ', paymentToken);
 
-    // this.setState({
-    //   disableButton: true,
-    //   buttonText: 'Submitting...'
-    // })
-    // await fetch(`${BASE}Payment`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         amount: String(info.amount),
-    //         "method": String(paymentToken.id),
-    //         account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
-    //     }),
-    // })
-    //     .then(async (res) => {
-    //         if (res.status == 200) {
-    //
-    // // // //  const createdEmail = await createEmail();
+    let fnResponse = false;
 
-    // --!!!-- BELOW NOT NEEDED, EXCEPT FOR FAIL ALERTS (Implement that in PaymentForm SubmitApplication() function, .catch )
-    // if (createdEmail) {
-    //   this.props.nextStep();
-    // } else {
-    //   this.setState({
-    //     dialogOpen: true,
-    //     disableButton: false
-    //   });
-    // }
-    //     alert('payment successful');
-    // } else {
-    //     alert(
-    //         "The payment did not go through. Please revise your payment information or go to the 'About Us' link to get in touch."
-    //     );
-    // this.setState({
-    //   disableButton: false,
-    //   buttonText: 'Confirm and Check Out'
-    // });
-    //     }
-    // })
-    // .catch((err) => {
-    //     alert(
-    //         "The form could not be submitted because of a technical issue. Please try again, or go to the 'About Us' link to get in touch.  " +
-    //             err
-    //     );
-    //   this.setState({
-    //     disableButton: false,
-    //     buttonText: 'Confirm and Check Out'
-    //   });
-    // });
+    await fetch(`${BASE}Payment`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // NOTE: Amount is in CENTS, so multiply by 100
+        body: JSON.stringify({
+            // amount: info.amount * 100,
+            amount: 1,
+            method: paymentToken,
+            account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
+        }),
+    })
+        .then(async (res) => {
+            if (res.status == 200) {
+                console.log('sendPayment(), res: ', res);
+                alert('payment successful');
+                fnResponse = true;
+            } else {
+                console.log('Error sending payment, res: ', res);
+                alert(
+                    "The payment did not go through. Please revise your payment information or go to the 'About Us' link to get in touch."
+                );
+                fnResponse = false;
+            }
+        })
+        .catch((err) => {
+            alert(
+                "The form could not be submitted because of a technical issue. Please try again, or go to the 'About Us' link to get in touch.  " +
+                    err
+            );
+        });
+
+    return fnResponse;
 };
