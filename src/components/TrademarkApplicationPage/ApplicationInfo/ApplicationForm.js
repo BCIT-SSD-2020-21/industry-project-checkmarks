@@ -330,11 +330,10 @@ export default function IndividualForm({
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
-                        id="outlined-basic"
-                        label="City"
+                        className={classes.input}
                         variant="outlined"
                         size="small"
-                        className={classes.flexInput}
+                        placeholder="City"
                         type="text"
                         autoComplete="on"
                         value={info.userCity}
@@ -355,15 +354,14 @@ export default function IndividualForm({
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
-                        id="outlined-basic"
-                        label={
+                        className={classes.input}
+                        placeholder={
                             info.userCountry === 'Canada'
                                 ? 'Postal Code'
                                 : 'Zip Code'
                         }
                         variant="outlined"
                         size="small"
-                        className={classes.flexInput}
                         type="text"
                         autoComplete="on"
                         value={info.userPostalCode}
@@ -378,6 +376,7 @@ export default function IndividualForm({
                             className: classes.multilineColor,
                         }}
                     />
+
                     <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
             </div>
