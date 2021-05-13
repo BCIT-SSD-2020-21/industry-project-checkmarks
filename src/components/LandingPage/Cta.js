@@ -1,6 +1,17 @@
 import React from 'react';
 
 
+const styles = (theme) => ({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginTop: theme.spacing(9),
+      marginBottom: theme.spacing(9),
+    },
+  });
+  
+
 function CallToAction(props) {
     const { classes } = props;
 
