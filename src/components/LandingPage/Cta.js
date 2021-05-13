@@ -10,6 +10,9 @@ function CallToAction(props) {
                 Registering Your Trademark? Need Assistance?
             </Typography>
         </Button>
+        <Typography variant="subtitle1" className={classes.link}>
+            We are here to help you. Get in touch!
+        </Typography>
     </Container>
   );
 }
