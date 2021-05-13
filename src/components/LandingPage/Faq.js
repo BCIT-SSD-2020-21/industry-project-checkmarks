@@ -172,17 +172,17 @@ export default function Faq() {
                     </AccordionDetails>
                 </Accordion>
                 {/*  /// PANEL 4 ////  */}
-                {/* <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                <Accordion square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
-                    <Typography>Why should I care about search and review services?</Typography>
+                    <Typography>How long is the “trademarking” process?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. 
+                    The procedure for registration of a trademark in Canada takes approximately <strong>12-30 months</strong> depending on many variables including whether the <strong>CIPO</strong>trademark examiner raises any objections to the application or whether it is opposed by other trademark owners. <br/>
+                    This will be a slow-moving process. If you plan to wait to <strong>"start"</strong> the business until the trademark is registered - please speak with a <strong>Checkmarks lawyer</strong> to discuss. 
                     </Typography>
                 </AccordionDetails>
-            </Accordion> */}
+            </Accordion>
             {/*  /// PANEL 5 ////  */}
             {/* <Accordion
                     square
