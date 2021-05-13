@@ -104,14 +104,15 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
+        width: '100%',
     },
     uploadButton: {
         backgroundColor: '#df3a48',
         color: '#FFF',
-        // width: '85%',
         height: '40px',
         borderRadius: '10px',
         fontSize: '12px',
+        width: '100%',
     },
     errorMessage: {
         color: '#df3a48',

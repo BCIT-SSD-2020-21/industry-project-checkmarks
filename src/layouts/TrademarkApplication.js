@@ -309,6 +309,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         // backgroundColor: checkmarksTheme.bgPrimary,
         display: 'flex',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
