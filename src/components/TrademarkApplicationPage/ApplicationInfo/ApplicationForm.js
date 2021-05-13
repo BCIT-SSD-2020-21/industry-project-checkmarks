@@ -514,10 +514,10 @@ const useStyles = makeStyles((theme) => ({
         // },
     },
 
-    // Text field styles
-    multilineColor: {
-        color: checkmarksTheme.textValue1,
-    },
+    // // Text field styles
+    // multilineColor: {
+    //     color: checkmarksTheme.textValue1,
+    // },
 
     buttonContainer: {
         display: 'flex',
