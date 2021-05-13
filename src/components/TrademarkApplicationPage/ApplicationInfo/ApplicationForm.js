@@ -116,6 +116,10 @@ export default function IndividualForm({
                             firstName: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.firstName} />
             </FormControl>
@@ -134,6 +138,10 @@ export default function IndividualForm({
                             lastName: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
@@ -153,6 +161,10 @@ export default function IndividualForm({
                             email: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.email} />
             </FormControl>
@@ -174,6 +186,10 @@ export default function IndividualForm({
                                 phone: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                     <Checkmark value={validationProgress.phone} />
                 </FormControl>
@@ -184,7 +200,7 @@ export default function IndividualForm({
                         className={classes.input}
                         variant="outlined"
                         size="small"
-                        placeholder="Fax number"
+                        placeholder="Fax number (Optional)"
                         type="text"
                         value={info.fax}
                         autoComplete="on"
@@ -194,13 +210,16 @@ export default function IndividualForm({
                                 fax: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
-                    <Checkmark value={validationProgress.fax} />
                 </FormControl>
             </div>
 
             <Alert severity="info" className={classes.idAlert}>
-                Single image file should be under 2MB
+                Please upload your photo ID, file should be less than 2Mb.
             </Alert>
 
             {/* ============================ */}
@@ -301,17 +320,20 @@ export default function IndividualForm({
                             userStreetAddress: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.userStreetAddress} />
             </FormControl>
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
-                        id="outlined-basic"
-                        label="City"
+                        className={classes.input}
                         variant="outlined"
                         size="small"
-                        className={classes.flexInput}
+                        placeholder="City"
                         type="text"
                         autoComplete="on"
                         value={info.userCity}
@@ -321,6 +343,10 @@ export default function IndividualForm({
                                 userCity: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                     <Checkmark value={validationProgress.userCity} />
                 </FormControl>
@@ -328,15 +354,14 @@ export default function IndividualForm({
             <div className={classes.flexContainer}>
                 <FormControl fullWidth={true} className={classes.field}>
                     <TextField
-                        id="outlined-basic"
-                        label={
+                        className={classes.input}
+                        placeholder={
                             info.userCountry === 'Canada'
                                 ? 'Postal Code'
                                 : 'Zip Code'
                         }
                         variant="outlined"
                         size="small"
-                        className={classes.flexInput}
                         type="text"
                         autoComplete="on"
                         value={info.userPostalCode}
@@ -346,7 +371,12 @@ export default function IndividualForm({
                                 userPostalCode: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
+
                     <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
             </div>
@@ -484,6 +514,11 @@ const useStyles = makeStyles((theme) => ({
         // },
     },
 
+    // Text field styles
+    multilineColor: {
+        color: checkmarksTheme.textValue1,
+    },
+
     buttonContainer: {
         display: 'flex',
         flexDirection: 'row',
@@ -552,6 +587,6 @@ const useStyles = makeStyles((theme) => ({
         color: checkmarksTheme.buttonTextSecondary,
     },
     terms: {
-        color: checkmarksTheme.textValue2,
+        color: checkmarksTheme.textValue1,
     },
 }));

@@ -25,12 +25,12 @@ export default function ApplicationInfo({
             </Typography>
             <Typography>
                 Are you registering as an{' '}
-                <span style={{ color: '#DF3A48' }}>
-                    <strong>individual </strong>{' '}
+                <span className={classes.individualOrganization}>
+                    <strong>Individual </strong>{' '}
                 </span>
                 , or representing an{' '}
-                <span style={{ color: '#DF3A48' }}>
-                    <strong>organization </strong>{' '}
+                <span className={classes.individualOrganization}>
+                    <strong>Organization </strong>{' '}
                 </span>
                 ?
             </Typography>
@@ -73,5 +73,10 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '24px',
         color: checkmarksTheme.textPrimaryDark,
         marginBottom: '5%',
+    },
+
+    individualOrganization: {
+        color: checkmarksTheme.textValue3,
+        textDecoration: 'underline',
     },
 }));
