@@ -184,7 +184,7 @@ export default function IndividualForm({
                         className={classes.input}
                         variant="outlined"
                         size="small"
-                        placeholder="Fax number"
+                        placeholder="Fax number (Optional)"
                         type="text"
                         value={info.fax}
                         autoComplete="on"
@@ -195,7 +195,6 @@ export default function IndividualForm({
                             })
                         }
                     />
-                    <Checkmark value={validationProgress.fax} />
                 </FormControl>
             </div>
 

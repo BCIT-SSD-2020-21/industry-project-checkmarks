@@ -124,12 +124,6 @@ export const validateForm = (info, setValidationProgress) => {
     } else {
         newInputValidationValue.phone = 0;
     }
-    // Fax
-    if (numbersRegex.test(info.fax) && info.fax.length >= 10) {
-        newInputValidationValue.fax = 1;
-    } else {
-        newInputValidationValue.fax = 0;
-    }
     // Id Document Upload
     if (info.idDocumentUploaded) {
         newInputValidationValue.idDocumentUploaded = 100;
