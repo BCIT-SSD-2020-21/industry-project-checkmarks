@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import FileUpload from '../../FileUpload';
 
@@ -34,12 +35,13 @@ const LogoForm = ({ info, setInfo }) => {
 export default LogoForm;
 const useStyles = makeStyles((theme) => ({
     alert: {
-        color: '#2a9df4',
+        backgroundColor: checkmarksTheme.transparentCard,
+        color: checkmarksTheme.textActive,
         fontSize: '13px',
-        margin: '3% auto',
+        margin: 'auto',
     },
     logoCard: {
-        width: '90%',
+        width: '100%',
         margin: 'auto',
         marginBottom: '3%',
     },
