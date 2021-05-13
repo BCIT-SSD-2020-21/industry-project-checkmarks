@@ -44,20 +44,19 @@ export default function PaymentForm({
             selector: '#credit_card_field_id',
             input: {
                 type: 'credit_card_number',
-                placeholder: 'credit card number',
+                // placeholder: 'credit card number',
                 css: {
-                    'background-color': 'white',
-                    'font-family': 'serif',
-                    'font-size': '22px',
-                    padding: '4px',
+                    'background-color': 'transparent',
+                    'font-family': 'Segoe UI',
+                    'font-size': '15px',
+                    'border-radius': '5px',
+                    padding: '10px',
                     color: 'black',
+
                     ':invalid': {
-                        color: '#FF0000',
-                        border: '2px solid red',
+                        border: '1px solid red',
                     },
-                    ':valid': { color: '#0000FF' },
-                    '::placeholder': { color: 'brown' },
-                    border: '1px solid #A8A8A8',
+                    border: `1px solid ${checkmarksTheme.textLabel}`,
                 },
             },
         };
@@ -66,20 +65,17 @@ export default function PaymentForm({
             selector: '#cvv_field_id',
             input: {
                 type: 'cvv',
-                placeholder: 'CVV',
+                // placeholder: 'CVV',
                 css: {
-                    'background-color': 'white',
-                    'border-radius': '10px',
-                    'font-family': 'serif',
-                    'font-size': '22px',
-                    padding: '4px',
-                    ':focus': { color: 'blue' },
+                    'background-color': 'transparent',
+                    'border-radius': '5px',
+                    'font-family': 'Segoe UI',
+                    'font-size': '15px',
+                    padding: '10px',
                     ':invalid': {
-                        color: '#FF0000',
-                        border: '2px solid red',
+                        border: '1px solid red',
                     },
-                    ':valid': { color: 'green' },
-                    border: '1px solid #A8A8A8',
+                    border: `1px solid ${checkmarksTheme.textLabel}`,
                 },
             },
         };
@@ -88,12 +84,12 @@ export default function PaymentForm({
             publicKey: 'm_4Pmy9PJ0T76ip_9W-o6UUA',
             input: {
                 css: {
+                    borderRadius: '5px',
                     'font-family': 'serif',
+                    padding: '10px',
                     'font-size': '22px',
-                    'border-radius': '10px',
-                    color: '#0BEEF0',
+                    'border-radius': '5px',
                     ':invalid': { background: 'antiquewhite' },
-                    ':valid': { color: 'blanchedalmond' },
                 },
             },
             fields: [cc_hosted_field, cvv_hosted_field],
@@ -232,6 +228,7 @@ export default function PaymentForm({
                             form input, form iframe {
                                 width: 100%;
                                 margin: 5px;
+                   
                             }
                         
                             form iframe {
@@ -241,24 +238,21 @@ export default function PaymentForm({
                         `}
             </style>
             <form id="form" ref={formRef} className={classes.container}>
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label
                         className={classes.label}
                         htmlFor="credit_card_field_id"
                     >
-                        Credit Card
+                        Credit Card Number
                     </label>
                     <div id="ccValidation" style={{ color: 'red' }}>
                         {ccError}
                     </div>
-                    <div
-                        className={classes.input}
-                        id="credit_card_field_id"
-                    ></div>
+                    <div id="credit_card_field_id"></div>
                 </div>
 
                 <div className={classes.expiryDateBox}>
-                    <div className={classes.flexInput}>
+                    <div className={classes.inputContainer}>
                         <label className={classes.label} htmlFor="exp_month">
                             Expiry Month
                         </label>
@@ -274,12 +268,8 @@ export default function PaymentForm({
                         />
                     </div>
 
-                    <div className={classes.flexInput}>
-                        <label
-                            className={classes.label}
-                            className={classes.label}
-                            htmlFor="exp_year"
-                        >
+                    <div className={classes.inputContainer}>
+                        <label className={classes.label} htmlFor="exp_year">
                             Expiry Year
                         </label>
                         <div id="yearValidation" style={{ color: 'red' }}>
@@ -295,17 +285,20 @@ export default function PaymentForm({
                     </div>
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="cvv_field_id">
                         CVV
                     </label>
                     <div id="cvvValidation" style={{ color: 'red' }}>
                         {cvvError}
                     </div>
-                    <div className={classes.input} id="cvv_field_id"></div>
+                    <div
+                        className={classes.hostedFieldInput}
+                        id="cvv_field_id"
+                    ></div>
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="address1">
                         Billing Street Address
                     </label>
@@ -321,7 +314,7 @@ export default function PaymentForm({
                     />
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="postal_code">
                         Postal Code
                     </label>
@@ -365,10 +358,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         margin: '3%',
         width: '70%',
-        border: '1px solid #696969',
         padding: '0 5% 5% 5%',
         [theme.breakpoints.up('md')]: {
-            width: '60%',
+            width: '50%',
             padding: '0 2% ',
         },
         [theme.breakpoints.between('sm', 'md')]: {
@@ -379,10 +371,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        overflowY: 'hidden',
-        overflowX: 'hidden',
-        height: '100%',
-        // width: 'auto',
+        width: 'auto',
     },
     title: {
         color: '#df3a48',
@@ -402,36 +391,36 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '18px',
     },
     input: {
-        width: '80%',
-        padding: '5px',
+        backgroundColor: 'transparent',
+        border: `1px solid ${checkmarksTheme.textLabel}`,
+        padding: '8px',
         margin: '3% auto',
-        borderRadius: '10px',
-        [theme.breakpoints.up('sm')]: {
+        borderRadius: '5px',
+        width: '100%',
+        ':invalid': {
+            border: '1px solid red',
+        },
+        '&:focus': {
+            outline: 'none',
+        },
+        [theme.breakpoints.up('md')]: {
             margin: '2% auto',
+            width: '50%',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '2% auto',
+            width: '65%',
         },
     },
-    flexInput: {
+
+    inputContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         width: '100%',
         margin: '3%',
-        borderRadius: '10px',
-        // [theme.breakpoints.up('sm')]: {
-        //     width: '38%',
-        //     margin: '2%',
-        // },
     },
-    flexContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        [theme.breakpoints.up('sm')]: {
-            flexDirection: 'row',
-            width: '100%',
-        },
-    },
+
     expiryDateBox: {
         display: 'flex',
         flexDirection: 'row',
@@ -447,7 +436,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginTop: '10%',
         marginLeft: '3%',
-        width: '40%',
+        width: '50%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
@@ -463,7 +452,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         marginTop: '10%',
-        width: '40%',
+        width: '50%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
@@ -484,269 +473,3 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
-
-// <Card className={classes.card}>
-//     <div>
-//         <script
-//             src="https://cdn.affinipay.com/hostedfields/1.1.1/fieldGen_1.1.1.js"
-//             async
-//         ></script>
-//         <h1 className={classes.title}> Place a Trust Payment</h1>
-//         {/* ////////////////////////////////////// Credit Card ////////////////////////////////////////////*/}
-//         <Typography className={classes.text} component="p">
-//             Credit Card
-//         </Typography>
-//         <form ref={formRef}>
-//             <FormControl fullWidth={true}>
-//                 <TextField
-//                     // id="outlined-basic"
-//                     label="Cardholder Name"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.input}
-//                     type="text"
-//                     // value={info.paymentCardholderName}
-//                     autoComplete="on"
-//                     // onChange={(e) =>
-//                     //     setInfo({
-//                     //         ...info,
-//                     //         paymentCardholderName: e.target.value,
-//                     //     })
-//                     // }
-//                 />
-//             </FormControl>
-//             <FormControl fullWidth={true}>
-//                 <TextField
-//                     id="outlined-basic"
-//                     label="Credit Card Number"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.input}
-//                     type="text"
-//                     // value={info.paymentCreditCardNumber}
-//                     autoComplete="on"
-//                     // onChange={(e) =>
-//                     //     setInfo({
-//                     //         ...info,
-//                     //         paymentCreditCardNumber: e.target.value,
-//                     //     })
-//                     // }
-//                 />
-//             </FormControl>
-//             <div className={classes.flexContainer}>
-//                 <TextField
-//                     id="exp_month"
-//                     label="Expiry Month"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.flexInput}
-//                     type="text"
-//                     // value={info.paymentCardExpiryDate}
-//                     autoComplete="on"
-//                     ref={mRef}
-//                 />
-//                 <div id="monthValidation" style={{ color: 'red' }}>
-//                     {monthError}
-//                 </div>
-
-//                 <TextField
-//                     id="exp_year"
-//                     label="Expiry Year"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.flexInput}
-//                     type="text"
-//                     // value={info.paymentCardCVV}
-//                     autoComplete="on"
-//                     ref={yRef}
-//                 />
-//                 <div id="yearValidation" style={{ color: 'red' }}>
-//                     {yearError}
-//                 </div>
-//             </div>
-//             <FormControl fullWidth={true}>
-//                 <TextField
-//                     id="cvv_field_id"
-//                     label="CVV"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.input}
-//                     type="text"
-//                     // value={info.paymentCreditCardNumber}
-//                     autoComplete="on"
-//                     // onChange={(e) =>
-//                     //     setInfo({
-//                     //         ...info,
-//                     //         paymentCreditCardNumber: e.target.value,
-//                     //     })
-//                     // }
-//                 />
-//                 <div id="cvvValidation" style={{ color: 'red' }}>
-//                     {cvvError}
-//                 </div>
-//             </FormControl>
-//             <Checkmark value={validationProgress.paymentCardInfo} />
-
-//             {/* ////////////////////////////////////// Billing Addres ////////////////////////////////////////////*/}
-//             <Typography className={classes.text} component="p">
-//                 Billing Addres
-//             </Typography>
-
-//             <FormControl fullWidth={true}>
-//                 <FormControlLabel
-//                     control={
-//                         <Checkbox
-//                             checked={info.billingAddressSameAsUser}
-//                             onChange={() => handleMirrorUserAddress()}
-//                         />
-//                     }
-//                     label="Same as Applicant Address (from a few steps ago)"
-//                 />
-//                 <TextField
-//                     id="address1"
-//                     label="Billing Address"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.input}
-//                     type="text"
-//                     // value={info.billingAddressStreet}
-//                     autoComplete="on"
-//                     disabled={info.billingAddressSameAsUser}
-//                     ref={addressRef}
-//                     // onChange={(e) =>
-//                     //     setInfo({
-//                     //         ...info,
-//                     //         billingAddressStreet: e.target.value,
-//                     //     })
-//                     // }
-//                 />
-//                 <div id="addressValidation" style={{ color: 'red' }}>
-//                     {addressError}
-//                 </div>
-//             </FormControl>
-
-//             <FormControl fullWidth={true}>
-//                 <TextField
-//                     id="postal_code"
-//                     label="Postal Code"
-//                     variant="outlined"
-//                     size="small"
-//                     className={classes.input}
-//                     type="text"
-//                     // value={info.billingAddressStreet}
-//                     autoComplete="on"
-//                     disabled={info.billingAddressSameAsUser}
-//                     ref={psRef}
-//                     // onChange={(e) =>
-//                     //     setInfo({
-//                     //         ...info,
-//                     //         billingAddressStreet: e.target.value,
-//                     //     })
-//                     // }
-//                 />
-//                 <div id="psValidation" style={{ color: 'red' }}>
-//                     {postalCodeError}
-//                 </div>
-//             </FormControl>
-
-//             {/* <div className={classes.flexContainer}>
-//             <TextField
-//                 id="outlined-basic"
-//                 label="City"
-//                 variant="outlined"
-//                 size="small"
-//                 className={classes.flexInput}
-//                 type="text"
-//                 value={info.billingAddressCity}
-//                 autoComplete="on"
-//                 disabled={info.billingAddressSameAsUser}
-//                 onChange={(e) =>
-//                     setInfo({
-//                         ...info,
-//                         billingAddressCity: e.target.value,
-//                     })
-//                 }
-//             />
-//             <TextField
-//                 id="outlined-basic"
-//                 label="Province"
-//                 variant="outlined"
-//                 size="small"
-//                 className={classes.flexInput}
-//                 type="text"
-//                 value={info.billingAddressProvince}
-//                 autoComplete="on"
-//                 disabled={info.billingAddressSameAsUser}
-//                 onChange={(e) =>
-//                     setInfo({
-//                         ...info,
-//                         billingAddressProvince: e.target.value,
-//                     })
-//                 }
-//             />
-//         </div>
-//         <div className={classes.flexContainer}>
-//             <TextField
-//                 id="outlined-basic"
-//                 label="Postal Code"
-//                 variant="outlined"
-//                 size="small"
-//                 className={classes.flexInput}
-//                 type="text"
-//                 value={info.billingAddressPostalCode}
-//                 autoComplete="on"
-//                 disabled={info.billingAddressSameAsUser}
-//                 onChange={(e) =>
-//                     setInfo({
-//                         ...info,
-//                         billingAddressPostalCode: e.target.value,
-//                     })
-//                 }
-//             />
-
-//             <TextField
-//                 id="outlined-basic"
-//                 label="Country"
-//                 variant="outlined"
-//                 size="small"
-//                 className={classes.flexInput}
-//                 type="text"
-//                 value={info.billingAddressCountry}
-//                 autoComplete="on"
-//                 disabled={info.billingAddressSameAsUser}
-//                 onChange={(e) =>
-//                     setInfo({
-//                         ...info,
-//                         billingAddressCountry: e.target.value,
-//                     })
-//                 }
-//             />
-//             <Checkmark value={validationProgress.billingAddress} />
-//         </div> */}
-//             <Alert severity="info" className={classes.alert}>
-//                 Helper section with brief legal information, assisting
-//                 the client through the process.
-//             </Alert>
-//             <div className={classes.buttonContainer}>
-//                 <Button
-//                     type="submit"
-//                     variant="contained"
-//                     className={classes.backButton}
-//                     onClick={() => navigation.previous()}
-//                 >
-//                     Back
-//                 </Button>
-//                 <Button
-//                     className={classes.continueButton}
-//                     type="submit"
-//                     variant="contained"
-//                     onClick={() => {
-//                         submitApplication(true);
-//                     }}
-//                 >
-//                     Confirm Payment
-//                 </Button>
-//             </div>
-//         </form>
-//     </div>
-// </Card>

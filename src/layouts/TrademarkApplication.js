@@ -303,6 +303,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         display: 'flex',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
