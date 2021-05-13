@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, CardContent, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
 
@@ -8,49 +8,47 @@ export default function OrderAmount({ info }) {
     const classes = useStyles();
 
     return (
-        <div className={classes.container}>
-            {info.classesSelected.length > 0 && (
-                <CardContent className={classes.amountSection}>
-                    <Box className={classes.amountSummaryField}>
-                        <Typography className={classes.amountSummaryLabel}>
-                            Base Price:
-                        </Typography>
-                        <Typography className={classes.amountSummaryValue}>
-                            {`$${info.basePrice.toFixed(2).toString()}`}
-                        </Typography>
-                    </Box>
-                    <Box className={classes.amountSummaryField}>
-                        <Typography className={classes.amountSummaryLabel}>
-                            First NICE Class:
-                        </Typography>
-                        <Typography className={classes.amountSummaryValue}>
-                            {/* {additionalNICE} */}
-                            {'$0.00'}
-                        </Typography>
-                    </Box>
-                    <hr />
-                    <Box className={classes.amountSummaryField}>
-                        <Typography className={classes.amountSummaryLabel}>
-                            Additional NICE Classes selected (+$100.00 each):
-                        </Typography>
-                        <Typography className={classes.amountSummaryValue}>
-                            {/* {additionalNICE} */}
-                            {`${(info.classesSelected.length - 1).toString()}`}
-                        </Typography>
-                    </Box>
-                    <hr />
-                    <Box className={classes.amountSummaryField}>
-                        <Typography className={classes.amountLabel}>
-                            Subtotal:
-                        </Typography>
-                        <Typography className={classes.amountTotal}>
-                            {/* {additionalNICE} */}
-                            {`$${info.amount.toString()}`}
-                        </Typography>
-                    </Box>
-                </CardContent>
-            )}
-        </div>
+        <Card className={classes.container}>
+            <CardContent className={classes.amountSection}>
+                <Box className={classes.amountSummaryField}>
+                    <Typography className={classes.amountSummaryLabel}>
+                        Base Price:
+                    </Typography>
+                    <Typography className={classes.amountSummaryValue}>
+                        {`$${info.basePrice.toFixed(2).toString()}`}
+                    </Typography>
+                </Box>
+                <Box className={classes.amountSummaryField}>
+                    <Typography className={classes.amountSummaryLabel}>
+                        First NICE Class:
+                    </Typography>
+                    <Typography className={classes.amountSummaryValue}>
+                        {/* {additionalNICE} */}
+                        {'$0.00'}
+                    </Typography>
+                </Box>
+                <hr />
+                <Box className={classes.amountSummaryField}>
+                    <Typography className={classes.amountSummaryLabel}>
+                        Additional NICE Classes selected (+$100.00 each):
+                    </Typography>
+                    <Typography className={classes.amountSummaryValue}>
+                        {/* {additionalNICE} */}
+                        {`${(info.classesSelected.length - 1).toString()}`}
+                    </Typography>
+                </Box>
+                <hr />
+                <Box className={classes.amountSummaryField}>
+                    <Typography className={classes.amountLabel}>
+                        Subtotal:
+                    </Typography>
+                    <Typography className={classes.amountTotal}>
+                        {/* {additionalNICE} */}
+                        {`$${info.amount.toString()}`}
+                    </Typography>
+                </Box>
+            </CardContent>
+        </Card>
     );
 }
 
