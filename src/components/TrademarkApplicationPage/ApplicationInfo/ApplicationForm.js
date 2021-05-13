@@ -116,6 +116,10 @@ export default function IndividualForm({
                             firstName: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.firstName} />
             </FormControl>
@@ -134,6 +138,10 @@ export default function IndividualForm({
                             lastName: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.lastName} />
             </FormControl>
@@ -153,6 +161,10 @@ export default function IndividualForm({
                             email: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.email} />
             </FormControl>
@@ -174,6 +186,10 @@ export default function IndividualForm({
                                 phone: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                     <Checkmark value={validationProgress.phone} />
                 </FormControl>
@@ -194,6 +210,10 @@ export default function IndividualForm({
                                 fax: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                 </FormControl>
             </div>
@@ -300,6 +320,10 @@ export default function IndividualForm({
                             userStreetAddress: e.target.value,
                         })
                     }
+                    multiline
+                    InputProps={{
+                        className: classes.multilineColor,
+                    }}
                 />
                 <Checkmark value={validationProgress.userStreetAddress} />
             </FormControl>
@@ -320,6 +344,10 @@ export default function IndividualForm({
                                 userCity: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                     <Checkmark value={validationProgress.userCity} />
                 </FormControl>
@@ -345,6 +373,10 @@ export default function IndividualForm({
                                 userPostalCode: e.target.value,
                             })
                         }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
                     />
                     <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
@@ -483,6 +515,11 @@ const useStyles = makeStyles((theme) => ({
         // },
     },
 
+    // Text field styles
+    multilineColor: {
+        color: checkmarksTheme.textValue1,
+    },
+
     buttonContainer: {
         display: 'flex',
         flexDirection: 'row',
@@ -551,6 +588,6 @@ const useStyles = makeStyles((theme) => ({
         color: checkmarksTheme.buttonTextSecondary,
     },
     terms: {
-        color: checkmarksTheme.textValue2,
+        color: checkmarksTheme.textValue1,
     },
 }));

@@ -83,9 +83,11 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
     },
     button: {
-        color: checkmarksTheme.hyperLink,
+        color: checkmarksTheme.textValue1,
+        fontWeight: 500,
+        textDecoration: 'underline',
         '&:hover': {
-            color: checkmarksTheme.textValue2,
+            color: checkmarksTheme.hyperLink,
         },
     },
 }));
