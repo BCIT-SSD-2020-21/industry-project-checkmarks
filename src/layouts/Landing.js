@@ -11,6 +11,7 @@ import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import About from '../components/LandingPage/About';
 import Faq from '../components/LandingPage/Faq';
 import Pricing from '../components/LandingPage/Pricing';
+import Cta from '../components/LandingPage/Cta';
 import Footer from '../components/LandingPage/Footer';
 
 export default function Landing(darkMode) {
@@ -52,6 +53,7 @@ export default function Landing(darkMode) {
             <About />
             <Faq />
             <Pricing />
+            <Cta/>
             <Footer />
         </Box>
     );
