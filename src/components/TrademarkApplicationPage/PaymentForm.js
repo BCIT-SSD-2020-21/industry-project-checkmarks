@@ -238,7 +238,7 @@ export default function PaymentForm({
                         `}
             </style>
             <form id="form" ref={formRef} className={classes.container}>
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label
                         className={classes.label}
                         htmlFor="credit_card_field_id"
@@ -252,7 +252,7 @@ export default function PaymentForm({
                 </div>
 
                 <div className={classes.expiryDateBox}>
-                    <div className={classes.flexInput}>
+                    <div className={classes.inputContainer}>
                         <label className={classes.label} htmlFor="exp_month">
                             Expiry Month
                         </label>
@@ -268,12 +268,8 @@ export default function PaymentForm({
                         />
                     </div>
 
-                    <div className={classes.flexInput}>
-                        <label
-                            className={classes.label}
-                            className={classes.label}
-                            htmlFor="exp_year"
-                        >
+                    <div className={classes.inputContainer}>
+                        <label className={classes.label} htmlFor="exp_year">
                             Expiry Year
                         </label>
                         <div id="yearValidation" style={{ color: 'red' }}>
@@ -289,7 +285,7 @@ export default function PaymentForm({
                     </div>
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="cvv_field_id">
                         CVV
                     </label>
@@ -302,7 +298,7 @@ export default function PaymentForm({
                     ></div>
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="address1">
                         Billing Street Address
                     </label>
@@ -318,7 +314,7 @@ export default function PaymentForm({
                     />
                 </div>
 
-                <div className={classes.flexInput}>
+                <div className={classes.inputContainer}>
                     <label className={classes.label} htmlFor="postal_code">
                         Postal Code
                     </label>
@@ -375,7 +371,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-
         width: 'auto',
     },
     title: {
@@ -401,38 +396,48 @@ const useStyles = makeStyles((theme) => ({
         padding: '8px',
         margin: '3% auto',
         borderRadius: '5px',
+        width: '100%',
         ':invalid': {
             border: '1px solid red',
         },
         '&:focus': {
             outline: 'none',
         },
-        [theme.breakpoints.up('sm')]: {
+        // [theme.breakpoints.up('sm')]: {
+        //     margin: '2% auto',
+        //     width: '65%',
+        // },
+        [theme.breakpoints.up('md')]: {
             margin: '2% auto',
+            width: '50%',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '2% auto',
+            width: '65%',
         },
     },
-    flexInput: {
+
+    inputContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         width: '100%',
         margin: '3%',
-        borderRadius: '10px',
         // [theme.breakpoints.up('sm')]: {
         //     width: '38%',
         //     margin: '2%',
         // },
     },
-    flexContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        [theme.breakpoints.up('sm')]: {
-            flexDirection: 'row',
-            width: '100%',
-        },
-    },
+    // flexContainer: {
+    //     display: 'flex',
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     [theme.breakpoints.up('sm')]: {
+    //         flexDirection: 'row',
+    //         width: '100%',
+    //     },
+    // },
     expiryDateBox: {
         display: 'flex',
         flexDirection: 'row',
@@ -448,7 +453,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginTop: '10%',
         marginLeft: '3%',
-        width: '40%',
+        width: '50%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
@@ -464,7 +469,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         marginTop: '10%',
-        width: '40%',
+        width: '50%',
         height: '30px',
         fontSize: '10px',
         borderRadius: '10px',
