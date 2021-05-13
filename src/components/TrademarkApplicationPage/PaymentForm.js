@@ -403,10 +403,6 @@ const useStyles = makeStyles((theme) => ({
         '&:focus': {
             outline: 'none',
         },
-        // [theme.breakpoints.up('sm')]: {
-        //     margin: '2% auto',
-        //     width: '65%',
-        // },
         [theme.breakpoints.up('md')]: {
             margin: '2% auto',
             width: '50%',
@@ -423,21 +419,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         width: '100%',
         margin: '3%',
-        // [theme.breakpoints.up('sm')]: {
-        //     width: '38%',
-        //     margin: '2%',
-        // },
     },
-    // flexContainer: {
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     [theme.breakpoints.up('sm')]: {
-    //         flexDirection: 'row',
-    //         width: '100%',
-    //     },
-    // },
+
     expiryDateBox: {
         display: 'flex',
         flexDirection: 'row',
