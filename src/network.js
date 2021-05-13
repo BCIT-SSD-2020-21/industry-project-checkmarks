@@ -1,5 +1,6 @@
 require('dotenv').config();
 const BASE = process.env.REACT_APP_BASE_URL + 'api/';
+const TRUST_ACCOUNT_ID = process.env.REACT_APP_TRUST_ACCOUNT_ID;
 
 export const createClioContact = async (info) => {
     var fnResponse = null;
@@ -167,7 +168,7 @@ export const sendPayment = async (info, paymentToken) => {
             // amount: info.amount * 100,
             amount: 1,
             method: paymentToken,
-            account_id: 'bL4uzw6cR4mQjzmovjpCTw', //Live Trust acc key
+            account_id: TRUST_ACCOUNT_ID, //Live Trust acc key
         }),
     })
         .then(async (res) => {
