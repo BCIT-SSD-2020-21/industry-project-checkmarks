@@ -252,7 +252,7 @@ export default function PaymentForm({
                 </div>
 
                 <div className={classes.expiryDateBox}>
-                    <div>
+                    <div className={classes.flexInputContainer}>
                         <label className={classes.label} htmlFor="exp_month">
                             Expiry Month
                         </label>
@@ -268,7 +268,7 @@ export default function PaymentForm({
                         />
                     </div>
 
-                    <div>
+                    <div className={classes.flexInputContainer}>
                         <label className={classes.label} htmlFor="exp_year">
                             Expiry Year
                         </label>
@@ -409,17 +409,25 @@ const useStyles = makeStyles((theme) => ({
     },
 
     inputContainer: {
-        // display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
         width: '75%',
-        margin: '3%',
+    },
+    flexInputContainer: {
+        width: '45%',
+
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            width: '100%',
+        },
     },
 
     expiryDateBox: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        width: '75%',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+        },
     },
     buttonContainer: {
         display: 'flex',
