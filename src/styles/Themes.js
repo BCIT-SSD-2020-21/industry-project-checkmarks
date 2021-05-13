@@ -1,7 +1,9 @@
 const colors = {
     lightRed: '#EE949B',
+    lightRed2: '#b74850',
     mediumRed: '#DF3440',
     darkRed: '#A51A24',
+    mediumRed2: '#b74850',
 
     lightBlue: '#98ABD1',
     mediumBlue: '#4D6CAD',
@@ -31,6 +33,8 @@ export const checkmarksTheme = {
     bgTertiary: colors.darkRed, // dark red (background for Pricing section)
     bgTransparent: colors.whiteOpq0, // applied to transparent containers
     // bgContainer: colors.white, // applied to Container Background
+    bgCardHeader1: colors.lightRed2,
+    bgCardHeader: colors.mediumRed2, // applied to price card header to match Faq color
 
     textLabel: colors.darkGray, // applied to Text Label
     textValue: colors.black,

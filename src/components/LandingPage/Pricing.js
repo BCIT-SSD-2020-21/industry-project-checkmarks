@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { checkmarksTheme } from '../../styles/Themes';
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -24,11 +25,17 @@ const useStyles = makeStyles((theme) => ({
     heroContent: {
         padding: theme.spacing(8, 0, 6),
     },
+    button: {
+        backgroundColor:
+            theme.palette.type === 'dark'
+                ? checkmarksTheme.bgCardHeader
+                : checkmarksTheme.bgCardHeader1,
+    },
     cardHeader: {
         backgroundColor:
             theme.palette.type === 'dark'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[700],
+                ? checkmarksTheme.bgCardHeader
+                : checkmarksTheme.bgCardHeader1,
     },
     cardPricing: {
         display: 'flex',
@@ -98,20 +105,14 @@ export default function Pricing() {
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
                     {tiers.map((tier, index) => (
-                        <Grid
-                            item
-                            key={index}
-                            xs={12}
-                            sm={6}
-                            md={6}
-                        >
+                        <Grid item key={index} xs={12} sm={6} md={6}>
                             <Card>
                                 <CardHeader
                                     title={tier.title}
                                     titleTypographyProps={{ align: 'center' }}
                                     className={classes.cardHeader}
                                 />
-                                <CardContent>
+                                <CardContent className={classes.CardContent}>
                                     <div className={classes.cardPricing}>
                                         <Typography
                                             component="h2"
@@ -142,6 +143,7 @@ export default function Pricing() {
                                 </CardContent>
                                 <CardActions>
                                     <Button
+                                        className={classes.button}
                                         fullWidth
                                         variant={tier.buttonVariant}
                                         color="primary"
