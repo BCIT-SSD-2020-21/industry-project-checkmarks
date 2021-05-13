@@ -9,6 +9,12 @@ const styles = (theme) => ({
       marginTop: theme.spacing(9),
       marginBottom: theme.spacing(9),
     },
+    button: {
+        border: '3px solid currentColor',
+        borderRadius: 2,
+        height: 'auto',
+        padding: theme.spacing(2, 5),
+      },
   });
   
 
