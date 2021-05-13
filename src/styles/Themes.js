@@ -14,9 +14,9 @@ const colors = {
     teal: '#128B83',
     text: '#751219',
 
-    appBar: '#e7f2f7',
+    appBar: '#fbfbfb',
     appBarDark: '#171518',
-    appBarOpq70: '#e7f2f7B3',
+    appBarOpq70: '#fbfbfbB3',
     appBarDarkOpq70: '#171518B3',
     white: '#FFFFFF',
 
