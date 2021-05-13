@@ -13,6 +13,7 @@ const colors = {
     text: '#751219',
 
     white: '#FFFFFF',
+    whiteOpq90: '#FFFFFFE6',
     whiteOpq0: '#FFFFFF00',
     whiteOpq: '#FFFFFF40',
     whiteOpq2: '#FFFFFF8C',
@@ -38,6 +39,7 @@ export const checkmarksTheme = {
     textValue1: colors.white,
     textValue2: colors.mediumRed,
     textValue3: colors.darkRed,
+    textFooter: colors.whiteOpq90,
 
     hyperLink: colors.blue1, //applied to links
 
