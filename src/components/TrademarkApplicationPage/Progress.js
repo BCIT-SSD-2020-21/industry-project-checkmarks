@@ -63,7 +63,8 @@ export default function Progress({ progressValue, drawerOpen }) {
                 style={{
                     // borderRadius: drawerOpen ? '0' : '25px',
                     justifyContent: drawerOpen ? 'flex-end' : 'center',
-                    width: drawerOpen ? window.innerWidth - 240 : '100%',
+                    // width: drawerOpen ? window.innerWidth - 240 : '100%',
+                    width: `calc(100% - 240px)`,
                     transition: 'width 0.25s ease-in 0.3s ease-out',
                 }}
             >
