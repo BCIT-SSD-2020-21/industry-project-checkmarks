@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../styles/Themes';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
@@ -23,14 +24,14 @@ export default function Checkmark({ value }) {
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        // backgroundColor: 'blue',
+        backgroundColor: checkmarksTheme.bgPrimary,
         alignItems: 'center',
         borderRadius: '50px',
         display: 'flex',
         justifyContent: 'center',
-        height: '30px',
-        marginLeft: '12px',
-        width: '30px',
+        height: '40px',
+        margin: '0 12px',
+        width: '40px',
     },
     checkmarkBad: {
         color: 'red',
