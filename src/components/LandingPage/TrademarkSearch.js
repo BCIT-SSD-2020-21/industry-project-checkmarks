@@ -50,7 +50,7 @@ export default function TrademarkSearch({ searching, setSearching }) {
         if (
             searchTerm !== '' &&
             searchResults?.length === 0 &&
-            numberOfRepeatSearches < 2
+            numberOfRepeatSearches < 3
         ) {
             setLoading(true);
             instance.delayTimer = setTimeout(() => {
