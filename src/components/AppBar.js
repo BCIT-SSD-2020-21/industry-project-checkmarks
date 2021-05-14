@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import {
     AppBar,
     Box,
@@ -188,6 +188,9 @@ export default function MenuAppBar({
     const classes = navbarStyles();
     const theme = useTheme();
     const history = useHistory();
+    const location = useLocation();
+
+    console.log('location: ', location);
 
     // MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -372,7 +375,11 @@ export default function MenuAppBar({
                                 button
                                 disabled={progressValue < s.progressValueStart}
                                 key={index}
-                                onClick={() => navigation.go(s.id)}
+                                onClick={() => {
+                                    location.pathname === '/'
+                                        ? history.push('/application')
+                                        : navigation.go(s.id);
+                                }}
                                 style={{
                                     // backgroundColor: 'red',
                                     backgroundColor:
