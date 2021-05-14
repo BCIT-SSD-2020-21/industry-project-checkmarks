@@ -247,7 +247,25 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            
+            {/*  /// PANEL 8 ////  */}
+            <Accordion 
+                square 
+                expanded={expanded === 'panel8'} 
+                onChange={handleChange('panel8')}
+                >
+                <AccordionSummary 
+                    aria-controls="panel8d-content" 
+                    id="panel8d-header"
+                    >
+                    <Typography>What can I trademark?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        What can’t you trademark is a better question. You can pretty much trademark any element of how your brand or your business is known: names, logos, smells, layout of a store colours, the location of a tag, the mode of packaging, a texture, a sound, etc.
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
             </Container>
         </React.Fragment>
     );
