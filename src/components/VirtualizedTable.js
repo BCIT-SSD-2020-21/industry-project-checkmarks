@@ -12,16 +12,9 @@ const styles = (theme) => ({
         display: 'flex',
         alignItems: 'center',
         boxSizing: 'border-box',
-        backgroundColor: checkmarksTheme.bgDrawer,
-        // padding: '5%',
     },
     table: {
-        // temporary right-to-left patch, waiting for
-        // https://github.com/bvaughn/react-virtualized/issues/454
         backgroundColor: checkmarksTheme.bgTransparent,
-        // padding: '2%',
-        // opacity: 0,
-        // borderRadius: '25px',
         '& .ReactVirtualized__Table__headerRow': {
             flip: false,
             paddingRight:
@@ -39,15 +32,13 @@ const styles = (theme) => ({
         },
     },
     tableCell: {
-        // backgroundColor: 'red',
-        backgroundColor: checkmarksTheme.bgPrimary,
-        // margin: 'auto',
         display: 'flex',
-        padding: '2px',
-        justifyContent: 'center',
-        fontSize: '10px',
-        textAlign: 'center',
         flex: 1,
+        fontSize: '12px',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        padding: '2px',
+        textAlign: 'center',
     },
     noClick: {
         cursor: 'initial',

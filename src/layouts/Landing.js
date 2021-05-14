@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, Paper } from '@material-ui/core';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg-landing-chris-brignola.jpg';
 import bannerImageDark from '../assets/images/bg-dark-landing-nicolas-hoizey.jpg';
@@ -20,36 +20,47 @@ export default function Landing(darkMode) {
 
     const [searching, setSearching] = useState(false);
     return (
-        <Box className={classes.root}>
-            <Box
+        <Paper className={classes.root}>
+            <Paper
                 className={classes.section}
                 style={{
-                    backgroundImage: `url(${
-                        darkMode.darkMode ? bannerImageDark : bannerImage
-                    })`,
+                    backgroundImage: `url(${bannerImage})`,
+                    // backgroundImage: `url(${
+                    //     darkMode.darkMode ? bannerImageDark : bannerImage
+                    // })`,
                 }}
             >
-                <HeaderBanner searching={searching} />
+                <Paper
+                    className={classes.sectionOverlay}
+                    style={{
+                        backgroundColor: darkMode.darkMode
+                            ? checkmarksTheme.bgOpaque70Dark
+                            : checkmarksTheme.transparent,
+                        width: '100%',
+                    }}
+                >
+                    <HeaderBanner searching={searching} />
 
-                <Box className={classes.actions}>
-                    <Box className={classes.search}>
-                        <TrademarkSearch
-                            searching={searching}
-                            setSearching={setSearching}
-                        />
+                    <Box className={classes.actions}>
+                        <Box className={classes.search}>
+                            <TrademarkSearch
+                                searching={searching}
+                                setSearching={setSearching}
+                            />
+                        </Box>
+                        <Button
+                            className={classes.buttonStart}
+                            onClick={() => {
+                                setSearching(false);
+                                history.push('/application');
+                            }}
+                        >
+                            <PlayArrowTwoToneIcon />
+                            Start Trademark Application
+                        </Button>
                     </Box>
-                    <Button
-                        className={classes.buttonStart}
-                        onClick={() => {
-                            setSearching(false);
-                            history.push('/application');
-                        }}
-                    >
-                        <PlayArrowTwoToneIcon />
-                        Start Trademark Application
-                    </Button>
-                </Box>
-            </Box>
+                </Paper>
+            </Paper>
             <About />
             <Faq />
             <Pricing />
@@ -57,7 +68,7 @@ export default function Landing(darkMode) {
             <Box className={classes.footerContainer}>
                 <Footer />
             </Box>
-        </Box>
+        </Paper>
     );
 }
 
@@ -75,10 +86,18 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'flex-start',
         alignItems: 'center',
         height: window.innerHeight,
-        width: window.innerWidth,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        width: '100%',
+    },
+    sectionOverlay: {
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        height: window.innerHeight,
+        width: '100%',
     },
     actions: {
         display: 'flex',
@@ -107,6 +126,9 @@ const useStyles = makeStyles(() => ({
         ['@media (min-width:1280px)']: { display: 'none' },
     },
     buttonStart: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         backgroundColor: checkmarksTheme.buttonPrimary,
         '&:hover': {
             color: checkmarksTheme.buttonPrimary,
@@ -117,13 +139,20 @@ const useStyles = makeStyles(() => ({
         color: checkmarksTheme.buttonTextPrimary,
         fontWeight: 'bold',
         margin: '10% auto 15% auto',
-        ['@media (min-width:768px)']: { margin: '10% auto 15%  auto' },
-        ['@media (min-width:1280px)']: { margin: '10% auto 12% auto' },
+        fontSize: '12px',
+        ['@media (min-width:768px)']: {
+            margin: '10% auto 15%  auto',
+            fontSize: '16px',
+        },
+        ['@media (min-width:1280px)']: {
+            margin: '10% auto 12% auto',
+            fontSize: '18px',
+        },
         opacity: 0.7,
-        padding: '7px 0',
-        minWidth: '300px',
-        width: '50%',
-        maxWidth: '320px',
+        padding: '7px 8px',
+        minWidth: '260px',
+        width: '60%',
+        maxWidth: '380px',
     },
     buttonSearch: {
         backgroundColor: checkmarksTheme.buttonSecondary,

@@ -99,6 +99,10 @@ export const navbarStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
+        backgroundColor: checkmarksTheme.bgAppBarOpq70,
+        width: drawerWidth,
+    },
+    drawerPaperDark: {
         backgroundColor: checkmarksTheme.bgAppBarOpq70Dark,
         width: drawerWidth,
     },
@@ -292,10 +296,10 @@ export default function MenuAppBar({
                             className={classes.menuItem}
                             target="blank"
                             component="a"
-                            href="https://calendly.com/golbey_justin/15mins?month=2021-05"
+                            href="https://calendly.com/golbey_justin/checkmarks"
                         >
                             <EventIcon className={classes.menuItemIcon} />
-                            Book 15 Minutes Through Calendly
+                            Book Appointment
                         </MenuItem>
                         <MenuItem
                             className={classes.menuItem}
@@ -314,13 +318,15 @@ export default function MenuAppBar({
                 variant="persistent"
                 anchor="left"
                 open={drawerOpen}
-                style={{
-                    backgroundColor: darkMode
-                        ? checkmarksTheme.bgAppBarOpq70Dark
-                        : checkmarksTheme.bgAppBarOpq70,
-                }}
+                // style={{
+                //     backgroundColor: darkMode
+                //         ? checkmarksTheme.bgOpaque70Dark
+                //         : checkmarksTheme.bgOpaque70,
+                // }}
                 classes={{
-                    paper: classes.drawerPaper,
+                    paper: darkMode
+                        ? classes.drawerPaperDark
+                        : classes.drawerPaper,
                 }}
             >
                 <div className={classes.drawerHeader}>

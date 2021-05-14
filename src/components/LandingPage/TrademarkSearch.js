@@ -50,7 +50,7 @@ export default function TrademarkSearch({ searching, setSearching }) {
         if (
             searchTerm !== '' &&
             searchResults?.length === 0 &&
-            numberOfRepeatSearches < 2
+            numberOfRepeatSearches < 3
         ) {
             setLoading(true);
             instance.delayTimer = setTimeout(() => {
@@ -93,15 +93,22 @@ export default function TrademarkSearch({ searching, setSearching }) {
                     placeholder="Check if your Trademark exists..."
                     setInputTo={searchTrademark}
                 />
-                <IconButton
+                <Button
                     style={{
                         display: searching ? 'block' : 'none',
                     }}
                     className={classes.edgeButton}
                     onClick={() => history.push('/application')}
                 >
-                    <PlayArrowTwoToneIcon />
-                </IconButton>
+                    <Box>
+                        <PlayArrowTwoToneIcon />
+                        <PlayArrowTwoToneIcon />
+                        <PlayArrowTwoToneIcon />
+                    </Box>
+                    <Typography className={classes.edgeButtonText}>
+                        Start
+                    </Typography>
+                </Button>
             </Box>
             {/* </Fade> */}
             {searchTerm.length > 2 && (
@@ -169,12 +176,16 @@ export const searchBoxStyles = makeStyles(() => ({
         // },
     },
     edgeButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         animation: '1s $edgeButtonFadeIn',
-        width: '10px',
-        height: '54px',
+        width: '120px',
+        fontSize: '12px',
+        height: '100%',
         // height: '100%',
         color: 'white',
-        opacity: 0.6,
+        opacity: 0.9,
         borderRadius: '0 100px 100px 0',
         backgroundColor: 'red',
         position: 'absolute',
@@ -184,13 +195,14 @@ export const searchBoxStyles = makeStyles(() => ({
         // transitionDelay: '1s',
         // transitionTimingFunction: 'linear',
         transition: 'opacity 1s linear',
+        transitionDelay: '3s',
     },
     searchBoxShifted: {
         animation: '$shiftUp-searchBox-mobile 1s',
         transform: 'translateY(-360%)',
         ['@media (min-width:768px)']: {
             animation: '$shiftUp-searchBox-tablet 1s',
-            transform: 'translateY(-300%)',
+            transform: 'translateY(-350%)',
         },
         ['@media (min-width:1280px)']: {
             animation: '$shiftUp-searchBox-generic 1s',
@@ -249,8 +261,6 @@ export const searchBoxStyles = makeStyles(() => ({
         border: '0.5px solid #FFFFFF00',
         '&.Mui-focused': {
             border: '0.5px solid red',
-            // animation: '$shiftUp-searchBox 1s',
-            // transform: 'translateY(-200%)'
         },
     },
     adornment: {},
@@ -306,7 +316,7 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     '@keyframes shiftUp-searchBox-tablet': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-300%)' },
+        to: { transform: 'translateY(-350%)' },
     },
     '@keyframes shiftUp-searchBox-generic': {
         from: { transform: 'translateY(0px)' },
@@ -317,7 +327,7 @@ export const searchBoxStyles = makeStyles(() => ({
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftDown-searchBox-tablet': {
-        from: { transform: 'translateY(-300%)' },
+        from: { transform: 'translateY(-350%)' },
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftDown-searchBox-generic': {

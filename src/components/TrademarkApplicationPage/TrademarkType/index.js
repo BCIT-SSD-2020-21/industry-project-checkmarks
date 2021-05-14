@@ -100,11 +100,10 @@ const TrademarkForm = ({
                     setInfo({
                         ...info,
                         isOther: !info.isOther,
-                        OtherTypes: [],
+                        otherTypes: [],
                     })
                 }
             />
-
             {info.isOther && (
                 <div>
                     <p style={{ fontWeight: 'bold' }}>Select all that apply</p>
@@ -115,44 +114,48 @@ const TrademarkForm = ({
                     </p>
                 </div>
             )}
-
             {/* <div className={classes.detailSelectCardContainer}> */}
             {/* map other Types Selection */}
             {info.isOther && (
-                <Box>
-                    <Box className={classes.detailSelectCardContainer}>
-                        {otherTypesSelection.map((otherType, index) => (
-                            <DetailSelectCard
-                                otherType={otherType}
-                                info={info}
-                                setInfo={setInfo}
-                                index={index}
-                                key={index}
-                            />
-                        ))}
-                    </Box>
-                    <Alert severity="info" className={classes.alert}>
+                <Box className={classes.detailSelectCardContainer}>
+                    {otherTypesSelection.map((otherType, index) => (
+                        <DetailSelectCard
+                            otherType={otherType}
+                            info={info}
+                            setInfo={setInfo}
+                            index={index}
+                            key={index}
+                        />
+                    ))}
+                </Box>
+            )}
+            {info.otherTypes.length > 0 && (
+                // <Card className={classes.alertContainer}>
+                <Alert
+                    severity="error"
+                    variant="outlined"
+                    className={classes.alert}
+                    action={
+                        <Button
+                            className={classes.bookApppintmentButton}
+                            target="blank"
+                            component="a"
+                            href="https://calendly.com/golbey_justin/checkmarks"
+                        >
+                            <EventIcon className={classes.menuItemIcon} />
+                            Book Appointment
+                        </Button>
+                    }
+                >
+                    <Typography className={classes.alertText}>
                         Looks like you're applying for a Trademark with a less
                         common characteristic. This is perfectly fine, however
                         discussion with a lawyer is required before submission.
-                    </Alert>
-                    <Button
-                        className={classes.bookApppintmentButton}
-                        target="blank"
-                        component="a"
-                        href="https://calendly.com/golbey_justin/15mins?month=2021-05"
-                    >
-                        <EventIcon className={classes.menuItemIcon} />
-                        Book 15 Minutes Through Calendly
-                    </Button>
-                </Box>
+                    </Typography>
+                </Alert>
+                // </Card>
             )}
-            {/* </div> */}
-            {/* {info.otherType && (
 
-                
-                
-            )} */}
             <Box className={classes.checkboxContainer}>
                 <Checkmark
                     value={validationProgress.trademarkTypeFormCompleted}
@@ -262,30 +265,39 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3%',
         fontSize: 17,
     },
+    alertContainer: {
+        backgroundColor: checkmarksTheme.transparentCard,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     alert: {
         backgroundColor: checkmarksTheme.transparentCard,
-        color: checkmarksTheme.textActive,
+        display: 'flex',
+        flexDirection: 'column',
+        color: checkmarksTheme.textPrimaryDark,
         margin: '2% 0 5% 0',
-        fontSize: '12px',
+        fontSize: '16px',
         [theme.breakpoints.up('sm')]: {
             margin: '0',
         },
     },
     bookApppintmentButton: {
+        flex: 1,
         color: '#FFF',
         backgroundColor: '#df3a48',
         fontWeight: 'bold',
-        marginTop: '10%',
+        margin: 'auto',
         // marginLeft: '3%',
         width: '100%',
-        height: '60px',
+        height: '40px',
         fontSize: '10px',
         borderRadius: '10px',
         [theme.breakpoints.up('md')]: {
-            margin: '5% 3% 5% 0',
+            // margin: '5% 3% 5% 0',
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            margin: '6% 2% 1% 0',
+            // margin: '6% 2% 1% 0',
         },
     },
 }));

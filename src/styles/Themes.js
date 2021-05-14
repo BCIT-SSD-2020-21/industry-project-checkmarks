@@ -19,7 +19,10 @@ const colors = {
     appBarOpq70: '#fbfbfbB3',
     appBarDarkOpq70: '#171518B3',
     white: '#FFFFFF',
+    pureTransparent: '#FFFFFF00',
 
+    whiteOpq30: '#FFFFFF4D',
+    blackOpq30: '#0000004D',
     whiteOpq90: '#FFFFFFE6',
     whiteOpq0: '#FFFFFF00',
     whiteOpq: '#FFFFFF40',
@@ -38,6 +41,7 @@ const colors = {
 };
 
 export const checkmarksTheme = {
+    transparent: colors.pureTransparent,
     bgPrimary: colors.whiteOpq, // applied to Root Background
     bgPrimaryDark: colors.blackOpq,
     bgDrawer: colors.whiteOpq2, // applied to Drawer Background
@@ -49,6 +53,9 @@ export const checkmarksTheme = {
     bgOpaque90Dark: colors.blackOpq90,
     bgOpaque70: colors.whiteOpq70,
     bgOpaque70Dark: colors.blackOpq70,
+    bgOpaque30: colors.whiteOpq30,
+    bgOpaque30Dark: colors.blackOpq30,
+
     bgAppBar: colors.appBar,
     bgAppBarDark: colors.appBarDark,
     bgAppBarOpq70: colors.appBarOpq70,

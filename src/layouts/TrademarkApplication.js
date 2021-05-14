@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { checkmarksTheme } from '../styles/Themes';
 import bannerImage from '../assets/images/bg-application-yann-allegre.jpg';
 // import bannerImageDark from '../assets/images/bg-dark-application-ricardo-gomez-angel.jpg';
 import bannerImageDark from '../assets/images/bg-dark-application2-asoggetti.jpg';
@@ -173,122 +174,134 @@ const TrademarkApplication = ({ darkMode, drawerOpen }) => {
         <Paper
             className={classes.root}
             style={{
-                backgroundImage: `url(${
-                    darkMode.darkMode ? bannerImageDark : bannerImage
-                })`,
+                backgroundImage: `url(${bannerImage})`,
+                // backgroundImage: `url(${
+                //     darkMode ? bannerImageDark : bannerImage
+                // })`,
                 backgroundSize: 'auto 2900px',
             }}
         >
-            <div className={classes.container}>
-                <Progress
-                    step={step}
-                    steps={steps}
-                    info={info}
-                    progressValue={progressValue}
-                    validationProgress={validationProgress}
-                    drawerOpen={drawerOpen}
-                />
-                <Box className={classes.hero}>
-                    {/* {console.log(
+            <Paper
+                style={{
+                    backgroundColor: darkMode
+                        ? checkmarksTheme.bgOpaque30Dark
+                        : checkmarksTheme.bgOpaque30,
+                    width: '100%',
+                }}
+            >
+                <div className={classes.container}>
+                    <Progress
+                        step={step}
+                        steps={steps}
+                        info={info}
+                        progressValue={progressValue}
+                        validationProgress={validationProgress}
+                        drawerOpen={drawerOpen}
+                    />
+                    <Box className={classes.hero}>
+                        {/* {console.log(
                     document.getElementById('parentContainer').offsetHeight
                 )} */}
-                    <Typography className={classes.title}>{step.id}</Typography>
-                </Box>
-                {(() => {
-                    switch (step.id) {
-                        case 'Trademark':
-                            return (
-                                <TrademarkForm
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                    setDirty={setDirty}
-                                />
-                            );
-                        case 'Goods-and-Services':
-                            return (
-                                <GoodsAndServices
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
-                        case 'International':
-                            return (
-                                <CountryCard
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
-                        case 'Applicant':
-                            return (
-                                <ApplicationInfo
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
-                        case 'Confirmation':
-                            return (
-                                <ConfirmOrder
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
-                        case 'Payment':
-                            return (
-                                <PaymentForm
-                                    navigation={navigation}
-                                    step={step}
-                                    info={info}
-                                    setInfo={setInfo}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    progressValue={progressValue}
-                                    validationProgress={validationProgress}
-                                />
-                            );
-                        case 'Success':
-                            return (
-                                <Success
-                                    navigation={navigation}
-                                    currentStep={currentStep}
-                                    setCurrentStep={setCurrentStep}
-                                    setPristine={setPristine}
-                                />
-                            );
-                    }
-                })()}
-            </div>
-            {Prompt}
-            <Footer />
+                        <Typography className={classes.title}>
+                            {step.id}
+                        </Typography>
+                    </Box>
+                    {(() => {
+                        switch (step.id) {
+                            case 'Trademark':
+                                return (
+                                    <TrademarkForm
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                        setDirty={setDirty}
+                                    />
+                                );
+                            case 'Goods-and-Services':
+                                return (
+                                    <GoodsAndServices
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                    />
+                                );
+                            case 'International':
+                                return (
+                                    <CountryCard
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                    />
+                                );
+                            case 'Applicant':
+                                return (
+                                    <ApplicationInfo
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                    />
+                                );
+                            case 'Confirmation':
+                                return (
+                                    <ConfirmOrder
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                    />
+                                );
+                            case 'Payment':
+                                return (
+                                    <PaymentForm
+                                        navigation={navigation}
+                                        step={step}
+                                        info={info}
+                                        setInfo={setInfo}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        progressValue={progressValue}
+                                        validationProgress={validationProgress}
+                                    />
+                                );
+                            case 'Success':
+                                return (
+                                    <Success
+                                        navigation={navigation}
+                                        currentStep={currentStep}
+                                        setCurrentStep={setCurrentStep}
+                                        setPristine={setPristine}
+                                    />
+                                );
+                        }
+                    })()}
+                </div>
+                {Prompt}
+                <Footer />
+            </Paper>
         </Paper>
     );
 };

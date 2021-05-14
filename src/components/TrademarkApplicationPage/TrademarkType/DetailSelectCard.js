@@ -13,7 +13,7 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
     // when user go back to the page , if type is already in the OtherTypes
     // check box will be checked
     useEffect(() => {
-        const infoOfOtherType = info.OtherTypes;
+        const infoOfOtherType = info.otherTypes;
 
         infoOfOtherType.forEach((userOtherType) => {
             if (userOtherType === otherType) {
@@ -24,7 +24,7 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
 
     //handle when checkbox is clicked
     const selectOtherType = () => {
-        const infoOfOtherType = info.OtherTypes;
+        const infoOfOtherType = info.otherTypes;
 
         if (isSelected) {
             // check if type already exist , remove from the OtherTypes array
@@ -41,7 +41,7 @@ const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
 
         setInfo({
             ...info,
-            OtherTypes: infoOfOtherType,
+            otherTypes: infoOfOtherType,
         });
         setIsSelected((prev) => !prev);
     };

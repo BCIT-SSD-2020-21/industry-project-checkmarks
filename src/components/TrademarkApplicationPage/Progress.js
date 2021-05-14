@@ -9,22 +9,17 @@ const progressStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        // padding: '12px',
         height: '34px',
         width: '100%',
     },
     container: {
         backgroundColor: checkmarksTheme.bgDrawer,
-        // borderRadius: '25px',
-        border: `1px solid ${checkmarksTheme.textLabel}`,
         height: '32px',
         position: 'relative',
         opacity: 0.85,
-        width: '100%',
     },
     progress: {
         backgroundColor: checkmarksTheme.buttonPrimary,
-        // borderRadius: '25px 0 0 25px',
         height: '100%',
     },
     value: {
@@ -51,8 +46,6 @@ export default function Progress({ progressValue, drawerOpen }) {
             className={classes.root}
             style={{
                 justifyContent: drawerOpen ? 'flex-end' : 'center',
-                // padding: drawerOpen ? '0' : '12px',
-                // width: drawerOpen ? '35%' : '100%',
                 transition: 'width 0.25s ease-in 0.3s ease-out',
             }}
             position="fixed"
@@ -61,18 +54,14 @@ export default function Progress({ progressValue, drawerOpen }) {
             <Box
                 className={classes.container}
                 style={{
-                    // borderRadius: drawerOpen ? '0' : '25px',
                     justifyContent: drawerOpen ? 'flex-end' : 'center',
-                    // width: drawerOpen ? window.innerWidth - 240 : '100%',
-                    width: `calc(100% - 240px)`,
+                    width: drawerOpen ? `calc(100% - 240px)` : '100%',
                     transition: 'width 0.25s ease-in 0.3s ease-out',
                 }}
             >
                 <Box
                     className={classes.progress}
                     style={{
-                        // borderRadius:
-                        //     progressPercentage > 96 ? '25px' : '25px 0 0 25px',
                         transition: 'width 1s ease-in-out',
                         width: `${progressPercentage}%`,
                     }}

@@ -63,22 +63,28 @@ export default function GoodsAndServices({
     // GET TERMS AFTER TEXT INPUT (with Delay)
     const [termSearchResults, setTermSearchResults] = useState([]);
     const { current: searchInstance } = useRef({});
+    const [numberOfRepeatSearches, setNumberOfRepeatSearches] = useState(0);
     useEffect(() => {
         setTermTableData([]);
         if (searchInstance.delayTimer) {
             clearTimeout(searchInstance.delayTimer);
         }
-        if (searchTerm.length > 2) {
-            if (searchTerm !== '') {
-                searchInstance.delayTimer = setTimeout(() => {
-                    (async () => {
-                        const result = await searchTerms(searchTerm);
+        if (searchTerm !== '' && numberOfRepeatSearches < 5) {
+            searchInstance.delayTimer = setTimeout(() => {
+                (async () => {
+                    const result = await searchTerms(searchTerm);
+                    if (result.terms.length > 0) {
                         setTermSearchResults(result.terms);
-                    })();
-                }, 750);
-            }
+                        setNumberOfRepeatSearches(0);
+                    } else {
+                        setNumberOfRepeatSearches(numberOfRepeatSearches + 1);
+                    }
+                })();
+            }, 1000);
+        } else if (searchTerm === '') {
+            setNumberOfRepeatSearches(0);
         }
-    }, [searchTerm]);
+    }, [searchTerm, numberOfRepeatSearches]);
 
     // RESULTS FROM PREVIOUS GET, POPULATED TO TERM TABLE ARRAY, which is Rendered Rendered
     const [termTableData, setTermTableData] = useState([]); // DATA Rendering on Table (Displayed)
@@ -130,6 +136,7 @@ export default function GoodsAndServices({
             (item) => item.id !== term.id
         );
         setTermTableData([]);
+        newSelectedTerms.sort((a, b) => a.id - b.id);
         setSelectedTerms(newSelectedTerms);
     };
     // const handleRemoveTerm = (term) => { // customized function when removing from Selected Terms section; above is called at checkmark remove
@@ -250,6 +257,7 @@ export default function GoodsAndServices({
                 }
                 termClassExists = false;
             });
+            classesSelected.sort((a, b) => a.id - b.id);
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(

@@ -12,6 +12,7 @@ import {
     Select,
     TextField,
     Radio,
+    Typography,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { checkmarksTheme } from '../../../styles/Themes';
@@ -59,6 +60,7 @@ export default function IndividualForm({
             <div className={classes.selectionContainer}>
                 <RadioGroup
                     row
+                    className={classes.radioButtons}
                     aria-label="individualOrOrganization"
                     id="individualOrOrganization"
                     name="individualOrOrganization"
@@ -76,6 +78,11 @@ export default function IndividualForm({
                         label="Organization"
                     />
                 </RadioGroup>
+                {info.individualOrOrganization === 'Individual' && (
+                    <Checkmark
+                        value={validationProgress.individualOrOrganizationName}
+                    />
+                )}
             </div>
             {/* ///////////////////////personal info///////////////////////*/}
             {info.individualOrOrganization == 'Organization' && (
@@ -170,8 +177,31 @@ export default function IndividualForm({
             </FormControl>
 
             <div className={classes.flexContainer}>
+                {/* /// Fax /// */}
+                <FormControl fullWidth={true} className={classes.fieldFax}>
+                    <TextField
+                        className={classes.input}
+                        variant="outlined"
+                        size="small"
+                        placeholder="Fax number (Optional)"
+                        type="text"
+                        value={info.fax}
+                        autoComplete="on"
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                fax: e.target.value,
+                            })
+                        }
+                        multiline
+                        InputProps={{
+                            className: classes.multilineColor,
+                        }}
+                    />
+                </FormControl>
+
                 {/* /// Phone /// */}
-                <FormControl fullWidth={true} className={classes.field}>
+                <FormControl fullWidth={true} className={classes.fieldPhone}>
                     <TextField
                         className={classes.input}
                         variant="outlined"
@@ -193,33 +223,16 @@ export default function IndividualForm({
                     />
                     <Checkmark value={validationProgress.phone} />
                 </FormControl>
-
-                {/* /// Fax /// */}
-                <FormControl fullWidth={true} className={classes.field}>
-                    <TextField
-                        className={classes.input}
-                        variant="outlined"
-                        size="small"
-                        placeholder="Fax number (Optional)"
-                        type="text"
-                        value={info.fax}
-                        autoComplete="on"
-                        onChange={(e) =>
-                            setInfo({
-                                ...info,
-                                fax: e.target.value,
-                            })
-                        }
-                        multiline
-                        InputProps={{
-                            className: classes.multilineColor,
-                        }}
-                    />
-                </FormControl>
             </div>
 
             <Alert severity="info" className={classes.idAlert}>
-                Please upload your photo ID, file should be less than 2Mb.
+                <Typography className={classes.idAlertText}>
+                    {'Please upload your photo ID.'}
+                </Typography>
+                <Typography className={classes.idAlertText}>
+                    {'File should be less than 2Mb.'}
+                </Typography>
+                {/* {'Please upload your photo ID. \nFile should be less than 2Mb.'} */}
             </Alert>
 
             {/* ============================ */}
@@ -380,10 +393,6 @@ export default function IndividualForm({
                     <Checkmark value={validationProgress.userPostalCode} />
                 </FormControl>
             </div>
-            <Alert severity="info" className={classes.alert}>
-                Helper section with brief legal information, assisting the
-                client through the process.
-            </Alert>
             <Box className={classes.disclaimer}>
                 <Alert severity="info" className={classes.alertRed}>
                     Using Checkmarks does not guarantee that your Trademark will
@@ -464,7 +473,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         [theme.breakpoints.up('sm')]: {
             flexDirection: 'row',
             width: '100%',
@@ -472,13 +481,46 @@ const useStyles = makeStyles((theme) => ({
     },
     selectionContainer: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+    },
+    radioButtons: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
     },
     field: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        margin: '10px 0',
+    },
+    fieldPhone: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: '10px 0',
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: '58%',
+        },
+    },
+    fieldFax: {
+        display: 'flex',
+        flexDirection: 'row',
+        // alignItems: 'center',
+        // justifyContent: 'space-between',
+        justifySelf: 'flex-start',
+        marginTop: '10px',
+        marginBottom: '10px',
+        marginRight: 'auto',
+        width: '80%',
+        [theme.breakpoints.up('sm')]: {
+            width: '58%',
+        },
     },
     fieldDropDown: {
         display: 'flex',
@@ -557,9 +599,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     alert: {
-        color: '#2a9df4',
-        margin: '5% auto 5% auto',
-        fontSize: '12px',
+        backgroundColor: checkmarksTheme.transparentCard,
+        color: checkmarksTheme.textPrimaryDark,
+        margin: '2% auto 2% auto',
+        fontSize: '16px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 2% auto',
         },
@@ -568,14 +611,24 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     idAlert: {
-        color: '#2a9df4',
+        backgroundColor: checkmarksTheme.transparentCard,
+        color: checkmarksTheme.textPrimaryDark,
         margin: '3% auto 5% auto',
         fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 3% auto',
+            fontSize: '16px',
         },
         [theme.breakpoints.up('md')]: {
             margin: '3% auto 2% auto',
+            fontSize: '16px',
+        },
+    },
+    idAlertText: {
+        fontSize: '12px',
+        fontWeight: 'bold',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '16px',
         },
     },
     disclaimer: {
@@ -584,7 +637,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     alertRed: {
+        backgroundColor: checkmarksTheme.transparentCard,
         color: checkmarksTheme.buttonTextSecondary,
+        fontSize: '16px',
     },
     terms: {
         color: checkmarksTheme.textValue1,
