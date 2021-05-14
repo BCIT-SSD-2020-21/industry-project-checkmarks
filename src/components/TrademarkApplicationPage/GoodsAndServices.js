@@ -136,6 +136,7 @@ export default function GoodsAndServices({
             (item) => item.id !== term.id
         );
         setTermTableData([]);
+        newSelectedTerms.sort((a, b) => a.id - b.id);
         setSelectedTerms(newSelectedTerms);
     };
     // const handleRemoveTerm = (term) => { // customized function when removing from Selected Terms section; above is called at checkmark remove
@@ -256,6 +257,7 @@ export default function GoodsAndServices({
                 }
                 termClassExists = false;
             });
+            classesSelected.sort((a, b) => a.id - b.id);
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
