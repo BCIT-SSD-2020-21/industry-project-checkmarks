@@ -174,7 +174,7 @@ const TrademarkApplication = ({ darkMode, drawerOpen }) => {
             className={classes.root}
             style={{
                 backgroundImage: `url(${
-                    darkMode.darkMode ? bannerImageDark : bannerImage
+                    darkMode ? bannerImageDark : bannerImage
                 })`,
                 backgroundSize: 'auto 2900px',
             }}
