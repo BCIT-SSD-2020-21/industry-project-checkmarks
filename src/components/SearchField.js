@@ -28,7 +28,7 @@ export default function SearchField({ loading, placeholder, setInputTo }) {
         <FormControl className={classes.form}>
             <Input
                 className={classes.input}
-                onChange={(e) => setInputTo(e.target.value)}
+                onChange={(e) => setInputTo(e.target.value?.toLowerCase())}
                 id="searchBox"
                 placeholder={placeholder}
                 style={{ position: 'relative' }}
