@@ -99,6 +99,10 @@ export const navbarStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
+        backgroundColor: checkmarksTheme.bgAppBarOpq70,
+        width: drawerWidth,
+    },
+    drawerPaperDark: {
         backgroundColor: checkmarksTheme.bgAppBarOpq70Dark,
         width: drawerWidth,
     },
@@ -314,13 +318,15 @@ export default function MenuAppBar({
                 variant="persistent"
                 anchor="left"
                 open={drawerOpen}
-                style={{
-                    backgroundColor: darkMode
-                        ? checkmarksTheme.bgAppBarOpq70Dark
-                        : checkmarksTheme.bgAppBarOpq70,
-                }}
+                // style={{
+                //     backgroundColor: darkMode
+                //         ? checkmarksTheme.bgOpaque70Dark
+                //         : checkmarksTheme.bgOpaque70,
+                // }}
                 classes={{
-                    paper: classes.drawerPaper,
+                    paper: darkMode
+                        ? classes.drawerPaperDark
+                        : classes.drawerPaper,
                 }}
             >
                 <div className={classes.drawerHeader}>
