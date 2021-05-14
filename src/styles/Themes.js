@@ -20,6 +20,8 @@ const colors = {
     appBarDarkOpq70: '#171518B3',
     white: '#FFFFFF',
 
+    whiteOpq30: '#FFFFFF4D',
+    blackOpq30: '#0000004D',
     whiteOpq90: '#FFFFFFE6',
     whiteOpq0: '#FFFFFF00',
     whiteOpq: '#FFFFFF40',
@@ -49,6 +51,9 @@ export const checkmarksTheme = {
     bgOpaque90Dark: colors.blackOpq90,
     bgOpaque70: colors.whiteOpq70,
     bgOpaque70Dark: colors.blackOpq70,
+    bgOpaque30: colors.whiteOpq30,
+    bgOpaque30Dark: colors.blackOpq30,
+
     bgAppBar: colors.appBar,
     bgAppBarDark: colors.appBarDark,
     bgAppBarOpq70: colors.appBarOpq70,
