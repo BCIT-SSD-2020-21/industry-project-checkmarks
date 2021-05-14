@@ -265,6 +265,25 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            {/*  /// PANEL 9 ////  */}
+            <Accordion 
+                square 
+                expanded={expanded === 'panel9'} 
+                onChange={handleChange('panel9')}
+                >
+                <AccordionSummary 
+                    aria-controls="panel9d-content" 
+                    id="panel9d-header"
+                    >
+                    <Typography>What do the symbols ® and ™ represent?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        <strong>®</strong> means the trademark is registered; <strong>™</strong> means is a common law (or unregistered) trademark. Don’t use ® unless your trademark is actually fully registered.
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
 
             </Container>
         </React.Fragment>
