@@ -5,10 +5,8 @@ import ResultDetail from './ResultDetail';
 import MuiVirtualizedTable from '../VirtualizedTable';
 
 export default function SearchResults({ data }) {
-    // const [detailedView, setDetailedView] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
     const [filterSelection, setFilterSelection] = useState(null);
-    const [menuSelection, setMenuSelection] = useState(null);
 
     // TM Types in data
     const dataTMTypes = [];
@@ -43,7 +41,6 @@ export default function SearchResults({ data }) {
         >
             {selectedRow === null ? (
                 <MuiVirtualizedTable
-                    // style={{ height: 400, width: '100%' }}
                     rowCount={data.length} // row or data
                     rowGetter={({ index }) => data[index]} // row or data
                     onRowClick={(e) => setSelectedRow(e.index)}
@@ -73,7 +70,6 @@ export default function SearchResults({ data }) {
                                 sortOptions,
                             ],
                             dataKey: 'fileDateFormatted',
-                            // numeric: true,
                         },
                     ]}
                 />
