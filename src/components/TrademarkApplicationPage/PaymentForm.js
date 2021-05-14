@@ -24,8 +24,10 @@ export default function PaymentForm({
     const addressRef = useRef(null);
     const yRef = useRef(null);
     const mRef = useRef(null);
+    const nameRef = useRef(null);
 
     // Error statevar
+    const [nameError, setNameError] = useState('');
     const [ccError, setCcError] = useState('');
     const [cvvError, setCcvError] = useState('');
     const [monthError, setMonthError] = useState('');
@@ -119,6 +121,7 @@ export default function PaymentForm({
 
         form.onsubmit = function (event) {
             event.preventDefault();
+            const nameElement = document.getElementById('cardholder_name');
             const postalCodeElement = document.getElementById('postal_code');
             const expYearElement = document.getElementById('exp_year');
             const expMonthElement = document.getElementById('exp_month');
@@ -130,6 +133,10 @@ export default function PaymentForm({
 
             creditCardValidation.innerText = ccError;
             cvvValidation.innerText = cvvError;
+
+            if (nameElement.value.length == 0) {
+                setNameError('Cardholder Name is required');
+            }
 
             if (expMonthElement.value.length == 0) {
                 setMonthError('Expiry Month field is required');
@@ -154,6 +161,7 @@ export default function PaymentForm({
             }
             hostedFields
                 .getPaymentToken({
+                    name: nameElement.value,
                     postal_code: postalCodeElement.value,
                     exp_year: expYearElement.value,
                     exp_month: expMonthElement.value,
@@ -239,8 +247,24 @@ export default function PaymentForm({
                             } 
                         `}
             </style>
+
             <OrderAmount info={info} />
             <form id="form" ref={formRef} className={classes.container}>
+                <div className={classes.inputContainer}>
+                    <label className={classes.label} htmlFor="cardholder_name">
+                        Cardholder Name
+                    </label>
+                    <div id="nameValidation" style={{ color: 'red' }}>
+                        {nameError}
+                    </div>
+                    <input
+                        id="cardholder_name"
+                        name="cardholder_name"
+                        className={classes.input}
+                        ref={nameRef}
+                    ></input>
+                </div>
+
                 <div className={classes.inputContainer}>
                     <label
                         className={classes.label}
