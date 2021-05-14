@@ -1,18 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    RadioGroup,
-    Radio,
-    FormControlLabel,
-    TextField,
-    Card,
+    Box,
     Button,
+    Card,
+    FormControlLabel,
+    Radio,
+    RadioGroup,
+    TextField,
     Typography,
 } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Checkmark from '../Checkmark';
 
 const CountryCard = ({
@@ -45,36 +44,44 @@ const CountryCard = ({
                     country?
                 </Typography>
 
-                <RadioGroup
-                    aria-label="userType"
-                    id="userType"
-                    name="userType"
-                    value={info.filedInOtherCountry}
-                    onChange={(e) =>
-                        setInfo({
-                            ...info,
-                            filedInOtherCountry: e.target.value,
-                            countryOfFiling: '',
-                            fillingDate: '',
-                            fillingNumber: '',
-                        })
-                    }
-                >
-                    <FormControlLabel
-                        value="Yes"
-                        control={<Radio />}
-                        label="Yes"
-                    />
-                    <FormControlLabel
-                        value="No"
-                        control={<Radio />}
-                        label="No"
-                    />
-                </RadioGroup>
+                <Box className={classes.selectionContainer}>
+                    <RadioGroup
+                        className={classes.radioContainer}
+                        aria-label="userType"
+                        id="userType"
+                        name="userType"
+                        value={info.filedInOtherCountry}
+                        onChange={(e) =>
+                            setInfo({
+                                ...info,
+                                filedInOtherCountry: e.target.value,
+                                countryOfFiling: '',
+                                fillingDate: '',
+                                fillingNumber: '',
+                            })
+                        }
+                    >
+                        <FormControlLabel
+                            value="Yes"
+                            control={<Radio />}
+                            label="Yes"
+                        />
+                        <FormControlLabel
+                            value="No"
+                            control={<Radio />}
+                            label="No"
+                        />
+                    </RadioGroup>
+                    <Box className={classes.checkmarkContainer}>
+                        <Checkmark
+                            value={validationProgress.internationalFilingInfo}
+                        />
+                    </Box>
+                </Box>
                 {info.filedInOtherCountry == 'Yes' && (
                     <div className={classes.form}>
                         <Typography className={classes.text}>
-                            Please fill out information below (if known)
+                            Please fill out information below, if known.
                         </Typography>
                         <TextField
                             className={classes.input}
@@ -124,11 +131,6 @@ const CountryCard = ({
                         />
                     </div>
                 )}
-                <Checkmark value={validationProgress.internationalFilingInfo} />
-                <Alert severity="info" className={classes.alert}>
-                    Helper Section with brief legal information, assisting the
-                    client through the process
-                </Alert>
             </div>
             <div className={classes.buttonContainer}>
                 <Button
@@ -171,6 +173,23 @@ const useStyles = makeStyles((theme) => ({
             padding: '0 5% 4% 5%',
         },
     },
+    selectionContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    radioContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+    },
+    checkmarkContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: '10px',
+    },
     title: {
         color: '#df3a48',
         marginBottom: '5%',
@@ -181,6 +200,7 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontWeight: 'bold',
+        fontSize: '14px',
         marginTop: '2% ',
     },
     question: {
