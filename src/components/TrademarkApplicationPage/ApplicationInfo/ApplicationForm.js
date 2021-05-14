@@ -60,6 +60,7 @@ export default function IndividualForm({
             <div className={classes.selectionContainer}>
                 <RadioGroup
                     row
+                    className={classes.radioButtons}
                     aria-label="individualOrOrganization"
                     id="individualOrOrganization"
                     name="individualOrOrganization"
@@ -225,8 +226,12 @@ export default function IndividualForm({
             </div>
 
             <Alert severity="info" className={classes.idAlert}>
-                <Typography>{'Please upload your photo ID.'}</Typography>
-                <Typography>{'File should be less than 2Mb.'}</Typography>
+                <Typography className={classes.idAlertText}>
+                    {'Please upload your photo ID.'}
+                </Typography>
+                <Typography className={classes.idAlertText}>
+                    {'File should be less than 2Mb.'}
+                </Typography>
                 {/* {'Please upload your photo ID. \nFile should be less than 2Mb.'} */}
             </Alert>
 
@@ -478,6 +483,13 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    radioButtons: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+    },
     field: {
         display: 'flex',
         flexDirection: 'row',
@@ -491,15 +503,24 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         margin: '10px 0',
-        width: '58%',
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: '58%',
+        },
     },
     fieldFax: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        margin: '10px 0',
-        width: '38%',
+        // alignItems: 'center',
+        // justifyContent: 'space-between',
+        justifySelf: 'flex-start',
+        marginTop: '10px',
+        marginBottom: '10px',
+        marginRight: 'auto',
+        width: '80%',
+        [theme.breakpoints.up('sm')]: {
+            width: '58%',
+        },
     },
     fieldDropDown: {
         display: 'flex',
@@ -593,12 +614,21 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.transparentCard,
         color: checkmarksTheme.textPrimaryDark,
         margin: '3% auto 5% auto',
-        fontSize: '16px',
+        fontSize: '12px',
         [theme.breakpoints.between('sm', 'md')]: {
             margin: '5% auto 3% auto',
+            fontSize: '16px',
         },
         [theme.breakpoints.up('md')]: {
             margin: '3% auto 2% auto',
+            fontSize: '16px',
+        },
+    },
+    idAlertText: {
+        fontSize: '12px',
+        fontWeight: 'bold',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '16px',
         },
     },
     disclaimer: {
