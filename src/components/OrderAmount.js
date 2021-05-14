@@ -57,18 +57,22 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.transparentCard,
         border: '1px solid #696969',
         // borderRadius: '15px',
-        display: 'flex',
-        flexDirection: 'column',
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // flexDirection: 'column',
         // margin: '3%',
         width: '100%',
+        marginBottom: '5%',
+
         // padding: '3%',
-        [theme.breakpoints.up('md')]: {
-            width: '60%',
-            padding: '0 2% ',
-        },
-        [theme.breakpoints.between('sm', 'md')]: {
-            padding: '0 5% 2% 5%',
-        },
+        // [theme.breakpoints.up('md')]: {
+        //     width: '60%',
+        //     padding: '0 2% ',
+        // },
+        // [theme.breakpoints.between('sm', 'md')]: {
+        //     padding: '0 5% 2% 5%',
+        // },
     },
 
     selectedTerms: {
