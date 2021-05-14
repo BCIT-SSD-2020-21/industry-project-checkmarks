@@ -34,7 +34,7 @@ export default function App() {
 
     // form information
     const [info, setInfo] = useState({
-        //Application Information
+        //Applicant Information
         individualOrOrganization: 'Individual',
         firstName: '',
         lastName: '',

@@ -150,6 +150,7 @@ const TrademarkApplication = ({
                                 return (
                                     <Success
                                         navigation={navigation}
+                                        setInfo={setInfo}
                                         currentStep={currentStep}
                                         setCurrentStep={setCurrentStep}
                                         setPristine={setPristine}

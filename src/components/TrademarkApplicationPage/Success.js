@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Success({ currentStep, setCurrentStep, setPristine }) {
+export default function Success({
+    currentStep,
+    setCurrentStep,
+    setInfo,
+    setPristine,
+}) {
     const history = useHistory();
     const classes = useStyles();
 
@@ -12,6 +17,62 @@ export default function Success({ currentStep, setCurrentStep, setPristine }) {
         setCurrentStep(1);
         history.push('/');
     };
+
+    // re-initialize info object
+    useEffect(() => {
+        setInfo({
+            //Applicant Information
+            individualOrOrganization: 'Individual',
+            firstName: '',
+            lastName: '',
+            organizationName: '',
+            email: '',
+            idDocumentUploaded: false,
+            userStreetAddress: '',
+            userCity: '',
+            userProvince: '',
+            userPostalCode: '',
+            userCountry: '',
+            agreedTermsOfService: false,
+            idName: '',
+
+            //Trademark Type
+            isText: false,
+            isLogo: false,
+            isOther: false,
+            otherTypes: [],
+            characterText: '',
+            fileName: '',
+            file: '',
+
+            // Goods and Services
+            classesSelected: [],
+            termsSelected: [],
+            selectedServiceName: 'DIY',
+            basePrice: 690,
+            amount: 0,
+
+            //International Information
+            filedInOtherCountry: null,
+            countryOfFiling: '',
+            fillingDate: '',
+            fillingNumber: '',
+
+            // Info Confirmed
+            infoConfirmed: false,
+
+            // Payment Information
+            paymentToken: '',
+            paymentCardholderName: '',
+            paymentCreditCardNumber: '',
+            paymentCardExpiryDate: '',
+            paymentCardCVV: '',
+            billingAddressSameAsUser: false,
+            billingStreetAddress: '',
+            billingPostalCode: '',
+            paymentConfirmaed: false,
+        });
+    }, []);
 
     setPristine();
     return (
