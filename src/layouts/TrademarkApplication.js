@@ -51,6 +51,7 @@ const TrademarkApplication = ({ darkMode, drawerOpen }) => {
         // Goods and Services
         classesSelected: [],
         termsSelected: [],
+        selectedServiceName: 'DIY',
         basePrice: 690,
         amount: 0,
 
