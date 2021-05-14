@@ -1,25 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Success({
-    currentStep,
-    setCurrentStep,
-    setInfo,
-    setPristine,
-}) {
+export default function Success({ setCurrentStep, setInfo, setPristine }) {
     const history = useHistory();
     const classes = useStyles();
 
     //handle back button
     const toLanding = () => {
         setCurrentStep(1);
-        history.push('/');
-    };
-
-    // re-initialize info object
-    useEffect(() => {
         setInfo({
             //Applicant Information
             individualOrOrganization: 'Individual',
@@ -72,7 +62,8 @@ export default function Success({
             billingPostalCode: '',
             paymentConfirmaed: false,
         });
-    }, []);
+        history.push('/');
+    };
 
     setPristine();
     return (
