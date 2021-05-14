@@ -118,12 +118,12 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonDIYAmount: {
         fontStyle: 'italic',
-        fontSize: '24px',
+        fontSize: '22px',
         fontWeight: 'bold',
     },
     buttonFullServiceAmount: {
         fontStyle: 'italic',
-        fontSize: '24px',
+        fontSize: '22px',
         fontWeight: 'bold',
     },
     buttonFullService: {
@@ -136,13 +136,19 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     buttonDIYContentContaner: {
-        border: '1px solid white',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // border: '1px solid white',
         borderRadius: '5px',
         height: '110px',
         width: '110px',
     },
     buttonFullServiceContentContaner: {
-        border: '1px solid red',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // border: '1px solid red',
         borderRadius: '5px',
         height: '110px',
         width: '110px',

@@ -94,18 +94,18 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     amountSummaryLabel: {
-        fontSize: '16px',
+        fontSize: '18px',
         fontStyle: 'italic',
         fontWeight: 'bold',
         color: checkmarksTheme.textValue3,
     },
     amountSummaryValue: {
-        fontSize: '18px',
+        fontSize: '20px',
         fontWeight: 'bold',
         color: checkmarksTheme.textValue3,
     },
     amountLabel: {
-        fontSize: '20px',
+        fontSize: '22px',
         fontWeight: 'bold',
     },
     amountTotal: {
