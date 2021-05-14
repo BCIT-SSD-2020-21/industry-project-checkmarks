@@ -5,7 +5,6 @@ import { checkmarksTheme } from '../styles/Themes';
 import { Box, Button, Paper } from '@material-ui/core';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg-landing-chris-brignola.jpg';
-import bannerImageDark from '../assets/images/bg-dark-landing-nicolas-hoizey.jpg';
 import HeaderBanner from '../components/HeaderBanner';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import About from '../components/LandingPage/About';
@@ -25,9 +24,6 @@ export default function Landing(darkMode) {
                 className={classes.section}
                 style={{
                     backgroundImage: `url(${bannerImage})`,
-                    // backgroundImage: `url(${
-                    //     darkMode.darkMode ? bannerImageDark : bannerImage
-                    // })`,
                 }}
             >
                 <Paper
