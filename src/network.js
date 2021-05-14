@@ -162,8 +162,7 @@ export const sendPayment = async (info, paymentToken) => {
         },
         // NOTE: Amount is in CENTS, so multiply by 100
         body: JSON.stringify({
-            // amount: info.amount * 100,
-            amount: 1,
+            amount: info.amount * 100,
             method: paymentToken,
             account_id: TRUST_ACCOUNT_ID, //Live Trust acc key
         }),
