@@ -91,6 +91,8 @@ Checkmarks back-end repository can be seen [here](https://github.com/BCIT-SSD-20
 
 ```
 REACT_APP_BASE_URL=https://checkmarkswebapirev.azurewebsites.net/
+REACT_APP_AFFINIPAY_PUBLIC_KEY={Affinipay_hostedFieldsConfiguration_public_key}
+REACT_APP_TRUST_ACCOUNT_ID={Trust_Account_Id}
 ```
 
 </details>
