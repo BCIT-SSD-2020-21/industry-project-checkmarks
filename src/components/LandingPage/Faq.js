@@ -161,13 +161,17 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    Generally, simply making and using a trademark gives you a trademark (called a <strong>“common law trademark”</strong>). This is free but relates to real goodwill enjoyed by the trademark and so it can be hard to enforce across Canada. If you only have goodwill in Vancouver, it will very hard to enforce your common law trademark rights in Halifax.  Registering a trademark with the Canadian Intellectual Property Office <strong>(CIPO)</strong> and there are several advantages to doing so:
+                    Generally, simply making and using a trademark gives you a trademark (called a <strong><em>“common law trademark”</em></strong>). This is free but relates to real goodwill enjoyed by the trademark and so it can be hard to enforce across Canada. If you only have goodwill in Vancouver, it will very hard to enforce your common law trademark rights in Halifax.  Registering a trademark with the Canadian Intellectual Property Office <strong>(CIPO)</strong> and there are several advantages to doing so:<br/>
                     <br/>
-                    (a)	Registration of your trademark will give you Canada-wide rights to the exclusive use of that mark in your industry regardless of whether your trademark enjoys goodwill or reputation in any particular area of Canada;<br/>
-                    (b)	Registration allows you to take easier steps to prevent others from using an identical or confusingly similar trademark in relation to a similar business;<br/>
-                    (c)	CIPO will screen future trademark registration applications thereby offering your registered trademark some additional protection;<br/>
-                    (d)	Trademark registration will deter others from adopting a trademark similar to yours; and<br/>
-                    (e)	Trademark registration may prevent others from registering a trademark similar to yours, and then taking action against you for damages or to prevent you from using your established trademark.
+                    <strong>(a)</strong> Registration of your trademark will give you Canada-wide rights to the exclusive use of that mark in your industry regardless of whether your trademark enjoys goodwill or reputation in any particular area of Canada;<br/>
+                    <br/>
+                    <strong>(b)</strong> Registration allows you to take easier steps to prevent others from using an identical or confusingly similar trademark in relation to a similar business;<br/>
+                    <br/>
+                    <strong>(c)</strong> CIPO will screen future trademark registration applications thereby offering your registered trademark some additional protection;<br/>
+                    <br/>
+                    <strong>(d)</strong> Trademark registration will deter others from adopting a trademark similar to yours; and<br/>
+                    <br/>
+                    <strong>(e)</strong> Trademark registration may prevent others from registering a trademark similar to yours, and then taking action against you for damages or to prevent you from using your established trademark.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
