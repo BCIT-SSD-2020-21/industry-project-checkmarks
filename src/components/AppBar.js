@@ -22,13 +22,13 @@ import GavelIcon from '@material-ui/icons/Gavel';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import PlayCircleFilledTwoToneIcon from '@material-ui/icons/PlayCircleFilledTwoTone';
+import PlayArrowOutlinedIcon from '@material-ui/icons/PlayArrowOutlined';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import WbSunnyTwoToneIcon from '@material-ui/icons/WbSunnyTwoTone';
 import NightsStayTwoToneIcon from '@material-ui/icons/NightsStayTwoTone';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
-// import { userSignOut } from '../firebase/services';
 import { useTheme } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -124,6 +124,13 @@ export const navbarStyles = makeStyles((theme) => ({
     drawerRemoveButton: {
         padding: '5px',
     },
+    stepListItemText: {
+        fontWeight: 'bold',
+        textAlign: 'left',
+    },
+    doneStepIcon: {
+        color: checkmarksTheme.done,
+    },
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
@@ -168,6 +175,10 @@ export const navbarStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuAppBar({
+    navigation,
+    step,
+    steps,
+    progressValue,
     darkMode,
     setDarkMode,
     drawerOpen,
@@ -354,6 +365,55 @@ export default function MenuAppBar({
                     </IconButton>
                 </div>
                 <List>
+                    {steps.map((s, index) => {
+                        return (
+                            <ListItem
+                                alignItems="flex-start"
+                                button
+                                disabled={progressValue < s.progressValueStart}
+                                key={index}
+                                onClick={() => navigation.go(s.id)}
+                                style={{
+                                    // backgroundColor: 'red',
+                                    backgroundColor:
+                                        progressValue >= s.progressValueStart &&
+                                        progressValue < s.progressValueEnd
+                                            ? checkmarksTheme.current
+                                            : '',
+                                }}
+                            >
+                                <ListItemText>
+                                    <Typography
+                                        className={classes.stepListItemText}
+                                    >
+                                        {s.num}
+                                    </Typography>
+                                </ListItemText>
+                                <ListItemText>
+                                    <Typography
+                                        className={classes.stepListItemText}
+                                    >
+                                        {s.id}
+                                    </Typography>
+                                </ListItemText>
+                                {!(progressValue < s.progressValueStart) && (
+                                    <>
+                                        {progressValue >= s.progressValueEnd ? (
+                                            <CheckCircleOutlinedIcon
+                                                className={classes.doneStepIcon}
+                                            />
+                                        ) : (
+                                            <PlayArrowOutlinedIcon
+                                                className={
+                                                    classes.currentStepIcon
+                                                }
+                                            />
+                                        )}
+                                    </>
+                                )}
+                            </ListItem>
+                        );
+                    })}
                     <ListItem>
                         {/* <IconButton className={classes.drawerRemoveButton}>
                             <PlayCircleFilledTwoToneIcon />
