@@ -207,11 +207,15 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <strong>Search + Report.</strong> Do a detailed search of your trademark  - how likely is the application to succeed<br/>
-                        <strong>Draft + File.</strong>Draft and file an application for registration. This includes attaching the trademark to specific goods and services. <br/>
-                        <strong>Deal with Examiner.</strong> A CIPO examiner will look at the application for formal, technical, or legal objections. If none, then we move to the next step. If there is an objection,  then that will need to be replied to or otherwise dealt with to try to overcome their objections.<br/>
-                        <strong>Advertise. </strong> Once past the Examiner, the application is publicly advertised for 2 months. During this period any 3rd party can oppose your application. This is like mini-ligation. If this happens, it must be resolved before proceeding.<br/>
-                        <strong>Done. </strong> You'll get a registered trademark.<br/>
+                        <strong>Search + Report.</strong> Do a detailed search of your trademark  - how likely is the application to succeed.
+                        <br/>
+                        <strong>Draft + File.</strong>Draft and file an application for registration. This includes attaching the trademark to specific goods and services. 
+                        <br/>
+                        <strong>Deal with Examiner.</strong> A CIPO examiner will look at the application for formal, technical, or legal objections. If none, then we move to the next step. If there is an objection,  then that will need to be replied to or otherwise dealt with to try to overcome their objections.
+                        <br/>
+                        <strong>Advertise. </strong> Once past the Examiner, the application is publicly advertised for 2 months. During this period any 3rd party can oppose your application. This is like mini-ligation. If this happens, it must be resolved before proceeding.
+                        <br/>
+                        <strong>Done. </strong> You'll get a registered trademark.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -229,7 +233,7 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        You can do it yourself! Use our DIY+ option. However, the first time one tries something new isn’t always my best performance. If you have the risk tolerance to try your first trademark application on your own, then feel free!   If you need a little extra help from time-to-time, we offer that sort of help too. 
+                        You can do it yourself! Use our <strong>DIY+</strong> option. However, the first time one tries something new isn’t always my best performance. If you have the risk tolerance to try your first trademark application on your own, then feel free!   If you need a little extra help from time-to-time, we offer that sort of help too. 
                     </Typography>
                 </AccordionDetails>
             </Accordion>
