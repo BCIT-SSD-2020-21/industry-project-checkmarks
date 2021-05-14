@@ -19,17 +19,39 @@ export default function App() {
         },
     });
 
+    // DRAWER
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const handleDrawerOpen = () => {
+        setDrawerOpen(true);
+        // setProgressBarPosition(1)
+    };
+    const handleDrawerClose = () => {
+        setDrawerOpen(false);
+        // setProgressBarPosition(0)
+    };
+
+    console.log('App, drawerOpen: ', drawerOpen);
+
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <Paper>
                 <Router>
-                    <MenuAppBar darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <MenuAppBar
+                        darkMode={darkMode}
+                        setDarkMode={setDarkMode}
+                        drawerOpen={drawerOpen}
+                        handleDrawerOpen={handleDrawerOpen}
+                        handleDrawerClose={handleDrawerClose}
+                    />
                     <Switch>
                         <Route exact path="/">
                             <Landing darkMode={darkMode} />
                         </Route>
                         <Route path="/application">
-                            <TrademarkApplication darkMode={darkMode} />
+                            <TrademarkApplication
+                                darkMode={darkMode}
+                                drawerOpen={drawerOpen}
+                            />
                         </Route>
                     </Switch>
                 </Router>

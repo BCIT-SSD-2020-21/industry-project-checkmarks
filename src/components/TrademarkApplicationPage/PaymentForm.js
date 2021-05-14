@@ -4,6 +4,8 @@ import { Button, Card } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
 import { createClioContact, createEmail, sendPayment } from '../../network';
 import OrderAmount from '../OrderAmount';
+require('dotenv').config();
+const AFFINIPAY_PUBLIC_KEY = process.env.REACT_APP_AFFINIPAY_PUBLIC_KEY;
 
 export default function PaymentForm({
     navigation,
@@ -82,7 +84,7 @@ export default function PaymentForm({
         };
 
         const hostedFieldsConfiguration = {
-            publicKey: 'm_4Pmy9PJ0T76ip_9W-o6UUA',
+            publicKey: AFFINIPAY_PUBLIC_KEY,
             input: {
                 css: {
                     borderRadius: '5px',
@@ -212,6 +214,8 @@ export default function PaymentForm({
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
+
+    console.log('info: ', info);
 
     return (
         <Card className={classes.card}>

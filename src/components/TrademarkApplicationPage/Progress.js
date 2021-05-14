@@ -9,22 +9,22 @@ const progressStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        padding: '12px',
+        // padding: '12px',
         height: '34px',
         width: '100%',
     },
     container: {
         backgroundColor: checkmarksTheme.bgDrawer,
-        borderRadius: '25px',
+        // borderRadius: '25px',
         border: `1px solid ${checkmarksTheme.textLabel}`,
         height: '32px',
         position: 'relative',
         opacity: 0.85,
-        width: '80%',
+        width: '100%',
     },
     progress: {
         backgroundColor: checkmarksTheme.buttonPrimary,
-        borderRadius: '25px 0 0 25px',
+        // borderRadius: '25px 0 0 25px',
         height: '100%',
     },
     value: {
@@ -40,18 +40,39 @@ const progressStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Progress({ progressValue }) {
+export default function Progress({ progressValue, drawerOpen }) {
     const progressPercentage = Math.round((progressValue * 100) / 2900);
+
+    console.log('Progress, drawerOpen: ', drawerOpen);
 
     const classes = progressStyles();
     return (
-        <Box className={classes.root} position="fixed" zIndex="modal">
-            <Box className={classes.container}>
+        <Box
+            className={classes.root}
+            style={{
+                justifyContent: drawerOpen ? 'flex-end' : 'center',
+                // padding: drawerOpen ? '0' : '12px',
+                // width: drawerOpen ? '35%' : '100%',
+                transition: 'width 0.25s ease-in 0.3s ease-out',
+            }}
+            position="fixed"
+            zIndex="modal"
+        >
+            <Box
+                className={classes.container}
+                style={{
+                    // borderRadius: drawerOpen ? '0' : '25px',
+                    justifyContent: drawerOpen ? 'flex-end' : 'center',
+                    // width: drawerOpen ? window.innerWidth - 240 : '100%',
+                    width: `calc(100% - 240px)`,
+                    transition: 'width 0.25s ease-in 0.3s ease-out',
+                }}
+            >
                 <Box
                     className={classes.progress}
                     style={{
-                        borderRadius:
-                            progressPercentage > 96 ? '25px' : '25px 0 0 25px',
+                        // borderRadius:
+                        //     progressPercentage > 96 ? '25px' : '25px 0 0 25px',
                         transition: 'width 1s ease-in-out',
                         width: `${progressPercentage}%`,
                     }}

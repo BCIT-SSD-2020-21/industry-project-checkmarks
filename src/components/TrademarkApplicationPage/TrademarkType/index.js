@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../../styles/Themes';
 import { Box, Button, Card, Typography } from '@material-ui/core';
+import EventIcon from '@material-ui/icons/Event';
 import Alert from '@material-ui/lab/Alert';
 import DesignCard from '../TrademarkType/DesignCard';
 import DetailSelectCard from '../TrademarkType/DetailSelectCard';
@@ -135,6 +136,15 @@ const TrademarkForm = ({
                         common characteristic. This is perfectly fine, however
                         discussion with a lawyer is required before submission.
                     </Alert>
+                    <Button
+                        className={classes.bookApppintmentButton}
+                        target="blank"
+                        component="a"
+                        href="https://calendly.com/golbey_justin/15mins?month=2021-05"
+                    >
+                        <EventIcon className={classes.menuItemIcon} />
+                        Book 15 Minutes Through Calendly
+                    </Button>
                 </Box>
             )}
             {/* </div> */}
@@ -162,7 +172,9 @@ const TrademarkForm = ({
                     type="submit"
                     variant="contained"
                     onClick={() => nextStep()}
-                    disabled={progressValue < step.progressValueEnd}
+                    disabled={
+                        progressValue < step.progressValueEnd || info.isOther
+                    }
                 >
                     Continue
                 </Button>
@@ -257,6 +269,23 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '12px',
         [theme.breakpoints.up('sm')]: {
             margin: '0',
+        },
+    },
+    bookApppintmentButton: {
+        color: '#FFF',
+        backgroundColor: '#df3a48',
+        fontWeight: 'bold',
+        marginTop: '10%',
+        // marginLeft: '3%',
+        width: '100%',
+        height: '60px',
+        fontSize: '10px',
+        borderRadius: '10px',
+        [theme.breakpoints.up('md')]: {
+            margin: '5% 3% 5% 0',
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            margin: '6% 2% 1% 0',
         },
     },
 }));
