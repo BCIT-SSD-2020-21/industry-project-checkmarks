@@ -20,7 +20,6 @@ const styles = (theme) => ({
             paddingRight:
                 theme.direction === 'rtl' ? '0 !important' : undefined,
         },
-        // backgroundColor: checkmarksTheme.bgDrawer,
     },
     tableRow: {
         backgroundColor: checkmarksTheme.bgTransparent,
@@ -39,6 +38,7 @@ const styles = (theme) => ({
         justifyContent: 'center',
         padding: '2px',
         textAlign: 'center',
+        verticalAlign: 'top',
     },
     noClick: {
         cursor: 'initial',
@@ -53,26 +53,24 @@ class MuiVirtualizedTable extends React.PureComponent {
 
     getRowClassName = ({ index }) => {
         const { classes, onRowClick } = this.props;
-        // console.log('onRowClick: ', onRowClick);
         return clsx(classes.tableRow, classes.flexContainer, {
             [classes.tableRowHover]: index !== -1 && onRowClick != null,
         });
     };
 
     cellRenderer = ({ cellData, columnIndex, rowIndex }) => {
-        // ,onClick
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
-            // <Fade in={true} exit={true} timeout={1000}>
             <TableCell
-                // onClick={() => console.log(rowIndex)}
-                // onRowClick={(e) => console.log(e.target)} // ADDED
                 component="div"
                 className={clsx(classes.tableCell, classes.flexContainer, {
                     [classes.noClick]: onRowClick == null,
                 })}
                 variant="body"
-                style={{ height: rowHeight }}
+                style={{
+                    fontSize: cellData.length > 35 ? '10px' : '12px',
+                    height: rowHeight,
+                }}
                 align={
                     (columnIndex != null && columns[columnIndex].numeric) ||
                     false
@@ -80,20 +78,8 @@ class MuiVirtualizedTable extends React.PureComponent {
                         : 'left'
                 }
             >
-                {/* <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? (
-                            <KeyboardArrowUpIcon />
-                        ) : (
-                            <KeyboardArrowDownIcon />
-                        )}
-                    </IconButton> */}
                 {cellData}
             </TableCell>
-            // </Fade>
         );
     };
 
@@ -112,12 +98,7 @@ class MuiVirtualizedTable extends React.PureComponent {
                 align={columns[columnIndex].numeric || false ? 'right' : 'left'}
             >
                 <span>
-                    <FilterMenu
-                        dataKey={dataKey}
-                        label={label}
-                        // onClick={onFilterClick}
-                    />
-                    {/* {label} */}
+                    <FilterMenu dataKey={dataKey} label={label} />
                 </span>
             </TableCell>
         );
@@ -131,12 +112,10 @@ class MuiVirtualizedTable extends React.PureComponent {
             headerHeight,
             ...tableProps
         } = this.props;
-        // console.log('tableProps:', tableProps);
         return (
             <AutoSizer>
                 {({ height, width }) => (
                     <Table
-                        // onRowClick={() => console.log(this)} // ADDED
                         height={height}
                         width={width}
                         rowHeight={rowHeight}
