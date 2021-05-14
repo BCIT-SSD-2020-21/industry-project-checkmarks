@@ -19,6 +19,7 @@ const colors = {
     appBarOpq70: '#fbfbfbB3',
     appBarDarkOpq70: '#171518B3',
     white: '#FFFFFF',
+    pureTransparent: '#FFFFFF00',
 
     whiteOpq30: '#FFFFFF4D',
     blackOpq30: '#0000004D',
@@ -40,6 +41,7 @@ const colors = {
 };
 
 export const checkmarksTheme = {
+    transparent: colors.pureTransparent,
     bgPrimary: colors.whiteOpq, // applied to Root Background
     bgPrimaryDark: colors.blackOpq,
     bgDrawer: colors.whiteOpq2, // applied to Drawer Background
