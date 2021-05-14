@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
 import { TextField } from '@material-ui/core';
-// import DisplayModal from '../../Modal';
-import { TrademarkRulesCIPO } from '../../../services/content';
 
 const TrademarkTypeCard = ({ info, setInfo }) => {
     const classes = useStyles();
-
-    //Modal State
-    // const [open, setOpen] = useState(false);
 
     return (
         <div className={classes.trademarkTypeCard}>
@@ -35,11 +30,6 @@ const TrademarkTypeCard = ({ info, setInfo }) => {
                 />
 
                 <Alert severity="info" className={classes.alert}>
-                    {/* <DisplayModal
-                        content={TrademarkRulesCIPO}
-                        open={open}
-                        setOpen={setOpen}
-                    /> */}
                     A Trademark cannot be 'primarily merely a surname'
                 </Alert>
             </div>

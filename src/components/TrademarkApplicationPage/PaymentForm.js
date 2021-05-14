@@ -101,13 +101,13 @@ export default function PaymentForm({
         };
 
         const hostedFieldsCallBack = function (state) {
-            if (state.fields[0].error != '') {
+            if (state.fields[0].error !== '') {
                 ccErrorMessage = state.fields[0].error;
             } else {
                 ccErrorMessage = '';
             }
 
-            if (state.fields[1].error != '') {
+            if (state.fields[1].error !== '') {
                 cvvErrorMessage = state.fields[1].error;
             } else {
                 cvvErrorMessage = '';
@@ -134,15 +134,15 @@ export default function PaymentForm({
             creditCardValidation.innerText = ccError;
             cvvValidation.innerText = cvvError;
 
-            if (nameElement.value.length == 0) {
+            if (nameElement.value.length === 0) {
                 setNameError('Cardholder Name is required');
             }
 
-            if (expMonthElement.value.length == 0) {
+            if (expMonthElement.value.length === 0) {
                 setMonthError('Expiry Month field is required');
             }
 
-            if (expYearElement.value.length == 0) {
+            if (expYearElement.value.length === 0) {
                 setYearError('Expiry Year field is required');
             }
 
@@ -151,11 +151,11 @@ export default function PaymentForm({
                 setCcvError(cvvErrorMessage);
             }
 
-            if (postalCodeElement.value.length == 0) {
+            if (postalCodeElement.value.length === 0) {
                 setPostalCodeError('Postal Code field is required');
             }
 
-            if (addressElement.value.length == 0) {
+            if (addressElement.value.length === 0) {
                 setAddressError('Billing Street Address is required');
                 return;
             }

@@ -46,7 +46,7 @@ export const createClioContact = async (info) => {
         }),
     })
         .then((res) => {
-            if (res.status != 200) {
+            if (res.status !== 200) {
                 fnResponse = null;
             }
             return res.json();
@@ -139,7 +139,7 @@ export const createEmail = async (info, matterId) => {
     })
         .then((res) => {
             console.log(res);
-            if (res.status == 200) {
+            if (res.status === 200) {
                 fnResponse = true;
             } else if (res.status >= 400) {
                 fnResponse = false;
@@ -172,7 +172,7 @@ export const sendPayment = async (info, paymentToken) => {
         }),
     })
         .then(async (res) => {
-            if (res.status == 200) {
+            if (res.status === 200) {
                 console.log('sendPayment(), res: ', res);
                 alert('payment successful');
                 fnResponse = true;

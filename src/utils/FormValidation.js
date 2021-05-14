@@ -96,7 +96,6 @@ export const validateForm = (info, setValidationProgress) => {
     const numbersRegex = /^[0-9]*$/;
     const personNameRegex = /[^a-z '.-]/i; // case insensitive
     const locationNamsRegex = /[^a-z0-9 '.-]/i; // case insensitive
-    const streetAddressRegex = /[^a-z0-9 '#.-]*?/i;
     const emailRegex = /^\S+@\S+\.\S+$/; // from Original Project
     const postalCodeRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/; // from Original Project
     const zipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;

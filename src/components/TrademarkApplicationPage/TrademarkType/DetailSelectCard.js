@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { checkmarksTheme } from '../../../styles/Themes';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const DetailSelectCard = ({ otherType, info, setInfo, index }) => {
+const DetailSelectCard = ({ otherType, info, setInfo }) => {
     const classes = useStyles();
 
     const [isSelected, setIsSelected] = useState(false);
