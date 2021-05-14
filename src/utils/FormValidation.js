@@ -1,6 +1,5 @@
 export const advancedSearch = (searchText, targetText) => {
     var searchWords = searchText.split(' ');
-    console.log('searchWords: ', searchWords);
     let targetTextMatches = true;
     searchWords.forEach((word) => {
         if (!targetText.toLowerCase().includes(word.toLowerCase())) {

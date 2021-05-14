@@ -170,8 +170,6 @@ export default function PaymentForm({
                 .then((result) => {
                     paymentToken = result.id;
                     setInfo({ ...info, paymentToken: result.id });
-                    console.log('result, getPaymentToken: ', result);
-                    console.log('paymentForm, paymentToken: ', paymentToken);
                     submitApplication(paymentToken);
                 })
                 .then(() => {})
@@ -187,14 +185,10 @@ export default function PaymentForm({
     const submitApplication = async (paymentToken) => {
         setSubmitting(true);
         let responseSendPayment = await sendPayment(info, paymentToken);
-        console.log('responseSendPayment: ', responseSendPayment);
         if (responseSendPayment) {
             let matterId = await createClioContact(info);
-            console.log('matterId: ', matterId);
             if (matterId) {
                 let responseCreateEmail = await createEmail(info, matterId);
-                // let responseCreateEmail = true;
-                console.log('responseCreateEmail: ', responseCreateEmail);
                 if (responseCreateEmail) {
                     setInfo({
                         ...info,
@@ -222,8 +216,6 @@ export default function PaymentForm({
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
-
-    console.log('info: ', info);
 
     return (
         <Card className={classes.card}>

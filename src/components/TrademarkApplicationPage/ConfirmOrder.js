@@ -27,8 +27,6 @@ export default function PaymentForm({
         navigation.next();
     };
 
-    console.log('info: ', info);
-
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Confirm Your Information</h1>

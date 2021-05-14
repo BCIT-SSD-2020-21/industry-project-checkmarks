@@ -173,9 +173,6 @@ const detailStyles = makeStyles(() => ({
     },
     image: {
         maxHeight: '200px',
-        // ['@media (min-height:768px)']: { width: '80%' },
-        // ['@media (min-height:1280px)']: { width: '70%' },
-        // width: '40%',
     },
     field: {
         display: 'flex',

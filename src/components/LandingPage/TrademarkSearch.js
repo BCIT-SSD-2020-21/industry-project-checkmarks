@@ -75,8 +75,6 @@ export default function TrademarkSearch({ searching, setSearching }) {
         }
     }, [searchTerm, searchResults, numberOfRepeatSearches]);
 
-    console.log('numberOfRepeatSearches: ', numberOfRepeatSearches);
-
     useEffect(() => {}, [searchResults]);
 
     return (
@@ -217,14 +215,14 @@ export const searchBoxStyles = makeStyles(() => ({
     },
     results: {
         animation: '$shiftUp-results-mobile 1s',
-        transform: 'translateY(-48%)',
+        transform: 'translateY(-24%)',
         ['@media (min-width:768px)']: {
             animation: '$shiftUp-results-tablet 1s',
-            transform: 'translateY(-40%)',
+            transform: 'translateY(-20%)',
         },
         ['@media (min-width:1280px)']: {
             animation: '$shiftUp-results-generic 1s',
-            transform: 'translateY(-20%)',
+            transform: 'translateY(-10%)',
         },
         // flexGrow: 1,
         // flexShrink: 0,

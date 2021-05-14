@@ -29,11 +29,7 @@ export default function SearchResults({ data }) {
     // File Date options
     const sortOptions = ['Sort Ascending', 'Sort Descending'];
 
-    // const rowClick = (e) => {
-    //     console.log('clicked', e.target);
-    // };
     const onFilterClick = (e) => {
-        // console.log('filter clicked', e.currentTarget.value);
         setFilterSelection(e.currentTarget.value);
     };
 

@@ -153,9 +153,6 @@ export const createEmail = async (info, matterId) => {
 };
 
 export const sendPayment = async (info, paymentToken) => {
-    console.log('sendPayment, info: ', info);
-    console.log('paymentToken: ', paymentToken);
-
     let fnResponse = false;
 
     await fetch(`${BASE}Payment`, {
