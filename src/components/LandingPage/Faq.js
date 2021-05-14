@@ -211,7 +211,25 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-
+            {/*  /// PANEL 6 ////  */}
+            <Accordion 
+                square 
+                expanded={expanded === 'panel6'} 
+                onChange={handleChange('panel6')}
+                >
+                <AccordionSummary 
+                    aria-controls="panel6d-content" 
+                    id="panel6d-header"
+                    >
+                    <Typography>Why can’t I do it all by myself?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        You can do it yourself! Use our DIY+ option. However, the first time one tries something new isn’t always my best performance. If you have the risk tolerance to try your first trademark application on your own, then feel free!   If you need a little extra help from time-to-time, we offer that sort of help too. 
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+            
             </Container>
         </React.Fragment>
     );
