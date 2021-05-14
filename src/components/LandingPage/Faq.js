@@ -297,8 +297,11 @@ export default function Faq() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        A trademark is used in association with specific goods or services. Every conceivable good and service is classified into 45 general classes of goods and services  (called Nice Classes). These are called NICE classes (named after the French city). For example, <strong>NICE</strong> class 8 is "<em>hand tools and implements, hand-operated; cutlery; side arms, except firearms; razors</em>". Every TM application has one <strong>NICE</strong> class included. Each additional <strong>NICE</strong> class attracts an extra <strong>$100 government fee</strong>. <br/>
-                        <strong>For example:</strong> Class 8 is hand tools and implementations. 
+                        A trademark is used in association with specific goods or services. Every conceivable good and service is classified into 45 general classes of goods and services  (called Nice Classes). These are called NICE classes (named after the French city). <br/>
+                        <strong>For example</strong>, <strong>NICE</strong> class 8 is "<em>hand tools and implements, hand-operated; cutlery; side arms, except firearms; razors</em>". <br/ >
+                        Every TM application has one <strong>NICE</strong> class included. Each additional <strong>NICE</strong> class attracts an extra <strong>$100 government fee</strong>. <br/>
+                        <strong>For example:</strong> Class 8 is hand tools and implementations.<br/>
+                        You can use as many NICE classes as you wish and our software program takes out the guess work on which ones will be approved (or not).
                     </Typography>
                 </AccordionDetails>
             </Accordion>
