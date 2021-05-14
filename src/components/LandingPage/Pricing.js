@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Card from '@material-ui/core/Card';
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
                 : checkmarksTheme.bgCardHeader1,
     },
     cardHeader: {
+        color: checkmarksTheme.textValue1,
         backgroundColor:
             theme.palette.type === 'dark'
                 ? checkmarksTheme.bgCardHeader
@@ -47,25 +49,23 @@ const useStyles = makeStyles((theme) => ({
 
 const tiers = [
     {
-        title: 'DIY Package',
-        price: '...',
+        title: 'DIY+',
+        price: '690.00',
         description: [
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
+            'Application drafted and filed by I.P. Lawyer or Trademark Agent ',
+            'Trademark Certificate PDF (Physical Certofocate, $10.00)',
         ],
         buttonText: 'Get Started',
         buttonVariant: 'contained',
     },
     {
-        title: 'Enterprise Package',
-        price: '...',
+        title: 'Full Service',
+        price: '1,500.00',
         description: [
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
-            'Lorem ipsum dolor sit amet',
+            'Comprehensive trademark search and opinion.',
+            'Intellectual Property Legal Consult',
+            'Responses to office actions (CIPO Office Objections)',
+            'Defend Trademark in 3rd party opposition proceedings',
         ],
         buttonText: 'Get Started',
         buttonVariant: 'contained',
@@ -74,6 +74,7 @@ const tiers = [
 
 export default function Pricing() {
     const classes = useStyles();
+    const history = useHistory();
 
     return (
         <React.Fragment>
@@ -93,14 +94,6 @@ export default function Pricing() {
                 >
                     Pricing
                 </Typography>
-                {/* <Typography
-                    variant="h5"
-                    align="center"
-                    color="textSecondary"
-                    component="p"
-                >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </Typography> */}
             </Container>
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
@@ -120,12 +113,6 @@ export default function Pricing() {
                                             color="textPrimary"
                                         >
                                             ${tier.price}
-                                        </Typography>
-                                        <Typography
-                                            variant="h6"
-                                            color="textSecondary"
-                                        >
-                                            /mo
                                         </Typography>
                                     </div>
                                     <ul>
@@ -147,6 +134,9 @@ export default function Pricing() {
                                         fullWidth
                                         variant={tier.buttonVariant}
                                         color="primary"
+                                        onClick={() =>
+                                            history.push('/application')
+                                        }
                                     >
                                         {tier.buttonText}
                                     </Button>

@@ -2,15 +2,12 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import CheckIcon from '@material-ui/icons/Check';
 
 export default function Checkmark({ value }) {
     const classes = useStyles();
 
-    // console.log(value);
     return (
         <Box boxShadow={5} className={classes.container}>
             {value ? (

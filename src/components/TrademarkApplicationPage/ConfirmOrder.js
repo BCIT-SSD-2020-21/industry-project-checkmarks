@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, Typography } from '@material-ui/core';
 import { checkmarksTheme } from '../../styles/Themes';
 import Alert from '@material-ui/lab/Alert';
+import Divider from '@material-ui/core/Divider';
 
 export default function PaymentForm({
     navigation,
@@ -26,8 +27,6 @@ export default function PaymentForm({
         navigation.next();
     };
 
-    console.log('info: ', info);
-
     return (
         <Card className={classes.card}>
             <h1 className={classes.title}>Confirm Your Information</h1>
@@ -44,6 +43,7 @@ export default function PaymentForm({
                     </Typography>
                 </div>
             )}
+            <Divider />
             {/* ////////////////////////////////////// First name ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -53,6 +53,7 @@ export default function PaymentForm({
                     {info.firstName}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Last Name ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -62,6 +63,7 @@ export default function PaymentForm({
                     {info.lastName}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Street Address ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -71,6 +73,7 @@ export default function PaymentForm({
                     {info.userStreetAddress}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// City ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -80,6 +83,7 @@ export default function PaymentForm({
                     {info.userCity}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Province ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -89,6 +93,7 @@ export default function PaymentForm({
                     {info.userProvince}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Postal Code ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -98,6 +103,7 @@ export default function PaymentForm({
                     {info.userPostalCode}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Country ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -107,6 +113,7 @@ export default function PaymentForm({
                     {info.userCountry}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Agreed to Disclaimer (Termso of Service) ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -116,7 +123,7 @@ export default function PaymentForm({
                     {info.agreedTermsOfService}
                 </Typography>
             </div>
-
+            <Divider />
             {/* ////////////////////////////////////// Email ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -126,6 +133,7 @@ export default function PaymentForm({
                     {info.email}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Phone ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -135,6 +143,7 @@ export default function PaymentForm({
                     {info.phone}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Fax ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -144,6 +153,7 @@ export default function PaymentForm({
                     {info.fax}
                 </Typography>
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Trademark Types ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -165,6 +175,7 @@ export default function PaymentForm({
                     </Typography>
                 )}
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Classes Selected ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -192,6 +203,7 @@ export default function PaymentForm({
                     </Typography>
                 )}
             </div>
+            <Divider />
             {/* ////////////////////////////////////// Terms Selected ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -217,6 +229,7 @@ export default function PaymentForm({
                     </Typography>
                 )}
             </div>
+            <Divider />
             {/* //////////////////////////////////////  Filed in other country  ////////////////////////////////////////////*/}
             <div className={classes.textContainer}>
                 <Typography className={classes.subtitle} component="p">
@@ -226,6 +239,7 @@ export default function PaymentForm({
                     {info.filedInOtherCountry ? 'Yes' : 'No'}
                 </Typography>
             </div>
+            <Divider />
             {info.filedInOtherCountry && (
                 <>
                     <div className={classes.textContainer}>
@@ -239,10 +253,6 @@ export default function PaymentForm({
                 </>
             )}
 
-            <Alert severity="info" className={classes.alert}>
-                Helper section with brief legal information, assisting the
-                client through the process.
-            </Alert>
             <div className={classes.buttonContainer}>
                 <Button
                     type="submit"

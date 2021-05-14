@@ -12,7 +12,7 @@ export default function OrderAmount({ info }) {
             <CardContent className={classes.amountSection}>
                 <Box className={classes.amountSummaryField}>
                     <Typography className={classes.amountSummaryLabel}>
-                        Base Price:
+                        {`Base Price (${info.selectedServiceName}):`}
                     </Typography>
                     <Typography className={classes.amountSummaryValue}>
                         {`$${info.basePrice.toFixed(2).toString()}`}
@@ -56,23 +56,9 @@ const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: checkmarksTheme.transparentCard,
         border: '1px solid #696969',
-        // borderRadius: '15px',
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // flexDirection: 'column',
-        // margin: '3%',
+        margin: '3% 0',
         width: '100%',
         marginBottom: '5%',
-
-        // padding: '3%',
-        // [theme.breakpoints.up('md')]: {
-        //     width: '60%',
-        //     padding: '0 2% ',
-        // },
-        // [theme.breakpoints.between('sm', 'md')]: {
-        //     padding: '0 5% 2% 5%',
-        // },
     },
 
     selectedTerms: {
@@ -108,18 +94,18 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     amountSummaryLabel: {
-        fontSize: '16px',
+        fontSize: '18px',
         fontStyle: 'italic',
         fontWeight: 'bold',
         color: checkmarksTheme.textValue3,
     },
     amountSummaryValue: {
-        fontSize: '18px',
+        fontSize: '20px',
         fontWeight: 'bold',
         color: checkmarksTheme.textValue3,
     },
     amountLabel: {
-        fontSize: '20px',
+        fontSize: '22px',
         fontWeight: 'bold',
     },
     amountTotal: {

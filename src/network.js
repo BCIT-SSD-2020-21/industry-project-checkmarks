@@ -46,7 +46,7 @@ export const createClioContact = async (info) => {
         }),
     })
         .then((res) => {
-            if (res.status != 200) {
+            if (res.status !== 200) {
                 fnResponse = null;
             }
             return res.json();
@@ -139,7 +139,7 @@ export const createEmail = async (info, matterId) => {
     })
         .then((res) => {
             console.log(res);
-            if (res.status == 200) {
+            if (res.status === 200) {
                 fnResponse = true;
             } else if (res.status >= 400) {
                 fnResponse = false;
@@ -153,9 +153,6 @@ export const createEmail = async (info, matterId) => {
 };
 
 export const sendPayment = async (info, paymentToken) => {
-    console.log('sendPayment, info: ', info);
-    console.log('paymentToken: ', paymentToken);
-
     let fnResponse = false;
 
     await fetch(`${BASE}Payment`, {
@@ -165,14 +162,13 @@ export const sendPayment = async (info, paymentToken) => {
         },
         // NOTE: Amount is in CENTS, so multiply by 100
         body: JSON.stringify({
-            // amount: info.amount * 100,
-            amount: 1,
+            amount: info.amount * 100,
             method: paymentToken,
             account_id: TRUST_ACCOUNT_ID, //Live Trust acc key
         }),
     })
         .then(async (res) => {
-            if (res.status == 200) {
+            if (res.status === 200) {
                 console.log('sendPayment(), res: ', res);
                 alert('payment successful');
                 fnResponse = true;

@@ -85,7 +85,7 @@ export default function ResultDetail({ data, setSelectedRow }) {
                         {'Registration Date: '}
                     </Typography>
                     <Typography className={classes.value}>
-                        {data.regDate}
+                        {data.regDate.substring(0, 10)}
                     </Typography>
                 </Box>
 
@@ -94,7 +94,7 @@ export default function ResultDetail({ data, setSelectedRow }) {
                         {'Renewal date: '}
                     </Typography>
                     <Typography className={classes.value}>
-                        {data.intrnlRenewDate}
+                        {data.intrnlRenewDate.substring(0, 10)}
                     </Typography>
                 </Box>
                 <Box className={classes.field}>
@@ -152,6 +152,7 @@ const detailStyles = makeStyles(() => ({
         height: '100%',
         paddingBottom: '10px',
         width: '100%',
+        overflowY: 'scroll',
     },
     details: {
         display: 'flex',
@@ -159,6 +160,7 @@ const detailStyles = makeStyles(() => ({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
+
         width: '90%',
         ['@media (min-width:768px)']: { width: '80%' },
         ['@media (min-width:1280px)']: { width: '70%' },
@@ -171,9 +173,6 @@ const detailStyles = makeStyles(() => ({
     },
     image: {
         maxHeight: '200px',
-        // ['@media (min-height:768px)']: { width: '80%' },
-        // ['@media (min-height:1280px)']: { width: '70%' },
-        // width: '40%',
     },
     field: {
         display: 'flex',

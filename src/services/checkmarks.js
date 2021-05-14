@@ -57,7 +57,6 @@ export const searchTrademarks = async (text, password) => {
 
 export const searchTerms = async (text) => {
     const url = `${BASE}cipo/GetTermDataByString/${text}`;
-    console.log('url: ', url);
     const response = await fetch(url)
         .then((response) => response.json())
         .catch((error) => console.log('Error: ', error));

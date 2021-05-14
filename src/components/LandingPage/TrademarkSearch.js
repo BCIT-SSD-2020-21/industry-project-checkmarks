@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Button, Card, IconButton, Typography } from '@material-ui/core';
+import { Box, Button, Card, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-// import Fade from '@material-ui/core/Fade';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import { checkmarksTheme } from '../../styles/Themes';
 import { makeStyles } from '@material-ui/core/styles';
@@ -71,17 +70,13 @@ export default function TrademarkSearch({ searching, setSearching }) {
             setNumberOfRepeatSearches(0);
         } else {
             setLoading(false);
-            // setNumberOfRepeatSearches(0);
         }
     }, [searchTerm, searchResults, numberOfRepeatSearches]);
-
-    console.log('numberOfRepeatSearches: ', numberOfRepeatSearches);
 
     useEffect(() => {}, [searchResults]);
 
     return (
         <Box className={classes.containerTMSearch}>
-            {/* <Fade in={true} exit={true} timeout={2000}> */}
             <Box
                 boxShadow={2}
                 className={`${classes.searchBox} ${
@@ -110,9 +105,7 @@ export default function TrademarkSearch({ searching, setSearching }) {
                     </Typography>
                 </Button>
             </Box>
-            {/* </Fade> */}
             {searchTerm.length > 2 && (
-                // <Fade in={true} exit={true}>
                 <Box
                     className={`${classes.results} ${
                         searchTerm.length > 0 && classes.searchResultsShifted
@@ -121,7 +114,6 @@ export default function TrademarkSearch({ searching, setSearching }) {
                     {searchResults?.length > 0 ? (
                         <SearchResults data={searchResults} />
                     ) : (
-                        // <Fade in={true} exit={true}>
                         <Card className={classes.noResultContainer}>
                             <Typography className={classes.noResultText}>
                                 {`No match found for "${searchTerm}", so this text may not be registered yet as a Trademark.`}
@@ -133,10 +125,8 @@ export default function TrademarkSearch({ searching, setSearching }) {
                                 Absolutely!
                             </Button>
                         </Card>
-                        // </Fade>
                     )}
                 </Box>
-                // </Fade>
             )}
         </Box>
     );
@@ -171,9 +161,6 @@ export const searchBoxStyles = makeStyles(() => ({
         ['@media (min-width:1280px)']: {
             animation: '$shiftDown-searchBox-generic 1s',
         },
-        // '&:hover': {
-        //     backgroundColor: checkmarksTheme.hoverLight,
-        // },
     },
     edgeButton: {
         display: 'flex',
@@ -183,7 +170,6 @@ export const searchBoxStyles = makeStyles(() => ({
         width: '120px',
         fontSize: '12px',
         height: '100%',
-        // height: '100%',
         color: 'white',
         opacity: 0.9,
         borderRadius: '0 100px 100px 0',
@@ -191,48 +177,24 @@ export const searchBoxStyles = makeStyles(() => ({
         position: 'absolute',
         right: -30,
         top: 0,
-        // opacity: 1,
-        // transitionDelay: '1s',
-        // transitionTimingFunction: 'linear',
+
         transition: 'opacity 1s linear',
         transitionDelay: '3s',
+        '&:hover': {
+            background: checkmarksTheme.hoverSoft,
+        },
     },
     searchBoxShifted: {
         animation: '$shiftUp-searchBox-mobile 1s',
-        transform: 'translateY(-360%)',
-        ['@media (min-width:768px)']: {
-            animation: '$shiftUp-searchBox-tablet 1s',
-            transform: 'translateY(-350%)',
-        },
-        ['@media (min-width:1280px)']: {
-            animation: '$shiftUp-searchBox-generic 1s',
-            transform: 'translateY(-200%)',
-        },
+        transform: 'translateY(-100px)',
     },
-    searchResultsShifted: {
-        // flex: 1,
-        // width: '100%',
-        // animation: '$shiftUp-results 1s',
-        // transform: 'translateY(-20%)',
-    },
+    searchResultsShifted: {},
     results: {
         animation: '$shiftUp-results-mobile 1s',
-        transform: 'translateY(-48%)',
-        ['@media (min-width:768px)']: {
-            animation: '$shiftUp-results-tablet 1s',
-            transform: 'translateY(-40%)',
-        },
-        ['@media (min-width:1280px)']: {
-            animation: '$shiftUp-results-generic 1s',
-            transform: 'translateY(-20%)',
-        },
-        // flexGrow: 1,
-        // flexShrink: 0,
-        // height: (window.innerHeight * 2) / 3,
+        transform: 'translateY(-100px)',
         width: '100%',
     },
     form: {
-        // margin: '5px auto',
         boxSizing: 'border-box',
         padding: '10px',
         width: '90%',
@@ -278,12 +240,11 @@ export const searchBoxStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
-        padding: '5% 10%',
+        padding: '25px 50px',
         margin: '0 auto',
         minWidth: 320,
-        width: '60%',
+        width: '90%',
         maxWidth: 500,
-        // height: '100%',
     },
     noResultText: {
         textAlign: 'center',
@@ -312,36 +273,36 @@ export const searchBoxStyles = makeStyles(() => ({
     // SearchBox Animations
     '@keyframes shiftUp-searchBox-mobile': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-360%)' },
+        to: { transform: 'translateY(-100px)' },
     },
     '@keyframes shiftUp-searchBox-tablet': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-350%)' },
+        to: { transform: 'translateY(-50%)' },
     },
     '@keyframes shiftUp-searchBox-generic': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-200%)' },
+        to: { transform: 'translateY(-50%)' },
     },
     '@keyframes shiftDown-searchBox-mobile': {
-        from: { transform: 'translateY(-360%)' },
+        from: { transform: 'translateY(-100px)' },
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftDown-searchBox-tablet': {
-        from: { transform: 'translateY(-350%)' },
+        from: { transform: 'translateY(-50%)' },
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftDown-searchBox-generic': {
-        from: { transform: 'translateY(-200%)' },
+        from: { transform: 'translateY(-50%)' },
         to: { transform: 'translateY(0px)' },
     },
     // SearchResults Table Animations
     '@keyframes shiftUp-results-mobile': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-48%)' },
+        to: { transform: 'translateY(-100px)' },
     },
     '@keyframes shiftUp-results-tablet': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-40%)' },
+        to: { transform: 'translateY(-20%)' },
     },
     '@keyframes shiftUp-results-generic': {
         from: { transform: 'translateY(0px)' },

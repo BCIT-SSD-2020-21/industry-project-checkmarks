@@ -101,13 +101,13 @@ export default function PaymentForm({
         };
 
         const hostedFieldsCallBack = function (state) {
-            if (state.fields[0].error != '') {
+            if (state.fields[0].error !== '') {
                 ccErrorMessage = state.fields[0].error;
             } else {
                 ccErrorMessage = '';
             }
 
-            if (state.fields[1].error != '') {
+            if (state.fields[1].error !== '') {
                 cvvErrorMessage = state.fields[1].error;
             } else {
                 cvvErrorMessage = '';
@@ -134,15 +134,15 @@ export default function PaymentForm({
             creditCardValidation.innerText = ccError;
             cvvValidation.innerText = cvvError;
 
-            if (nameElement.value.length == 0) {
+            if (nameElement.value.length === 0) {
                 setNameError('Cardholder Name is required');
             }
 
-            if (expMonthElement.value.length == 0) {
+            if (expMonthElement.value.length === 0) {
                 setMonthError('Expiry Month field is required');
             }
 
-            if (expYearElement.value.length == 0) {
+            if (expYearElement.value.length === 0) {
                 setYearError('Expiry Year field is required');
             }
 
@@ -151,11 +151,11 @@ export default function PaymentForm({
                 setCcvError(cvvErrorMessage);
             }
 
-            if (postalCodeElement.value.length == 0) {
+            if (postalCodeElement.value.length === 0) {
                 setPostalCodeError('Postal Code field is required');
             }
 
-            if (addressElement.value.length == 0) {
+            if (addressElement.value.length === 0) {
                 setAddressError('Billing Street Address is required');
                 return;
             }
@@ -170,8 +170,6 @@ export default function PaymentForm({
                 .then((result) => {
                     paymentToken = result.id;
                     setInfo({ ...info, paymentToken: result.id });
-                    console.log('result, getPaymentToken: ', result);
-                    console.log('paymentForm, paymentToken: ', paymentToken);
                     submitApplication(paymentToken);
                 })
                 .then(() => {})
@@ -187,14 +185,10 @@ export default function PaymentForm({
     const submitApplication = async (paymentToken) => {
         setSubmitting(true);
         let responseSendPayment = await sendPayment(info, paymentToken);
-        console.log('responseSendPayment: ', responseSendPayment);
         if (responseSendPayment) {
             let matterId = await createClioContact(info);
-            console.log('matterId: ', matterId);
             if (matterId) {
                 let responseCreateEmail = await createEmail(info, matterId);
-                // let responseCreateEmail = true;
-                console.log('responseCreateEmail: ', responseCreateEmail);
                 if (responseCreateEmail) {
                     setInfo({
                         ...info,
@@ -222,8 +216,6 @@ export default function PaymentForm({
         setCurrentStep(currentStep + 1); // assign currentStep to next step
         navigation.next();
     };
-
-    console.log('info: ', info);
 
     return (
         <Card className={classes.card}>

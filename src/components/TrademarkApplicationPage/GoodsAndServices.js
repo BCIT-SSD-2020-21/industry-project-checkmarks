@@ -16,7 +16,6 @@ import {
     Typography,
     Button,
 } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../../styles/Themes';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
@@ -24,8 +23,9 @@ import MuiVirtualizedTable from '../VirtualizedTable';
 import SearchField from '../SearchField';
 import TermSelector from './TermSelector';
 import Checkmark from '../Checkmark';
+import ServiceSelect from '../ServiceSelect';
 import OrderAmount from '../OrderAmount';
-import { searchTerms, getAllClasses } from '../../services/checkmarks';
+import { searchTerms } from '../../services/checkmarks';
 import { advancedSearch } from '../../utils/FormValidation';
 
 export default function GoodsAndServices({
@@ -187,7 +187,6 @@ export default function GoodsAndServices({
             setLoadingClassSearch(false);
         }
     }, [searchClassFilterText]);
-    console.log('searchClassFilterText: ', searchClassFilterText);
 
     const [selectedRow, setSelectedRow] = useState(null); // toggle ListView, detailedView
     const [filterSelection, setFilterSelection] = useState(null); // filter termTableResults
@@ -236,8 +235,6 @@ export default function GoodsAndServices({
         }
     };
 
-    console.log('info: ', info);
-
     // upon selectedTerms update, run logic to change selectedClasses (no duplicates) and totalAmount
     useEffect(() => {
         const classesSelected = [];
@@ -261,7 +258,10 @@ export default function GoodsAndServices({
             setSelectedClasses(classesSelected);
             if (classesSelected.length > 0) {
                 setTotalAmount(
-                    (690 + 100 * (classesSelected.length - 1)).toFixed(2)
+                    (
+                        info.basePrice +
+                        100 * (classesSelected.length - 1)
+                    ).toFixed(2)
                 );
             } else if (classesSelected.length === 0) {
                 setTotalAmount(0);
@@ -269,6 +269,7 @@ export default function GoodsAndServices({
         } else {
             setSelectedClasses([]);
             setTotalAmount(0);
+            // setInfo({ ...info, classesSelected: [], amount: 0 });
         }
 
         setInfo({ ...info, termsSelected: selectedTerms });
@@ -281,6 +282,12 @@ export default function GoodsAndServices({
                 ...info,
                 classesSelected: selectedClasses,
                 amount: totalAmount,
+            });
+        } else {
+            setInfo({
+                ...info,
+                classesSelected: [],
+                amount: 0,
             });
         }
     }, [selectedClasses]);
@@ -302,10 +309,7 @@ export default function GoodsAndServices({
                     A Trademark is registered under one or more{' '}
                     <b>NICE class(es)</b>. <br />
                     <br />
-                    {`This Trademark application service base price is $${info.basePrice.toFixed(
-                        2
-                    )}
-                    and it includes 1 (one) NICE Class applied to your Trademark. You can apply as many Terms as needed, as long as they're under the same NICE Class.`}
+                    {`This Trademark application includes 1 (one) NICE Class applied to your Trademark. You can apply as many Terms as needed, as long as they're under the same NICE Class.`}
                     <br />
                     <br />
                     If your Trademark must be registered under additional NICE
@@ -505,16 +509,20 @@ export default function GoodsAndServices({
                 </Card>
                 {/* ///////////////////////////total amount section /////////////////////////// */}
 
+                {info.classesSelected.length > 0 && (
+                    <ServiceSelect
+                        info={info}
+                        setInfo={setInfo}
+                        selectedClasses={selectedClasses}
+                        setTotalAmount={setTotalAmount}
+                    />
+                )}
+
                 {info.classesSelected.length > 0 && <OrderAmount info={info} />}
 
                 <Box className={classes.checkmarkContainer}>
                     <Checkmark value={validationProgress.amountNotZero} />
                 </Box>
-                {/* Hidden via 'display: none' below */}
-                <Alert severity="info" className={classes.alert}>
-                    Helper section with brief legal information, assisting the
-                    client through the process.
-                </Alert>
 
                 <div className={classes.buttonContainer}>
                     <Button
@@ -669,12 +677,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: '5%',
+        padding: '2% 5%',
     },
     buttonContainer: {
         display: 'flex',
         justifyContent: 'center',
-        marginTop: '3%',
+        marginTop: '1%',
     },
     continueButton: {
         color: '#FFF',
@@ -682,7 +690,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         marginLeft: '3%',
         width: '45%',
-        height: '30px',
+        height: '35px',
         fontSize: '16px',
         borderRadius: '10px',
         [theme.breakpoints.up('md')]: {
@@ -697,7 +705,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#FFF',
         fontWeight: 'bold',
         width: '45%',
-        height: '30px',
+        height: '35px',
         fontSize: '16px',
         borderRadius: '10px',
         border: '1px solid #df3a48',

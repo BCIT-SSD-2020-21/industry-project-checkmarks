@@ -14,6 +14,9 @@ const colors = {
     teal: '#128B83',
     text: '#751219',
 
+    greenDone: '#58a778',
+    yellowCurrent: '##e8f09e',
+
     appBar: '#fbfbfb',
     appBarDark: '#171518',
     appBarOpq70: '#fbfbfbB3',
@@ -55,6 +58,8 @@ export const checkmarksTheme = {
     bgOpaque70Dark: colors.blackOpq70,
     bgOpaque30: colors.whiteOpq30,
     bgOpaque30Dark: colors.blackOpq30,
+    done: colors.greenDone,
+    current: colors.yellowCurrent,
 
     bgAppBar: colors.appBar,
     bgAppBarDark: colors.appBarDark,

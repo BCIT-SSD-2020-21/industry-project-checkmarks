@@ -38,8 +38,6 @@ const progressStyles = makeStyles((theme) => ({
 export default function Progress({ progressValue, drawerOpen }) {
     const progressPercentage = Math.round((progressValue * 100) / 2900);
 
-    console.log('Progress, drawerOpen: ', drawerOpen);
-
     const classes = progressStyles();
     return (
         <Box

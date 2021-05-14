@@ -5,7 +5,6 @@ import { checkmarksTheme } from '../styles/Themes';
 import { Box, Button, Paper } from '@material-ui/core';
 import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import bannerImage from '../assets/images/bg-landing-chris-brignola.jpg';
-import bannerImageDark from '../assets/images/bg-dark-landing-nicolas-hoizey.jpg';
 import HeaderBanner from '../components/HeaderBanner';
 import TrademarkSearch from '../components/LandingPage/TrademarkSearch';
 import About from '../components/LandingPage/About';
@@ -25,9 +24,6 @@ export default function Landing(darkMode) {
                 className={classes.section}
                 style={{
                     backgroundImage: `url(${bannerImage})`,
-                    // backgroundImage: `url(${
-                    //     darkMode.darkMode ? bannerImageDark : bannerImage
-                    // })`,
                 }}
             >
                 <Paper
@@ -48,16 +44,18 @@ export default function Landing(darkMode) {
                                 setSearching={setSearching}
                             />
                         </Box>
-                        <Button
-                            className={classes.buttonStart}
-                            onClick={() => {
-                                setSearching(false);
-                                history.push('/application');
-                            }}
-                        >
-                            <PlayArrowTwoToneIcon />
-                            Start Trademark Application
-                        </Button>
+                        {!searching && (
+                            <Button
+                                className={classes.buttonStart}
+                                onClick={() => {
+                                    setSearching(false);
+                                    history.push('/application');
+                                }}
+                            >
+                                <PlayArrowTwoToneIcon />
+                                Start Trademark Application
+                            </Button>
+                        )}
                     </Box>
                 </Paper>
             </Paper>
@@ -103,9 +101,10 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        minHeight: '600px',
         height: (window.innerHeight * 3) / 4,
-        ['@media (min-width:768px)']: { height: (window.innerHeight * 2) / 3 },
-        ['@media (min-width:1280px)']: { height: (window.innerHeight * 2) / 3 },
+        ['@media (min-width:768px)']: { height: (window.innerHeight * 3) / 5 },
+        // ['@media (min-width:1280px)']: { height: (window.innerHeight * 2) / 3 },
         width: '90%',
     },
     search: {
@@ -170,11 +169,11 @@ const useStyles = makeStyles(() => ({
         width: '100%',
     },
     '@keyframes shiftUp-buttons': {
-        from: { transform: 'translateY(20%)' },
+        from: { transform: 'translateY(100px)' },
         to: { transform: 'translateY(0px)' },
     },
     '@keyframes shiftUp-actions': {
         from: { transform: 'translateY(0px)' },
-        to: { transform: 'translateY(-20%)' },
+        to: { transform: 'translateY(-100px)' },
     },
 }));
