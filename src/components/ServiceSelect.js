@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    IconButton,
-    Typography,
-} from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { checkmarksTheme } from '../styles/Themes';
-import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 
 export default function ServiceSelect({
     info,
@@ -18,8 +10,6 @@ export default function ServiceSelect({
     selectedClasses,
 }) {
     const classes = useStyles();
-
-    const [selectedService, setSelectedService] = useState('DIY');
 
     return (
         <Box className={classes.container}>
@@ -57,9 +47,6 @@ export default function ServiceSelect({
                     </Typography>
                 </Box>
             </Button>
-            {/* <IconButton className={classes.buttonIcon}>
-                <HelpOutlineOutlinedIcon fontSize="large" />
-            </IconButton> */}
             <Button
                 className={classes.buttonFullService}
                 onClick={() => {
@@ -111,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.buttonPrimary,
         height: '120px',
         width: '50%',
+        margin: '3px',
     },
     buttonDIYText: {
         color: checkmarksTheme.buttonTextPrimary,
@@ -122,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     buttonFullServiceAmount: {
+        color: 'black',
         fontStyle: 'italic',
         fontSize: '22px',
         fontWeight: 'bold',
@@ -130,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: checkmarksTheme.buttonSecondary,
         height: '120px',
         width: '50%',
+        margin: '3px',
     },
     buttonFullServiceText: {
         color: checkmarksTheme.buttonTextSecondary,
@@ -141,8 +131,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         // border: '1px solid white',
         borderRadius: '5px',
-        height: '110px',
-        width: '110px',
+        height: '112px',
+        width: '99%',
     },
     buttonFullServiceContentContaner: {
         display: 'flex',
@@ -150,8 +140,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         // border: '1px solid red',
         borderRadius: '5px',
-        height: '110px',
-        width: '110px',
+        height: '112px',
+        width: '99%',
     },
     buttonIcon: {
         color: checkmarksTheme.textActive,
