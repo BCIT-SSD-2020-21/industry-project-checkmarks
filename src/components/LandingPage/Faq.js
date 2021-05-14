@@ -229,6 +229,24 @@ export default function Faq() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            {/*  /// PANEL 7 ////  */}
+            <Accordion 
+                square 
+                expanded={expanded === 'panel7'} 
+                onChange={handleChange('panel7')}
+                >
+                <AccordionSummary 
+                    aria-controls="panel7d-content" 
+                    id="panel7d-header"
+                    >
+                    <Typography>How long does a registration last?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        15 years, but you can renew it!
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
             
             </Container>
         </React.Fragment>
