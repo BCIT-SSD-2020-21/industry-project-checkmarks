@@ -184,10 +184,10 @@ export const validateForm = (info, setValidationProgress) => {
     }
     // Trademark Types Completed
     if (
-        (info.isText || info.isLogo || info.isOther) &&
+        !info.isOther &&
+        (info.isText || info.isLogo) &&
         (info.isText ? info.characterText : true) &&
-        (info.isLogo ? info.fileName : true) &&
-        (info.isOther ? info.OtherTypes.length > 0 : true)
+        (info.isLogo ? info.fileName : true)
     ) {
         newInputValidationValue.trademarkTypeFormCompleted = 500;
     } else {
